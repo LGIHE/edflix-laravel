@@ -545,10 +545,9 @@
                     </div>
                 </div>
             </div>
-            <x-footers.auth></x-footers.auth>
+            <x-footer></x-footer>
         </div>
     </main>
-    <x-plugins></x-plugins>
     </div>
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>

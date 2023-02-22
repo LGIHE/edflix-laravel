@@ -1,3 +1,69 @@
-@if ()
+@if (Auth::guest())
+
+<footer class="footer position-absolute bottom-footer py-2 w-100 z-index-1">
+    <div class="container">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col-12 col-md-12 my-auto">
+                <div class="copyright text-center text-sm">
+                    © <script>
+                        document.write(new Date().getFullYear())
+
+                    </script>,
+                    <a href="https://lgihe.org" class="font-weight-bold" target="_blank">
+                        LGIHE
+                    </a> -
+                    <a href="https://lgfug.org" class="font-weight-bold" target="_blank">
+                        LGF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+@else
+
+<footer class="footer py-4">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-end">
+                    © <script>
+                        document.write(new Date().getFullYear())
+
+                    </script>,
+                    <a href="https://lgihe.org" class="font-weight-bold" target="_blank">
+                        LGIHE
+                    </a> -
+                    <a href="https://lgfug.org" class="font-weight-bold" target="_blank">
+                        LGF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 @endif
+
+<script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
+<script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
+<script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
+@stack('js')
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+</script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+</body>
+</html>
