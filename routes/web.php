@@ -20,7 +20,7 @@ Route::get('/', function () {
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -28,13 +28,13 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
-Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
-Route::post('sign-in', [SessionsController::class, 'store'])->middleware('guest');
-Route::post('reset-password', [SessionsController::class, 'update'])->middleware('guest')->name('password.update');
+Route::get('sign-in', [AuthController::class, 'create'])->middleware('guest')->name('login');
+Route::post('sign-in', [AuthController::class, 'store'])->middleware('guest');
+Route::post('reset-password', [AuthController::class, 'update'])->middleware('guest')->name('password.update');
 Route::get('verify', function () {return view('auth.verify');})->middleware('guest')->name('verify');
 Route::get('/reset-password/{token}', function ($token) {return view('auth.reset', ['token' => $token]);})->middleware('guest')->name('password.reset');
-Route::post('verify', [SessionsController::class, 'show'])->middleware('guest');
-Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
+Route::post('verify', [AuthController::class, 'show'])->middleware('guest');
+Route::post('sign-out', [AuthController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 
-class SessionsController extends Controller
+class AuthController extends Controller
 {
     public function create()
     {
