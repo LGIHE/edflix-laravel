@@ -4,12 +4,11 @@
                 <span class="mask bg-gradient-dark opacity-1"></span>
                 <div class="container mt-5">
                     <center><img src="{{ asset('assets') }}/img/logos/edflix-logo.png" alt="Edflix" class="m-3 mb-5" width="200"></center>
-                    <!-- <h4 class="text-center">Sign In</h4> -->
                     <div class="row">
                         <div class="col-lg-4 col-md-8 col-12 mx-auto">
                             <div class="card z-index-0 fadeIn3 fadeInBottom">
                                 <div class="card-body">
-                                <h4 class="text-center">Sign In</h4>
+                                    <h4 class="text-center">Sign In</h4>
                                     <form role="form" method="POST" action="{{ route('login') }}" class="text-start">
                                         @csrf
                                         @if (Session::has('status'))
