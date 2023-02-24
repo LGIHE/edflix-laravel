@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-    public function create()
+    public function signInGet()
     {
         return view('auth.signin');
     }
 
-    public function store()
+    public function signInPost()
     {
         $attributes = request()->validate([
             'email' => 'required|email',
@@ -36,7 +36,7 @@ class AuthController extends Controller
 
     }
 
-    public function show(){
+    public function verifyPasswordReset(){
         request()->validate([
             'email' => 'required|email',
         ]);
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
     }
 
-    public function update(){
+    public function resetPassword(){
 
         request()->validate([
             'token' => 'required',
@@ -77,7 +77,7 @@ class AuthController extends Controller
                     : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function destroy()
+    public function singOut()
     {
         auth()->logout();
 
