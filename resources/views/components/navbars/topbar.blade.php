@@ -9,8 +9,8 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
-                    <label class="form-label">Type here...</label>
-                    <input type="text" class="form-control">
+                    <!-- <label class="form-label">Type here...</label>
+                    <input type="text" class="form-control"> -->
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
@@ -30,8 +30,7 @@
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-user cursor-pointer me-sm-1" style="font-size:1.5rem;"></i>
                     </a>
-                    <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                        aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
