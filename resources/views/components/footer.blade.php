@@ -1,4 +1,4 @@
-@if (Auth::guest())
+@guest
 
 <footer class="footer position-absolute bottom-footer py-2 w-100 z-index-1">
     <div class="container">
@@ -21,7 +21,9 @@
     </div>
 </footer>
 
-@else
+@endguest
+
+@auth
 
 <footer class="footer py-4">
     <div class="container-fluid">
@@ -44,4 +46,4 @@
     </div>
 </footer>
 
-@endif
+@endauth
