@@ -1,5 +1,5 @@
 <x-layout bodyClass="bg-gray-200">
-        <main class="main-content  mt-0">
+        <main class="main-content mt-0">
             <div class="page-header align-items-start min-vh-100">
                 <span class="mask bg-gradient-dark opacity-1"></span>
                 <div class="container mt-5">
