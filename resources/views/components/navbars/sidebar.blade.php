@@ -18,7 +18,7 @@
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'lesson-plans' ? ' active bg-gradient-info' : '' }} "
-                    href="{{ route('user-management') }}">
+                    href="{{ route('users') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">list</i>
                     </div>
@@ -26,8 +26,8 @@
                 </a>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link text-dark {{ $activePage == 'user-management' ? ' active bg-gradient-info' : '' }} "
-                    href="{{ route('user-management') }}">
+                <a class="nav-link text-dark {{ $activePage == 'users' ? ' active bg-gradient-info' : '' }} "
+                    href="{{ route('users') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">people</i>
                     </div>
@@ -36,7 +36,7 @@
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'schools' ? ' active bg-gradient-info' : '' }} "
-                    href="{{ route('user-management') }}">
+                    href="{{ route('schools') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">home</i>
                     </div>

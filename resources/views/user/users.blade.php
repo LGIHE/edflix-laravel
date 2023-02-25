@@ -1,9 +1,9 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <x-navbars.sidebar activePage="user-management"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="users"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.topbar titlePage="User Management"></x-navbars.topbar>
+        <x-navbars.topbar titlePage=""></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
