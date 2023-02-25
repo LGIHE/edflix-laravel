@@ -187,3 +187,33 @@
         </div>
     </div>
 </x-layout>
+
+
+<script>
+    $( document ).ready(function() {
+
+        var whichTab = window.location.href.slice(window.location.href.indexOf('?') + 1).split('=');
+
+        // console.log(whichTab[1]);
+
+        switch(whichTab[1]){
+            case '1':
+                $("#bio-form").addClass('active show');
+                $('#lesson-plans').removeClass('active show');
+                $('#password-change').removeClass('active show');
+                // $('[href="#bio-form"]').tab('show');
+                break;
+            case '2':
+                $("#bio-form").removeClass('active show');
+                $('#lesson-plans').addClass('active show');
+                $('#password-change').removeClass('active show');
+                // $('[href="#lesson-plans"]').tab('show');
+                break;
+            case '3':
+                $("#bio-form").removeClass('active show');
+                $('#lesson-plans').removeClass('active show');
+                $('#password-change').addClass('active show');
+                break;
+        }
+    });
+</script>

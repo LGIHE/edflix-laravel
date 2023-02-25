@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                            <a class="dropdown-item border-radius-md" href="{{ route('profile') }}?tab=3">
                                 <div class="d-flex py-1">
                                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                                         <i class="material-icons opacity-10">lock</i>
