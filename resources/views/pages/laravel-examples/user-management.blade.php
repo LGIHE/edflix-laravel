@@ -19,33 +19,20 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2 py-1">
-                                                NAME</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                EMAIL</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                ROLE</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                CREATION DATE
-                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">NAME</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">EMAIL</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SCHOOL</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROLE</th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
-                                                    <h6 class="mb-0 text-sm">John</h6>
-
-                                                </div>
+                                                <h6 class="mb-0 text-sm">John</h6>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com
-                                                </p>
+                                            <td class="align-middle text-sm">
+                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">Admin</span>
