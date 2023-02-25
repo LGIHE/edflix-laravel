@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- Navbar -->
-                    <x-navbars.navs.guest signin='static-sign-in' signup='static-sign-up'></x-navbars.navs.guest>
+                    <x-navbars.topbar signin='login' signup='register'></x-navbars.topbar>
                     <!-- End Navbar -->
                 </div>
             </div>
@@ -18,7 +18,7 @@
                             <div
                                 class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
                                 <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                                    style="background-image: url('{{ asset('assets') }}/img/illustrations/illustration-signup.jpg'); background-size: cover;">
+                                    style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
                                 </div>
                             </div>
                             <div
@@ -26,23 +26,35 @@
                                 <div class="card card-plain">
                                     <div class="card-header">
                                         <h4 class="font-weight-bolder">Sign Up</h4>
-                                        <p class="mb-0">Enter your email and password to register</p>
+                                        <p class="mb-0">Enter your name, email and password to register</p>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="input-group input-group-outline mb-3">
+                                        <form method="POST" action="{{ route('register') }}">
+                                            @csrf
+                                            <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="name" required>
+                                                <input type="text" class="form-control" name="name"
+                                                    value="{{ old('name') }}">
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            @error('name')
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                            <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" required>
+                                                <input type="email" class="form-control" name="email"
+                                                    value="{{ old('email') }}">
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            @error('email')
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                            <div class="input-group input-group-outline mt-3">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" required>
+                                                <input type="password" class="form-control" name="password">
                                             </div>
-                                            <div class="form-check form-check-info text-start ps-0">
+                                            @error('password')
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                            <div class="form-check form-check-info text-start ps-0 mt-3">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="flexCheckDefault" checked>
                                                 <label class="form-check-label" for="flexCheckDefault">
@@ -60,7 +72,7 @@
                                     <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                         <p class="mb-2 text-sm mx-auto">
                                             Already have an account?
-                                            <a href="{{ route('static-sign-in') }}"
+                                            <a href="{{ route('login') }}"
                                                 class="text-primary text-gradient font-weight-bold">Sign in</a>
                                         </p>
                                     </div>
@@ -72,4 +84,19 @@
             </section>
         </main>
     </div>
+
+    @push('js')
+    <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
+    <script>
+        $(function() {
+
+        var text_val = $(".input-group input").val();
+        if (text_val === "") {
+          $(".input-group").removeClass('is-filled');
+        } else {
+          $(".input-group").addClass('is-filled');
+        }
+    });
+    </script>
+    @endpush
 </x-layout>

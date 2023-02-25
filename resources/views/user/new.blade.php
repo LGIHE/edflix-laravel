@@ -1,8 +1,8 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="profile"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="create-user"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage='Profile'></x-navbars.navs.auth>
+        <x-navbars.topbar titlePage=''></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid px-2 px-md-4">
             <div class="page-header min-height-300 border-radius-xl mt-4"
@@ -464,7 +464,7 @@
                 </div>
             </div>
         </div>
-        <x-footers.auth></x-footers.auth>
+        <x-footer></x-footer>
     </div>
     <x-plugins></x-plugins>
 

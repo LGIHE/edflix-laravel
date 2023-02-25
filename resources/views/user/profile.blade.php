@@ -1,21 +1,16 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-    <x-navbars.sidebar activePage="user-profile"></x-navbars.sidebar>
-    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <x-navbars.sidebar activePage="profile"></x-navbars.sidebar>
+    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 pb-5">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage='User Profile'></x-navbars.navs.auth>
+        <x-navbars.topbar titlePage=''></x-navbars.topbar>
         <!-- End Navbar -->
-        <div class="container-fluid px-2 px-md-4">
-            <div class="page-header min-height-300 border-radius-xl mt-4"
-                style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
-                <span class="mask  bg-gradient-primary  opacity-6"></span>
-            </div>
-            <div class="card card-body mx-3 mx-md-4 mt-n6">
+        <div class="container-fluid px-2 px-md-4 mt-5">
+            <div class="card card-body mx-3 mx-md-4 ">
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
-                                class="w-100 border-radius-lg shadow-sm">
+                            <img src="{{ asset('assets') }}/img/user/avatar.png" alt="profile_image" class="w-100 border-radius-lg">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
@@ -24,7 +19,13 @@
                                 {{ auth()->user()->name }}
                             </h5>
                             <p class="mb-0 font-weight-normal text-sm">
-                                CEO / Co-Founder
+                                @if (auth()->user()->type == 'admin')
+                                    {{ 'System Administrator' }}
+                                @elseif(auth()->user()->type == 'facil')
+                                    {{ 'Facilitator' }}
+                                @elseif(auth()->user()->type == 'teacher')
+                                    {{ 'Teacher' }}
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -35,23 +36,23 @@
                                     <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;"
                                         role="tab" aria-selected="true">
                                         <i class="material-icons text-lg position-relative">home</i>
-                                        <span class="ms-1">App</span>
+                                        <span class="ms-1">Bio</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;"
                                         role="tab" aria-selected="false">
-                                        <i class="material-icons text-lg position-relative">email</i>
-                                        <span class="ms-1">Messages</span>
+                                        <i class="material-icons text-lg position-relative">list</i>
+                                        <span class="ms-1">Lesson Plans</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;"
                                         role="tab" aria-selected="false">
                                         <i class="material-icons text-lg position-relative">settings</i>
-                                        <span class="ms-1">Settings</span>
+                                        <span class="ms-1">Change Password</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -87,10 +88,10 @@
                                     </div>
                                 </div>
                         @endif
-                        <form method='POST' action='{{ route('user-profile') }}'>
+                        <form method='POST' action='{{ route('profile') }}'>
                             @csrf
                             <div class="row">
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Email address</label>
                                     <input type="email" name="email" class="form-control border border-2 p-2" value='{{ old('email', auth()->user()->email) }}'>
@@ -98,7 +99,7 @@
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Name</label>
                                     <input type="text" name="name" class="form-control border border-2 p-2" value='{{ old('name', auth()->user()->name) }}'>
@@ -106,7 +107,7 @@
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                                 </div>
-                               
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Phone</label>
                                     <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('phone', auth()->user()->phone) }}'>
@@ -114,23 +115,13 @@
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Location</label>
                                     <input type="text" name="location" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->location) }}'>
                                     @error('location')
                                     <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
-                                </div>
-                                
-                                <div class="mb-3 col-md-12">
-                                    <label for="floatingTextarea2">About</label>
-                                    <textarea class="form-control border border-2 p-2"
-                                        placeholder=" Say something about yourself" id="floatingTextarea2" name="about"
-                                        rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
-                                        @error('about')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                        @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn bg-gradient-dark">Submit</button>
@@ -139,10 +130,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <x-footers.auth></x-footers.auth>
     </div>
-    <x-plugins></x-plugins>
-
 </x-layout>

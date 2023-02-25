@@ -36,8 +36,8 @@ Route::get('/reset-password/{token}', function ($token) {return view('auth.reset
 Route::post('verify', [AuthController::class, 'verifyPasswordReset'])->middleware('guest');
 Route::post('sign-out', [AuthController::class, 'singOut'])->middleware('auth')->name('logout');
 
-Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
-Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
+Route::get('create-user', [ProfileController::class, 'create'])->middleware('auth')->name('create-user');
+Route::post('profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('billing', function () {
 		return view('pages.billing');
@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user-management', function () {
 		return view('pages.laravel-examples.user-management');
 	})->name('user-management');
-	Route::get('user-profile', function () {
-		return view('pages.laravel-examples.user-profile');
-	})->name('user-profile');
+	Route::get('profile', function () {
+		return view('user.profile');
+	})->name('profile');
 });

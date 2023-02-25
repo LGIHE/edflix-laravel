@@ -32,7 +32,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                            <a class="dropdown-item border-radius-md" href="{{ route('profile') }}">
                                 <div class="d-flex py-1">
                                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                                         <i class="material-icons opacity-10">person</i>
@@ -63,7 +63,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="material-icons opacity-10">login</i>
+                                        <i class="material-icons opacity-10">logout</i>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">

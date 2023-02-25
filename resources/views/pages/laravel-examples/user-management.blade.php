@@ -3,26 +3,16 @@
     <x-navbars.sidebar activePage="user-management"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="User Management"></x-navbars.navs.auth>
+        <x-navbars.topbar titlePage="User Management"></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white mx-3"><strong> Add, Edit, Delete features are not
-                                        functional!</strong> This is a<strong> PRO</strong> feature! Click
-                                    <strong><a
-                                            href="https://www.creative-tim.com/product/material-dashboard-pro-laravel"
-                                            target="_blank" class="text-white"><u>here</u> </a></strong>to see
-                                    the PRO product!</h6>
-                            </div>
-                        </div>
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i
-                                    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
-                                User</a>
+                            <a class="btn bg-gradient-dark mb-0" href="javascript:;">
+                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User
+                            </a>
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
@@ -30,14 +20,7 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                ID
-                                            </th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                PHOTO</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2 py-1">
                                                 NAME</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -55,23 +38,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">1</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">John</h6>
 
                                                 </div>
@@ -93,7 +60,7 @@
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
-                                                
+
                                                 <button type="button" class="btn btn-danger btn-link"
                                                 data-original-title="" title="">
                                                 <i class="material-icons">close</i>
@@ -103,23 +70,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">2</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-3.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">Alexa</h6>
 
                                                 </div>
@@ -150,23 +101,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">3</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-4.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">Laurent</h6>
 
                                                 </div>
@@ -197,23 +132,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">4</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-3.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">Michael</h6>
                                                 </div>
                                             </td>
@@ -243,23 +162,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">5</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">Richard</h6>
                                                 </div>
                                             </td>
@@ -289,22 +192,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <p class="mb-0 text-sm">6</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/team-4.jpg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column justify-content-center">
+                                                <div class="d-flex flex-column justify-content-center px-2 py-1">
                                                     <h6 class="mb-0 text-sm">Miriam</h6>
                                                 </div>
                                             </td>
@@ -339,9 +227,6 @@
                     </div>
                 </div>
             </div>
-            <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
-
 </x-layout>
