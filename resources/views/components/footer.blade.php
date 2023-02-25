@@ -9,9 +9,6 @@
                         document.write(new Date().getFullYear())
 
                     </script>,
-                    <a href="https://lgihe.org" class="font-weight-bold" target="_blank">
-                        LGIHE
-                    </a> -
                     <a href="https://lgfug.org" class="font-weight-bold" target="_blank">
                         LGF
                     </a>
@@ -34,9 +31,6 @@
                         document.write(new Date().getFullYear())
 
                     </script>,
-                    <a href="https://lgihe.org" class="font-weight-bold" target="_blank">
-                        LGIHE
-                    </a> -
                     <a href="https://lgfug.org" class="font-weight-bold" target="_blank">
                         LGF
                     </a>

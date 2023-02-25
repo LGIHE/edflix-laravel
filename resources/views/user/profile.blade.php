@@ -138,6 +138,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="no-lesson-plans m-3">
+                                    <div class="col-md-12 text-center m-4">
+                                        <span>You Have No Lesson Plans Yet</span>
+                                    </div>
+                                    <div class="col-md-12 text-center m-4">
+                                        <a href="" class="btn bg-gradient-dark center">Create Lesson Plan</a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="password-change">
