@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password',
         'location',
         'phone',
-        'about',
+        'type',
         'password_confirmation'
     ];
 
@@ -46,10 +46,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
+    const ADMIN_TYPE = 'admin';
+    const FACILITATOR_TYPE = 'facilitator';
+    const TEACHER_TYPE = 'teacher';
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function isAdmin() {
+        return $this->type === self::ADMIN_TYPE;
+    }
+
+    public function isFacilitator() {
+        return $this->type === self::FACILITATOR_TYPE;
+    }
+
+    public function isTeacher() {
+        return $this->type === self::TEACHER_TYPE;
     }
 
 }
