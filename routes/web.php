@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('create-user', [ProfileController::class, 'create'])->name('create-user');
     Route::post('profile', [ProfileController::class, 'update']);
 
+    Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
+
 	Route::get('lesson-plans', function () {return view('lesson-plans.index');})->name('lesson-plans');
 	Route::get('users', function () {return view('user.users');})->name('users');
 	Route::get('schools', function () {return view('schools.index');})->name('schools');

@@ -68,4 +68,6 @@ class User extends Authenticatable
         return $this->type === self::TEACHER_TYPE;
     }
 
+
+
 }

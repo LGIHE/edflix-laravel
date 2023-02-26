@@ -156,15 +156,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method='POST' action='{{ route('profile') }}'>
+                                <form method='POST' action="{{ route('update-password') }}">
                                     @csrf
                                     <div class="row">
-
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">New Password</label>
                                             <input type="password" name="password" class="form-control border border-2 p-2">
                                             @error('password')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                             @enderror
                                         </div>
                                     </div>
@@ -173,7 +172,7 @@
                                             <label class="form-label">Confirm Password</label>
                                             <input type="password" name="password_confirmation" class="form-control border border-2 p-2">
                                             @error('password_confirmation')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                             @enderror
                                         </div>
                                     </div>
