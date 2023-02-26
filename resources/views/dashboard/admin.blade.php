@@ -77,12 +77,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Website Views</h6>
-                            <p class="text-sm ">Last Campaign Performance</p>
+                            <h6 class="mb-0 ">Platform Usability</h6>
+                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase usage from last month </p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                                <p class="mb-0 text-sm"> Current Week </p>
                             </div>
                         </div>
                     </div>
@@ -97,9 +97,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 "> Daily Sales </h6>
-                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                sales. </p>
+                            <h6 class="mb-0 "> Uploaded Lesson Plan </h6>
+                            <p class="text-sm ">Monthly stats for current year</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -118,8 +117,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Completed Tasks</h6>
-                            <p class="text-sm ">Last Campaign Performance</p>
+                            <h6 class="mb-0 ">Completed Lesson Plans</h6>
+                            <p class="text-sm ">Monthly stats for current year</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -221,7 +220,7 @@
         new Chart(ctx2, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                     label: "Mobile apps",
                     tension: 0,
@@ -234,7 +233,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                    data: [100, 20, 50, 50, 40, 300, 320, 500, 350, 200, 230, 500],
                     maxBarThickness: 6
 
                 }],
@@ -304,7 +303,7 @@
         new Chart(ctx3, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                     label: "Mobile apps",
                     tension: 0,
@@ -316,7 +315,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: [100, 20, 50, 50, 40, 300, 220, 500, 250, 400, 230, 500],
                     maxBarThickness: 6
 
                 }],
