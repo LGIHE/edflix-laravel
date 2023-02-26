@@ -17,21 +17,21 @@
                                         <input type="email" class="form-control" name="email">
                                     </div>
                                     @error('email')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                    <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                     @enderror
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">New password</label>
                                         <input type="password" class="form-control" name="password">
                                     </div>
                                     @error('password')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                    <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                     @enderror
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Confirm New Password</label>
                                         <input type="password" class="form-control" name="password_confirmation">
                                     </div>
                                     @error('password_confirmation')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                    <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                     @enderror
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Change

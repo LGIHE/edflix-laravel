@@ -25,14 +25,14 @@
                                             <input type="email" class="form-control" name="email" value="{{ 'admin@material.com' }}">
                                         </div>
                                         @error('email')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                        <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                         @enderror
                                         <div class="input-group input-group-outline mt-3">
                                             <label class="form-label">Password</label>
                                             <input type="password" class="form-control" name="password" value='{{ 'secret'}}'>
                                         </div>
                                         @error('password')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                        <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                         @enderror
                                         <div class="form-check form-switch d-flex align-items-center my-3">
                                             <input class="form-check-input" type="checkbox" id="rememberMe">
