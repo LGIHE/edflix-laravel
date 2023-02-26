@@ -9,9 +9,8 @@
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
-                            <div
-                                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">school</i>
+                            <div class="icon icon-lg icon-shape bg-gradient-secondary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">school</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Schools</h5>
@@ -25,8 +24,8 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
-                                class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">piano</i>
+                                class="icon icon-lg icon-shape bg-gradient-secondary shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">piano</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Lesson Plans</h5>
@@ -40,8 +39,8 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
-                                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">people</i>
+                                class="icon icon-lg icon-shape bg-gradient-secondary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">people</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Facilitators</h5>
@@ -55,8 +54,8 @@
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
-                                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">groups</i>
+                                class="icon icon-lg icon-shape bg-gradient-secondary shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">groups</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Teachers</h5>
