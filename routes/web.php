@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SchoolController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
@@ -48,9 +48,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile', [ProfileController::class, 'updateBio']);
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
-	Route::get('lesson-plans', function () {return view('lesson-plans.index');})->name('lesson-plans');
+	Route::get('lesson-plans', function () {return view('lesson-plan.index');})->name('lesson-plans');
 
-	Route::get('schools', function () {return view('schools.index');})->name('schools');
+	Route::get('schools', [SchoolController::class, 'getAll'])->name('schools');
+	Route::post('school', [SchoolController::class, 'createSchool'])->name('create.school');
+	Route::get('school-success', [SchoolController::class, 'createSuccess'])->name('school-success');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });

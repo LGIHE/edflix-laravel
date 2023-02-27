@@ -60,14 +60,14 @@
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                            <a class="dropdown-item border-radius-md" href="javascript:;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 <div class="d-flex py-1">
                                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                                         <i class="material-icons opacity-10">logout</i>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</span>
+                                            <span class="font-weight-bold">Logout</span>
                                         </h6>
                                     </div>
                                 </div>

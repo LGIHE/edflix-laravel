@@ -6,20 +6,20 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="newSchoolModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newSchoolModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateSchoolModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateSchoolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="newSchoolModalLabel">Add New User</h1>
+                <h1 class="modal-title fs-5" id="updateSchoolModalLabel">Update School</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
-                <form method='POST' action='{{ route('create-user') }}'>
+                <form method='PATCH' id="updateSchoolForm">
                     @csrf
                     <div class="row">
 
-                        <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-md-6">
                             <label class="form-label">Name</label>
                             <input type="text" name="name" class="form-control border border-2 p-2">
                             @error('name')
@@ -37,7 +37,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Address</label>
-                            <input type="number" name="phone" class="form-control border border-2 p-2">
+                            <input type="number" name="address" class="form-control border border-2 p-2">
                             @error('address')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -45,7 +45,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">City</label>
-                            <input type="text" name="location" class="form-control border border-2 p-2">
+                            <input type="text" name="city" class="form-control border border-2 p-2">
                             @error('city')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -53,7 +53,7 @@
 
                         <div class="mb-3 col-md-9">
                             <label class="form-label">District</label>
-                            <input type="text" name="location" class="form-control border border-2 p-2">
+                            <input type="text" name="district" class="form-control border border-2 p-2">
                             @error('school')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -64,7 +64,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success">Add User</button>
+                <button type="submit" class="btn btn-success">Update School</button>
             </div>
         </div>
     </div>
