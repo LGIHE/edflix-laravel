@@ -53,10 +53,16 @@ class SchoolController extends Controller
         $status = School::whereId(request()->id)->update($attributes);
         var_dump($status);
 
-        return response()->json(['success' => 'The School has been Updated Successfully.']);
+        return response()->json(['success' => 'The school has been updated successfully.']);
     }
 
     public function updateSuccess(){
-        return redirect()->route('schools')->with('status', 'The School has been Updated Successfully.');
+        return redirect()->route('schools')->with('status', 'The school has been updated successfully.');
+    }
+
+    public function deleteSuccess(){
+        $status = School::find(request()->id)->delete();
+
+        return redirect()->route('schools')->with('status', 'The school has been deleted successfully.');
     }
 }

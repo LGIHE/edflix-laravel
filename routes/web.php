@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school-success', [SchoolController::class, 'createSuccess'])->name('school-success');
 	Route::put('school', [SchoolController::class, 'updateSchool'])->name('update.school');
 	Route::get('school-update', [SchoolController::class, 'createSuccess'])->name('school-update');
+	Route::get('school-delete/{id}', [SchoolController::class, 'deleteSuccess'])->name('delete.school');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });
