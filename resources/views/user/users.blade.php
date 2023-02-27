@@ -57,13 +57,13 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <a rel="tooltip" class="btn btn-success btn-link" href="" data-original-title="" title="">
+                                                <a rel="tooltip" class="btn btn-success btn-link" data-bs-toggle="modal" data-bs-target="#updateUserModal">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
 
                                                 <button type="button" class="btn btn-danger btn-link" data-original-title="" title="">
-                                                    <i class="material-icons">close</i>
+                                                    <i class="material-icons">delete</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
                                             </td>
@@ -81,3 +81,4 @@
     </main>
 </x-layout>
 @include('user.create')
+@include('user.update')
