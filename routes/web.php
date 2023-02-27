@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
     Route::get('user/{id}', [UserController::class, 'getUser'])->name('user');
     Route::patch('user/{id}', [UserController::class, 'updateUser']);
-    Route::patch('user/{id}', [UserController::class, 'deleteUser']);
+    Route::delete('user/{id}', [UserController::class, 'deleteUser']);
     Route::get('users', [UserController::class, 'getUsers'])->name('users');
 
 	Route::get('profile', function () {return view('user.profile');})->name('profile');
@@ -51,8 +51,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('lesson-plans', function () {return view('lesson-plan.index');})->name('lesson-plans');
 
 	Route::get('schools', [SchoolController::class, 'getAll'])->name('schools');
+	Route::get('school/{id}', [SchoolController::class, 'getOne'])->name('get.school');
 	Route::post('school', [SchoolController::class, 'createSchool'])->name('create.school');
 	Route::get('school-success', [SchoolController::class, 'createSuccess'])->name('school-success');
+	Route::put('school', [SchoolController::class, 'updateSchool'])->name('update.school');
+	Route::get('school-update', [SchoolController::class, 'createSuccess'])->name('school-update');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });

@@ -15,48 +15,38 @@
             </div>
 
             <div class="modal-body">
-                <form method='PATCH' id="updateSchoolForm">
+                <form id="updateSchoolForm">
                     @csrf
                     <div class="row">
-
+                    <input type="hidden" name="id">
                     <div class="mb-3 col-md-6">
                             <label class="form-label">Name</label>
                             <input type="text" name="name" class="form-control border border-2 p-2">
-                            @error('name')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <p class='text-danger font-weight-bold inputerror' id="nameError"></p>
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Email address</label>
                             <input type="email" name="email" class="form-control border border-2 p-2">
-                            @error('email')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <p class='text-danger font-weight-bold inputerror' id="emailError"></p>
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Address</label>
                             <input type="number" name="address" class="form-control border border-2 p-2">
-                            @error('address')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <p class='text-danger font-weight-bold inputerror' id="addressError"></p>
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">City</label>
                             <input type="text" name="city" class="form-control border border-2 p-2">
-                            @error('city')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <p class='text-danger font-weight-bold inputerror' id="cityError"></p>
                         </div>
 
                         <div class="mb-3 col-md-9">
                             <label class="form-label">District</label>
                             <input type="text" name="district" class="form-control border border-2 p-2">
-                            @error('school')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <p class='text-danger font-weight-bold inputerror' id="districtError"></p>
                         </div>
                     </div>
                 </form>
@@ -64,8 +54,53 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success">Update School</button>
+                <button type="submit" class="btn btn-success btn-submit">Update School <span id="loader"></span></button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+$(function () {
+
+    $('.btn-submit').on('click', function (e) {
+        e.preventDefault();
+
+        let formData = $('#updateSchoolForm').serializeArray();
+        $(".inputerror").text("");
+        $("#updateSchoolForm input").removeClass("is-invalid");
+
+        $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+        $(".btn-submit").attr("disabled", 'disabled');
+
+        $.ajax({
+            method: "PUT",
+            headers: {
+                Accept: "application/json"
+            },
+            url: "{{ route('update.school') }}",
+            data: formData,
+            success: () => {
+                $(".fa-spinner").remove();
+                $(".btn-submit").prop("disabled", false);
+                window.location.assign("{{ route('school-update') }}")
+            },
+            error: (response) => {
+                $(".fa-spinner").remove();
+                $(".btn-submit").prop("disabled", false);
+
+                if(response.status === 422) {
+                    let errors = response.responseJSON.errors;
+                    Object.keys(errors).forEach(function (key) {
+                        $("[name='" + key + "']").addClass("is-invalid");
+                        $("#" + key + "Error").text(errors[key][0]);
+                    });
+                } else {
+                    window.location.reload();
+                }
+            }
+        })
+    });
+})
+</script>

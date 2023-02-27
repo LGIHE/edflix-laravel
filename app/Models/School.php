@@ -21,4 +21,14 @@ class School extends Model
         'city',
         'district',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

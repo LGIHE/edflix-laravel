@@ -70,7 +70,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" data-bs-toggle="modal" data-bs-target="#updateSchoolModal">
+                                                    <a rel="tooltip" class="btn btn-success btn-link open_modal" data-value="{{ $school->id }}">
+                                                    <!-- <a rel="tooltip" class="btn btn-success btn-link" data-bs-toggle="modal" data-bs-target="#updateSchoolModal"> -->
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
@@ -97,6 +98,28 @@
         </div>
     </main>
 </x-layout>
+
+<script>
+    $(document).on('click','.open_modal',function(){
+        var school_id = $('.open_modal').data("value");
+        var url = '{{route("get.school",":id")}}';
+        url = url.replace(':id', school_id);
+
+        console.log(school_id);
+
+        $.get(url, function (data) {
+            //success data
+            console.log(data);
+            $('[name=id]').val(data.id);
+            $('[name=name]').val(data.name);
+            $('[name=email]').val(data.email);
+            $('[name=address]').val(data.address);
+            $('[name=city]').val(data.city);
+            $('[name=district]').val(data.district);
+            $('#updateSchoolModal').modal('show');
+        })
+    });
+</script>
 
 @include('school.create')
 @include('school.update')
