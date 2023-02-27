@@ -1,102 +1,123 @@
-<x-layout bodyClass="">
-
-    <div>
-        <div class="container position-sticky z-index-sticky top-0">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Navbar -->
-                    <x-navbars.topbar signin='login' signup='register'></x-navbars.topbar>
-                    <!-- End Navbar -->
-                </div>
+<style>
+    .btn-close{
+        color: #000;
+        background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="newUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newUserModalLabel">Add New User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-        <main class="main-content  mt-0">
-            <section>
-                <div class="page-header min-vh-100">
-                    <div class="container">
-                        <div class="row">
-                            <div
-                                class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-                                <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                                    style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
-                                </div>
-                            </div>
-                            <div
-                                class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-                                <div class="card card-plain">
-                                    <div class="card-header">
-                                        <h4 class="font-weight-bolder">Sign Up</h4>
-                                        <p class="mb-0">Enter your name, email and password to register</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <form method="POST" action="{{ route('register') }}">
-                                            @csrf
-                                            <div class="input-group input-group-outline mt-3">
-                                                <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    value="{{ old('name') }}">
-                                            </div>
-                                            @error('name')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
-                                            @enderror
-                                            <div class="input-group input-group-outline mt-3">
-                                                <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email"
-                                                    value="{{ old('email') }}">
-                                            </div>
-                                            @error('email')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
-                                            @enderror
-                                            <div class="input-group input-group-outline mt-3">
-                                                <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password">
-                                            </div>
-                                            @error('password')
-                                            <p class='text-danger inputerror'>{{ $message }} </p>
-                                            @enderror
-                                            <div class="form-check form-check-info text-start ps-0 mt-3">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" checked>
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    I agree the <a href="javascript:;"
-                                                        class="text-dark font-weight-bolder">Terms and Conditions</a>
-                                                </label>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="submit"
-                                                    class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign
-                                                    Up</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                        <p class="mb-2 text-sm mx-auto">
-                                            Already have an account?
-                                            <a href="{{ route('login') }}"
-                                                class="text-primary text-gradient font-weight-bold">Sign in</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+
+            <div class="modal-body">
+                <form method='POST' action='{{ route('create-user') }}'>
+                    @csrf
+                    <div class="row">
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control border border-2 p-2">
+                            @error('name')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control border border-2 p-2">
+                            @error('email')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Phone</label>
+                            <input type="number" name="phone" class="form-control border border-2 p-2">
+                            @error('phone')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Location</label>
+                            <input type="text" name="location" class="form-control border border-2 p-2">
+                            @error('location')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label role">Role</label>
+                            <select class="form-select" aria-label=".role">
+                                <option selected>Select User Role</option>
+                                <option value="admin">System Admin</option>
+                                <option value="facilitator">Facilitator</option>
+                                <option value="teacher">Teacher</option>
+                            </select>
+                            @error('role')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="location" class="form-control border border-2 p-2">
+                            @error('password')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-9">
+                            <label class="form-label">School</label>
+                            <input type="text" name="location" class="form-control border border-2 p-2">
+                            @error('school')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-3"></div>
+
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label subject-1">Subject 1</label>
+                            <select class="form-select" aria-label=".subject-1">
+                                <option selected>Select Subject</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label subject-2">Subject 2</label>
+                            <select class="form-select" aria-label=".subject-2">
+                                <option selected>Select Subject</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                            <label class="form-label subject-3">Subject 3</label>
+                            <select class="form-select" aria-label=".subject-3">
+                                <option selected>Select Subject</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success">Add User</button>
+            </div>
+        </div>
     </div>
-
-    @push('js')
-    <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
-    <script>
-        $(function() {
-
-        var text_val = $(".input-group input").val();
-        if (text_val === "") {
-          $(".input-group").removeClass('is-filled');
-        } else {
-          $(".input-group").addClass('is-filled');
-        }
-    });
-    </script>
-    @endpush
-</x-layout>
+</div>

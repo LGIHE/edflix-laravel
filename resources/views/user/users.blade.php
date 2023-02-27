@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0 end" href="javascript:;">
+                            <a class="btn bg-gradient-dark mb-0 end" data-bs-toggle="modal" data-bs-target="#newUserModal">
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User
                             </a>
                         </div>
@@ -80,3 +80,4 @@
         </div>
     </main>
 </x-layout>
+@include('user.create')

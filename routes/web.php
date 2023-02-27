@@ -38,7 +38,6 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('create-user', function () {return view('pages.new');});
     Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
     Route::get('user/{id}', [UserController::class, 'getUser'])->name('user');
     Route::patch('user/{id}', [UserController::class, 'updateUser']);
