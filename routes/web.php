@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 
@@ -37,15 +37,14 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('create-user', [ProfileController::class, 'create'])->name('create-user');
-    Route::post('profile', [ProfileController::class, 'update']);
-
-    Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
+    Route::get('users', [UserController::class, 'getUsers'])->name('users');
+	Route::get('profile', function () {return view('user.profile');})->name('profile');
+    Route::post('profile', [UserController::class, 'updateBio']);
+    Route::post('update-password', [UserController::class, 'updatePassword'])->name('update-password');
 
 	Route::get('lesson-plans', function () {return view('lesson-plans.index');})->name('lesson-plans');
-	Route::get('users', function () {return view('user.users');})->name('users');
+
 	Route::get('schools', function () {return view('schools.index');})->name('schools');
-	Route::get('profile', function () {return view('user.profile');})->name('profile');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });

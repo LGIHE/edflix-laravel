@@ -6,14 +6,20 @@ use Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
-    public function create()
+    public function createUser()
     {
-        return view('pages.new');
+        return 1;
     }
 
-    public function update()
+    public function getUsers(){
+        $users = User::all();
+
+        return view('user.users', compact('users'));
+    }
+
+    public function updateBio()
     {
 
         $user = request()->user();
@@ -33,23 +39,6 @@ class ProfileController extends Controller
         $attributes = request()->validate([
             'password' => 'required|min:8|confirmed'
         ]);
-
-        // $status = Password::reset(
-        //     request()->only('email', 'password', 'password_confirmation', 'token'),
-        //     function ($user, $password) {
-        //         $user->forceFill([
-        //             'password' => ($password)
-        //         ])->setRememberToken(Str::random(60));
-
-        //         $user->save();
-
-        //         event(new PasswordReset($user));
-        //     }
-        // );
-
-        // return $status === Password::PASSWORD_RESET
-        //             ? redirect()->route('login')->with('status', __($status))
-        //             : back()->withErrors(['email' => [__($status)]]);
 
         #Update the new Password
         $status = User::whereId(auth()->user()->id)->update([

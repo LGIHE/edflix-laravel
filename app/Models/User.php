@@ -25,6 +25,7 @@ class User extends Authenticatable
         'location',
         'phone',
         'type',
+        'role',
         'password_confirmation'
     ];
 
@@ -48,8 +49,7 @@ class User extends Authenticatable
     ];
 
     const ADMIN_TYPE = 'admin';
-    const FACILITATOR_TYPE = 'facilitator';
-    const TEACHER_TYPE = 'teacher';
+    const USER_TYPE = 'user';
 
     public function setPasswordAttribute($password)
     {
@@ -60,14 +60,9 @@ class User extends Authenticatable
         return $this->type === self::ADMIN_TYPE;
     }
 
-    public function isFacilitator() {
-        return $this->type === self::FACILITATOR_TYPE;
+    public function isUser() {
+        return $this->type === self::USER_TYPE;
     }
-
-    public function isTeacher() {
-        return $this->type === self::TEACHER_TYPE;
-    }
-
 
 
 }
