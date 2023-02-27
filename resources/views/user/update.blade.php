@@ -15,13 +15,13 @@
             </div>
 
             <div class="modal-body">
-                <form method='POST' action='{{ route('create-user') }}'>
+                <form method='PATCH' action='{{ route('create-user') }}'>
                     @csrf
                     <div class="row">
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control border border-2 p-2">
+                            <input type="text" name="name" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->name) }}'>
                             @error('name')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -29,7 +29,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control border border-2 p-2">
+                            <input type="email" name="email" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->email) }}'>
                             @error('email')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -37,7 +37,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Phone</label>
-                            <input type="number" name="phone" class="form-control border border-2 p-2">
+                            <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->phone) }}'>
                             @error('phone')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -45,7 +45,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Location</label>
-                            <input type="text" name="location" class="form-control border border-2 p-2">
+                            <input type="text" name="location" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->location) }}'>
                             @error('location')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror

@@ -55,9 +55,9 @@
                             <label class="form-label role">Role</label>
                             <select class="form-select" aria-label=".role">
                                 <option selected>Select User Role</option>
-                                <option value="admin">System Admin</option>
-                                <option value="facilitator">Facilitator</option>
-                                <option value="teacher">Teacher</option>
+                                <option value="Administrator">System Admin</option>
+                                <option value="Facilitator">Facilitator</option>
+                                <option value="Teacher">Teacher</option>
                             </select>
                             @error('role')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
