@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthController;
 
@@ -37,10 +38,16 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('create-user', function () {return view('pages.new');});
+    Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
+    Route::get('user/{id}', [UserController::class, 'getUser'])->name('user');
+    Route::patch('user/{id}', [UserController::class, 'updateUser']);
+    Route::patch('user/{id}', [UserController::class, 'deleteUser']);
     Route::get('users', [UserController::class, 'getUsers'])->name('users');
+
 	Route::get('profile', function () {return view('user.profile');})->name('profile');
-    Route::post('profile', [UserController::class, 'updateBio']);
-    Route::post('update-password', [UserController::class, 'updatePassword'])->name('update-password');
+    Route::post('profile', [ProfileController::class, 'updateBio']);
+    Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
 	Route::get('lesson-plans', function () {return view('lesson-plans.index');})->name('lesson-plans');
 

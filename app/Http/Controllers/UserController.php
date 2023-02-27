@@ -19,34 +19,22 @@ class UserController extends Controller
         return view('user.users', compact('users'));
     }
 
-    public function updateBio()
-    {
+    public function getUser(){
 
-        $user = request()->user();
-        $attributes = request()->validate([
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'name' => 'required',
-            'phone' => 'required|max:10',
-            'location' => 'required'
-        ]);
+        return 1;
 
-        auth()->user()->update($attributes);
-        return back()->withStatus('Profile successfully updated.');
     }
 
-    public function updatePassword(){
+    public function getUpdate(){
 
-        $attributes = request()->validate([
-            'password' => 'required|min:8|confirmed'
-        ]);
+        return 1;
 
-        #Update the new Password
-        $status = User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make(request()->password)
-        ]);
+    }
 
-        return $status ? back()->with('status', 'Password updated successfully')
-                    : back()->withErrors('password', 'Error in updating password.');
+    public function getDelete(){
+
+        return 1;
+
     }
 
 }
