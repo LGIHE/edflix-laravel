@@ -1,3 +1,8 @@
+<style>
+    .dash-block {
+        cursor: pointer;
+    }
+</style>
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
     <x-navbars.sidebar activePage='dashboard'></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -6,7 +11,7 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block" onclick="window.location.href='{{ route('schools') }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
@@ -14,13 +19,13 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Schools</h5>
-                                <h4 class="mb-0">15</h4>
+                                <h4 class="mb-0">{{count($schools)}}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"  onclick="window.location.href='#'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -29,13 +34,13 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Lesson Plans</h5>
-                                <h4 class="mb-0">21</h4>
+                                <h4 class="mb-0">0</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"  onclick="window.location.href='{{ route('users') }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -44,13 +49,13 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Facilitators</h5>
-                                <h4 class="mb-0">10</h4>
+                                <h4 class="mb-0">{{count($facilitators)}}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6">
+                <div class="col-xl-3 col-sm-6 dash-block"  onclick="window.location.href='{{ route('users') }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -59,7 +64,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Teachers</h5>
-                                <h4 class="mb-0">50</h4>
+                                <h4 class="mb-0">{{count($teachers)}}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>

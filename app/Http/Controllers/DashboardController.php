@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Subject;
+use App\Models\School;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         if (auth()->user()->isAdmin()) {
+            $teachers = User::all()->where('role', 'Teacher');
+            $facilitators = User::all()->where('role', 'Facilitator');
+            $schools = School::all();
+
             // an admin
-            return view('dashboard.admin');
-        } elseif (auth()->user()->isAdmin()) {
-            // a facilitator
-            return view('dashboard.admin');
+            return view('dashboard.admin', compact('teachers', 'facilitators', 'schools'));
+
         }else{
             //a teacher
             // return view('dashboard.index');
         }
-        return auth()->user()->isAdmin() == 'admin' ? redirect('/dashboard/admin') : redirect('/dashboard/admin');
     }
 }
