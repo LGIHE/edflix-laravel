@@ -44,6 +44,15 @@
                 </a>
             </li>
             <li class="nav-item mt-3">
+                <a class="nav-link text-dark {{ $activePage == 'subjects' ? ' active bg-gradient-info' : '' }} "
+                    href="{{ route('subjects') }}">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">book</i>
+                    </div>
+                    <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Subjects</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'profile' ? 'active bg-gradient-info' : '' }} "
                     href="{{ route('profile') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">

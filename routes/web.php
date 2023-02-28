@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\SubjectController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
@@ -48,8 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile', [ProfileController::class, 'updateBio']);
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
+    //LESSON PLAN ROUTES
 	Route::get('lesson-plans', function () {return view('lesson-plan.index');})->name('lesson-plans');
 
+    //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->name('schools');
 	Route::get('school/{id}', [SchoolController::class, 'getOne'])->name('get.school');
 	Route::post('school', [SchoolController::class, 'createSchool'])->name('create.school');
@@ -57,6 +60,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('school/update/{id}', [SchoolController::class, 'updateSchool'])->name('update.school');
 	Route::get('school-update', [SchoolController::class, 'createSuccess'])->name('school-update');
 	Route::get('school-delete/{id}', [SchoolController::class, 'deleteSuccess'])->name('delete.school');
+
+    //SUBJECTS ROUTES
+    Route::get('subjects', [SubjectController::class, 'getAll'])->name('subjects');
+	Route::get('subject/{id}', [SubjectController::class, 'getOne'])->name('get.subject');
+	Route::post('subject', [SubjectController::class, 'createSubject'])->name('create.subject');
+	Route::get('subject-success', [SubjectController::class, 'createSuccess'])->name('subject-success');
+	Route::post('subject/update/{id}', [SubjectController::class, 'updateSubject'])->name('update.subject');
+	Route::get('subject-update', [SubjectController::class, 'createSuccess'])->name('subject-update');
+	Route::get('subject-delete/{id}', [SubjectController::class, 'deleteSuccess'])->name('delete.subject');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });
