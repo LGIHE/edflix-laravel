@@ -176,13 +176,12 @@
     </div>
 </x-layout>
 
-@section('scripts')
 <script>
     $( document ).ready(function() {
 
         var whichTab = window.location.href.slice(window.location.href.indexOf('?') + 1).split('=');
 
-        // console.log(whichTab[1]);
+        console.log(whichTab[1]);
 
         switch(whichTab[1]){
             case '1':
@@ -205,4 +204,3 @@
         }
     });
 </script>
-@endsection
