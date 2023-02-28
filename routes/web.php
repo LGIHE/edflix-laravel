@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
+    Route::get('create-user', [UserController::class, 'createUserSuccess'])->name('user.create.success');
     Route::get('user/{id}', [UserController::class, 'getUser'])->name('user');
     Route::patch('user/{id}', [UserController::class, 'updateUser']);
     Route::delete('user/{id}', [UserController::class, 'deleteUser']);

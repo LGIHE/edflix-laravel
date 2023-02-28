@@ -32,11 +32,11 @@ class SchoolController extends Controller
 
         School::create($attributes);
 
-        return response()->json(['success' => 'The School has been Added Successfully.']);
+        return response()->json(['success' => 'The school has been added successfully.']);
     }
 
     public function createSuccess(){
-        return redirect()->route('schools')->with('status', 'The School has been Added Successfully.');
+        return redirect()->route('schools')->with('status', 'The school has been added successfully.');
     }
 
     public function updateSchool(){

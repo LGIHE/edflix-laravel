@@ -14,6 +14,19 @@
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User
                             </a>
                         </div>
+                        @if (session('status'))
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="alert alert-success alert-dismissible text-white fade show" role="alert"style="margin-left:20px;width:90%;">
+                                    <span class="text-sm">{{ Session::get('status') }}</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                        data-bs-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
