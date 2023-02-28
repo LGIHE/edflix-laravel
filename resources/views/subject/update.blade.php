@@ -60,9 +60,9 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Level</label>
                                             <select class="form-select border border-2 p-2" name="level" aria-label="">
-                                                <option selected>Select Level</option>
-                                                <option value="UACE">UACE</option>
-                                                <option value="UCE">UCE</option>
+                                                <option vlaue="Select Level" {{ $subject->level == "Select Level" ? "selected" : '' }}>Select Level</option>
+                                                <option value="UACE" {{ $subject->level == "UACE" ? "selected" : '' }}>UACE</option>
+                                                <option value="UCE" {{ $subject->level == "UCE" ? "selected" : '' }}>UCE</option>
                                             </select>
                                             @error('city')
                                                 <p class='text-danger inputerror'>{{ $message }} </p>
