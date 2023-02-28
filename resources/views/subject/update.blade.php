@@ -43,7 +43,7 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">UNEB Code</label>
-                                            <input type="text" name="code" class="form-control border border-2 p-2" value='{{ $subject->email }}'>
+                                            <input type="text" name="code" class="form-control border border-2 p-2" value='{{ $subject->code }}'>
                                             @error('code')
                                                 <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
