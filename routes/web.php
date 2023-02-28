@@ -23,6 +23,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\LessonPlanController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
@@ -52,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
     //LESSON PLAN ROUTES
-	Route::get('lesson-plans', function () {return view('lesson-plan.index');})->name('lesson-plans');
+	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson-plans');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->name('schools');
