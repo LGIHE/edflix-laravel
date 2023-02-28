@@ -39,11 +39,12 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    //USER MANAGEMENT
     Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
     Route::get('create-user', [UserController::class, 'createUserSuccess'])->name('user.create.success');
     Route::get('user/{id}', [UserController::class, 'getUser'])->name('get.user');
-    Route::post('user/{id}', [UserController::class, 'updateUser'])->name('user.update');
-    Route::delete('user/{id}', [UserController::class, 'deleteUser']);
+    Route::post('user/{id}', [UserController::class, 'updateUser'])->name('update.user');
+    Route::get('user/delete/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
     Route::get('users', [UserController::class, 'getUsers'])->name('users');
 
 	Route::get('profile', function () {return view('user.profile');})->name('profile');

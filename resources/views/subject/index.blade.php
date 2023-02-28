@@ -75,15 +75,13 @@
                                                         <div class="ripple-container"></div>
                                                     </a>
 
-                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$subject->id}}" title="Delete Project">
+                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$subject->id}}" title="Delete Subject">
                                                         <i class="material-icons ">delete</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 </td>
                                             </tr>
 
-                                            <!-- School Update Modal -->
-                                            <!--  -->
                                             <!-- Confirm School Delete modal -->
                                             <div class="modal fade" id="deleteModal-{{ $subject->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm" role="document">

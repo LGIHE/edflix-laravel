@@ -26,7 +26,7 @@ class UserController extends Controller
             'subject_3' => 'nullable',
         ]);
 
-
+        $attributes['email_verified_at'] = $attributes['role'] == 'Teacher' ? 'user' : 'admin';
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
         // return response()->json($attributes);
@@ -79,10 +79,10 @@ class UserController extends Controller
 
     }
 
-    public function getDelete(){
+    public function deleteUser(){
+        $status = User::find(request()->id)->delete();
 
-        return 1;
-
+        return redirect()->route('users')->with('status', 'The user has been deleted successfully.');
     }
 
 }

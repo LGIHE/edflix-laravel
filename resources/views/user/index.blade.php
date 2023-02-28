@@ -75,12 +75,33 @@
                                                     <div class="ripple-container"></div>
                                                 </a>
 
-                                                <button type="button" class="btn btn-danger btn-link" data-original-title="" title="">
+                                                <button type="button" class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$user->id}}" title="Delete User">
                                                     <i class="material-icons">delete</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
                                             </td>
                                         </tr>
+
+                                        <!-- Confirm School Delete modal -->
+                                        <div class="modal fade" id="deleteModal-{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body" id="smallBody">
+                                                            <div class="text-center">
+                                                                <span class="">Are you sure you want to Delete this User?</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer align-items-center">
+                                                            <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.user', $user->id) }}">Confirm</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         @endforeach
                                     </tbody>
@@ -98,6 +119,7 @@
     $(document).on('click', '#del-btn', function(event) {
         event.preventDefault();
         let href = $(this).data('value');
+        // console.log(href);
         window.location.assign(href);
     });
 

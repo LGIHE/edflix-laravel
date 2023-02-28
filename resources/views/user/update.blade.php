@@ -30,7 +30,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method='POST' action="{{ route('user.update', $user->id) }}">
+                                <form method='POST' action="{{ route('update.user', $user->id) }}">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
