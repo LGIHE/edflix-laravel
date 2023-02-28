@@ -15,9 +15,9 @@ class SchoolController extends Controller
     }
 
     public function getOne(){
-        $schools = School::findOrFail(request()->id);
+        $school = School::find(request()->id);
 
-        return response()->json($schools);
+        return view('school.update', compact('school'));
     }
 
     public function createSchool()
@@ -50,14 +50,10 @@ class SchoolController extends Controller
         ]);
 
         #Update the School
-        $status = School::whereId(request()->id)->update($attributes);
-        var_dump($status);
+        $status = School::find(request()->id)->update($attributes);
 
-        return response()->json(['success' => 'The school has been updated successfully.']);
-    }
 
-    public function updateSuccess(){
-        return redirect()->route('schools')->with('status', 'The school has been updated successfully.');
+        return redirect()->route('get.school', request()->id)->with('status', 'The school has been updated successfully.');
     }
 
     public function deleteSuccess(){

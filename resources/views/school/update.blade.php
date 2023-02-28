@@ -1,106 +1,85 @@
-<style>
-    .btn-close{
-        color: #000;
-        background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
-    }
-</style>
+<x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-<!-- Modal -->
-<div class="modal fade" id="updateSchoolModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateSchoolModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="updateSchoolModalLabel">Update School</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+    <x-navbars.sidebar activePage="schools"></x-navbars.sidebar>
+    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 pb-5">
+        <!-- Navbar -->
+        <x-navbars.topbar titlePage='Update School'></x-navbars.topbar>
+        <!-- End Navbar -->
+        <div class="container-fluid px-2 px-md-4 mt-5">
+            <div class="card card-body mx-3 mx-md-4 ">
 
-            <div class="modal-body">
-                <form id="updateSchoolForm">
-                    @csrf
-                    <div class="row">
-                    <input type="hidden" name="id">
-                    <div class="mb-3 col-md-6">
-                            <label class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control border border-2 p-2">
-                            <p class='text-danger font-weight-bold inputerror' id="nameError"></p>
+                <div class="card card-plain h-100">
+                    <div class="card-body p-3">
+                        @if (session('status'))
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible text-white" role="alert">
+                                <span class="text-sm">{{ Session::get('status') }}</span>
+                                <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                    data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
+                        @endif
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="bio-form">
+                                <div class="card-header pb-0 p-3">
+                                    <div class="row">
+                                        <div class="col-md-8 d-flex align-items-center">
+                                            <h6 class="mb-3">School Information</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form method='POST' action="{{ route('update.school', $school->id) }}">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Name</label>
+                                            <input type="text" name="name" class="form-control border border-2 p-2" value='{{ $school->name }}'>
+                                            @error('name')
+                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control border border-2 p-2">
-                            <p class='text-danger font-weight-bold inputerror' id="emailError"></p>
-                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Email address</label>
+                                            <input type="email" name="email" class="form-control border border-2 p-2" value='{{ $school->email }}'>
+                                            @error('email')
+                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Address</label>
-                            <input type="number" name="address" class="form-control border border-2 p-2">
-                            <p class='text-danger font-weight-bold inputerror' id="addressError"></p>
-                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Address</label>
+                                            <input type="text" name="address" class="form-control border border-2 p-2" value='{{ $school->address }}'>
+                                            @error('address')
+                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">City</label>
-                            <input type="text" name="city" class="form-control border border-2 p-2">
-                            <p class='text-danger font-weight-bold inputerror' id="cityError"></p>
-                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">City</label>
+                                            <input type="text" name="city" class="form-control border border-2 p-2" value='{{ $school->city }}'>
+                                            @error('city')
+                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
 
-                        <div class="mb-3 col-md-9">
-                            <label class="form-label">District</label>
-                            <input type="text" name="district" class="form-control border border-2 p-2">
-                            <p class='text-danger font-weight-bold inputerror' id="districtError"></p>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">District</label>
+                                            <input type="text" name="district" class="form-control border border-2 p-2" value='{{ $school->district }}'>
+                                            @error('district')
+                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn bg-gradient-dark">Update School</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success btn-submit">Update School <span id="loader"></span></button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-
-$(function () {
-
-    $('.btn-submit').on('click', function (e) {
-        e.preventDefault();
-
-        let formData = $('#updateSchoolForm').serializeArray();
-        $(".inputerror").text("");
-        $("#updateSchoolForm input").removeClass("is-invalid");
-
-        $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
-        $(".btn-submit").attr("disabled", 'disabled');
-
-        $.ajax({
-            method: "PUT",
-            headers: {
-                Accept: "application/json"
-            },
-            url: "{{ route('update.school') }}",
-            data: formData,
-            success: () => {
-                $(".fa-spinner").remove();
-                $(".btn-submit").prop("disabled", false);
-                window.location.assign("{{ route('school-update') }}")
-            },
-            error: (response) => {
-                $(".fa-spinner").remove();
-                $(".btn-submit").prop("disabled", false);
-
-                if(response.status === 422) {
-                    let errors = response.responseJSON.errors;
-                    Object.keys(errors).forEach(function (key) {
-                        $("[name='" + key + "']").addClass("is-invalid");
-                        $("#" + key + "Error").text(errors[key][0]);
-                    });
-                } else {
-                    window.location.reload();
-                }
-            }
-        })
-    });
-})
-</script>
+</x-layout>

@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('school/{id}', [SchoolController::class, 'getOne'])->name('get.school');
 	Route::post('school', [SchoolController::class, 'createSchool'])->name('create.school');
 	Route::get('school-success', [SchoolController::class, 'createSuccess'])->name('school-success');
-	Route::put('school', [SchoolController::class, 'updateSchool'])->name('update.school');
+	Route::post('school/update/{id}', [SchoolController::class, 'updateSchool'])->name('update.school');
 	Route::get('school-update', [SchoolController::class, 'createSuccess'])->name('school-update');
 	Route::get('school-delete/{id}', [SchoolController::class, 'deleteSuccess'])->name('delete.school');
 

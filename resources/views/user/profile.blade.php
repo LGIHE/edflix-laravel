@@ -3,7 +3,7 @@
     <x-navbars.sidebar activePage="profile"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 pb-5">
         <!-- Navbar -->
-        <x-navbars.topbar titlePage=''></x-navbars.topbar>
+        <x-navbars.topbar titlePage='Profile'></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid px-2 px-md-4 mt-5">
             <div class="card card-body mx-3 mx-md-4 ">

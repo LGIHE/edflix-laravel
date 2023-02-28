@@ -3,7 +3,7 @@
     <x-navbars.sidebar activePage="schools"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.topbar titlePage="Users"></x-navbars.topbar>
+        <x-navbars.topbar titlePage="Schools"></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
@@ -70,19 +70,21 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a rel="tooltip" class="btn btn-success btn-link open_modal" data-value="{{ $school->id }}">
-                                                    <!-- <a rel="tooltip" class="btn btn-success btn-link" data-bs-toggle="modal" data-bs-target="#updateSchoolModal"> -->
+                                                    <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $school->id }}">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
 
-                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-original-title="" data-bs-target="#deleteModal-{{$school->id}}" data-bs-value="{{ route('delete.school', $school->id) }}" title="Delete Project">
+                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$school->id}}" title="Delete Project">
                                                         <i class="material-icons ">delete</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <!-- small modal -->
+
+                                            <!-- School Update Modal -->
+                                            <!--  -->
+                                            <!-- Confirm School Delete modal -->
                                             <div class="modal fade" id="deleteModal-{{ $school->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm" role="document">
                                                     <div class="modal-content">
@@ -128,26 +130,14 @@
         window.location.assign(href);
     });
 
-    $(document).on('click','.open_modal',function(){
-        var school_id = $('.open_modal').data("value");
+    $(document).on('click','#open-update',function(){
+        var school_id = $(this).data("value");
         var url = '{{route("get.school",":id")}}';
         url = url.replace(':id', school_id);
-
-        console.log(school_id);
-
-        $.get(url, function (data) {
-            //success data
-            console.log(data);
-            $('[name=id]').val(data.id);
-            $('[name=name]').val(data.name);
-            $('[name=email]').val(data.email);
-            $('[name=address]').val(data.address);
-            $('[name=city]').val(data.city);
-            $('[name=district]').val(data.district);
-            $('#updateSchoolModal').modal('show');
-        })
+        window.location.assign(url);
     });
+
+
 </script>
 
 @include('school.create')
-@include('school.update')
