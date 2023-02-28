@@ -37,7 +37,7 @@
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name" class="form-control border border-2 p-2" value='{{ $subject->name }}'>
                                             @error('name')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
 
@@ -45,7 +45,7 @@
                                             <label class="form-label">UNEB Code</label>
                                             <input type="text" name="code" class="form-control border border-2 p-2" value='{{ $subject->email }}'>
                                             @error('code')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
 
@@ -53,7 +53,7 @@
                                             <label class="form-label">Short Name</label>
                                             <input type="text" name="short" class="form-control border border-2 p-2" value='{{ $subject->short }}'>
                                             @error('address')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
 
@@ -65,7 +65,7 @@
                                                 <option value="UCE" {{ $subject->level == "UCE" ? "selected" : '' }}>UCE</option>
                                             </select>
                                             @error('city')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
 
@@ -73,7 +73,7 @@
                                             <label class="form-label">Description</label>
                                             <input type="text" name="description" class="form-control border border-2 p-2" value='{{ $subject->description }}'>
                                             @error('description')
-                                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
                                     </div>

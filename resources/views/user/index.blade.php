@@ -70,7 +70,7 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <a rel="tooltip" class="btn btn-success btn-link" data-bs-toggle="modal" data-bs-target="#updateUserModal">
+                                                <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $user->id }}">
                                                     <i class="material-icons">edit</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
@@ -93,5 +93,20 @@
         </div>
     </main>
 </x-layout>
+
+<script>
+    $(document).on('click', '#del-btn', function(event) {
+        event.preventDefault();
+        let href = $(this).data('value');
+        window.location.assign(href);
+    });
+
+    $(document).on('click','#open-update',function(){
+        var user_id = $(this).data("value");
+        var url = '{{route("get.user",":id")}}';
+        url = url.replace(':id', user_id);
+        window.location.assign(url);
+    });
+</script>
+
 @include('user.create')
-@include('user.update')

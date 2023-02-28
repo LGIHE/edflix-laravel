@@ -121,8 +121,6 @@
     </main>
 </x-layout>
 
-
-
 <script>
     $(document).on('click', '#del-btn', function(event) {
         event.preventDefault();
@@ -136,8 +134,6 @@
         url = url.replace(':id', subject_id);
         window.location.assign(url);
     });
-
-
 </script>
 
 @include('subject.create')
