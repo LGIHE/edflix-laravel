@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     //LESSON PLAN ROUTES
 	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson-plans');
 	Route::get('lesson-plan', [LessonPlanController::class, 'getCreate'])->name('get.lesson.plan');
+	Route::post('add-preliminary', [LessonPlanController::class, 'addPreliminary'])->name('add.preliminary');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
