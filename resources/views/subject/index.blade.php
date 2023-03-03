@@ -30,10 +30,10 @@
                         <div class="card-body px-0 pb-2">
                             @if (count($subjects) > 0)
                                 <div class="table-responsive p-0">
-                                    <table class="table align-items-center mb-0">
+                                    <table class="table align-items-center mb-0" id="table">
                                         <thead>
                                             <tr>
-                                                <th class="text-secondary text-xxl font-weight-bolder">Name</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Name</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">UNEB Code</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Short Name</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Description</th>
@@ -45,27 +45,27 @@
                                         @foreach ($subjects as $subject)
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center px-2">
                                                         <h6 class="mb-0 text-m">{{ $subject->name }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $subject->code }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $subject->short }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $subject->description }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">@if($subject->level == 'Select Level') {{ '-' }} @else {{ $subject->level }} @endif</span>
                                                     </div>
                                                 </td>

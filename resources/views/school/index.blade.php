@@ -30,10 +30,10 @@
                         <div class="card-body px-0 pb-2">
                             @if (count($schools) > 0)
                                 <div class="table-responsive p-0">
-                                    <table class="table align-items-center mb-0">
+                                    <table class="table align-items-center mb-0" id="table">
                                         <thead>
                                             <tr>
-                                                <th class="text-secondary text-xxl font-weight-bolder">Name</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Name</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Address</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">City</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">District</th>
@@ -45,27 +45,27 @@
                                         @foreach ($schools as $school)
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center px-2">
                                                         <h6 class="mb-0 text-m">{{ $school->name }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $school->address }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $school->city }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $school->district }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $school->email }}</span>
                                                     </div>
                                                 </td>

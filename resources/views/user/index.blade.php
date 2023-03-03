@@ -29,10 +29,10 @@
                         @endif
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
+                                <table class="table table-sm hover mb-0" id="table">
                                     <thead>
                                         <tr>
-                                            <th class="text-secondary text-xxl font-weight-bolder">Name</th>
+                                            <th class="text-secondary text-xxl font-weight-bolder px-4">Name</th>
                                             <th class="text-secondary text-xxl font-weight-bolder">Email</th>
                                             <th class="text-secondary text-xxl font-weight-bolder">Username</th>
                                             <th class="text-secondary text-xxl font-weight-bolder">School</th>
@@ -45,27 +45,27 @@
 
                                         <tr>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                    <h6 class="mb-0 text-m">{{ $user->name }}</h6>
+                                                <div class="d-flex flex-column justify-content-center px-2">
+                                                    <p class="text-m text-dark font-weight-bold mb-0">{{ $user->name }}</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
                                                     <p class="text-m text-dark font-weight-bold mb-0">{{ $user->email }}</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
                                                     <p class="text-m text-dark font-weight-bold mb-0">{{ $user->email }}</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
                                                     <span class="text-dark text-m font-weight-bold">Luigi Giussani High School</span>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
                                                     <span class="text-dark text-m font-weight-bold">{{ $user->role }}</span>
                                                 </div>
                                             </td>
