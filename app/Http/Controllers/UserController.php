@@ -26,7 +26,7 @@ class UserController extends Controller
             'subject_3' => 'nullable',
         ]);
 
-        $attributes['email_verified_at'] = $attributes['role'] == 'Teacher' ? 'user' : 'admin';
+        $attributes['type'] = $attributes['role'] == 'Teacher' ? 'teacher' : 'admin';
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
         // return response()->json($attributes);

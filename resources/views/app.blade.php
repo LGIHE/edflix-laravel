@@ -46,6 +46,7 @@
                     'excel', 'pdf', 'print'
                 ]
             });
+            $('#table td .d-flex').css('white-space','initial');
         } );
         </script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

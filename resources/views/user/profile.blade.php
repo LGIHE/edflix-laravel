@@ -20,10 +20,12 @@
                             </h5>
                             <p class="mb-0 font-weight-normal text-sm">
                                 @if (auth()->user()->type == 'admin')
-                                    {{ 'System Administrator' }}
-                                @elseif(auth()->user()->type == 'facil')
+                                    @if(auth()->user()->role == 'Facilitator')
                                     {{ 'Facilitator' }}
-                                @elseif(auth()->user()->type == 'teacher')
+                                    @else
+                                    {{ 'System Administrator' }}
+                                    @endif
+                                @else
                                     {{ 'Teacher' }}
                                 @endif
                             </p>

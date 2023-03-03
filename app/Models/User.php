@@ -52,8 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const ADMIN_TYPE = 'admin';
-    const USER_TYPE = 'user';
+    const ADMIN = 'admin';
+    const TEACHER = 'teacher';
+    const FACILITATOR = 'Facilitator';
 
     public function setPasswordAttribute($password)
     {
@@ -61,11 +62,15 @@ class User extends Authenticatable
     }
 
     public function isAdmin() {
-        return $this->type === self::ADMIN_TYPE;
+        return $this->type === self::ADMIN;
     }
 
-    public function isUser() {
-        return $this->type === self::USER_TYPE;
+    public function isTeacher() {
+        return $this->type === self::TEACHER;
+    }
+
+    public function isRoleFacilitator() {
+        return $this->role === self::FACILITATOR;
     }
 
 

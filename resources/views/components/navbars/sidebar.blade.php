@@ -31,6 +31,7 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Lesson Plans</span>
                 </a>
             </li>
+            @if(!auth()->user()->isRoleFacilitator())
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'users' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('users') }}">
@@ -40,6 +41,7 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">User Management</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'schools' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('schools') }}">
