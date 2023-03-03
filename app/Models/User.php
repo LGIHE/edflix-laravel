@@ -55,6 +55,7 @@ class User extends Authenticatable
     const ADMIN = 'admin';
     const TEACHER = 'teacher';
     const FACILITATOR = 'Facilitator';
+    const SYS_ADMIN = 'Administrator';
 
     public function setPasswordAttribute($password)
     {
@@ -67,6 +68,10 @@ class User extends Authenticatable
 
     public function isTeacher() {
         return $this->type === self::TEACHER;
+    }
+
+    public function isRoleSysAdmin() {
+        return $this->role === self::SYS_ADMIN;
     }
 
     public function isRoleFacilitator() {
