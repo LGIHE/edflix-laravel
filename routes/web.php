@@ -41,12 +41,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //USER MANAGEMENT
-    Route::post('create-user', [UserController::class, 'createUser'])->name('create-user');
-    Route::get('create-user', [UserController::class, 'createUserSuccess'])->name('user.create.success');
-    Route::get('user/{id}', [UserController::class, 'getUser'])->name('get.user');
-    Route::post('user/{id}', [UserController::class, 'updateUser'])->name('update.user');
-    Route::get('user/delete/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
-    Route::get('users', [UserController::class, 'getUsers'])->name('users');
+    Route::post('create-user', [UserController::class, 'createUser'])->middleware('super.admin')->name('create-user');
+    Route::get('create-user', [UserController::class, 'createUserSuccess'])->middleware('super.admin')->name('user.create.success');
+    Route::get('user/{id}', [UserController::class, 'getUser'])->middleware('super.admin')->name('get.user');
+    Route::post('user/{id}', [UserController::class, 'updateUser'])->middleware('super.admin')->name('update.user');
+    Route::get('user/delete/{id}', [UserController::class, 'deleteUser'])->middleware('super.admin')->name('delete.user');
+    Route::get('users', [UserController::class, 'getUsers'])->middleware('admin')->name('users');
 
 	Route::get('profile', function () {return view('user.profile');})->name('profile');
     Route::post('profile', [ProfileController::class, 'updateBio']);
