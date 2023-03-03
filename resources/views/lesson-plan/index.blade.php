@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0 end" data-bs-toggle="modal" data-bs-target="#newSchoolModal">
+                            <a class="btn bg-gradient-dark mb-0 end" onclick="window.location.href='{{ route('get.lesson.plan') }}';">
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Create A Lesson Plan
                             </a>
                         </div>

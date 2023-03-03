@@ -15,4 +15,11 @@ class LessonPlanController extends Controller
 
         return view('lesson-plan.index', compact('lessonPlans'));
     }
+
+    public function getCreate(){
+        $schools = School::all();
+        $subjects = Subject::all();
+
+        return view('lesson-plan.create', compact('schools', 'subjects'));
+    }
 }
