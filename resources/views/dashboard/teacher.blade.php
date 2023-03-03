@@ -11,20 +11,6 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block" onclick="window.location.href='{{ route('schools') }}'">
-                    <div class="card">
-                        <div class="card-header p-3 pt-2">
-                            <div class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">school</i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <h5 class="mb-0">Schools</h5>
-                                <h4 class="mb-0">{{count($schools)}}</h4>
-                            </div>
-                        </div>
-                        <div class="card-footer p-2"></div>
-                    </div>
-                </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"  onclick="window.location.href='{{ route("lesson-plans") }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -33,14 +19,28 @@
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">piano</i>
                             </div>
                             <div class="text-end pt-1">
-                                <h5 class="mb-0">Lesson Plans</h5>
+                                <h5 class="mb-0">All Lesson Plans</h5>
                                 <h4 class="mb-0">0</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"  onclick="window.location.href='{{ route('users') }}'">
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4 dash-block">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">school</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <h5 class="mb-0">Your Lesson Plans</h5>
+                                <h4 class="mb-0">0</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer p-2"></div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4 dash-block">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -48,14 +48,14 @@
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">people</i>
                             </div>
                             <div class="text-end pt-1">
-                                <h5 class="mb-0">Facilitators</h5>
-                                <h4 class="mb-0">{{count($facilitators)}}</h4>
+                                <h5 class="mb-0">Approved Lesson Plans</h5>
+                                <h4 class="mb-0">0</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 dash-block" onclick="window.location.href='{{ route('users') }}'">
+                <!-- <div class="col-xl-3 col-sm-6 dash-block" onclick="window.location.href='{{ route('users') }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -69,7 +69,7 @@
                         </div>
                         <div class="card-footer p-2"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="card-body px-0 pb-2">
                 @if (count($lessonPlans) > 0)
