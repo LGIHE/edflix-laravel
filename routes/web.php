@@ -56,22 +56,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson-plans');
 
     //SCHOOL ROUTES
-	Route::get('schools', [SchoolController::class, 'getAll'])->name('schools');
-	Route::get('school/{id}', [SchoolController::class, 'getOne'])->name('get.school');
-	Route::post('school', [SchoolController::class, 'createSchool'])->name('create.school');
-	Route::get('school-success', [SchoolController::class, 'createSuccess'])->name('school-success');
-	Route::post('school/update/{id}', [SchoolController::class, 'updateSchool'])->name('update.school');
-	Route::get('school-update', [SchoolController::class, 'createSuccess'])->name('school-update');
-	Route::get('school-delete/{id}', [SchoolController::class, 'deleteSuccess'])->name('delete.school');
+	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
+	Route::get('school/{id}', [SchoolController::class, 'getOne'])->middleware('admin')->name('get.school');
+	Route::post('school', [SchoolController::class, 'createSchool'])->middleware('admin')->name('create.school');
+	Route::get('school-success', [SchoolController::class, 'createSuccess'])->middleware('admin')->name('school-success');
+	Route::post('school/update/{id}', [SchoolController::class, 'updateSchool'])->middleware('admin')->name('update.school');
+	Route::get('school-update', [SchoolController::class, 'createSuccess'])->middleware('admin')->name('school-update');
+	Route::get('school-delete/{id}', [SchoolController::class, 'deleteSuccess'])->middleware('admin')->name('delete.school');
 
     //SUBJECTS ROUTES
-    Route::get('subjects', [SubjectController::class, 'getAll'])->name('subjects');
-	Route::get('subject/{id}', [SubjectController::class, 'getOne'])->name('get.subject');
-	Route::post('subject', [SubjectController::class, 'createSubject'])->name('create.subject');
-	Route::get('subject-success', [SubjectController::class, 'createSuccess'])->name('subject-success');
-	Route::post('subject/update/{id}', [SubjectController::class, 'updateSubject'])->name('update.subject');
-	Route::get('subject-update', [SubjectController::class, 'createSuccess'])->name('subject-update');
-	Route::get('subject-delete/{id}', [SubjectController::class, 'deleteSuccess'])->name('delete.subject');
+    Route::get('subjects', [SubjectController::class, 'getAll'])->middleware('admin')->name('subjects');
+	Route::get('subject/{id}', [SubjectController::class, 'getOne'])->middleware('admin')->name('get.subject');
+	Route::post('subject', [SubjectController::class, 'createSubject'])->middleware('admin')->name('create.subject');
+	Route::get('subject-success', [SubjectController::class, 'createSuccess'])->middleware('admin')->name('subject-success');
+	Route::post('subject/update/{id}', [SubjectController::class, 'updateSubject'])->middleware('admin')->name('update.subject');
+	Route::get('subject-update', [SubjectController::class, 'createSuccess'])->middleware('admin')->name('subject-update');
+	Route::get('subject-delete/{id}', [SubjectController::class, 'deleteSuccess'])->middleware('admin')->name('delete.subject');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });

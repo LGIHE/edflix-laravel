@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
+use App\Models\LessonPlan;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,13 @@ class DashboardController extends Controller
 
         }else{
             //a teacher
-            // return view('dashboard.index');
+            $teachers = User::all()->where('role', 'Teacher');
+            $facilitators = User::all()->where('role', 'Facilitator');
+            $schools = School::all();
+            $lessonPlans = LessonPlan::all();
+
+            // an admin
+            return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'lessonPlans'));
         }
     }
 }

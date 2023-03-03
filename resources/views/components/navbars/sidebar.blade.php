@@ -31,7 +31,7 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Lesson Plans</span>
                 </a>
             </li>
-            @if(!auth()->user()->isRoleFacilitator())
+            @if(auth()->user()->isRoleSuperAdmin())
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'users' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('users') }}">
@@ -42,6 +42,7 @@
                 </a>
             </li>
             @endif
+            @if(auth()->user()->isAdmin())
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'schools' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('schools') }}">
@@ -51,6 +52,8 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Schools</span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->isAdmin())
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'subjects' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('subjects') }}">
@@ -60,6 +63,7 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Subjects</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'profile' ? 'active bg-gradient-info' : '' }} "
                     href="{{ route('profile') }}">
