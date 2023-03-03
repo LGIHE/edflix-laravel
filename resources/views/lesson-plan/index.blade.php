@@ -30,10 +30,10 @@
                         <div class="card-body px-0 pb-2">
                             @if (count($lessonPlans) > 0)
                                 <div class="table-responsive p-0">
-                                    <table class="table align-items-center mb-0">
+                                    <table class="table align-items-center mb-0" id="table">
                                         <thead>
                                             <tr>
-                                                <th class="text-secondary text-xxl font-weight-bolder">Theme</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Subject</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Class</th>
@@ -50,22 +50,22 @@
                                         @foreach ($lessonPlans as $lessonPlan)
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center px-2">
                                                         <h6 class="mb-0 text-m">{{ lessonPlans->theme }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $school->subject }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $school->topic }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $school->class }}</span>
                                                     </div>
                                                 </td>
