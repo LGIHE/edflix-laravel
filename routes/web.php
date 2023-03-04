@@ -53,9 +53,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
     //LESSON PLAN ROUTES
-	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson-plans');
-	Route::get('lesson-plan', [LessonPlanController::class, 'getCreate'])->name('get.lesson.plan');
-	Route::post('add-preliminary', [LessonPlanController::class, 'addPreliminary'])->name('add.preliminary');
+	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson.plans');
+	Route::get('lesson-plan/{id}', [LessonPlanController::class, 'getLessonPlan'])->name('get.lesson.plan');
+	Route::get('create-lesson-plan', [LessonPlanController::class, 'getCreate'])->name('get.create.lesson.plan');
+	Route::post('create-lesson-plan', [LessonPlanController::class, 'createLessonPlan'])->name('create.lesson.plan');
+	Route::get('create-lesson-plan-success/{id}', [LessonPlanController::class, 'successCreate'])->name('create.lesson.plan.success');
+	Route::post('add-step/{id}', [LessonPlanController::class, 'addStep'])->name('add.step');
+	Route::get('step/{id}', [LessonPlanController::class, 'getStep'])->name('step');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');

@@ -24,7 +24,7 @@
             </li>
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'lesson-plans' ? ' active bg-gradient-info' : '' }} "
-                    href="{{ route('lesson-plans') }}">
+                    href="{{ route('lesson.plans') }}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">list</i>
                     </div>

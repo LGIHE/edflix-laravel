@@ -17,13 +17,14 @@ class LessonPlanController extends Controller
     }
 
     public function getCreate(){
+        $teachers = User::all()->where('role', 'Teacher');
         $schools = School::all();
         $subjects = Subject::all();
 
-        return view('lesson-plan.create', compact('schools', 'subjects'));
+        return view('lesson-plan.create', compact('schools', 'subjects', 'teachers'));
     }
 
-    public function addPreliminary(){
+    public function createLessonPlan(){
 
         $attributes = request()->validate([
             'owner' => 'required',
@@ -45,8 +46,34 @@ class LessonPlanController extends Controller
             'references' => 'required',
         ]);
 
-        LessonPlan::create($attributes);
+        $attributes['created_by'] = request()->created_by;
+        $lesson = LessonPlan::create($attributes);
 
-        return response()->json(['success' => 'Lesson Plan has been saved.']);
+        return response()->json(['id' => $lesson->id]);
     }
+
+    public function successCreate(){
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The Lesson Plan preliminary information has been added. You can now add the steps.');
+    }
+
+    public function getLessonPlan(){
+        $lesson = LessonPlan::find(request()->id);
+        $subject = Subject::find($lesson->subject);
+        $owner = User::find($lesson->owner);
+        $school = School::find($owner->school);
+
+        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school'));
+
+    }
+
+    public function AddStep(){
+        return true;
+    }
+
+    public function getStep(){
+        return true;
+    }
+
 }

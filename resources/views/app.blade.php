@@ -1,6 +1,6 @@
 @include('components.header')
 
-    <body class="{{ $bodyClass }}">
+    <body class="{{ $bodyClass }}" style="background-color:#f8f9fa!important">
 
 {{ $slot }}
 

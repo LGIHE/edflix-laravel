@@ -98,16 +98,10 @@
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label subject-1">Subject 1</label>
                                             <select class="form-select border-2 p-2" name="subject_1" aria-label="">
-                                                @if($user->subject_1 == '')
-                                                    <option value="" selected>Select Subject</option>
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_1) {{'selected'}} @endif>{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @endif
+                                                <option value="" selected>Select Subject</option>
+                                                @foreach($subjects as $subject)
+                                                <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_1) {{'selected'}} @endif>{!! $subject->name !!}</option>
+                                                @endforeach
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="subject_1Error"></p>
                                         </div>
@@ -115,17 +109,10 @@
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label subject-2">Subject 2</label>
                                             <select class="form-select border-2 p-2" name="subject_2" aria-label="">
-
-                                                @if($user->subject_2 == '')
-                                                    <option value="" selected>Select Subject</option>
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_2) {{'selected'}} @endif>{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @endif
+                                                <option value="" selected>Select Subject</option>
+                                                @foreach($subjects as $subject)
+                                                <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_2) {{'selected'}} @endif>{!! $subject->name !!}</option>
+                                                @endforeach
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="subject_2Error"></p>
                                         </div>
@@ -133,16 +120,10 @@
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label subject-3">Subject 3</label>
                                             <select class="form-select" name="subject_3" aria-label="">
-                                                @if($user->subject_3 == '')
-                                                    <option value="" selected>Select Subject</option>
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach($subjects as $subject)
-                                                    <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_3) {{'selected'}} @endif>{!! $subject->name !!}</option>
-                                                    @endforeach
-                                                @endif
+                                                <option value="" selected>Select Subject</option>
+                                                @foreach($subjects as $subject)
+                                                <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_3) {{'selected'}} @endif>{!! $subject->name !!}</option>
+                                                @endforeach
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="subject_3Error"></p>
                                         </div>

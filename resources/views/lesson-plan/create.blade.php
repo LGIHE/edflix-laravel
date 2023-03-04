@@ -1,9 +1,9 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-    <x-navbars.sidebar activePage="lesson-plan"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="lesson-plans"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 pb-5">
         <!-- Navbar -->
-        <x-navbars.topbar titlePage='Update User'></x-navbars.topbar>
+        <x-navbars.topbar titlePage='Lesson Plan'></x-navbars.topbar>
         <!-- End Navbar -->
         <div class="container-fluid px-2 px-md-4 mt-5">
             <div class="card card-body mx-3 mx-md-4 ">
@@ -30,15 +30,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method='POST' action="#" id="addLessonPreliminary">
+                                <form method='POST' action="#" id="addLessonPlan">
                                     @csrf
+                                    <input type="text" name="created_by" value="{{ auth()->user()->id }}" hidden>
                                     <div class="row">
+                                        @if(@auth()->user()->isAdmin())
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Owner</label>
-                                            <input type="text" name="owner" class="form-control border border-2 p-2">
+                                            <label class="form-label">Choose Owner</label>
+                                            <select class="form-select border border-2 p-2" name="owner" aria-label="">
+                                                <option value="" selected>Select</option>
+                                                @foreach($teachers as $teacher)
+                                                <option value="{!! $teacher->id !!}">{!! $teacher->name !!}</option>
+                                                @endforeach
+                                            </select>
                                             <p class='text-danger font-weight-bold inputerror' id="ownerError"></p>
                                         </div>
-
+                                        @else
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Owner</label>
+                                            <input type="text" name="owner" class="form-control border border-2 p-2" value="{{ auth()->user()->name }}" disabled>
+                                            <p class='text-danger font-weight-bold inputerror' id="ownerError"></p>
+                                        </div>
+                                        @endif
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Status</label>
                                             <select class="form-select border-2 p-2" name="status" aria-label="">
@@ -62,12 +75,6 @@
                                             <p class='text-danger font-weight-bold inputerror' id="visibilityError"></p>
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Topic</label>
-                                            <input type="text" name="topic" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="topicError"></p>
-                                        </div>
-
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Subject</label>
                                             <select class="form-select border-2 p-2" name="subject" aria-label="">
@@ -83,12 +90,12 @@
                                             <label class="form-label">Class</label>
                                             <select class="form-select border-2 p-2" name="class" aria-label="">
                                                 <option value="" selected>Select Subject</option>
-                                                <option value="1">Senior One</option>
-                                                <option value="2">Senior Two</option>
-                                                <option value="3">Senior Three</option>
-                                                <option value="4">Senior Four</option>
-                                                <option value="5">Senior Five</option>
-                                                <option value="6">Senior Six</option>
+                                                <option value="S1">Senior One</option>
+                                                <option value="S2">Senior Two</option>
+                                                <option value="S3">Senior Three</option>
+                                                <option value="S4">Senior Four</option>
+                                                <option value="S5">Senior Five</option>
+                                                <option value="S6">Senior Six</option>
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="classError"></p>
                                         </div>
@@ -103,6 +110,12 @@
                                             <label class="form-label">Theme</label>
                                             <input type="text" name="theme" class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="themeError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Topic</label>
+                                            <input type="text" name="topic" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="topicError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
@@ -178,11 +191,11 @@ $(function () {
     $('.btn-submit').on('click', function (e) {
         e.preventDefault();
 
-        let formData = $('#addLessonPreliminary').serializeArray();
+        let formData = $('#addLessonPlan').serializeArray();
         $(".inputerror").text("");
-        $("#addLessonPreliminary input").removeClass("is-invalid");
-        $("#addLessonPreliminary select").removeClass("is-invalid");
-        $("#addLessonPreliminary textarea").removeClass("is-invalid");
+        $("#addLessonPlan input").removeClass("is-invalid");
+        $("#addLessonPlan select").removeClass("is-invalid");
+        $("#addLessonPlan textarea").removeClass("is-invalid");
 
         $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
         $(".btn-submit").attr("disabled", 'disabled');
@@ -192,12 +205,14 @@ $(function () {
             headers: {
                 Accept: "application/json"
             },
-            url: "{{ route('add.preliminary') }}",
+            url: "{{ route('create.lesson.plan') }}",
             data: formData,
-            success: () => {
+            success: (response) => {
                 $(".fa-spinner").remove();
                 $(".btn-submit").prop("disabled", false);
-                // window.location.assign("{{ route('user.create.success') }}");
+                let url = '{{route("create.lesson.plan.success",":id")}}';
+                url = url.replace(':id', response.id);
+                window.location.assign(url);
             },
             error: (response) => {
                 $(".fa-spinner").remove();
