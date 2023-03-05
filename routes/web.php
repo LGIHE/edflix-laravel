@@ -61,6 +61,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('add-step/{id}', [LessonPlanController::class, 'addStep'])->name('add.step');
 	Route::get('step/{id}', [LessonPlanController::class, 'getStep'])->name('step');
 
+
+	Route::get('lesson-plan-delete/{id}', [LessonPlanController::class, 'deleteSuccess'])->middleware('admin')->name('delete.lesson.plan');
+
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
 	Route::get('school/{id}', [SchoolController::class, 'getOne'])->middleware('admin')->name('get.school');

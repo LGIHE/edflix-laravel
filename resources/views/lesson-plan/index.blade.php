@@ -51,27 +51,27 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-2">
-                                                        <h6 class="mb-0 text-m">{{ lessonPlans->theme }}</h6>
+                                                        <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $school->subject }}</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $school->topic }}</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $school->class }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $school->learners_no }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -81,27 +81,27 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $school->status }}</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status)) }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $school->visibility }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $school->owner }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->ownerName }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-3 py-1">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $school->school }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->schoolName }}</span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $school->id }}">
-                                                        <i class="material-icons">edit</i>
+                                                    <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
+                                                        <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 </td>
@@ -110,7 +110,7 @@
                                             <!-- School Update Modal -->
                                             <!--  -->
                                             <!-- Confirm School Delete modal -->
-                                            <div class="modal fade" id="deleteModal-{{ $school->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="deleteModal-{{ $lessonPlan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -123,7 +123,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer align-items-center">
-                                                            <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.school', $school->id) }}">Confirm</button>
+                                                            <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.lesson.plan', $lessonPlan->id) }}">Confirm</button>
                                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
@@ -151,9 +151,9 @@
 <script>
 
     $(document).on('click','#open-update',function(){
-        var school_id = $(this).data("value");
-        var url = '{{route("get.school",":id")}}';
-        url = url.replace(':id', school_id);
+        var lesson_plan_id = $(this).data("value");
+        var url = '{{route("get.lesson.plan",":id")}}';
+        url = url.replace(':id', lesson_plan_id);
         window.location.assign(url);
     });
 

@@ -11,7 +11,12 @@ use App\Models\LessonPlan;
 class LessonPlanController extends Controller
 {
     public function getAll(){
-        $lessonPlans = LessonPlan::all();
+
+        $lessonPlans = LessonPlan::join('subjects', 'lesson_plans.subject', '=', 'subjects.id')
+                            ->join('users', 'lesson_plans.owner', '=', 'users.id')
+                            ->join('schools', 'lesson_plans.school', '=', 'schools.id')
+                            ->select('lesson_plans.*', 'subjects.name as subjectName', 'users.name as ownerName', 'schools.name as schoolName')
+                            ->get();
 
         return view('lesson-plan.index', compact('lessonPlans'));
     }
@@ -46,6 +51,9 @@ class LessonPlanController extends Controller
             'references' => 'required',
         ]);
 
+        $school = User::find($attributes['owner']);
+
+        $attributes['school'] = $school->school;
         $attributes['created_by'] = request()->created_by;
         $lesson = LessonPlan::create($attributes);
 
@@ -74,6 +82,14 @@ class LessonPlanController extends Controller
 
     public function getStep(){
         return true;
+    }
+
+
+
+    public function deleteSuccess(){
+        $status = LessonPlan::find(request()->id)->delete();
+
+        return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
     }
 
 }
