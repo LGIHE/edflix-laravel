@@ -30,9 +30,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method='POST' action="#" id="addLessonPlan">
+                                <form method='POST' action="{{ route('update.lesson.plan', $lesson->id) }}">
                                     @csrf
-                                    <input type="text" name="created_by" value="{{ auth()->user()->id }}" hidden>
+                                    <input type="text" name="updated_by" value="{{ auth()->user()->id }}" hidden>
                                     <div class="row">
                                         @if(@auth()->user()->isAdmin())
                                         <div class="mb-3 col-md-6">
@@ -66,7 +66,9 @@
                                                 <option value="approved" {{ $lesson->status == "approved" ? "selected" : '' }}>Approved</option>
                                                 <option value="saved" {{ $lesson->status == "saved" ? "selected" : '' }}>Saved</option>
                                             </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="statusError"></p>
+                                            @error('status')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-3">
@@ -76,7 +78,9 @@
                                                 <option value="1" {{ $lesson->visibility == 1 ? "selected" : '' }}>Yes</option>
                                                 <option value="0" {{ $lesson->visibility == 0 ? "selected" : '' }}>No</option>
                                             </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="visibilityError"></p>
+                                            @error('visibility')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-3">
@@ -87,7 +91,9 @@
                                                 <option value="{!! $subject->id !!}" @if($subject->id == $lesson->subject) {{'selected'}} @endif>{!! $subject->name !!}</option>
                                                 @endforeach
                                             </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="subjectError"></p>
+                                            @error('subject')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-3">
@@ -101,83 +107,109 @@
                                                 <option value="S5" {{ $lesson->class == "S5" ? "selected" : '' }}>Senior Five</option>
                                                 <option value="S6" {{ $lesson->class == "S6" ? "selected" : '' }}>Senior Six</option>
                                             </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="classError"></p>
+                                            @error('class')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Learners</label>
                                             <input type="number" name="learners_no" class="form-control border border-2 p-2" value="{{ $lesson->learners_no }}">
-                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                            @error('learners_no')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Theme</label>
                                             <input type="text" name="theme" class="form-control border border-2 p-2" value="{{ $lesson->theme }}">
-                                            <p class='text-danger font-weight-bold inputerror' id="themeError"></p>
+                                            @error('theme')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Topic</label>
                                             <input type="text" name="topic" class="form-control border border-2 p-2" value="{{ $lesson->topic }}">
-                                            <p class='text-danger font-weight-bold inputerror' id="topicError"></p>
+                                            @error('topic')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning outcomes</label>
                                             <textarea name="learning_outcomes" class="form-control border border-2 p-2">{{ $lesson->learning_outcomes }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_outcomesError"></p>
+                                            @error('learning_outcomes')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Generic Skills</label>
                                             <textarea name="generic_skills" class="form-control border border-2 p-2">{{ $lesson->generic_skills}}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="generic_skillsError"></p>
+                                            @error('generic_skills')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Values</label>
                                             <textarea name="values" class="form-control border border-2 p-2">{{ $lesson->values}}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="valuesError"></p>
+                                            @error('values')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Cross-cutting Issues</label>
                                             <textarea name="cross_cutting_issues" class="form-control border border-2 p-2">{{ $lesson->cross_cutting_issues }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="cross_cutting_issuesError"></p>
+                                            @error('cross_cutting_issues')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Key learning outcomes</label>
                                             <textarea name="key_learning_outcomes" class="form-control border border-2 p-2">{{ $lesson->key_learning_outcomes }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="key_learning_outcomesError"></p>
+                                            @error('key_learning_outcomes')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Pre-requisite Knowledge</label>
                                             <textarea name="pre_requisite_knowledge" class="form-control border border-2 p-2">{{ $lesson->pre_requisite_knowledge }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="pre_requisite_knowledgeError"></p>
+                                            @error('pre_requisite_knowledge')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning materials</label>
                                             <textarea name="learning_materials" class="form-control border border-2 p-2">{{ $lesson->learning_materials}}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_materialsError"></p>
+                                            @error('learning_materials')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning methods</label>
                                             <textarea name="learning_methods" class="form-control border border-2 p-2">{{ $lesson->learning_methods }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_methodsError"></p>
+                                            @error('learning_methods')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">References</label>
                                             <textarea name="references" class="form-control border border-2 p-2">{{ $lesson->references }}</textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="referencesError"></p>
+                                            @error('references')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn bg-gradient-dark btn-submit">Start Lesson Plan <span id="loader"></span></button>
+                                    <button type="submit" class="btn bg-gradient-dark btn-submit">Update Lesson Plan <span id="loader"></span></button>
                                 </form>
                             </div>
                         </div>

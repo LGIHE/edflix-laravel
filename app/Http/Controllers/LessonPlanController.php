@@ -120,13 +120,13 @@ class LessonPlanController extends Controller
         $school = User::find($attributes['owner']);
 
         $attributes['school'] = $school->school;
-        $attributes['updated_by'] = request()->created_by;
+        $attributes['updated_by'] = request()->updated_by;
 
         #Update the School
-        $status = Lesson::find(request()->id)->update($attributes);
+        $status = LessonPlan::find(request()->id)->update($attributes);
 
 
-        return redirect()->route('lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
+        return redirect()->route('get.lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
     }
 
     public function deleteSuccess(){
