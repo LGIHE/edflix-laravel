@@ -84,7 +84,39 @@ class LessonPlanController extends Controller
         return true;
     }
 
+    public function updateLessonPlan(){
 
+        $attributes = request()->validate([
+            'owner' => 'required',
+            'status' => 'required',
+            'visibility' => 'required',
+            'topic' => 'required',
+            'subject' => 'required',
+            'class' => 'required',
+            'learners_no' => 'required',
+            'theme' => 'required',
+            'learning_outcomes' => 'required',
+            'generic_skills' => 'required',
+            'values' => 'required',
+            'cross_cutting_issues' => 'required',
+            'key_learning_outcomes' => 'required',
+            'pre_requisite_knowledge' => 'required',
+            'learning_materials' => 'required',
+            'learning_methods' => 'required',
+            'references' => 'required',
+        ]);
+
+        $school = User::find($attributes['owner']);
+
+        $attributes['school'] = $school->school;
+        $attributes['updated_by'] = request()->created_by;
+
+        #Update the School
+        $status = Lesson::find(request()->id)->update($attributes);
+
+
+        return redirect()->route('lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
+    }
 
     public function deleteSuccess(){
         $status = LessonPlan::find(request()->id)->delete();
