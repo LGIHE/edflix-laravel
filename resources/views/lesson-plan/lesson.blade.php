@@ -29,7 +29,7 @@
                                             <h6 class="mb-3">{{ $lesson->topic }}</h6>
                                         </div>
                                         <div class="col-md-2 d-flex ">
-                                            <a class="btn bg-gradient-success mb-0 end">
+                                            <a class="btn bg-gradient-success mb-0 end" id="edit-lesson-plan" data-value="{{ $lesson->id }}">
                                                 <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
                                             </a>
                                         </div>
@@ -96,3 +96,13 @@
 </x-layout>
 
 <script>
+
+    $(document).on('click','#edit-lesson-plan',function(){
+        var lesson_plan_id = $(this).data("value");
+        var url = '{{route("get.lesson.plan.update",":id")}}';
+        url = url.replace(':id', lesson_plan_id);
+        window.location.assign(url);
+    });
+
+
+</script>

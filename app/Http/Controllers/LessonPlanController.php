@@ -84,6 +84,17 @@ class LessonPlanController extends Controller
         return true;
     }
 
+    public function getLessonPlanUpdate(){
+        $lesson = LessonPlan::find(request()->id);
+        $subjects = Subject::all();
+        $owner = User::find($lesson->owner);
+        $school = School::find($owner->school);
+        $teachers = User::all()->where('role', 'Teacher');
+
+        return view('lesson-plan.update', compact('lesson', 'subjects', 'owner', 'school', 'teachers'));
+
+    }
+
     public function updateLessonPlan(){
 
         $attributes = request()->validate([

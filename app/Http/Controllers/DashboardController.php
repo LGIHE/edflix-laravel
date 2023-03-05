@@ -16,9 +16,10 @@ class DashboardController extends Controller
             $teachers = User::all()->where('role', 'Teacher');
             $facilitators = User::all()->where('role', 'Facilitator');
             $schools = School::all();
+            $lessonPlans = lessonPlan::all();
 
             // an admin
-            return view('dashboard.admin', compact('teachers', 'facilitators', 'schools'));
+            return view('dashboard.admin', compact('teachers', 'facilitators', 'schools', 'lessonPlans'));
 
         }else{
             //a teacher

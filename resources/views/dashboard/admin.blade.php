@@ -34,7 +34,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Lesson Plans</h5>
-                                <h4 class="mb-0">0</h4>
+                                <h4 class="mb-0">{{count($lessonPlans)}}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
