@@ -73,7 +73,7 @@
             </div>
             <div class="card-body px-0 pb-2">
                 @if (count($lessonPlans) > 0)
-                <div class="table-responsive p-0">
+                <div class="table-responsive p-2 pt-5">
                     <table class="table align-items-center mb-0" id="table">
                         <thead>
                             <tr>

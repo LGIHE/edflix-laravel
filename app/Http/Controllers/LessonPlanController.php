@@ -86,13 +86,18 @@ class LessonPlanController extends Controller
 
     public function getLessonPlanUpdate(){
         $lesson = LessonPlan::find(request()->id);
-        $subjects = Subject::all();
-        $owner = User::find($lesson->owner);
-        $school = School::find($owner->school);
-        $teachers = User::all()->where('role', 'Teacher');
 
-        return view('lesson-plan.update', compact('lesson', 'subjects', 'owner', 'school', 'teachers'));
+        if(auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner){
 
+            $subjects = Subject::all();
+            $owner = User::find($lesson->owner);
+            $school = School::find($owner->school);
+            $teachers = User::all()->where('role', 'Teacher');
+            return view('lesson-plan.update', compact('lesson', 'subjects', 'owner', 'school', 'teachers'));
+
+        }else{
+            return back()->with('error', 'Action not Authorized. Please contact asministrator.');
+        }
     }
 
     public function updateLessonPlan(){
@@ -130,9 +135,18 @@ class LessonPlanController extends Controller
     }
 
     public function deleteSuccess(){
-        $status = LessonPlan::find(request()->id)->delete();
+        $lesson = LessonPlan::find(request()->id);
 
-        return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
+        if(auth()->user()->isAdmin || auth()->user()->id == $lesson->owner){
+
+            $status = LessonPlan::find(request()->id)->delete();
+
+            return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
+
+        }else{
+
+            return back()->with('error', 'Action not Authorized. Please contact asministrator.');
+        }
     }
 
 }
