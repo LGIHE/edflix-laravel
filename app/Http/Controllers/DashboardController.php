@@ -27,9 +27,10 @@ class DashboardController extends Controller
             $facilitators = User::all()->where('role', 'Facilitator');
             $schools = School::all();
             $lessonPlans = LessonPlan::all();
+            $yourLPs = LessonPlan::all()->where('owner', auth()->user()->id);
 
             // an admin
-            return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'lessonPlans'));
+            return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'lessonPlans', 'yourLPs'));
         }
     }
 }

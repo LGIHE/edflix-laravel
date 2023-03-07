@@ -20,7 +20,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">All Lesson Plans</h5>
-                                <h4 class="mb-0">0</h4>
+                                <h4 class="mb-0">{{ count($lessonPlans) }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Your Lesson Plans</h5>
-                                <h4 class="mb-0">0</h4>
+                                <h4 class="mb-0">{{ count($yourLPs) }}</h4>
                             </div>
                         </div>
                         <div class="card-footer p-2"></div>
@@ -48,7 +48,7 @@
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">people</i>
                             </div>
                             <div class="text-end pt-1">
-                                <h5 class="mb-0">Approved Lesson Plans</h5>
+                                <h5 class="mb-0">Your Approved LPs</h5>
                                 <h4 class="mb-0">0</h4>
                             </div>
                         </div>
