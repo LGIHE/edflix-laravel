@@ -125,7 +125,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->status }}</p>
+                                        <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status ))}}</p>
                                     </div>
                                 </td>
                                 <td>

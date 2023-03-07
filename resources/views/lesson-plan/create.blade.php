@@ -58,8 +58,10 @@
                                                 <option value="" selected>Select Status</option>
                                                 <option value="edit">Edit</option>
                                                 <option value="submitted">Submitted</option>
+                                                @if(@auth()->user()->isAdmin())
                                                 <option value="reviewed">Reviewed</option>
                                                 <option value="approved">Approved</option>
+                                                @endif
                                                 <option value="saved">Saved</option>
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="statusError"></p>

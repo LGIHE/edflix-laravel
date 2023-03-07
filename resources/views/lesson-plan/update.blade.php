@@ -34,10 +34,9 @@
                                     @csrf
                                     <input type="text" name="updated_by" value="{{ auth()->user()->id }}" hidden>
                                     <div class="row">
-                                        @if(@auth()->user()->isAdmin())
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Choose Owner</label>
-                                            <select class="form-select border border-2 p-2" name="owner" aria-label="">
+                                            <select class="form-select border border-2 p-2" name="owner" aria-label="" @if(@auth()->user()->isAdmin()) '' @else disabled @endif>
                                                 <option value="" selected>Select Owner</option>
                                                 @foreach($teachers as $teacher)
                                                 <option value="{!! $teacher->id !!}" @if($teacher->id == $lesson->owner) {{'selected'}} @endif>{!! $teacher->name !!}</option>
@@ -47,23 +46,16 @@
                                                 <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
-                                        @else
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Owner</label>
-                                            <input type="text" name="owner" class="form-control border border-2 p-2" value="{{ $owner->name }}" disabled>
-                                            @error('owner')
-                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
-                                            @enderror
-                                        </div>
-                                        @endif
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Status</label>
                                             <select class="form-select border-2 p-2" name="status" aria-label="">
                                                 <option value="" selected>Select Status</option>
                                                 <option value="edit" {{ $lesson->status == "edit" ? "selected" : '' }}>Edit</option>
                                                 <option value="submitted" {{ $lesson->status == "submitted" ? "selected" : '' }}>Submitted</option>
+                                                @if(@auth()->user()->isAdmin())
                                                 <option value="reviewed" {{ $lesson->status == "reviewed" ? "selected" : '' }}>Reviewed</option>
                                                 <option value="approved" {{ $lesson->status == "approved" ? "selected" : '' }}>Approved</option>
+                                                @endif
                                                 <option value="saved" {{ $lesson->status == "saved" ? "selected" : '' }}>Saved</option>
                                             </select>
                                             @error('status')
