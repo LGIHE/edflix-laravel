@@ -28,9 +28,11 @@ class DashboardController extends Controller
             $schools = School::all();
             $lessonPlans = LessonPlan::all();
             $yourLPs = LessonPlan::all()->where('owner', auth()->user()->id);
+            $yourApprovedLPs = LessonPlan::all()->where('owner', auth()->user()->id)
+                                        ->where('status', 'approved');
 
             // an admin
-            return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'lessonPlans', 'yourLPs'));
+            return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'lessonPlans', 'yourLPs', 'yourApprovedLPs'));
         }
     }
 }
