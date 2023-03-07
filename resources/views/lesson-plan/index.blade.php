@@ -70,36 +70,36 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">0</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status)) }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->ownerName }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
                                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->schoolName }}</span>
                                                     </div>
                                                 </td>
-                                                <td class="align-middle">
+                                                <td class="align-middle not-export-col">
                                                     <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>

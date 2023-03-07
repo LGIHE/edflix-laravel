@@ -114,32 +114,32 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <p class="text-m text-dark font-weight-bold mb-0">0</p>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->status }}</p>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->visibility }}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->owner }}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center px-3 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
                                         <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->school }}</span>
                                     </div>
                                 </td>

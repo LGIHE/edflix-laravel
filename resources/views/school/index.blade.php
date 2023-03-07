@@ -69,7 +69,7 @@
                                                         <span class="text-dark text-m font-weight-bold">{{ $school->email }}</span>
                                                     </div>
                                                 </td>
-                                                <td class="align-middle">
+                                                <td class="align-middle not-export-col">
                                                     <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $school->id }}">
                                                         <i class="material-icons">edit</i>
                                                         <div class="ripple-container"></div>
