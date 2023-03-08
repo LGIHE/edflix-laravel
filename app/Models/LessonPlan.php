@@ -20,6 +20,7 @@ class LessonPlan extends Model
         'visibility',
         'topic',
         'subject',
+        'school',
         'class',
         'learners_no',
         'theme',

@@ -138,17 +138,19 @@ class LessonPlanController extends Controller
     }
 
     public function getUploadLessonPlan(){
+        $subjects = Subject::all();
 
-        return view('lesson-plan.upload');
+        return view('lesson-plan.upload', compact('subjects'));
     }
 
     public function uploadLessonPlan(){
 
         $file = request()->validate([
-            'lpfile' => 'required|mimes:xlsx,xls|max:1024'
+            'subject' => 'required',
+            'lesson_plan_file' => 'required|mimes:xlsx,xls|max:1024'
         ]);
 
-        Excel::import(new LessonPlanImport, request()->lpfile);
+        Excel::import(new LessonPlanImport, request()->lesson_plan_file);
 
         return redirect()
             ->route('lesson.plans')

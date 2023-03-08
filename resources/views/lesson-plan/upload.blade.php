@@ -14,6 +14,21 @@
                                 <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download Example LP
                             </a>
                         </div>
+                        @if (count($errors) > 0)
+                        <div class="row">
+                            <div class="alert alert-danger alert-dismissible text-white col-md-8" role="alert">
+                                <span class="text-sm">
+                                    @foreach($errors->all() as $error)
+                                        {{ $error }} <br>
+                                    @endforeach
+                                </span>
+                                <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                    data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        @endif
                         <div class="tab-content">
                             <div class="tab-pane fade active show">
                                 <div class="card-header pb-0 p-3">
@@ -40,20 +55,23 @@
                                                 </li>
                                             </ol>
                                         </div>
-                                        <div class="card text-center">
+                                        <div class="card ">
                                             <div class="card-header"><h5>Upload Section</h5></div>
-                                            <div class="card-body">
-                                                <p class="card-text mb-3"><strong>Select File to Upload</strong> - <small class="text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></p>
                                                 <form action="{{ route('upload.lesson.plan') }}" method="post" enctype="multipart/form-data">
                                                     @csrf
-                                                    <input type="file" id="lpFile" name="lpfile" accept=".xls,.xlsx">
-                                                    @error('lpfile')
-                                                        <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
-                                                    @enderror
+                                                    <p class="card-text mb-2 font-weight-bold">Select Subject for the Lesson Plan</p>
+                                                    <div class="mb-3 col-md-6">
+                                                        <select class="form-select border-2 p-2" name="subject" aria-label="">
+                                                            <option value="" selected>Select Subject</option>
+                                                            @foreach($subjects as $subject)
+                                                            <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <p class="card-text mt-3 mb-2"><strong>Select File to Upload</strong> - <small class="text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></p>
+                                                    <input type="file" id="lpFile" name="lesson_plan_file" accept=".xls,.xlsx">
                                                     <button type="submit" class="btn btn-success mt-4">Upload Lesson Plan</button>
                                                 </form>
-                                                <pre id="jsonData"></pre>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -65,112 +83,3 @@
         </div>
     </div>
 </x-layout>
-
-<script>
-
-$(function () {
-
-    // $('.btn-submit').on('click', function (e) {
-    //     e.preventDefault();
-
-    //     let formData = $('#uploadLessonPlan').serializeArray();
-    //     $(".inputerror").text("");
-    //     $("#uploadLessonPlan input").removeClass("is-invalid");
-
-    //     $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
-    //     $(".btn-submit").attr("disabled", 'disabled');
-
-    //     $.ajax({
-    //         method: "POST",
-    //         headers: {
-    //             Accept: "application/json"
-    //         },
-    //         url: "{{ route('upload.lesson.plan') }}",
-    //         data: formData,
-    //         success: (response) => {
-    //             $(".fa-spinner").remove();
-    //             $(".btn-submit").prop("disabled", false);
-    //             url = url.replace(':id', response.id);
-    //             window.location.assign(url);
-    //         },
-    //         error: (response) => {
-    //             $(".fa-spinner").remove();
-    //             $(".btn-submit").prop("disabled", false);
-
-    //             if(response.status === 422) {
-    //                 let errors = response.responseJSON.errors;
-    //                 Object.keys(errors).forEach(function (key) {
-    //                     $("[name='" + key + "']").addClass("is-invalid");
-    //                     $("#" + key + "Error").text(errors[key][0]);
-    //                 });
-    //             } else {
-    //                 window.location.reload();
-    //             }
-    //         }
-    //     })
-    // });
-})
-</script>
-
-<script>
-    var selectedFile;
-    document.getElementById("lpFile").addEventListener("change", function(event) {
-        selectedFile = event.target.files[0];
-    });
-
-    document.getElementById("uploadLP").addEventListener("click", function() {
-        if (selectedFile) {
-          var fileReader = new FileReader();
-          fileReader.onload = function(event) {
-            var data = event.target.result;
-            var workbook = XLSX.read(data, {type: "binary"});
-            let result = [];
-
-            workbook.SheetNames.forEach(sheet => {
-                let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
-
-                result.push(rowObject[0]);
-
-                let jsonObject = JSON.stringify(result);
-
-                if(sheet == 'Sheet2'){
-                    console.log(result);
-
-                    $.ajax({
-                        method: "POST",
-                        headers: {
-                            Accept: "application/json",
-                            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                        },
-                        url: "{{ route('upload.lesson.plan') }}",
-                        data: result,
-                        success: (response) => {
-                            // $(".fa-spinner").remove();
-                            // $(".btn-submit").prop("disabled", false);
-                            // url = url.replace(':id', response.id);
-                            // window.location.assign(url);
-                            console.log(response);
-                        },
-                        error: (response) => {
-                            // $(".fa-spinner").remove();
-                            // $(".btn-submit").prop("disabled", false);
-
-                            // if(response.status === 422) {
-                            //     let errors = response.responseJSON.errors;
-                            //     Object.keys(errors).forEach(function (key) {
-                            //         $("[name='" + key + "']").addClass("is-invalid");
-                            //         $("#" + key + "Error").text(errors[key][0]);
-                            //     });
-                            // } else {
-                            //     window.location.reload();
-                            // }
-                            console.log(response);
-                        }
-                    });
-                }
-            });
-          };
-          fileReader.readAsBinaryString(selectedFile);
-        }
-      });
-  </script>
