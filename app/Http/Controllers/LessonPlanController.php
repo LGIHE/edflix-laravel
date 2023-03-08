@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
 use App\Models\LessonPlan;
+use App\Imports\LessonPlanImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LessonPlanController extends Controller
 {
@@ -132,6 +135,24 @@ class LessonPlanController extends Controller
 
 
         return redirect()->route('get.lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
+    }
+
+    public function getUploadLessonPlan(){
+
+        return view('lesson-plan.upload');
+    }
+
+    public function uploadLessonPlan(){
+
+        $file = request()->validate([
+            'lpfile' => 'required|mimes:xlsx,xls|max:1024'
+        ]);
+
+        Excel::import(new LessonPlanImport, request()->lpfile);
+
+        return redirect()
+            ->route('lesson.plans')
+            ->with('status', 'The Lesson Plan has been uploaded successfully.');
     }
 
     public function deleteSuccess(){

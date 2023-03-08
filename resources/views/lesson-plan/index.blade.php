@@ -10,8 +10,11 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0 end" onclick="window.location.href='{{ route('get.create.lesson.plan') }}';">
-                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Create A Lesson Plan
+                            <a class="btn bg-gradient-success mb-0" onclick="window.location.href='{{ route('get.create.lesson.plan') }}';" style="margin-right: 15px;">
+                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Create LP
+                            </a>
+                            <a class="btn bg-gradient-dark mb-0 end" onclick="window.location.href='{{ route('get.upload.lesson.plan') }}';">
+                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Upload LP
                             </a>
                         </div>
                         @if (session('status'))

@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('create-lesson-plan', [LessonPlanController::class, 'getCreate'])->name('get.create.lesson.plan');
 	Route::post('create-lesson-plan', [LessonPlanController::class, 'createLessonPlan'])->name('create.lesson.plan');
 	Route::get('create-lesson-plan-success/{id}', [LessonPlanController::class, 'successCreate'])->name('create.lesson.plan.success');
+
+	Route::get('upload-lesson-plan', [LessonPlanController::class, 'getUploadLessonPlan'])->name('get.upload.lesson.plan');
+	Route::post('upload-lesson-plan', [LessonPlanController::class, 'uploadLessonPlan'])->name('upload.lesson.plan');
+
 	Route::post('add-step/{id}', [LessonPlanController::class, 'addStep'])->name('add.step');
 	Route::get('step/{id}', [LessonPlanController::class, 'getStep'])->name('step');
 
