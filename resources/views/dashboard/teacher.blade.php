@@ -11,7 +11,7 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"  onclick="window.location.href='{{ route("lesson.plans") }}'">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block" onclick="window.location.href='{{ route("lesson.plans") }}'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
@@ -26,7 +26,7 @@
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4 dash-block">
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4 dash-block" onclick="window.location.href='{{ route("profile") }}?tab=2'">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
@@ -55,21 +55,6 @@
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <!-- <div class="col-xl-3 col-sm-6 dash-block" onclick="window.location.href='{{ route('users') }}'">
-                    <div class="card">
-                        <div class="card-header p-3 pt-2">
-                            <div
-                                class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10" style="top:10%;font-size:48px;">groups</i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <h5 class="mb-0">Teachers</h5>
-                                <h4 class="mb-0">{{count($teachers)}}</h4>
-                            </div>
-                        </div>
-                        <div class="card-footer p-2"></div>
-                    </div>
-                </div> -->
             </div>
             <div class="card-body px-0 pb-2">
                 @if (count($lessonPlans) > 0)
@@ -150,7 +135,7 @@
                                     </a>
                                 </td>
                                 </tr>
-                                    <!-- Confirm School Delete modal -->
+                                    <!-- Confirm Lesson Plan Delete modal -->
                                     <div class="modal fade" id="deleteModal-{{ $lessonPlan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-sm" role="document">
                                             <div class="modal-content">

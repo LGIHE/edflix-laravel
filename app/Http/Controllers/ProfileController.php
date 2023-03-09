@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\LessonPlan;
 
 class ProfileController extends Controller
 {
+    public function get(){
+        $lessonPlans = LessonPlan::all()->where('owner', auth()->user()->id);
+
+        return view('user.profile', compact('lessonPlans'));
+    }
 
     public function updateBio()
     {

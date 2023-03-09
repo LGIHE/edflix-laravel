@@ -97,8 +97,8 @@
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name" class="form-control border border-2 p-2" value='{{ old('name', auth()->user()->name) }}'>
                                             @error('name')
-                                        <p class='text-danger inputerror'>{{ $message }} </p>
-                                        @enderror
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3 col-md-6">
@@ -129,14 +129,121 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if (count($lessonPlans) > 0)
+                                <div class="table-responsive p-2 pt-5">
+                                    <table class="table align-items-center mb-0" id="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Subject</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Class</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Status</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Public</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">School</th>
+                                                <th class="text-secondary"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($lessonPlans as $lessonPlan)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center px-2">
+                                                        <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subject }}</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status ))}}</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->visibility }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->owner }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->school }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
+                                                        <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Confirm Lesson Plan Delete modal -->
+                                            <div class="modal fade" id="deleteModal-{{ $lessonPlan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body" id="smallBody">
+                                                            <div class="text-center">
+                                                                <span class="">Are you sure you want to Delete this School?</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer align-items-center">
+                                                            <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.lesson.plan', $lessonPlan->id) }}">Confirm</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                @else
                                 <div id="no-lesson-plans m-3">
                                     <div class="col-md-12 text-center m-4">
                                         <span>You Have No Lesson Plans Yet</span>
                                     </div>
                                     <div class="col-md-12 text-center m-4">
-                                        <a href="" class="btn bg-gradient-dark center">Create Lesson Plan</a>
+                                        <a href="{{ route('get.create.lesson.plan') }}" class="btn bg-gradient-dark center">Create Lesson Plan</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ route('get.upload.lesson.plan') }}" class="btn bg-gradient-dark center">Upload Lesson Plan</a>
                                     </div>
                                 </div>
+                                @endif
                             </div>
 
                             <div class="tab-pane fade" id="password-change">

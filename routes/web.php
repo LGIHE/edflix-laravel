@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('user/delete/{id}', [UserController::class, 'deleteUser'])->middleware('super.admin')->name('delete.user');
     Route::get('users', [UserController::class, 'getUsers'])->middleware('admin')->name('users');
 
-	Route::get('profile', function () {return view('user.profile');})->name('profile');
+	Route::get('profile', [ProfileController::class, 'get'])->name('profile');
     Route::post('profile', [ProfileController::class, 'updateBio']);
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 
