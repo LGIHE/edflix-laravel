@@ -8,7 +8,8 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Validator;
-use App\Rules\OneOf;
+use App\Rules\classIsOneOf;
+use App\Rules\requiredInLPUpload;
 
 class LessonPlanImport implements ToCollection, WithHeadingRow
 {
@@ -20,18 +21,18 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
          Validator::make($rows->toArray(), [
-             '*.theme' => 'required|max:255',
-             '*.topic' => 'required|max:255',
-             '*.class' => ["required", new OneOf(request()->class, ['S1', 'S2'], 'Use the correct format for class e.g S1 for Senior One. Refer to instruction No.3')],
-             '*.learners_no' => 'required|numeric',
-             '*.learning_outcomes' => 'required|max:255',
-             '*.generic_skills' => 'required|max:255',
-             '*.values' => 'required|max:255',
-             '*.cross_cutting_issues' => 'required|max:255',
-             '*.key_learning_outcomes' => 'required|max:255',
-             '*.learning_materials' => 'required|max:255',
-             '*.learning_methods' => 'required|max:255',
-             '*.references' => 'required|max:255',
+             '*.theme' => new requiredInLPUpload('theme'),
+             '*.topic' => new requiredInLPUpload('topic'),
+             '*.class' => [new requiredInLPUpload('class'), new classIsOneOf],
+             '*.learners_no' => [new requiredInLPUpload('learners_no'), 'numeric'],
+             '*.learning_outcomes' => new requiredInLPUpload('learning_outcomes'),
+             '*.generic_skills' => new requiredInLPUpload('generic_skills'),
+             '*.values' => new requiredInLPUpload('values'),
+             '*.cross_cutting_issues' => new requiredInLPUpload('cross_cutting_issues'),
+             '*.key_learning_outcomes' => new requiredInLPUpload('key_learning_outcomes'),
+             '*.learning_materials' => new requiredInLPUpload('learning_materials'),
+             '*.learning_methods' => new requiredInLPUpload('learning_methods'),
+             '*.references' => new requiredInLPUpload('references'),
          ])->validate();
 
         foreach ($rows as $row) {

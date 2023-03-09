@@ -17,11 +17,11 @@
                         @if (count($errors) > 0)
                         <div class="row">
                             <div class="alert alert-danger alert-dismissible text-white col-md-8" role="alert">
-                                <span class="text-sm">
+                                <ul class="text-sm">
                                     @foreach($errors->all() as $error)
-                                        {{ $error }} <br>
+                                    <li>{{ $error }}</li>
                                     @endforeach
-                                </span>
+                                </ul>
                                 <button type="button" class="btn-close text-lg py-3 opacity-10"
                                     data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
