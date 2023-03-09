@@ -15,7 +15,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
 
         <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-        <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script> -->
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js"></script>
@@ -43,7 +42,8 @@
         <script>
         $(document).ready(function() {
             $('#table').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
+                pageLength: 5,
                 buttons: [
                     // 'excel', 'pdf', 'print'
                     {

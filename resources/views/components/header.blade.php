@@ -62,5 +62,13 @@
             border: 0!important;
             background: transparent!important;
         }
+
+        @media only screen and (min-width: 720px) {
+            .dataTables_length {
+                float: right!important;
+                margin-right:40px;
+                padding-top: 3px;
+            }
+        }
     </style>
 </head>
