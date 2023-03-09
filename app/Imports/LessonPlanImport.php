@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\classIsOneOf;
 use App\Rules\requiredInLPUpload;
+use App\Rules\learnersNumber;
 
 class LessonPlanImport implements ToCollection, WithHeadingRow
 {
@@ -24,7 +25,7 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
              '*.theme' => new requiredInLPUpload('theme'),
              '*.topic' => new requiredInLPUpload('topic'),
              '*.class' => [new requiredInLPUpload('class'), new classIsOneOf],
-             '*.learners_no' => [new requiredInLPUpload('learners_no'), 'numeric'],
+             '*.learners_no' => [new requiredInLPUpload('learners_no'), new learnersNumber],
              '*.learning_outcomes' => new requiredInLPUpload('learning_outcomes'),
              '*.generic_skills' => new requiredInLPUpload('generic_skills'),
              '*.values' => new requiredInLPUpload('values'),
