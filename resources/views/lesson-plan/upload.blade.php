@@ -43,10 +43,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-8 d-flex">
+                                        <div class="col-md-9 d-flex">
                                             <ol>
                                                 <li>First, download the upload example file using the blue button above.</li>
                                                 <li>Edit the file on your computer /tablet /phone and save it.</li>
+                                                <li>The class colum should be in the form of S1, S2, S3, S4, S5, S6. For example S1 is Senior 1</li>
                                                 <li>Upload the file in the upload section below:
                                                     <ul>
                                                         <li>Click on the choose file, and select the file you saved.</li>

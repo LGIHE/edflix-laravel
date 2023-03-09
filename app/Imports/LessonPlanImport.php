@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\OneOf;
 
 class LessonPlanImport implements ToCollection, WithHeadingRow
 {
@@ -21,7 +22,7 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
          Validator::make($rows->toArray(), [
              '*.theme' => 'required|max:255',
              '*.topic' => 'required|max:255',
-             '*.class' => 'required',
+             '*.class' => ["required", new OneOf(request()->class, ['S1', 'S2'], 'Use the correct format for class e.g S1 for Senior One. Refer to instruction No.3')],
              '*.learners_no' => 'required|numeric',
              '*.learning_outcomes' => 'required|max:255',
              '*.generic_skills' => 'required|max:255',
