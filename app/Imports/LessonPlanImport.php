@@ -2,8 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\LessonPlan;
-use App\Models\User;
+use DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -37,7 +36,7 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
          ])->validate();
 
         foreach ($rows as $row) {
-            LessonPlan::create([
+            $id = DB::table('lesson_plans')->insertGetId([
                 'owner' => auth()->user()->id,
                 'status' => 'edit',
                 'visibility' => 0,
@@ -58,6 +57,7 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
                 'references' => $row['references'],
                 'created_by' => auth()->user()->id,
             ]);
+
         }
     }
 

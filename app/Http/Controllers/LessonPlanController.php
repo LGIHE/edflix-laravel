@@ -10,6 +10,7 @@ use App\Models\School;
 use App\Models\LessonPlan;
 use App\Imports\LessonPlanImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class LessonPlanController extends Controller
 {
@@ -19,6 +20,7 @@ class LessonPlanController extends Controller
                             ->join('users', 'lesson_plans.owner', '=', 'users.id')
                             ->join('schools', 'lesson_plans.school', '=', 'schools.id')
                             ->select('lesson_plans.*', 'subjects.name as subjectName', 'users.name as ownerName', 'schools.name as schoolName')
+                            ->orderBy('lesson_plans.created_at', 'asc')
                             ->get();
 
         return view('lesson-plan.index', compact('lessonPlans'));
