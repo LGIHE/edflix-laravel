@@ -11,6 +11,25 @@
     #addAnnexModalLabel {
         font-family: var(--bs-body-font-family)!important;
     }
+
+    #addBtn {
+        position: fixed;
+        bottom: 10px;
+        right: 30px;
+        z-index: 99;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        background-color: red;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+		border-radius: 60px;
+    }
+
+    #addBtn:hover {
+        background-color: #555;
+    }
 </style>
 
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
@@ -116,7 +135,7 @@
                             </li>
                         </ul>
 
-                        <div class="tab-content mt-4">
+                        <div class="tab-content mt-2">
                             <div class="tab-pane fade show active" id="steps-tab" role="tabpanel" aria-labelledby="steps-tab">
                                 <div class="card-body px-0 pb-2">
                                     @if(false)
@@ -200,6 +219,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
                                     @else
                                         <div class="container text-center m-2 p-4">
                                             <p class="font-weight-bold">No Steps Added Yet.</p>
@@ -307,6 +330,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
                                     @else
                                         <div class="container text-center m-2 p-4">
                                             <p class="font-weight-bold">No Annexes Added Yet.</p>
