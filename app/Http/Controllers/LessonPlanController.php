@@ -202,27 +202,49 @@ class LessonPlanController extends Controller
     }
 
     public function updateAnnex(){
+        $annex = LessonAnnex::find(request()->id);
 
         $attributes = request()->validate([
-            'title' => 'required',
-            'annex_file' => 'required|mimes:jpg,png,jpeg|max:1024'
+            'title' => 'required'
         ]);
 
-        // $attributes['annex_file'] = request()->file('annex_file')->store('image', 'public');
+        if(request()->annex_file){
+            request()->validate([
+                'annex_file' => 'required|mimes:jpg,png,jpeg|max:1024'
+            ]);
 
-        $imageName = time().'.'.request()->annex_file->extension();
-        request()->annex_file->move(public_path('uploads'), $imageName);
+            unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
 
-        $attributes['annex_file'] = $imageName;
-        $attributes['lesson_plan'] = request()->lesson_plan;
-        $attributes['created_by'] = auth()->user()->id;
-
-        #Update the School
-        $status = LessonAnnex::find(request()->annex)->update($attributes);
+            $file_name = request()->file('annex_file')->store('annex-uploads', 'public');
+            $attributes['annex_file'] = explode('/', $file_name)[1];
+        }
 
 
-        return response()->json(['id' => request()->lesson_plan]);
+        $attributes['updated_by'] = auth()->user()->id;
 
+        #Update the Lesson Plan Annex
+        $annex->update($attributes);
+
+        return response()->json(['id' => $annex->lesson_plan]);
+
+    }
+
+    public function successUpdateAnnex(){
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan annex has been updated successfully');
+    }
+
+    public function deleteAnnex(){
+        $annex = LessonAnnex::find(request()->id);
+
+        unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
+
+        $annex->delete();
+
+        return redirect()
+            ->route('get.lesson.plan', $annex->lesson_plan)
+            ->with('status', 'The lesson plan annex has been deleted successfully');
     }
 
 }

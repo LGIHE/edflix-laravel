@@ -220,7 +220,6 @@
                                                     <tr>
                                                         <th class="text-secondary text-xxl font-weight-bolder px-4">Title</th>
                                                         <th class="text-secondary text-xxl font-weight-bolder">Last Edit</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Download</th>
                                                         <th class="text-secondary"></th>
                                                     </tr>
                                                 </thead>
@@ -237,20 +236,73 @@
                                                                 <span class="text-dark text-m font-weight-bold">@if($annex->updated_at != '') {{ $annex->updated_at }} @else {{ $annex->created_at }} @endif</span>
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <p class=" text-m text-dark font-weight-bold mb-0">
-                                                                    <a href="{{ url('annex/'.$annex->annex_file) }}">Download</a>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle not-export-col">
-                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $annex->id }}" style="cursor:pointer;">
-                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
+                                                        <td class="align-middle d-flex not-export-col">
+                                                            <a class="" data-bs-toggle="modal" data-bs-target="#updateAnnexModal-{{$annex->id}}" title="Update Annex" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">edit</i>
+                                                                <div class="ripple-container"></div>
+                                                            </a>
+                                                            <a href="{{ url('annex/'.$annex->annex_file) }}" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">download</i>
+                                                                <div class="ripple-container"></div>
+                                                            </a>
+                                                            <a class="" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$annex->id}}" title="Delete Annex" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">close</i>
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         </td>
                                                     </tr>
+
+                                                    <!-- Confirm Annex Update modal -->
+                                                    <div class="modal fade" id="updateAnnexModal-{{ $annex->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateAnnexModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="updateAnnexModalLabel">Update Annex</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="#" id="updateAnnexForm" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label class="form-label">Title</label>
+                                                                            <input type="text" name="title" class="form-control border border-2 p-2" value="{{ $annex->title }}">
+                                                                            <p class='text-danger font-weight-bold inputerror' id="titleError"></p>
+                                                                        </div>
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label class="form-label">Annex File</label>
+                                                                            <input type="file" name="annex_file" class="form-control border border-2 p-2">
+                                                                            <p class='text-danger font-weight-bold inputerror' id="annex_fileError"></p>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-success btn-update-annex" data-value="{{ $annex->id }}">Update Annex <span id="loader"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Confirm Annex Delete modal -->
+                                                    <div class="modal fade" id="deleteModal-{{ $annex->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Confirm</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" id="smallBody">
+                                                                    <div class="text-center">
+                                                                        <span class="">Are you sure you want to Delete this Annex?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer align-items-center">
+                                                                    <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.annex', $annex->id) }}">Confirm</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -315,6 +367,12 @@
         window.location.assign(url);
     });
 
+    $(document).on('click', '#del-btn', function(event) {
+        event.preventDefault();
+        let href = $(this).data('value');
+        window.location.assign(href);
+    });
+
     $(function () {
 
         $.ajaxSetup({
@@ -323,6 +381,7 @@
             }
         });
 
+        //Add Annex
         $('.btn-submit').on('click', function (e) {
             e.preventDefault();
 
@@ -355,6 +414,53 @@
                 error: (response) => {
                     $(".fa-spinner").remove();
                     $(".btn-submit").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+        //Update Annex
+        $('.btn-update-annex').on('click', function (e) {
+            e.preventDefault();
+
+            // let formData = $('#addAnnexForm').serialize();
+            let formData = new FormData(document.getElementById('updateAnnexForm'));
+
+            let annex_id = $(this).data("value");
+            let url = '{{route("update.annex",":id")}}';
+            url = url.replace(':id', annex_id);
+
+            $(".inputerror").text("");
+            $("#updateAnnexForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".btn-update-annex").attr("disabled", 'disabled');
+
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-update-annex").prop("disabled", false);
+                    let goTo = '{{route("update.annex.success",":id")}}';
+                    goTo = goTo.replace(':id', response.id);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-update-annex").prop("disabled", false);
 
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;

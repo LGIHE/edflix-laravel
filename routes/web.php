@@ -74,9 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
             return Response::download($path);
         }
     });
-	// Route::get('annex/{id}', [LessonPlanController::class, 'getAnnex'])->name('annex');
-	// Route::post('update-annex/{id}', [LessonPlanController::class, 'updateAnnex'])->name('update.annex');
-	// Route::post('delete-annex/{id}', [LessonPlanController::class, 'deleteAnnex'])->name('delete.annex');
+	Route::post('update-annex/{id}', [LessonPlanController::class, 'updateAnnex'])->name('update.annex');
+	Route::get('update-annex-success/{id}', [LessonPlanController::class, 'successUpdateAnnex'])->name('update.annex.success');
+	Route::get('delete-annex/{id}', [LessonPlanController::class, 'deleteAnnex'])->name('delete.annex');
 
 	Route::get('lesson-plan/update/{id}', [LessonPlanController::class, 'getLessonPlanUpdate'])->name('get.lesson.plan.update');
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
