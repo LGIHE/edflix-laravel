@@ -22,7 +22,7 @@
 
 @auth
 
-<footer class="footer py-4">
+<!-- <footer class="footer mt-8">
     <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
@@ -38,6 +38,6 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
 @endauth

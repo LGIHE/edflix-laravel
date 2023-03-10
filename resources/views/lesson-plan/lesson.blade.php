@@ -1,3 +1,18 @@
+<style>
+    a.nav-link, a.nav-link:hover {
+        color: black;
+    }
+
+    .btn-close{
+        color: #000;
+        background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    }
+
+    #addAnnexModalLabel {
+        font-family: var(--bs-body-font-family)!important;
+    }
+</style>
+
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
     <x-navbars.sidebar activePage="lesson-plans"></x-navbars.sidebar>
@@ -31,70 +46,224 @@
                             </div>
                         </div>
                         @endif
-                        <div class="tab-content">
-                            <div class="tab-pane fade active show" id="bio-form">
-                                <div class="card-header pb-0 p-2 pt-0">
-                                    <div class="row mb-5">
-                                        <div class="col-md-8 d-flex align-items-center">
-                                            <h6 class="mb-3">{{ $lesson->topic }}</h6>
+                        <div class="card-header pb-0 p-2 pt-0">
+                            <div class="row mb-5">
+                                <div class="me-3 my-3 text-end">
+                                    <a class="btn bg-gradient-success mb-0 end" id="edit-lesson-plan" data-value="{{ $lesson->id }}">
+                                        <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
+                                    </a>
+                                    <a class="btn bg-gradient-info mb-0 end">
+                                        <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
+                                    </a>
+                                </div>
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <h6 class="mb-3">{{ $lesson->topic }}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Subject:</p>&nbsp;
+                                    <p class="text-dark">{{ $subject->name }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Class:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->class }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">No. of Learners:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->learners_no }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Theme:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->theme }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Status:</p>&nbsp;
+                                    <p class="text-dark">{{ ucfirst(trans($lesson->status)) }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Public:</p>&nbsp;
+                                    <p class="text-dark">@if ($lesson->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
+                                    <p class="text-dark">0</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Owner:</p>&nbsp;
+                                    <p class="text-dark">{{ $owner->name }} ({{ $school->name }})</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Last Edited:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->updated_at }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-tabs mt-5">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#steps-tab">Steps</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#annexes-tab">Annexes</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mt-4">
+                            <div class="tab-pane fade show active" id="steps-tab" role="tabpanel" aria-labelledby="steps-tab">
+                                <div class="card-body px-0 pb-2">
+                                    @if(false)
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center mb-0" id="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Subject</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Class</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Status</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Public</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">School</th>
+                                                        <th class="text-secondary"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center px-2">
+                                                                <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status)) }}</p>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->ownerName }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->schoolName }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle not-export-col">
+                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
+                                                                <div class="ripple-container"></div>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="col-md-2 d-flex ">
-                                            <a class="btn bg-gradient-success mb-0 end" id="edit-lesson-plan" data-value="{{ $lesson->id }}">
-                                                <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
+                                    @else
+                                        <div class="container text-center m-2 p-4">
+                                            <p class="font-weight-bold">No Steps Added Yet.</p>
+
+                                            <a class="btn bg-gradient-dark">
+                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Step
                                             </a>
                                         </div>
-                                        <div class="col-md-2 d-flex ">
-                                            <a class="btn bg-gradient-info mb-0 end">
-                                                <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="annexes-tab" role="tabpanel" aria-labelledby="annexes-tab">
+                                <div class="card-body px-0 pb-2">
+                                    @if(count($annexes) > 0)
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center mb-0" id="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-secondary text-xxl font-weight-bolder px-4">Title</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Last Edit</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Download</th>
+                                                        <th class="text-secondary"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($annexes as $annex)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center px-2">
+                                                                <h6 class="mb-0 text-m">{{ $annex->title }}</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-dark text-m font-weight-bold">@if($annex->updated_at != '') {{ $annex->updated_at }} @else {{ $annex->created_at }} @endif</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class=" text-m text-dark font-weight-bold mb-0">
+                                                                    <a href="{{ url('annex/'.$annex->annex_file) }}">Download</a>
+                                                                </p>
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle not-export-col">
+                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $annex->id }}" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
+                                                                <div class="ripple-container"></div>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @else
+                                        <div class="container text-center m-2 p-4">
+                                            <p class="font-weight-bold">No Annexes Added Yet.</p>
+
+                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
+                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
                                             </a>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Subject:</p>&nbsp;
-                                            <p class="text-dark">{{ $subject->name }}</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Class:</p>&nbsp;
-                                            <p class="text-dark">{{ $lesson->class }}</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">No. of Learners:</p>&nbsp;
-                                            <p class="text-dark">{{ $lesson->learners_no }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Theme:</p>&nbsp;
-                                            <p class="text-dark">{{ $lesson->theme }}</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Status:</p>&nbsp;
-                                            <p class="text-dark">{{ ucfirst(trans($lesson->status)) }}</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Public:</p>&nbsp;
-                                            <p class="text-dark">@if ($lesson->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
-                                            <p class="text-dark">0</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Owner:</p>&nbsp;
-                                            <p class="text-dark">{{ $owner->name }} ({{ $school->name }})</p>
-                                        </div>
-                                        <div class="col-md-4 d-flex">
-                                            <p class="text-dark font-weight-bold">Last Edited:</p>&nbsp;
-                                            <p class="text-dark">{{ $lesson->updated_at }}</p>
-                                        </div>
-                                    </div>
-
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -105,6 +274,38 @@
     </div>
 </x-layout>
 
+<!-- Add Annex Modal -->
+<div class="modal fade" id="addAnnexModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addAnnexModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAnnexModalLabel">Add an Annex</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" id="addAnnexForm" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control border border-2 p-2">
+                        <p class='text-danger font-weight-bold inputerror' id="titleError"></p>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Annex File</label>
+                        <input type="file" name="annex_file" class="form-control border border-2 p-2">
+                        <p class='text-danger font-weight-bold inputerror' id="annex_fileError"></p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-submit" data-value="{{ $lesson->id }}">Add Annex <span id="loader"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
     $(document).on('click','#edit-lesson-plan',function(){
@@ -114,5 +315,60 @@
         window.location.assign(url);
     });
 
+    $(function () {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.btn-submit').on('click', function (e) {
+            e.preventDefault();
+
+            // let formData = $('#addAnnexForm').serialize();
+            let formData = new FormData(document.getElementById('addAnnexForm'));
+
+            let lesson_plan_id = $(this).data("value");
+            let url = '{{route("add.annex",":id")}}';
+            url = url.replace(':id', lesson_plan_id);
+
+            $(".inputerror").text("");
+            $("#addAnnexForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".btn-submit").attr("disabled", 'disabled');
+
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+                    let goTo = '{{route("add.annex.success",":id")}}';
+                    goTo = goTo.replace(':id', response.id);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+    });
 
 </script>

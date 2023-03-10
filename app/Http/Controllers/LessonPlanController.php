@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
 use App\Models\LessonPlan;
+use App\Models\LessonAnnex;
 use App\Imports\LessonPlanImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -76,8 +77,9 @@ class LessonPlanController extends Controller
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
         $school = School::find($owner->school);
+        $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school'));
+        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'annexes'));
 
     }
 
@@ -132,7 +134,7 @@ class LessonPlanController extends Controller
         $attributes['school'] = $school->school;
         $attributes['updated_by'] = request()->updated_by;
 
-        #Update the School
+        #Update the lesson plan preliminary info
         $status = LessonPlan::find(request()->id)->update($attributes);
 
 
@@ -172,6 +174,55 @@ class LessonPlanController extends Controller
 
             return back()->with('error', 'Action not Authorized. Please contact asministrator.');
         }
+    }
+
+    public function addAnnex(){
+
+        $attributes = request()->validate([
+            'title' => 'required',
+            'annex_file' => 'required|mimes:png,jpeg,jpg|max:1024'
+        ]);
+
+        $file_name = request()->file('annex_file')->store('annex-uploads', 'public');
+        $attributes['annex_file'] = explode('/', $file_name)[1];
+        $attributes['lesson_plan'] = request()->lesson_plan;
+        $attributes['created_by'] = auth()->user()->id;
+
+        #Update the School
+        $status = LessonAnnex::create($attributes);
+
+        return response()->json(['id' => request()->lesson_plan]);
+
+    }
+
+    public function successAddAnnex(){
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan annex has been uploaded successfully');
+    }
+
+    public function updateAnnex(){
+
+        $attributes = request()->validate([
+            'title' => 'required',
+            'annex_file' => 'required|mimes:jpg,png,jpeg|max:1024'
+        ]);
+
+        // $attributes['annex_file'] = request()->file('annex_file')->store('image', 'public');
+
+        $imageName = time().'.'.request()->annex_file->extension();
+        request()->annex_file->move(public_path('uploads'), $imageName);
+
+        $attributes['annex_file'] = $imageName;
+        $attributes['lesson_plan'] = request()->lesson_plan;
+        $attributes['created_by'] = auth()->user()->id;
+
+        #Update the School
+        $status = LessonAnnex::find(request()->annex)->update($attributes);
+
+
+        return response()->json(['id' => request()->lesson_plan]);
+
     }
 
 }

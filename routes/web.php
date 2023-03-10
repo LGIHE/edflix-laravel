@@ -65,6 +65,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('add-step/{id}', [LessonPlanController::class, 'addStep'])->name('add.step');
 	Route::get('step/{id}', [LessonPlanController::class, 'getStep'])->name('step');
 
+	Route::post('add-annex/{id}', [LessonPlanController::class, 'addAnnex'])->name('add.annex');
+	Route::get('add-annex-success/{id}', [LessonPlanController::class, 'successAddAnnex'])->name('add.annex.success');
+    Route::get('annex/{file_name}', function($file_name = null)
+    {
+        $path = storage_path().'/app/public/annex-uploads/'.$file_name;
+        if (file_exists($path)) {
+            return Response::download($path);
+        }
+    });
+	// Route::get('annex/{id}', [LessonPlanController::class, 'getAnnex'])->name('annex');
+	// Route::post('update-annex/{id}', [LessonPlanController::class, 'updateAnnex'])->name('update.annex');
+	// Route::post('delete-annex/{id}', [LessonPlanController::class, 'deleteAnnex'])->name('delete.annex');
+
 	Route::get('lesson-plan/update/{id}', [LessonPlanController::class, 'getLessonPlanUpdate'])->name('get.lesson.plan.update');
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
 	Route::get('lesson-plan-delete/{id}', [LessonPlanController::class, 'deleteSuccess'])->middleware('admin')->name('delete.lesson.plan');

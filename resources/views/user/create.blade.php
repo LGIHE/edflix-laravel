@@ -115,7 +115,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-success btn-submit">Add User</button>
+                <button type="submit" class="btn btn-success btn-submit">Add User <span id="loader"></span></button>
             </div>
         </div>
     </div>
