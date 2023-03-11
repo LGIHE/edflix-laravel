@@ -62,7 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('upload-lesson-plan', [LessonPlanController::class, 'getUploadLessonPlan'])->name('get.upload.lesson.plan');
 	Route::post('upload-lesson-plan', [LessonPlanController::class, 'uploadLessonPlan'])->name('upload.lesson.plan');
 
-	Route::post('add-step/{id}', [LessonPlanController::class, 'addStep'])->name('add.step');
+	Route::post('add-step', [LessonPlanController::class, 'addStep'])->name('add.step');
+	Route::get('add-step-success/{id}', [LessonPlanController::class, 'successAddStep'])->name('add.step.success');
 	Route::get('step/{id}', [LessonPlanController::class, 'getStep'])->name('step');
 
 	Route::post('add-annex/{id}', [LessonPlanController::class, 'addAnnex'])->name('add.annex');

@@ -39,8 +39,8 @@
         <!-- Navbar -->
         <x-navbars.topbar titlePage='Lesson Plan'></x-navbars.topbar>
         <!-- End Navbar -->
-        <div class="container-fluid px-2 px-md-4 mt-5">
-            <div class="card card-body mx-3 mx-md-4 ">
+        <div class="container-fluid px-2 mt-5">
+            <div class="card card-body">
 
                 <div class="card card-plain h-100">
                     <div class="card-body p-3">
@@ -138,84 +138,73 @@
                         <div class="tab-content mt-2">
                             <div class="tab-pane fade show active" id="steps-tab" role="tabpanel" aria-labelledby="steps-tab">
                                 <div class="card-body px-0 pb-2">
-                                    @if(false)
+                                    @if(count($steps) > 0)
                                         <div class="table-responsive p-0">
                                             <table class="table align-items-center mb-0" id="table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Subject</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Class</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder px-4">Step</th>
                                                         <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Status</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Public</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
-                                                        <th class="text-secondary text-xxl font-weight-bolder">School</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Teacher Activity</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Student Activity</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Knowledge/Skills/Values</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Output</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Assessment Criteria</th>
+                                                        <th class="text-secondary text-xxl font-weight-bolder">Notes</th>
                                                         <th class="text-secondary"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    @foreach($steps as $step)
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center px-2">
-                                                                <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
+                                                                <h6 class="mb-0 text-m">{{ $step->step }}</h6>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->duration }}</p>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->teacher_activity }}</p>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
+                                                                <span class="text-dark text-m font-weight-bold">{{ $step->student_activity }}</span>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->learners_no }}</span>
+                                                                <span class="text-dark text-m font-weight-bold">{{ $step->knowledge }}</span>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->output }}</p>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status)) }}</p>
+                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->assessment_criteria }}</p>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->ownerName }}</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->schoolName }}</span>
+                                                                <span class="text-dark text-m font-weight-bold">{{ $step->falitator_notes }}</span>
                                                             </div>
                                                         </td>
                                                         <td class="align-middle not-export-col">
-                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
+                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $step->id }}" style="cursor:pointer;">
                                                                 <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -227,7 +216,7 @@
                                         <div class="container text-center m-2 p-4">
                                             <p class="font-weight-bold">No Steps Added Yet.</p>
 
-                                            <a class="btn bg-gradient-dark">
+                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addStepModal">
                                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Step
                                             </a>
                                         </div>
@@ -505,3 +494,5 @@
     });
 
 </script>
+
+@include('lesson-plan.step.create')

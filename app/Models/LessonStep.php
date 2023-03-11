@@ -15,7 +15,18 @@ class LessonStep extends Model
      * @var string[]
      */
     protected $fillable = [
-
+        'step',
+        'duration',
+        'lesson_plan',
+        'teacher_activity',
+        'student_activity',
+        'knowledge',
+        'skills',
+        'values',
+        'output',
+        'assessment_criteria',
+        'facilitator_note',
+        'created_by'
     ];
 
     /**

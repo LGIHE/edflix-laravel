@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
 use App\Models\LessonPlan;
+use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\LessonPlanImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -77,18 +78,11 @@ class LessonPlanController extends Controller
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
         $school = School::find($owner->school);
+        $steps = LessonStep::all()->where('lesson_plan', request()->id);
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'annexes'));
+        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'steps', 'annexes'));
 
-    }
-
-    public function AddStep(){
-        return true;
-    }
-
-    public function getStep(){
-        return true;
     }
 
     public function getLessonPlanUpdate(){
@@ -174,6 +168,25 @@ class LessonPlanController extends Controller
 
             return back()->with('error', 'Action not Authorized. Please contact asministrator.');
         }
+    }
+
+
+    public function AddStep(){
+
+        request()->validate([
+            'step' => 'required',
+            'duration' => 'required',
+        ]);
+
+        LessonStep::create(request()->all());
+
+        return response()->json(['id' => request()->lesson_plan]);
+    }
+
+    public function successAddStep(){
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan step has been uploaded successfully');
     }
 
     public function addAnnex(){
