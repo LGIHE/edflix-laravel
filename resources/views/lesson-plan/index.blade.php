@@ -79,7 +79,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">
+                                                        {{ \App\Models\LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration') }}`
+                                                        </p>
                                                     </div>
                                                 </td>
                                                 <td>

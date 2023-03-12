@@ -79,9 +79,10 @@ class LessonPlanController extends Controller
         $owner = User::find($lesson->owner);
         $school = School::find($owner->school);
         $steps = LessonStep::all()->where('lesson_plan', request()->id);
+        $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'steps', 'annexes'));
+        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'));
 
     }
 

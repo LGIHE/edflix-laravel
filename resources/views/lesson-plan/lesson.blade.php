@@ -57,7 +57,7 @@
                         @elseif (session('error'))
                         <div class="row">
                             <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                                <span class="text-sm">{{ Session::get('status') }}</span>
+                                <span class="text-sm">{{ Session::get('error') }}</span>
                                 <button type="button" class="btn-close text-lg py-3 opacity-10"
                                     data-bs-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -113,7 +113,7 @@
                             <div class="row">
                                 <div class="col-md-4 d-flex">
                                     <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
-                                    <p class="text-dark">0</p>
+                                    <p class="text-dark">{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans()  ?? '' }}</p>
                                 </div>
                                 <div class="col-md-4 d-flex">
                                     <p class="text-dark font-weight-bold">Owner:</p>&nbsp;

@@ -68,10 +68,10 @@
                                 <th class="text-secondary text-xxl font-weight-bolder">Class</th>
                                 <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
                                 <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
-                                <th class="text-secondary text-xxl font-weight-bolder">Status</th>
-                                <th class="text-secondary text-xxl font-weight-bolder">Public</th>
+                                <!-- <th class="text-secondary text-xxl font-weight-bolder">Status</th>
+                                <th class="text-secondary text-xxl font-weight-bolder">Public</th> -->
                                 <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
-                                <th class="text-secondary text-xxl font-weight-bolder">School</th>
+                                <!-- <th class="text-secondary text-xxl font-weight-bolder">School</th> -->
                                 <th class="text-secondary"></th>
                             </tr>
                         </thead>
@@ -85,7 +85,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subject }}</p>
+                                        <p class="text-m text-dark font-weight-bold mb-0">@foreach($subjects as $subject) @if($lessonPlan->subject == $subject->id) {{$subject->name}} @endif @endforeach</p>
                                     </div>
                                 </td>
                                 <td>
@@ -105,29 +105,31 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                        <p class="text-m text-dark font-weight-bold mb-0">
+                                        {{ \App\Models\LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration') }}
+                                        </p>
                                     </div>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <div class="d-flex flex-column justify-content-center">
                                         <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status ))}}</p>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->visibility }}</span>
+                                        <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
                                     </div>
-                                </td>
+                                </td> -->
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->owner }}</span>
+                                        <span class="text-dark text-m font-weight-bold">@foreach($teachers as $teacher) @if($lessonPlan->owner == $teacher->id) {{$teacher->name}} @endif @endforeach</span>
                                     </div>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->school }}</span>
+                                        <span class="text-dark text-m font-weight-bold">@foreach($schools as $school) @if($lessonPlan->school == $school->id) {{$school->name}} @endif @endforeach</span>
                                     </div>
-                                </td>
+                                </td> -->
                                 <td class="align-middle">
                                     <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
