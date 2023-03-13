@@ -198,18 +198,130 @@
                                                             </div>
                                                         </td>
                                                         <td class="align-middle not-export-col">
-                                                            <a rel="tooltip" class="" id="open-update" data-value="{{ $step->id }}" style="cursor:pointer;">
+                                                            <a rel="tooltip" class="" data-bs-toggle="modal" data-bs-target="#updateStepModal-{{ $step->id }}" style="cursor:pointer;">
                                                                 <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
+                                                                <div class="ripple-container"></div>
+                                                            </a>
+                                                            <a class="" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$step->id}}" title="Delete Step" style="cursor:pointer;">
+                                                                <i class="material-icons" style="font-size:25px;margin-right:20px;">deleteforever</i>
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         </td>
                                                     </tr>
+
+                                                    <!-- Update Step Modal -->
+                                                    <div class="modal fade" id="updateStepModal-{{ $step->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateStepModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="updateStepModalLabel">Update Step</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <form method='POST' action='#' id="updateStepForm">
+                                                                        @csrf
+                                                                        <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
+                                                                        <div class="row">
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">step</label>
+                                                                                <input type="number" name="step" class="form-control border border-2 p-2" value="{{ $step->step }}">
+                                                                                <p class='text-danger font-weight-bold inputerror' id="stepError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Duration (in minutes)</label>
+                                                                                <input type="number" name="duration" class="form-control border border-2 p-2" value="{{ $step->duration }}">
+                                                                                <p class='text-danger font-weight-bold inputerror' id="durationError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Teacher Activity</label>
+                                                                                <textarea name="teacher_activity" class="form-control border border-2 p-2">{{ $step->teacher_activity }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="teacher_activityError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Student Activity</label>
+                                                                                <textarea name="student_activity" class="form-control border border-2 p-2">{{ $step->student_activity }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="student_activityError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Knowlegde</label>
+                                                                                <textarea name="knowledge" class="form-control border border-2 p-2">{{ $step->knowledge }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="knowledgeError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Skills</label>
+                                                                                <textarea name="skills" class="form-control border border-2 p-2">{{ $step->skills }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="skillsError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Values</label>
+                                                                                <textarea name="values" class="form-control border border-2 p-2">{{ $step->values }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="valuesError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Output</label>
+                                                                                <textarea name="output" class="form-control border border-2 p-2">{{ $step->output }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="outputError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Assessment Criteria</label>
+                                                                                <textarea name="assessment_criteria" class="form-control border border-2 p-2">{{ $step->assessment_criteria }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="assessment_criteriaError"></p>
+                                                                            </div>
+
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label class="form-label">Facilitator Note</label>
+                                                                                <textarea name="facilitator_note" class="form-control border border-2 p-2">{{ $step->facilitator_note }}</textarea>
+                                                                                <p class='text-danger font-weight-bold inputerror' id="facilitator_noteError"></p>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-success btn-update-step" data-value="{{ $step->id }}">Update Step <span id="loader"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Confirm Step Delete modal -->
+                                                    <div class="modal fade" id="deleteModal-{{ $step->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Confirm</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" id="smallBody">
+                                                                    <div class="text-center">
+                                                                        <span class="">Are you sure you want to Delete this Step?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer align-items-center">
+                                                                    <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.step', $step->id) }}">Confirm</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal">
+                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addStepModal">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     @else
@@ -477,6 +589,50 @@
                 error: (response) => {
                     $(".fa-spinner").remove();
                     $(".btn-update-annex").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+        //Update Step
+        $('.btn-update-step').on('click', function (e) {
+            e.preventDefault();
+
+            let formData = $('#updateStepForm').serialize();
+
+            let step_id = $(this).data("value");
+            let url = '{{route("update.step",":id")}}';
+            url = url.replace(':id', step_id);
+
+            $(".inputerror").text("");
+            $("#updateAnnexForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".btn-update-step").attr("disabled", 'disabled');
+
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: formData,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-update-step").prop("disabled", false);
+                    let goTo = '{{route("update.step.success",":id")}}';
+                    goTo = goTo.replace(':id', response.id);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-update-step").prop("disabled", false);
 
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;

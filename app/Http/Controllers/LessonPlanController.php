@@ -190,6 +190,37 @@ class LessonPlanController extends Controller
             ->with('status', 'The lesson plan step has been uploaded successfully');
     }
 
+    public function deleteStep(){
+        $step = LessonStep::find(request()->id);
+        $step->delete();
+
+        return redirect()
+            ->route('get.lesson.plan', $step->lesson_plan)
+            ->with('status', 'The lesson plan step has been deleted successfully');
+    }
+
+    public function updateStep(){
+
+        $attributes = request()->validate([
+            'step' => 'required',
+            'duration' => 'required',
+        ]);
+
+        $attributes['updated_by'] = auth()->user()->id;
+
+        #Update the Lesson Plan Step
+        $step = LessonStep::find(request()->id)->update($attributes);
+
+        return response()->json(['id' => request()->lesson_plan]);
+
+    }
+
+    public function successUpdateStep(){
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan annex has been updated successfully');
+    }
+
     public function addAnnex(){
 
         $attributes = request()->validate([

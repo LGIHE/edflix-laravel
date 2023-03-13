@@ -33,7 +33,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Duration (in minutes)</label>
-                            <input type="email" name="duration" class="form-control border border-2 p-2">
+                            <input type="number" name="duration" class="form-control border border-2 p-2">
                             <p class='text-danger font-weight-bold inputerror' id="durationError"></p>
                         </div>
 
