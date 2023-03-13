@@ -89,7 +89,7 @@ $(function () {
             success: () => {
                 $(".fa-spinner").remove();
                 $(".btn-submit").prop("disabled", false);
-                window.location.assign("{{ route('subject-success') }}")
+                window.location.assign("{{ route('create.subject.success') }}")
             },
             error: (response) => {
                 $(".fa-spinner").remove();

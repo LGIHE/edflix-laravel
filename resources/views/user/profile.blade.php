@@ -254,7 +254,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method='POST' action="{{ route('update-password') }}">
+                                <form method='POST' action="{{ route('update.password') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">

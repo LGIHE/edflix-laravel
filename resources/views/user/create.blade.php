@@ -140,12 +140,12 @@ $(function () {
             headers: {
                 Accept: "application/json"
             },
-            url: "{{ route('create-user') }}",
+            url: "{{ route('create.user') }}",
             data: formData,
             success: () => {
                 $(".fa-spinner").remove();
                 $(".btn-submit").prop("disabled", false);
-                window.location.assign("{{ route('user.create.success') }}");
+                window.location.assign("{{ route('create.user.success') }}");
             },
             error: (response) => {
                 $(".fa-spinner").remove();

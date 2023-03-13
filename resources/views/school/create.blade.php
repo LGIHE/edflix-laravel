@@ -85,7 +85,7 @@ $(function () {
             success: () => {
                 $(".fa-spinner").remove();
                 $(".btn-submit").prop("disabled", false);
-                window.location.assign("{{ route('school-success') }}")
+                window.location.assign("{{ route('create.school.success') }}")
             },
             error: (response) => {
                 $(".fa-spinner").remove();
