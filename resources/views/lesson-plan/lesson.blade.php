@@ -39,7 +39,7 @@
         <!-- Navbar -->
         <x-navbars.topbar titlePage='Lesson Plan'></x-navbars.topbar>
         <!-- End Navbar -->
-        <div class="container-fluid px-2 mt-5">
+        <div class="container-fluid px-2 mt-2">
             <div class="card card-body">
 
                 <div class="card card-plain h-100">

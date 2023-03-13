@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <x-navbars.topbar titlePage='Lesson Plan'></x-navbars.topbar>
         <!-- End Navbar -->
-        <div class="container-fluid px-2 px-md-4 mt-5">
+        <div class="container-fluid px-2 px-md-4 mt-2">
             <div class="card card-body mx-3 mx-md-4 ">
 
                 <div class="card card-plain h-100">
