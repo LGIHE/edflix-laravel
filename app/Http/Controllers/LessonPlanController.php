@@ -201,15 +201,13 @@ class LessonPlanController extends Controller
 
     public function updateStep(){
 
-        $attributes = request()->validate([
+        request()->validate([
             'step' => 'required',
             'duration' => 'required',
         ]);
 
-        $attributes['updated_by'] = auth()->user()->id;
-
         #Update the Lesson Plan Step
-        $step = LessonStep::find(request()->id)->update($attributes);
+        $step = LessonStep::find(request()->id)->update(request()->all());
 
         return response()->json(['id' => request()->lesson_plan]);
 

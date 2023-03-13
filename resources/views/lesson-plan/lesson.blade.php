@@ -159,42 +159,72 @@
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center px-2">
-                                                                <h6 class="mb-0 text-m">{{ $step->step }}</h6>
+                                                                <h6 class="mb-0 text-center text-m">{{ $step->step }}</h6>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->duration }}</p>
+                                                                <p class="text-m text-center text-dark font-weight-bold mb-0">{{ $step->duration }}</p>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->teacher_activity }}</p>
+                                                                @if ($step->teacher_activity == null)
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">person</i>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">person</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $step->student_activity }}</span>
+                                                                @if ($step->student_activity == null)
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">group</i>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">group</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $step->knowledge }}</span>
+                                                                @if ( $step->knowledge != null || $step->skills != null || $step->values != null )
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">psychology</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">psychology</i>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->output }}</p>
+                                                                @if ($step->output == null)
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">output</i>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">output</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-dark font-weight-bold mb-0">{{ $step->assessment_criteria }}</p>
+                                                                @if ($step->assessment_criteria == null)
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">assignment</i>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">assignment</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <span class="text-dark text-m font-weight-bold">{{ $step->falitator_notes }}</span>
+                                                                @if ($step->facilitator_note == null)
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">comment</i>
+                                                                @else
+                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">comment</i>
+                                                                    <div class="ripple-container"></div>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td class="align-middle not-export-col">
@@ -207,115 +237,117 @@
                                                                 <div class="ripple-container"></div>
                                                             </a>
                                                         </td>
-                                                    </tr>
 
-                                                    <!-- Update Step Modal -->
-                                                    <div class="modal fade" id="updateStepModal-{{ $step->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateStepModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="updateStepModalLabel">Update Step</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
+                                                        <!-- Update Step Modal -->
+                                                        <div class="modal fade" id="updateStepModal-{{ $step->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateStepModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="updateStepModalLabel">Update Step</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
 
-                                                                <div class="modal-body">
-                                                                    <form method='POST' action='#' id="updateStepForm">
-                                                                        @csrf
-                                                                        <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
-                                                                        <div class="row">
+                                                                    <div class="modal-body">
+                                                                        <form method='POST' action='#' id="updateStepForm-{{ $step->id }}">
+                                                                            @csrf
+                                                                            <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
+                                                                            <input type="hidden" name="updated_by" value="{{ auth()->user()->id }}">
+                                                                            <div class="row">
 
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">step</label>
-                                                                                <input type="number" name="step" class="form-control border border-2 p-2" value="{{ $step->step }}">
-                                                                                <p class='text-danger font-weight-bold inputerror' id="stepError"></p>
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">step</label>
+                                                                                    <input type="number" name="step" class="form-control border border-2 p-2" value="{{ $step->step }}">
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="stepError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Duration (in minutes)</label>
+                                                                                    <input type="number" name="duration" class="form-control border border-2 p-2" value="{{ $step->duration }}">
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="durationError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Teacher Activity</label>
+                                                                                    <textarea name="teacher_activity" class="form-control border border-2 p-2">{{ $step->teacher_activity }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="teacher_activityError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Student Activity</label>
+                                                                                    <textarea name="student_activity" class="form-control border border-2 p-2">{{ $step->student_activity }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="student_activityError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Knowlegde</label>
+                                                                                    <textarea name="knowledge" class="form-control border border-2 p-2">{{ $step->knowledge }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="knowledgeError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Skills</label>
+                                                                                    <textarea name="skills" class="form-control border border-2 p-2">{{ $step->skills }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="skillsError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Values</label>
+                                                                                    <textarea name="values" class="form-control border border-2 p-2">{{ $step->values }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="valuesError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Output</label>
+                                                                                    <textarea name="output" class="form-control border border-2 p-2">{{ $step->output }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="outputError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Assessment Criteria</label>
+                                                                                    <textarea name="assessment_criteria" class="form-control border border-2 p-2">{{ $step->assessment_criteria }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="assessment_criteriaError"></p>
+                                                                                </div>
+
+                                                                                <div class="mb-3 col-md-6">
+                                                                                    <label class="form-label">Facilitator Note</label>
+                                                                                    <textarea name="facilitator_note" class="form-control border border-2 p-2">{{ $step->facilitator_note }}</textarea>
+                                                                                    <p class='text-danger font-weight-bold inputerror' id="facilitator_noteError"></p>
+                                                                                </div>
+
                                                                             </div>
+                                                                        </form>
+                                                                    </div>
 
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Duration (in minutes)</label>
-                                                                                <input type="number" name="duration" class="form-control border border-2 p-2" value="{{ $step->duration }}">
-                                                                                <p class='text-danger font-weight-bold inputerror' id="durationError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Teacher Activity</label>
-                                                                                <textarea name="teacher_activity" class="form-control border border-2 p-2">{{ $step->teacher_activity }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="teacher_activityError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Student Activity</label>
-                                                                                <textarea name="student_activity" class="form-control border border-2 p-2">{{ $step->student_activity }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="student_activityError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Knowlegde</label>
-                                                                                <textarea name="knowledge" class="form-control border border-2 p-2">{{ $step->knowledge }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="knowledgeError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Skills</label>
-                                                                                <textarea name="skills" class="form-control border border-2 p-2">{{ $step->skills }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="skillsError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Values</label>
-                                                                                <textarea name="values" class="form-control border border-2 p-2">{{ $step->values }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="valuesError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Output</label>
-                                                                                <textarea name="output" class="form-control border border-2 p-2">{{ $step->output }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="outputError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Assessment Criteria</label>
-                                                                                <textarea name="assessment_criteria" class="form-control border border-2 p-2">{{ $step->assessment_criteria }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="assessment_criteriaError"></p>
-                                                                            </div>
-
-                                                                            <div class="mb-3 col-md-6">
-                                                                                <label class="form-label">Facilitator Note</label>
-                                                                                <textarea name="facilitator_note" class="form-control border border-2 p-2">{{ $step->facilitator_note }}</textarea>
-                                                                                <p class='text-danger font-weight-bold inputerror' id="facilitator_noteError"></p>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" class="btn btn-success btn-update-step" data-value="{{ $step->id }}">Update Step <span id="loader"></span></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Confirm Step Delete modal -->
-                                                    <div class="modal fade" id="deleteModal-{{ $step->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-sm" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Confirm</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body" id="smallBody">
-                                                                    <div class="text-center">
-                                                                        <span class="">Are you sure you want to Delete this Step?</span>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-success btn-update-step" data-value="{{ $step->id }}">Update Step <span id="loader"></span></button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer align-items-center">
-                                                                    <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.step', $step->id) }}">Confirm</button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Confirm Step Delete modal -->
+                                                        <div class="modal fade" id="deleteModal-{{ $step->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Confirm</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="smallBody">
+                                                                        <div class="text-center">
+                                                                            <span class="">Are you sure you want to Delete this Step?</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer align-items-center">
+                                                                        <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.step', $step->id) }}">Confirm</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </tr>
+
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -513,7 +545,6 @@
         $('.btn-submit').on('click', function (e) {
             e.preventDefault();
 
-            // let formData = $('#addAnnexForm').serialize();
             let formData = new FormData(document.getElementById('addAnnexForm'));
 
             let lesson_plan_id = $(this).data("value");
@@ -560,7 +591,6 @@
         $('.btn-update-annex').on('click', function (e) {
             e.preventDefault();
 
-            // let formData = $('#addAnnexForm').serialize();
             let formData = new FormData(document.getElementById('updateAnnexForm'));
 
             let annex_id = $(this).data("value");
@@ -607,14 +637,16 @@
         $('.btn-update-step').on('click', function (e) {
             e.preventDefault();
 
-            let formData = $('#updateStepForm').serialize();
-
             let step_id = $(this).data("value");
             let url = '{{route("update.step",":id")}}';
             url = url.replace(':id', step_id);
 
+            const formId = '#updateStepForm-'+step_id;
+
+            let formData = $(formId).serialize();
+
             $(".inputerror").text("");
-            $("#updateAnnexForm input").removeClass("is-invalid");
+            $(formId+' input').removeClass("is-invalid");
 
             $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
             $(".btn-update-step").attr("disabled", 'disabled');
