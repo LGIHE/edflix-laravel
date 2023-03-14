@@ -172,7 +172,7 @@
                                                                 @if ($step->teacher_activity == null)
                                                                     <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">person</i>
                                                                 @else
-                                                                    <i class="material-icons text-center" role="button" style="font-size:40px;color:#1e4e9c;">person</i>
+                                                                    <i class="material-icons text-center" role="button" title="Header" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Content" style="font-size:40px;color:#1e4e9c;">person</i>
                                                                     <div class="ripple-container"></div>
                                                                 @endif
                                                             </div>
@@ -534,6 +534,12 @@
     });
 
     $(function () {
+
+        $("a.pop-me-over").on("click", function (e) {
+            e.preventDefault();
+            return true;
+        });
+        $(".pop-me-over").popover();
 
         $.ajaxSetup({
             headers: {
