@@ -10,11 +10,6 @@ class getSheets implements WithMultipleSheets
 {
     public function sheets(): array
     {
-        // return [
-        //     0 => new Sheet1Import,
-        //     1 => new Sheet2Import,
-        // ];
-
         $sheets = [];
 
         // First sheet

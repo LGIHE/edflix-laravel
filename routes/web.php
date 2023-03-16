@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -27,8 +23,6 @@ use App\Http\Controllers\LessonPlanController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
-    // Route::get('sign-up', [RegisterController::class, 'create'])->name('register');
-    // Route::post('sign-up', [RegisterController::class, 'store']);
     Route::get('sign-in', [AuthController::class, 'signInGet'])->name('login');
     Route::post('sign-in', [AuthController::class, 'signInPost']);
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
@@ -84,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('lesson-plan/update/{id}', [LessonPlanController::class, 'getLessonPlanUpdate'])->name('get.lesson.plan.update');
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
-	Route::get('lesson-plan-delete/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
+	Route::get('delete-lesson-plan/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
