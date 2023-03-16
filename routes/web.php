@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('lesson-plan/update/{id}', [LessonPlanController::class, 'getLessonPlanUpdate'])->name('get.lesson.plan.update');
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
-	Route::get('lesson-plan-delete/{id}', [LessonPlanController::class, 'deleteSuccess'])->middleware('admin')->name('delete.lesson.plan');
+	Route::get('lesson-plan-delete/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');

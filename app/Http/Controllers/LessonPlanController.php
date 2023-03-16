@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
-use App\Imports\LessonPlanImport;
+use App\Imports\getSheets;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Validator;
 
 class LessonPlanController extends Controller
 {
@@ -144,24 +141,37 @@ class LessonPlanController extends Controller
 
     public function uploadLessonPlan(){
 
-        $file = request()->validate([
+        request()->validate([
             'subject' => 'required',
             'lesson_plan_file' => 'required|mimes:xlsx,xls|max:1024'
         ]);
 
-        Excel::import(new LessonPlanImport, request()->lesson_plan_file);
+        $import = new getSheets();
+
+        Excel::import($import, request()->lesson_plan_file);
 
         return redirect()
             ->route('lesson.plans')
             ->with('status', 'The Lesson Plan has been uploaded successfully.');
     }
 
-    public function deleteSuccess(){
+    public function deleteLessonPlan(){
         $lesson = LessonPlan::find(request()->id);
 
-        if(auth()->user()->isAdmin || auth()->user()->id == $lesson->owner){
+        if(auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner){
 
-            $status = LessonPlan::find(request()->id)->delete();
+            $lesson->delete();
+            $steps = LessonStep::where('lesson_plan', request()->id);
+            $steps->delete();
+
+            $annexes = LessonAnnex::where('lesson_plan', request()->id);
+
+            if($annexes){
+                foreach($annexes as $annex){
+                    unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
+                    LessonAnnex::find($annex->id)->delete();
+                }
+            }
 
             return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
 

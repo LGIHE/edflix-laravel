@@ -47,13 +47,15 @@
                                             <ol>
                                                 <li>First, download the upload example file using the blue button above.</li>
                                                 <li>Edit the file on your computer /tablet /phone and save it.</li>
-                                                <li>The class colum should be in the form of S1, S2, S3, S4, S5, S6. For example S1 is Senior 1</li>
+                                                <li>The file has 2 sheets i.e. <strong>Sheet1 is for Preliminary Information</strong> and <strong>Sheet2 for steps</strong></li>
+                                                <li>The class colum should be in the form of <strong>S1, S2, S3, S4, S5, S6</strong>. For example S1 is Senior 1</li>
                                                 <li>Upload the file in the upload section below:
                                                     <ul>
                                                         <li>Click on the choose file, and select the file you saved.</li>
                                                         <li>Then click on the upload button.</li>
                                                     </ul>
                                                 </li>
+                                                <li>The steps on Sheet2 should be on seperate rows</li>
                                             </ol>
                                         </div>
                                         <div class="card ">

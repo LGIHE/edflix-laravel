@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use DB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -10,13 +9,14 @@ use Illuminate\Support\Facades\Validator;
 use App\Rules\classIsOneOf;
 use App\Rules\requiredInLPUpload;
 use App\Rules\learnersNumber;
+use App\Models\LessonPlan;
 
-class LessonPlanImport implements ToCollection, WithHeadingRow
+class Sheet1Import implements ToCollection, WithHeadingRow
 {
+
     /**
     * @param array $row
     *
-    * @return \Illuminate\Database\Eloquent\Model|null
     */
     public function collection(Collection $rows)
     {
@@ -36,7 +36,7 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
          ])->validate();
 
         foreach ($rows as $row) {
-            $id = DB::table('lesson_plans')->insertGetId([
+            return LessonPlan::create([
                 'owner' => auth()->user()->id,
                 'status' => 'edit',
                 'visibility' => 0,
@@ -57,7 +57,6 @@ class LessonPlanImport implements ToCollection, WithHeadingRow
                 'references' => $row['references'],
                 'created_by' => auth()->user()->id,
             ]);
-
         }
     }
 
