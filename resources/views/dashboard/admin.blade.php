@@ -75,7 +75,7 @@
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                            <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
                                 <div class="chart">
                                     <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                                 </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="card-body">
                             <h6 class="mb-0 ">Platform Usability</h6>
-                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase usage from last month </p>
+                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase usage from last week </p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -107,7 +107,7 @@
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm"> updated 4 min ago </p>
+                                <p class="mb-0 text-sm"> Monthly Update </p>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                <p class="mb-0 text-sm">just updated</p>
+                                <p class="mb-0 text-sm"> Monthly Update </p>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
                     data: [50, 20, 10, 22, 50, 10, 40],
-                    maxBarThickness: 6
+                    maxBarThickness: 10
                 }, ],
             },
             options: {
