@@ -72,6 +72,7 @@
                                                         </select>
                                                     </div>
                                                     <p class="card-text mt-3 mb-2"><strong>Select File to Upload</strong> - <small class="text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></p>
+                                                    {{-- <input type="file" id="lpFile" name="lesson_plan_file" accept=".doc,.docx"> --}}
                                                     <input type="file" id="lpFile" name="lesson_plan_file" accept=".xls,.xlsx">
                                                     <button type="submit" class="btn btn-success mt-4">Upload Lesson Plan</button>
                                                 </form>

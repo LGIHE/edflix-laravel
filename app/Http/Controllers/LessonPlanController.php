@@ -139,6 +139,25 @@ class LessonPlanController extends Controller
         return view('lesson-plan.upload', compact('subjects'));
     }
 
+    // public function uploadLessonPlan(){
+
+    //     request()->validate([
+    //         'subject' => 'required',
+    //         'lesson_plan_file' => 'required|mimes:doc,docx|max:1024'
+    //     ]);
+
+    //     // $phpWordReader = \PhpOffice\PhpWord\IOFactory::createReader('MsDoc');
+
+    //     if($phpWordReader->canRead(request()->lesson_plan_file)) {
+    //         $phpWord = \PhpOffice\PhpWord\IOFactory::load(request()->lesson_plan_file);
+    //         print_r($phpWord);
+    //     }
+
+    //     // return redirect()
+    //     //     ->route('lesson.plans')
+    //     //     ->with('status', 'The Lesson Plan has been uploaded successfully.');
+    // }
+
     public function uploadLessonPlan(){
 
         request()->validate([
