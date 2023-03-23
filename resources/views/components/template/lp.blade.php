@@ -51,16 +51,26 @@
                     <strong>Duration: </strong>{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans()  ?? '' }}
                 </div>
             </div>
+            <div class="row align-items-start mt-3">
+                <div class="col col-md-4">
+                    <strong>Term: </strong>{{ $lesson->term }}
+                </div>
+            </div>
         </div>
         <div class="m-4">
             <div class="row align-items-start mt-5">
+                <div class="col">
+                    <strong>Competency: </strong>{{ $lesson->competency }}
+                </div>
+            </div>
+            <div class="row align-items-start mt-3">
                 <div class="col">
                     <strong>Learning Outcome: </strong>{{ $lesson->learning_outcomes }}
                 </div>
             </div>
             <div class="row align-items-start mt-3">
                 <div class="col">
-                    <strong>Skills: </strong>{{ $lesson->generic_skills }}
+                    <strong>Generic Skills: </strong>{{ $lesson->generic_skills }}
                 </div>
             </div>
             <div class="row align-items-start mt-3">

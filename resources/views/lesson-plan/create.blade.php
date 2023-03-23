@@ -108,16 +108,28 @@
                                             <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">School Term</label>
+                                            <input type="text" name="term" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="termError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label">Theme</label>
                                             <input type="text" name="theme" class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="themeError"></p>
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label">Topic</label>
                                             <input type="text" name="topic" class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="topicError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Competency</label>
+                                            <input type="text" name="competency" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="competencyError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">

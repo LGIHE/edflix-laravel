@@ -39,7 +39,7 @@
                                             <select class="form-select border border-2 p-2" name="owner" aria-label="" @if(@auth()->user()->isAdmin()) '' @else disabled @endif>
                                                 <option value="" selected>Select Owner</option>
                                                 @foreach($teachers as $teacher)
-                                                <option value="{!! $teacher->id !!}" @if($teacher->id == $lesson->owner) {{'selected'}} @endif>{!! $teacher->name !!}</option>
+                                                <option value="{{ $teacher->id }}" @if($teacher->id == $lesson->owner) {{'selected'}} @endif>{{ $teacher->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('owner')
@@ -112,7 +112,15 @@
                                             @enderror
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">School Term</label>
+                                            <input type="text" name="term" class="form-control border border-2 p-2" value="{{ $lesson->term }}">
+                                            @error('term')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label">Theme</label>
                                             <input type="text" name="theme" class="form-control border border-2 p-2" value="{{ $lesson->theme }}">
                                             @error('theme')
@@ -120,10 +128,18 @@
                                             @enderror
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-4">
                                             <label class="form-label">Topic</label>
                                             <input type="text" name="topic" class="form-control border border-2 p-2" value="{{ $lesson->topic }}">
                                             @error('topic')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Competency</label>
+                                            <input type="text" name="competency" class="form-control border border-2 p-2" value="{{ $lesson->competency }}">
+                                            @error('competency')
                                                 <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>

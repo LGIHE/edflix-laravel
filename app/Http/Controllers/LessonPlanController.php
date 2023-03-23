@@ -10,7 +10,6 @@ use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\getSheets;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use View;
 
@@ -50,6 +49,7 @@ class LessonPlanController extends Controller
             'subject' => 'required',
             'class' => 'required',
             'learners_no' => 'required',
+            'term' => 'required',
             'theme' => 'required',
             'learning_outcomes' => 'required',
             'generic_skills' => 'required',
@@ -116,6 +116,8 @@ class LessonPlanController extends Controller
             'subject' => 'required',
             'class' => 'required',
             'learners_no' => 'required',
+            'term' => 'required',
+            'competency' => 'required',
             'theme' => 'required',
             'learning_outcomes' => 'required',
             'generic_skills' => 'required',
