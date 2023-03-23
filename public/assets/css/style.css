@@ -1,0 +1,290 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+}
+
+p {
+    color: black;
+    font-family: "Trebuchet MS", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 10pt;
+    margin: 0pt;
+}
+
+img.logo {
+    padding: 10px 20px;
+}
+
+.lp-heading {
+    padding-top: 13pt;
+    padding-left: 20pt;
+    text-indent: 0pt;
+    text-align: left;
+    font-size: x-large;
+}
+
+h1 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14pt;
+}
+
+.column {
+    border-top-style: solid;
+    border-top-width: 2pt;
+    border-top-color: #2b2b2b;
+    border-left-style: solid;
+    border-left-width: 2pt;
+    border-left-color: #2b2b2b;
+    border-bottom-style: solid;
+    border-bottom-width: 2pt;
+    border-bottom-color: #2b2b2b;
+    border-right-style: solid;
+    border-right-width: 2pt;
+    border-right-color: #2b2b2b;
+}
+
+.column-head {
+    padding-top: 4pt;
+    padding-left: 6pt;
+    padding-right: 20pt;
+    text-indent: 0pt;
+    text-align: left;
+}
+
+.s1 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+.s2 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+.s3 {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l1 {
+    padding-left: 0pt;
+}
+#l1 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l2 {
+    padding-left: 0pt;
+}
+#l2 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l3 {
+    padding-left: 0pt;
+}
+#l3 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l4 {
+    padding-left: 0pt;
+}
+#l4 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l5 {
+    padding-left: 0pt;
+}
+#l5 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l6 {
+    padding-left: 0pt;
+    counter-reset: h1 1;
+}
+#l6 > li > *:first-child:before {
+    counter-increment: h1;
+    content: "(" counter(h1, lower-roman) ") ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+#l6 > li:first-child > *:first-child:before {
+    counter-increment: h1 0;
+}
+li {
+    display: block;
+}
+#l7 {
+    padding-left: 0pt;
+}
+#l7 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l8 {
+    padding-left: 0pt;
+}
+#l8 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l9 {
+    padding-left: 0pt;
+}
+#l9 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l10 {
+    padding-left: 0pt;
+}
+#l10 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l11 {
+    padding-left: 0pt;
+}
+#l11 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l12 {
+    padding-left: 0pt;
+}
+#l12 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+li {
+    display: block;
+}
+#l13 {
+    padding-left: 0pt;
+}
+#l13 > li > *:first-child:before {
+    content: "• ";
+    color: black;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+table,
+tbody {
+    vertical-align: top;
+    overflow: visible;
+}
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
@@ -9,7 +10,9 @@ use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\getSheets;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
+use View;
 
 class LessonPlanController extends Controller
 {
@@ -37,8 +40,6 @@ class LessonPlanController extends Controller
 
         $attributes = request()->validate([
             'owner' => 'required',
-            'status' => 'required',
-            'visibility' => 'required',
             'topic' => 'required',
             'subject' => 'required',
             'class' => 'required',
@@ -79,7 +80,7 @@ class LessonPlanController extends Controller
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        return view('lesson-plan.lesson', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'));
+        return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'));
 
     }
 
@@ -317,6 +318,21 @@ class LessonPlanController extends Controller
         return redirect()
             ->route('get.lesson.plan', $annex->lesson_plan)
             ->with('status', 'The lesson plan annex has been deleted successfully');
+    }
+
+    public function downloadLessonPlan(){
+        $lesson = LessonPlan::find(request()->id);
+        $subject = Subject::find($lesson->subject);
+        $owner = User::find($lesson->owner);
+        $school = School::find($owner->school);
+        $steps = LessonStep::all()->where('lesson_plan', request()->id);
+        $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
+        $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
+
+        $data['lesson'] = $lesson;
+
+        return View::make('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+
     }
 
 }

@@ -80,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
 	Route::get('delete-lesson-plan/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
 
+    Route::get('download-lp/{id}', [LessonPlanController::class, 'downloadLessonPlan'])->name('download.lp');
+
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
 	Route::get('school/{id}', [SchoolController::class, 'getOne'])->middleware('admin')->name('get.school');

@@ -34,40 +34,39 @@
                                     @csrf
                                     <input type="text" name="created_by" value="{{ auth()->user()->id }}" hidden>
                                     <div class="row">
-                                        @if(@auth()->user()->isAdmin())
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Choose Owner</label>
-                                            <select class="form-select border border-2 p-2" name="owner" aria-label="">
-                                                <option value="" selected>Select</option>
+                                            <select class="form-select border border-2 p-2" name="owner">
+                                                <option>Select</option>
                                                 @foreach($teachers as $teacher)
-                                                <option value="{!! $teacher->id !!}">{!! $teacher->name !!}</option>
+                                                    @if (auth()->user()->isTeacher())
+                                                        @if (auth()->user()->id == $teacher->id)
+                                                            <option value="{{ $teacher->id }}">{!! $teacher->name !!}</option>
+                                                        @endif
+                                                    @else
+                                                        <option value="{{ $teacher->id }}">{!! $teacher->name !!}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="ownerError"></p>
                                         </div>
-                                        @else
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Owner</label>
-                                            <input type="text" name="owner" class="form-control border border-2 p-2" value="{{ auth()->user()->name }}" disabled>
-                                            <p class='text-danger font-weight-bold inputerror' id="ownerError"></p>
-                                        </div>
-                                        @endif
                                         <div class="mb-3 col-md-3">
+                                            @if(@auth()->user()->isAdmin())
                                             <label class="form-label">Status</label>
                                             <select class="form-select border-2 p-2" name="status" aria-label="">
                                                 <option value="" selected>Select Status</option>
                                                 <option value="edit">Edit</option>
                                                 <option value="submitted">Submitted</option>
-                                                @if(@auth()->user()->isAdmin())
                                                 <option value="reviewed">Reviewed</option>
                                                 <option value="approved">Approved</option>
-                                                @endif
                                                 <option value="saved">Saved</option>
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="statusError"></p>
+                                            @endif
                                         </div>
 
                                         <div class="mb-3 col-md-3">
+                                            @if (auth()->user()->isAdmin())
                                             <label class="form-label">Public</label>
                                             <select class="form-select border-2 p-2" name="visibility" aria-label="">
                                                 <option value="" selected>Select</option>
@@ -75,6 +74,7 @@
                                                 <option value="0">No</option>
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="visibilityError"></p>
+                                            @endif
                                         </div>
 
                                         <div class="mb-3 col-md-3">

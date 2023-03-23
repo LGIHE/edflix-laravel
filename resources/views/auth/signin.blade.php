@@ -22,14 +22,14 @@
                                         @endif
                                         <div class="input-group input-group-outline mt-3">
                                             <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{ 'admin@material.com' }}">
+                                            <input type="email" class="form-control" name="email">
                                         </div>
                                         @error('email')
                                         <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                         @enderror
                                         <div class="input-group input-group-outline mt-3">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password" value='{{ 'secret'}}'>
+                                            <input type="password" class="form-control" name="password">
                                         </div>
                                         @error('password')
                                         <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>

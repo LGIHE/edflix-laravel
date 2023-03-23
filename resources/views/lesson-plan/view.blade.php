@@ -71,7 +71,7 @@
                                     <a class="btn bg-gradient-success mb-0 end" id="edit-lesson-plan" data-value="{{ $lesson->id }}">
                                         <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
                                     </a>
-                                    <a class="btn bg-gradient-info mb-0 end">
+                                    <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
                                         <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
                                     </a>
                                 </div>
