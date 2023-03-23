@@ -70,4 +70,5 @@
             }
         }
     </style>
+    @laravelPWA
 </head>
