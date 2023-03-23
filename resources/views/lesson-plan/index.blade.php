@@ -44,6 +44,7 @@
                         @endif
                         <div class="card-body px-0 pb-2">
                             @if (count($lessonPlans) > 0)
+                                @if ($yourLPs > 0)
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center mb-0" id="table">
                                         <thead>
@@ -150,6 +151,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @else
+                                <div class="container text-center mt-2 pt-5">
+                                    <h4 class="font-weight-bold">Add a lesson plan to view others.</h4>
+                                </div>
+                                @endif
                             @else
                                 <div class="container text-center m-2 p-5">
                                     <span class="display-6 font-weight-bold">No Lesson Plans Added Yet.</span>

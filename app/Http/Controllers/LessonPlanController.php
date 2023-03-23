@@ -25,7 +25,13 @@ class LessonPlanController extends Controller
                             ->orderBy('lesson_plans.created_at', 'asc')
                             ->get();
 
-        return view('lesson-plan.index', compact('lessonPlans'));
+        if(auth()->user()->isAdmin()){
+            $yourLPs = 1;
+        }else{
+            $yourLPs = LessonPlan::all()->where('owner', auth()->user()->id)->count();
+        }
+
+        return view('lesson-plan.index', compact('lessonPlans', 'yourLPs'));
     }
 
     public function getCreate(){
