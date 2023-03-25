@@ -3,6 +3,8 @@ var filesToCache = [
     // '/offline',
     // '/css/app.css',
     // '/js/app.js',
+    '/',
+    '/public/assets/*',
     '/images/icons/icon-72.png',
     '/images/icons/icon-96.png',
     '/images/icons/icon-128.png',

@@ -5,10 +5,11 @@ return [
     'manifest' => [
         'name' => env('APP_NAME', 'EDFLIX'),
         'short_name' => 'EDFLIX',
-        'start_url' => './',
+        'start_url' => '/',
+        'scope' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
-        'display' => 'standalone',
+        'display' => 'fullscreen',
         'orientation'=> 'any',
         'status_bar'=> 'black',
         'icons' => [
