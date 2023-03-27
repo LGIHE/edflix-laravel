@@ -64,7 +64,7 @@ return [
                 'description' => 'Shortcut to EDFLIX',
                 'url' => '/',
                 'icons' => [
-                    "src" => "/images/icons/icon-72x72.png",
+                    "src" => "/images/icons/icon-72.png",
                     "purpose" => "any"
                 ]
             ],
