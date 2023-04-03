@@ -90,14 +90,14 @@
         <script>
             $(window).on('load', function() {
 
-                    // if(navigator.userAgent.match(/Android/i) ||
-                    //     navigator.userAgent.match(/iPhone|iPad|iPod/i)
-                    //     ){
-                    //     $('#install_pwa').modal('show');
-                    // }
-                    if(true){
+                    if(navigator.userAgent.match(/Android/i) ||
+                        navigator.userAgent.match(/iPhone|iPad|iPod/i)
+                        ){
                         $('#install_pwa').modal('show');
                     }
+                    // if(true){
+                    //     $('#install_pwa').modal('show');
+                    // }
             });
 
             let deferredPrompt; // Allows to show the install prompt

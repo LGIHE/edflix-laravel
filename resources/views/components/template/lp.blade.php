@@ -111,14 +111,6 @@
         </div>
     </body>
 </html>
-@extends('components.template.step', [
-    'steps' => $steps,
-    'lesson' =>$lesson,
-    'subject' =>$subject,
-    'school' =>$school,
-    'owner' =>$owner,
-    'duration' => $duration
-])
 
 @extends('components.template.annex', [
     'annexes' => $annexes,
@@ -128,3 +120,14 @@
     'owner' =>$owner,
     'duration' => $duration
 ])
+
+@extends('components.template.step', [
+    'steps' => $steps,
+    'lesson' =>$lesson,
+    'subject' =>$subject,
+    'school' =>$school,
+    'owner' =>$owner,
+    'duration' => $duration
+])
+
+

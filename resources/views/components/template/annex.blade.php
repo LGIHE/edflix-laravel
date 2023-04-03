@@ -1,80 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
-    </head>
-    <body>
-        @foreach ($annexes as $annex)
-        <div class="row align-items-start">
-            <div class="col col-md-4">
-                <img class="logo" src="{{ asset('assets') }}/img/logos/edflix-logo.png" width="250" height="75" alt="EDFLIX">
-            </div>
-            <div class="col col-md-4">
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>School: </strong>{{$school->name}}
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Class: </strong>{{$lesson->class}}
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Theme: </strong>{{$lesson->theme}}
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Number of learners: </strong>{{$lesson->learners_no}}
-                    </div>
+@foreach ($annexes as $annex)
+    <div class="row align-items-start">
+        <div class="col col-md-4">
+            <img class="logo" src="{{ asset('assets') }}/img/logos/edflix-logo.png" width="250" height="75"
+                alt="EDFLIX">
+        </div>
+        {{-- <div class="col col-md-4">
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>School: </strong>{{ $school->name }}
                 </div>
             </div>
-            <div class="col col-md-4">
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Teacher: </strong>{{$owner->name}}
-                    </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Class: </strong>{{ $lesson->class }}
                 </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Subject: </strong>{{$subject->name}}
-                    </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Theme: </strong>{{ $lesson->theme }}
                 </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Topic: </strong>{{$lesson->topic}}
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        <strong>Duration: </strong>{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans()  ?? '' }}
-                    </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Number of learners: </strong>{{ $lesson->learners_no }}
                 </div>
             </div>
         </div>
+        <div class="col col-md-4">
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Teacher: </strong>{{ $owner->name }}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Subject: </strong>{{ $subject->name }}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Topic: </strong>{{ $lesson->topic }}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col">
+                    <strong>Duration:
+                    </strong>{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans() ?? '' }}
+                </div>
+            </div>
+        </div> --}}
+    </div>
 
-        <table class="mt-5" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
-            @for ($i = 1; $i <= count($annexes); $i++)
-                <tr style="height: 33pt">
-                    <td class="column" style="width: 150pt;">
-                        <p class="s2 column-head"><span style="font-weight:bold;">Annex {{ $i }}:</span> {{$annex->title}}</p>
-                    </td>
-                </tr>
-                <tr style="height: 33pt">
-                    <td class="column" style="width: 150pt;">
-                        <img src="{{ url('/annex/'.$annex->annex_file) }}" alt="{{$annex->title}}" width="1000" height="600">
-                    </td>
-                </tr>
-            @endfor
-        </table>
-        <br>
+    <table class="mt-5" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
 
-        @endforeach
-    </body>
-</html>
+        <tr style="height: 33pt">
+            <td class="column" style="width: 150pt;">
+                <p class="s2 column-head"><span style="font-weight:bold;">Annex:</span> {{ $annex->title }}</p>
+            </td>
+        </tr>
+        <tr style="height: 33pt">
+            <td class="column" style="width: 150pt;">
+                <img src="{{ url('/annex/' . $annex->annex_file) }}" alt="{{ $annex->title }}" width="1000"
+                    height="600">
+            </td>
+        </tr>
+
+    </table>
+    <br>
+@endforeach
