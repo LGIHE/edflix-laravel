@@ -10,6 +10,7 @@ use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\getSheets;
+use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use View;
 
@@ -264,8 +265,12 @@ class LessonPlanController extends Controller
             'annex_file' => 'required|mimes:png,jpeg,jpg|max:1024'
         ]);
 
-        $file_name = request()->file('annex_file')->store('annex-uploads', 'public');
-        $attributes['annex_file'] = explode('/', $file_name)[1];
+        $image = request()->file('annex_file');
+        $file_name = time().'.'.$image->getClientOriginalExtension();
+        $img = Image::make($image->getRealPath())->resize(800, 600);
+        $img->save(public_path('annex/'.$file_name));
+
+        $attributes['annex_file'] = $file_name;
         $attributes['lesson_plan'] = request()->lesson_plan;
         $attributes['created_by'] = auth()->user()->id;
 
@@ -294,10 +299,14 @@ class LessonPlanController extends Controller
                 'annex_file' => 'required|mimes:jpg,png,jpeg|max:1024'
             ]);
 
-            unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
+            unlink(public_path('annex/'.$annex->annex_file));
 
-            $file_name = request()->file('annex_file')->store('annex-uploads', 'public');
-            $attributes['annex_file'] = explode('/', $file_name)[1];
+            $image = request()->file('annex_file');
+            $file_name = time().'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->resize(800, 600);
+            $img->save(public_path('annex/'.$file_name));
+
+            $attributes['annex_file'] = $file_name;
         }
 
 

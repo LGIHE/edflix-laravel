@@ -6,7 +6,6 @@ return [
         'name' => env('APP_NAME', 'EDFLIX'),
         'short_name' => 'EDFLIX',
         'start_url' => '/',
-        'scope' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'fullscreen',
@@ -62,7 +61,7 @@ return [
             [
                 'name' => 'EDFLIX',
                 'description' => 'Shortcut to EDFLIX',
-                'url' => '/',
+                'url' => 'http://localhost:8000/',
                 'icons' => [
                     "src" => "/images/icons/icon-72.png",
                     "purpose" => "any"

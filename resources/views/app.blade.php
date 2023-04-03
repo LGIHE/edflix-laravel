@@ -2,7 +2,7 @@
 
     <body class="{{ $bodyClass }}" style="background-color:#f8f9fa!important">
         <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="install_pwa">
-            <div class="modal-dialog">
+            <div class="modal-dialog" id="install_pwa_dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Install EDFLIX</h5>
@@ -90,9 +90,12 @@
         <script>
             $(window).on('load', function() {
 
-                    if(navigator.userAgent.match(/Android/i) ||
-                        navigator.userAgent.match(/iPhone|iPad|iPod/i)
-                        ){
+                    // if(navigator.userAgent.match(/Android/i) ||
+                    //     navigator.userAgent.match(/iPhone|iPad|iPod/i)
+                    //     ){
+                    //     $('#install_pwa').modal('show');
+                    // }
+                    if(true){
                         $('#install_pwa').modal('show');
                     }
             });
