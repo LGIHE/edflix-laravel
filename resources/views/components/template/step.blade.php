@@ -51,10 +51,10 @@
         </div>
     </div>
     @if ($step->step == 1)
-        <h2 class="lp-heading mt-5">Steps</h2>
+        <h2 class="lp-heading mt-3">Steps</h2>
     @endif
 
-    <table style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
+    <table class="mt-4 page-break" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
         <tr style="height: 33pt">
             <td class="column" style="width:75pt;">
                 <p class="s2 column-head">Duration of activity</p>

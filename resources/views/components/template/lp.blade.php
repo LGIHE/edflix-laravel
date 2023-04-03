@@ -11,9 +11,12 @@
             .col {
                 font-size: 14px;
             }
+            .page-break {
+                page-break-after: always!important;
+            }
         </style>
     </head>
-    <body>
+    <body onload="window.print()">
         <img class="logo" src="{{ asset('assets/img/logos/edflix-logo.png') }}" width="250" height="75" alt="EDFLIX">
 
         <h1 class="lp-heading">Lesson Plan Details</h1>
@@ -57,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="m-4">
+        <div class="m-4 page-break">
             <div class="row align-items-start mt-5">
                 <div class="col">
                     <strong>Competency: </strong>{{ $lesson->competency }}
@@ -103,7 +106,7 @@
                     <strong>Learning Methods: </strong>{{ $lesson->learning_methods }}
                 </div>
             </div>
-            <div class="row align-items-start mt-3">
+            <div class="row align-items-start mt-3 ">
                 <div class="col">
                     <strong>References: </strong>{{ $lesson->references }}
                 </div>
