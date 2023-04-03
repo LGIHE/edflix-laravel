@@ -119,3 +119,12 @@
     'owner' =>$owner,
     'duration' => $duration
 ])
+
+@extends('components.template.annex', [
+    'annexes' => $annexes,
+    'lesson' =>$lesson,
+    'subject' =>$subject,
+    'school' =>$school,
+    'owner' =>$owner,
+    'duration' => $duration
+])
