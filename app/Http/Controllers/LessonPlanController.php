@@ -262,7 +262,7 @@ class LessonPlanController extends Controller
 
         $attributes = request()->validate([
             'title' => 'required',
-            'annex_file' => 'required|mimes:png,jpeg,jpg|max:1024'
+            'annex_file' => 'required|mimes:png,jpeg,jpg|max:5120'
         ]);
 
         $image = request()->file('annex_file');
@@ -296,7 +296,7 @@ class LessonPlanController extends Controller
 
         if(request()->annex_file){
             request()->validate([
-                'annex_file' => 'required|mimes:jpg,png,jpeg|max:1024'
+                'annex_file' => 'required|mimes:jpg,png,jpeg|max:5120'
             ]);
 
             unlink(public_path('annex/'.$annex->annex_file));
@@ -328,7 +328,7 @@ class LessonPlanController extends Controller
     public function deleteAnnex(){
         $annex = LessonAnnex::find(request()->id);
 
-        unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
+        unlink(public_path('annex/'.$annex->annex_file));
 
         $annex->delete();
 

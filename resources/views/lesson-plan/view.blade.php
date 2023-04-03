@@ -417,7 +417,7 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="#" id="updateAnnexForm" enctype="multipart/form-data">
+                                                                    <form action="#" id="updateAnnexForm-{{ $annex->id }}" enctype="multipart/form-data">
                                                                         @csrf
                                                                         <div class="mb-3 col-md-6">
                                                                             <label class="form-label">Title</label>
@@ -597,14 +597,14 @@
         $('.btn-update-annex').on('click', function (e) {
             e.preventDefault();
 
-            let formData = new FormData(document.getElementById('updateAnnexForm'));
-
             let annex_id = $(this).data("value");
+            let formData = new FormData(document.getElementById('updateAnnexForm-'+annex_id));
+
             let url = '{{route("update.annex",":id")}}';
             url = url.replace(':id', annex_id);
 
             $(".inputerror").text("");
-            $("#updateAnnexForm input").removeClass("is-invalid");
+            $("#updateAnnexForm-" +annex_id+ " input").removeClass("is-invalid");
 
             $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
             $(".btn-update-annex").attr("disabled", 'disabled');
