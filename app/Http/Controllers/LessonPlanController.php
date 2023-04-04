@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App;
+// use App;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
@@ -11,30 +11,34 @@ use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\getSheets;
 use Intervention\Image\Facades\Image;
+use Knp\Snappy\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use View;
+// use PDF;
 
 class LessonPlanController extends Controller
 {
-    public function getAll(){
+    public function getAll()
+    {
 
         $lessonPlans = LessonPlan::join('subjects', 'lesson_plans.subject', '=', 'subjects.id')
-                            ->join('users', 'lesson_plans.owner', '=', 'users.id')
-                            ->join('schools', 'lesson_plans.school', '=', 'schools.id')
-                            ->select('lesson_plans.*', 'subjects.name as subjectName', 'users.name as ownerName', 'schools.name as schoolName')
-                            ->orderBy('lesson_plans.created_at', 'asc')
-                            ->get();
+            ->join('users', 'lesson_plans.owner', '=', 'users.id')
+            ->join('schools', 'lesson_plans.school', '=', 'schools.id')
+            ->select('lesson_plans.*', 'subjects.name as subjectName', 'users.name as ownerName', 'schools.name as schoolName')
+            ->orderBy('lesson_plans.created_at', 'asc')
+            ->get();
 
-        if(auth()->user()->isAdmin()){
+        if (auth()->user()->isAdmin()) {
             $yourLPs = 1;
-        }else{
+        } else {
             $yourLPs = LessonPlan::all()->where('owner', auth()->user()->id)->count();
         }
 
         return view('lesson-plan.index', compact('lessonPlans', 'yourLPs'));
     }
 
-    public function getCreate(){
+    public function getCreate()
+    {
         $teachers = User::all()->where('role', 'Teacher');
         $schools = School::all();
         $subjects = Subject::all();
@@ -42,7 +46,8 @@ class LessonPlanController extends Controller
         return view('lesson-plan.create', compact('schools', 'subjects', 'teachers'));
     }
 
-    public function createLessonPlan(){
+    public function createLessonPlan()
+    {
 
         $attributes = request()->validate([
             'owner' => 'required',
@@ -72,13 +77,15 @@ class LessonPlanController extends Controller
         return response()->json(['id' => $lesson->id]);
     }
 
-    public function successCreate(){
+    public function successCreate()
+    {
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The Lesson Plan preliminary information has been added. You can now add the steps.');
     }
 
-    public function getLessonPlan(){
+    public function getLessonPlan()
+    {
         $lesson = LessonPlan::find(request()->id);
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
@@ -91,10 +98,11 @@ class LessonPlanController extends Controller
 
     }
 
-    public function getLessonPlanUpdate(){
+    public function getLessonPlanUpdate()
+    {
         $lesson = LessonPlan::find(request()->id);
 
-        if(auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner){
+        if (auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner) {
 
             $subjects = Subject::all();
             $owner = User::find($lesson->owner);
@@ -102,12 +110,13 @@ class LessonPlanController extends Controller
             $teachers = User::all()->where('role', 'Teacher');
             return view('lesson-plan.update', compact('lesson', 'subjects', 'owner', 'school', 'teachers'));
 
-        }else{
+        } else {
             return back()->with('error', 'Action not Authorized. Please contact asministrator.');
         }
     }
 
-    public function updateLessonPlan(){
+    public function updateLessonPlan()
+    {
 
         $attributes = request()->validate([
             'owner' => 'required',
@@ -143,7 +152,8 @@ class LessonPlanController extends Controller
         return redirect()->route('get.lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
     }
 
-    public function getUploadLessonPlan(){
+    public function getUploadLessonPlan()
+    {
         $subjects = Subject::all();
 
         return view('lesson-plan.upload', compact('subjects'));
@@ -168,7 +178,8 @@ class LessonPlanController extends Controller
     //     //     ->with('status', 'The Lesson Plan has been uploaded successfully.');
     // }
 
-    public function uploadLessonPlan(){
+    public function uploadLessonPlan()
+    {
 
         request()->validate([
             'subject' => 'required',
@@ -184,10 +195,11 @@ class LessonPlanController extends Controller
             ->with('status', 'The Lesson Plan has been uploaded successfully.');
     }
 
-    public function deleteLessonPlan(){
+    public function deleteLessonPlan()
+    {
         $lesson = LessonPlan::find(request()->id);
 
-        if(auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner){
+        if (auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner) {
 
             $lesson->delete();
             $steps = LessonStep::where('lesson_plan', request()->id);
@@ -195,23 +207,24 @@ class LessonPlanController extends Controller
 
             $annexes = LessonAnnex::where('lesson_plan', request()->id);
 
-            if($annexes){
-                foreach($annexes as $annex){
-                    unlink(storage_path().'/app/public/annex-uploads/'.$annex->annex_file);
+            if ($annexes) {
+                foreach ($annexes as $annex) {
+                    unlink(storage_path() . '/app/public/annex-uploads/' . $annex->annex_file);
                     LessonAnnex::find($annex->id)->delete();
                 }
             }
 
             return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
 
-        }else{
+        } else {
 
             return back()->with('error', 'Action not Authorized. Please contact asministrator.');
         }
     }
 
 
-    public function AddStep(){
+    public function AddStep()
+    {
 
         request()->validate([
             'step' => 'required',
@@ -223,13 +236,15 @@ class LessonPlanController extends Controller
         return response()->json(['id' => request()->lesson_plan]);
     }
 
-    public function successAddStep(){
+    public function successAddStep()
+    {
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan step has been uploaded successfully');
     }
 
-    public function deleteStep(){
+    public function deleteStep()
+    {
         $step = LessonStep::find(request()->id);
         $step->delete();
 
@@ -238,7 +253,8 @@ class LessonPlanController extends Controller
             ->with('status', 'The lesson plan step has been deleted successfully');
     }
 
-    public function updateStep(){
+    public function updateStep()
+    {
 
         request()->validate([
             'step' => 'required',
@@ -252,13 +268,15 @@ class LessonPlanController extends Controller
 
     }
 
-    public function successUpdateStep(){
+    public function successUpdateStep()
+    {
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan annex has been updated successfully');
     }
 
-    public function addAnnex(){
+    public function addAnnex()
+    {
 
         $attributes = request()->validate([
             'title' => 'required',
@@ -266,9 +284,9 @@ class LessonPlanController extends Controller
         ]);
 
         $image = request()->file('annex_file');
-        $file_name = time().'.'.$image->getClientOriginalExtension();
+        $file_name = time() . '.' . $image->getClientOriginalExtension();
         $img = Image::make($image->getRealPath())->resize(800, 600);
-        $img->save(public_path('annex/'.$file_name));
+        $img->save(public_path('annex/' . $file_name));
 
         $attributes['annex_file'] = $file_name;
         $attributes['lesson_plan'] = request()->lesson_plan;
@@ -281,30 +299,32 @@ class LessonPlanController extends Controller
 
     }
 
-    public function successAddAnnex(){
+    public function successAddAnnex()
+    {
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan annex has been uploaded successfully');
     }
 
-    public function updateAnnex(){
+    public function updateAnnex()
+    {
         $annex = LessonAnnex::find(request()->id);
 
         $attributes = request()->validate([
             'title' => 'required'
         ]);
 
-        if(request()->annex_file){
+        if (request()->annex_file) {
             request()->validate([
                 'annex_file' => 'required|mimes:jpg,png,jpeg|max:5120'
             ]);
 
-            unlink(public_path('annex/'.$annex->annex_file));
+            unlink(public_path('annex/' . $annex->annex_file));
 
             $image = request()->file('annex_file');
-            $file_name = time().'.'.$image->getClientOriginalExtension();
+            $file_name = time() . '.' . $image->getClientOriginalExtension();
             $img = Image::make($image->getRealPath())->resize(800, 600);
-            $img->save(public_path('annex/'.$file_name));
+            $img->save(public_path('annex/' . $file_name));
 
             $attributes['annex_file'] = $file_name;
         }
@@ -319,16 +339,18 @@ class LessonPlanController extends Controller
 
     }
 
-    public function successUpdateAnnex(){
+    public function successUpdateAnnex()
+    {
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan annex has been updated successfully');
     }
 
-    public function deleteAnnex(){
+    public function deleteAnnex()
+    {
         $annex = LessonAnnex::find(request()->id);
 
-        unlink(public_path('annex/'.$annex->annex_file));
+        unlink(public_path('annex/' . $annex->annex_file));
 
         $annex->delete();
 
@@ -337,7 +359,8 @@ class LessonPlanController extends Controller
             ->with('status', 'The lesson plan annex has been deleted successfully');
     }
 
-    public function downloadLessonPlan(){
+    public function downloadLessonPlan()
+    {
         $lesson = LessonPlan::find(request()->id);
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
@@ -346,7 +369,26 @@ class LessonPlanController extends Controller
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        $data['lesson'] = $lesson;
+        // $data['lesson'] = $lesson;
+        // $data['subject'] = $subject;
+        // $data['owner'] = $owner;
+        // $data['school'] = $school;
+        // $data['steps'] = $steps;
+        // $data['duration'] = $duration;
+        // $data['annexes'] = $annexes;
+
+        // $pdf = new Pdf('/usr/local/bin/wkhtmltopdf');
+        // $pdf->setTimeout(120); // set timeout to 120 seconds (2 minutes)
+        // $pdf->setOption('page-size', 'A4');
+        // $pdf->setOption('orientation', 'landscape');
+        // $pdf->setOption('margin-top', 0);
+        // $pdf->setOption('margin-right', 0);
+        // $pdf->setOption('margin-bottom', 0);
+        // $pdf->setOption('margin-left', 0);
+
+        // $html = view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+
+        // return $pdf->generateFromHtml($html, public_path('output.pdf'));
 
         return View::make('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 
