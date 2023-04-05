@@ -8,7 +8,7 @@ return [
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
-        'display' => 'fullscreen',
+        'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
         'icons' => [
@@ -37,7 +37,7 @@ return [
                 'purpose' => 'any'
             ],
             '384x384' => [
-                'path' => '/images/icons/icon-384x384.png',
+                'path' => '/images/icons/icon-384.png',
                 'purpose' => 'any'
             ],
             '512x512' => [
@@ -61,7 +61,7 @@ return [
             [
                 'name' => 'EDFLIX',
                 'description' => 'Shortcut to EDFLIX',
-                'url' => 'http://localhost:8000/',
+                'url' => '/',
                 'icons' => [
                     "src" => "/images/icons/icon-72.png",
                     "purpose" => "any"
