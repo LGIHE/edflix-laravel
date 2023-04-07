@@ -95,9 +95,6 @@
                         ){
                         $('#install_pwa').modal('show');
                     }
-                    // if(true){
-                    //     $('#install_pwa').modal('show');
-                    // }
             });
 
             let deferredPrompt; // Allows to show the install prompt

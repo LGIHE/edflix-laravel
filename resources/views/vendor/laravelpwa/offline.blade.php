@@ -19,7 +19,8 @@
             <h2 class="display-3">404</h2>
             <h4 class="display-6">Oops!</h4>
             <h4 class="display-6">Looks like you are offline.</h4><br>
-            <center><a type="button" class="btn btn-warning" href="{{ route('dashboard') }}">RETRY</a></center>
+            <p>You must be online to access this page, or you can go back using the link below.</p>
+            <center><a type="button" class="btn btn-warning" href="{{ url()->previous() }}">RETRY</a></center>
         </div>
     </div>
 </x-layout>
