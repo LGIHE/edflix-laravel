@@ -81,6 +81,10 @@
                 margin-right:40px;
                 padding-top: 3px;
             }
+
+            .navbar-vertical.navbar-expand-x {
+                width: 60%!important;
+            }
         }
     </style>
     @laravelPWA

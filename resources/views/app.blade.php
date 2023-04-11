@@ -92,9 +92,12 @@
 
                     if(navigator.userAgent.match(/Android/i) ||
                         navigator.userAgent.match(/iPhone|iPad|iPod/i)
+                        // && window.matchMedia('(display-mode: standalone)').matches === false
                         ){
-                        $('#install_pwa').modal('show');
-                    }
+
+                            $('#install_pwa').modal('show');
+
+                        }
             });
 
             let deferredPrompt; // Allows to show the install prompt
@@ -124,7 +127,7 @@
                     } else {
                         console.log("PWA setup rejected");
                     }
-                    installButton.disabled = false;
+                    // installButton.disabled = false;
                     deferredPrompt = null;
                 });
             }
