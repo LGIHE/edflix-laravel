@@ -20,6 +20,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LessonPlanController;
+use thiagoalessio\TesseractOCR\TesseractOCR;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
@@ -55,6 +56,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('upload-lesson-plan', [LessonPlanController::class, 'getUploadLessonPlan'])->name('get.upload.lesson.plan');
 	Route::post('upload-lesson-plan', [LessonPlanController::class, 'uploadLessonPlan'])->name('upload.lesson.plan');
+
+    Route::get('lp-image', function ()
+        {
+            $tesseract = new TesseractOCR(public_path('annex/image.jpeg'));
+            echo $tesseract->setLanguage('eng')->run();
+        }
+    );
 
 	Route::post('add-step', [LessonPlanController::class, 'addStep'])->name('add.step');
 	Route::get('add-step-success/{id}', [LessonPlanController::class, 'successAddStep'])->name('add.step.success');
