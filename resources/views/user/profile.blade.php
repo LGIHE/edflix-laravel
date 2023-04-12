@@ -201,7 +201,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a rel="tooltip" class="" id="open-update" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
+                                                    <a rel="tooltip" class="" id="view-lp" data-value="{{ $lessonPlan->id }}" style="cursor:pointer;">
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
@@ -311,5 +311,12 @@
                 $('#password-change').addClass('active show');
                 break;
         }
+    });
+
+    $(document).on('click','#view-lp',function(){
+        var lesson_plan_id = $(this).data("value");
+        var url = '{{route("get.lesson.plan",":id")}}';
+        url = url.replace(':id', lesson_plan_id);
+        window.location.assign(url);
     });
 </script>
