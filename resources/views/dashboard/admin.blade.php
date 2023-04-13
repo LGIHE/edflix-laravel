@@ -83,7 +83,7 @@
                         </div>
                         <div class="card-body">
                             <h6 class="mb-0 ">Platform Usability</h6>
-                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase usage from last week </p>
+                            <p class="text-sm "> (<span class="font-weight-bolder">{{ $percentageChangeInUsage }}%</span>) increase usage from last week </p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -146,13 +146,13 @@
             data: {
                 labels: ["M", "T", "W", "T", "F", "S", "S"],
                 datasets: [{
-                    label: "Sales",
+                    label: "Activites",
                     tension: 0.4,
                     borderWidth: 0,
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
+                    data: JSON.parse('{{ json_encode($logsPerDay) }}'),
                     maxBarThickness: 10
                 }, ],
             },
