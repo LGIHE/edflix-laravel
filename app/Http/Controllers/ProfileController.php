@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Hash;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\LessonPlan;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Logs;
 
 class ProfileController extends Controller
 {
@@ -27,6 +28,16 @@ class ProfileController extends Controller
         ]);
 
         auth()->user()->update($attributes);
+
+        $log['message'] = 'User with id '. $user->id .' updated their profile';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update Profile';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
         return back()->withStatus('Profile successfully updated.');
     }
 
@@ -40,6 +51,15 @@ class ProfileController extends Controller
         $status = User::whereId(auth()->user()->id)->update([
             'password' => Hash::make(request()->password)
         ]);
+
+        $log['message'] = 'User with id '. auth()->user()->id .' updated their password';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update Password';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return $status ? back()->with('status', 'Password updated successfully')
                     : back()->withErrors('password', 'Error in updating password.');

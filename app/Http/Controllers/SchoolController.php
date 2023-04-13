@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\School;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Logs;
 
 class SchoolController extends Controller
 {
@@ -30,7 +31,16 @@ class SchoolController extends Controller
             'district' => 'required|max:255',
         ]);
 
-        School::create($attributes);
+        $school = School::create($attributes);
+
+        $log['message'] = 'School with id '. $school->id .' was added';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Add School';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return response()->json(['success' => 'The school has been added successfully.']);
     }
@@ -50,14 +60,31 @@ class SchoolController extends Controller
         ]);
 
         #Update the School
-        $status = School::find(request()->id)->update($attributes);
+        School::find(request()->id)->update($attributes);
 
+        $log['message'] = 'School with id '. request()->id .' was updated';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update School';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('get.school', request()->id)->with('status', 'The school has been updated successfully.');
     }
 
     public function deleteSuccess(){
-        $status = School::find(request()->id)->delete();
+        School::find(request()->id)->delete();
+
+        $log['message'] = 'School with id '. request()->id .' was deleted';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Delete School';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('schools')->with('status', 'The school has been deleted successfully.');
     }

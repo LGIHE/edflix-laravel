@@ -11,10 +11,10 @@ use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use App\Imports\getSheets;
 use Intervention\Image\Facades\Image;
-use Knp\Snappy\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use View;
-// use PDF;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Logs;
 
 class LessonPlanController extends Controller
 {
@@ -73,6 +73,15 @@ class LessonPlanController extends Controller
         $attributes['school'] = $school->school;
         $attributes['created_by'] = request()->created_by;
         $lesson = LessonPlan::create($attributes);
+
+        $log['message'] = 'Lessonplan with id '. $lesson->id .' was created.';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Create Lessonplan';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return response()->json(['id' => $lesson->id]);
     }
@@ -146,8 +155,16 @@ class LessonPlanController extends Controller
         $attributes['updated_by'] = request()->updated_by;
 
         #Update the lesson plan preliminary info
-        $status = LessonPlan::find(request()->id)->update($attributes);
+        LessonPlan::find(request()->id)->update($attributes);
 
+        $log['message'] = 'Lessonplan with id '. request()->id .' was updated.';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Updated Lessonplan';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('get.lesson.plan', request()->id)->with('status', 'The lesson plan has been updated successfully.');
     }
@@ -190,6 +207,15 @@ class LessonPlanController extends Controller
 
         Excel::import($import, request()->lesson_plan_file);
 
+        $log['message'] = 'Lessonplan was uploaded.';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Upload Lessonplan';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
         return redirect()
             ->route('lesson.plans')
             ->with('status', 'The Lesson Plan has been uploaded successfully.');
@@ -214,6 +240,15 @@ class LessonPlanController extends Controller
                 }
             }
 
+            $log['message'] = 'Lessonplan with id '. request()->id .' was deleted.';
+            $log['user_id'] = Auth()->user()->id;
+            $log['action'] = 'Delete Lessonplan';
+            $log['ip_address'] = request()->ip();
+            $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+            $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+            Logs::create($log);
+
             return redirect()->route('lesson.plans')->with('status', 'The lesson plan has been deleted successfully.');
 
         } else {
@@ -233,6 +268,15 @@ class LessonPlanController extends Controller
 
         LessonStep::create(request()->all());
 
+        $log['message'] = 'Step added for Lessonplan with id '. request()->id;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Add Step';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
         return response()->json(['id' => request()->lesson_plan]);
     }
 
@@ -248,6 +292,15 @@ class LessonPlanController extends Controller
         $step = LessonStep::find(request()->id);
         $step->delete();
 
+        $log['message'] = 'Step deleted for Lessonplan with id '. $step->lesson_plan;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Delete Step';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
         return redirect()
             ->route('get.lesson.plan', $step->lesson_plan)
             ->with('status', 'The lesson plan step has been deleted successfully');
@@ -262,7 +315,16 @@ class LessonPlanController extends Controller
         ]);
 
         #Update the Lesson Plan Step
-        $step = LessonStep::find(request()->id)->update(request()->all());
+        LessonStep::find(request()->id)->update(request()->all());
+
+        $log['message'] = 'Step updated for Lessonplan with id '. request()->lesson_plan;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update Step';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return response()->json(['id' => request()->lesson_plan]);
 
@@ -292,8 +354,17 @@ class LessonPlanController extends Controller
         $attributes['lesson_plan'] = request()->lesson_plan;
         $attributes['created_by'] = auth()->user()->id;
 
-        #Update the School
-        $status = LessonAnnex::create($attributes);
+        #Add Annex
+        LessonAnnex::create($attributes);
+
+        $log['message'] = 'Annex added for Lessonplan with id '. request()->lesson_plan;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Add Annex';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return response()->json(['id' => request()->lesson_plan]);
 
@@ -335,6 +406,15 @@ class LessonPlanController extends Controller
         #Update the Lesson Plan Annex
         $annex->update($attributes);
 
+        $log['message'] = 'Annex updated for Lessonplan with id '. $annex->lesson_plan;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update Annex';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
         return response()->json(['id' => $annex->lesson_plan]);
 
     }
@@ -353,6 +433,15 @@ class LessonPlanController extends Controller
         unlink(public_path('annex/' . $annex->annex_file));
 
         $annex->delete();
+
+        $log['message'] = 'Annex deleted for Lessonplan with id '. $annex->lesson_plan;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Delete Annex';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()
             ->route('get.lesson.plan', $annex->lesson_plan)
@@ -389,6 +478,15 @@ class LessonPlanController extends Controller
         // $html = view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 
         // return $pdf->generateFromHtml($html, public_path('output.pdf'));
+
+        $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Download Annex';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return View::make('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 

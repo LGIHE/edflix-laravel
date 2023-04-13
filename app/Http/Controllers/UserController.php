@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Logs;
 
 class UserController extends Controller
 {
@@ -29,9 +29,16 @@ class UserController extends Controller
         $attributes['type'] = $attributes['role'] == 'Teacher' ? 'teacher' : 'admin';
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
-        // return response()->json($attributes);
-
         $user = User::create($attributes);
+
+        $log['message'] = 'User with id '. $user->id .' Created';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Create User';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('users')->with('status', 'The user has been added successfully.');
     }
@@ -71,16 +78,33 @@ class UserController extends Controller
             'subject_3' => 'nullable',
         ]);
 
-        #Update the School
-        $status = User::find(request()->id)->update($attributes);
+        #Update the user
+        User::find(request()->id)->update($attributes);
 
+        $log['message'] = 'User with id '. request()->id .' Updated';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update User';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('get.user', request()->id)->with('status', 'The user has been updated successfully.');
 
     }
 
     public function deleteUser(){
-        $status = User::find(request()->id)->delete();
+        User::find(request()->id)->delete();
+
+        $log['message'] = 'User with id '. request()->id .' Deleted';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Delete User';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect()->route('users')->with('status', 'The user has been deleted successfully.');
     }

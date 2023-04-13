@@ -35,6 +35,8 @@ class DashboardController extends Controller
                                         ->where('status', 'approved');
             $steps = LessonStep::all();
 
+            //Usage Stats
+
             // an admin
             return view('dashboard.teacher', compact('teachers', 'facilitators', 'schools', 'subjects', 'lessonPlans', 'yourLPs', 'yourApprovedLPs', 'steps'));
         }

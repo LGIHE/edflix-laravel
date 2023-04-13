@@ -12,6 +12,7 @@
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
         "jonnyw/php-phantomjs": "^2.0",
         "knplabs/knp-snappy": "^1.4",
         "laravel-frontend-presets/material-dashboard": "^2.0",

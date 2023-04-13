@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 Use Str;
-Use Hash;
 use Illuminate\Auth\Events\PasswordReset;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Logs;
 
 class AuthController extends Controller
 {
@@ -31,6 +30,15 @@ class AuthController extends Controller
         }
 
         session()->regenerate();
+
+        $log['message'] = 'User SignedIn';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Sign In';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return redirect('/dashboard');
 
@@ -70,6 +78,15 @@ class AuthController extends Controller
                 event(new PasswordReset($user));
             }
         );
+
+        $log['message'] = 'User Reset Password';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Reset Password';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
         return $status === Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
