@@ -22,6 +22,12 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LessonPlanController;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 
+
+Route::get('optimize', function () {
+    $output = Artisan::call('optimize');
+    return "<pre>$output</pre>";
+});
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
     Route::get('sign-in', [AuthController::class, 'signInGet'])->name('login');
@@ -30,6 +36,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('verify', function () {return view('auth.verify');})->name('verify');
     Route::get('/reset-password/{token}', function ($token) {return view('auth.reset', ['token' => $token]);})->name('password.reset');
     Route::post('verify', [AuthController::class, 'verifyPasswordReset']);
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -107,4 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subject-delete/{id}', [SubjectController::class, 'deleteSuccess'])->middleware('admin')->name('delete.subject');
 
     Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
+
+    // Route::get('admin-optimize', function () {
+    //     $output = Artisan::call('optimize');
+    //     return "<pre>$output</pre>";
+    // });
 });
