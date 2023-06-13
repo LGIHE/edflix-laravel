@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Lessonplan;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use App\Imports\Lessonplan\Sheet1Import;
+use App\Imports\Lessonplan\Sheet2Import;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class getSheets implements WithMultipleSheets

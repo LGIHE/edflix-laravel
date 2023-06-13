@@ -54,6 +54,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile', [ProfileController::class, 'updateBio']);
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
 
+    Route::get('upload-teachers', [UserController::class, 'getUploadTeachers'])->name('get.upload.teachers');
+	Route::post('upload-teachers', [UserController::class, 'uploadTeachers'])->name('upload.teachers');
+
     //LESSON PLAN ROUTES
 	Route::get('lesson-plans', [LessonPlanController::class, 'getAll'])->name('lesson.plans');
 	Route::get('lesson-plan/{id}', [LessonPlanController::class, 'getLessonPlan'])->name('get.lesson.plan');

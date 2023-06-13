@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
+use Maatwebsite\Excel\Facades\Excel;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
 
@@ -107,6 +108,25 @@ class UserController extends Controller
         Logs::create($log);
 
         return redirect()->route('users')->with('status', 'The user has been deleted successfully.');
+    }
+
+    public function getUploadTeachers()
+    {
+        return view('user.upload');
+    }
+
+    public function uploadTeachers(){
+        request()->validate([
+            'teacher_upload' => 'required|mimes:xlsx,xls|max:1024'
+        ]);
+
+        $import = new \App\Imports\Teachers\getTeacherSheets();
+
+        Excel::import($import, request()->teacher_upload);
+
+        return redirect()
+            ->route('users')
+            ->with('status', 'The bulk teacher upload is successful.');
     }
 
 }

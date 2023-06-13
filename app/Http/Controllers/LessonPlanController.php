@@ -9,7 +9,6 @@ use App\Models\School;
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
-use App\Imports\getSheets;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use View;
@@ -203,7 +202,7 @@ class LessonPlanController extends Controller
             'lesson_plan_file' => 'required|mimes:xlsx,xls|max:1024'
         ]);
 
-        $import = new getSheets();
+        $import = new \App\Imports\Lessonplan\getSheets();
 
         Excel::import($import, request()->lesson_plan_file);
 

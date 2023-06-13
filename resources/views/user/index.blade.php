@@ -13,6 +13,9 @@
                             <a class="btn bg-gradient-dark mb-0 end" data-bs-toggle="modal" data-bs-target="#newUserModal">
                                 <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New User
                             </a>
+                            <a class="btn bg-gradient-info mb-0 end" onclick="window.location.href='{{ route('get.upload.teachers') }}';">
+                                <i class="material-icons text-sm">upload</i>&nbsp;&nbsp;Upload Teachers
+                            </a>
                         </div>
                         @if (session('status'))
                         <div class="row">

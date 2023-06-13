@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li class="nav-item mt-3">
-                <a class="nav-link text-dark {{ $activePage == 'subjects' ? ' active bg-gradient-info' : '' }} "
+                <a class="nav-link text-dark {{ $activePage == 'reports' ? ' active bg-gradient-info' : '' }} "
                     href="#">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">folder</i>

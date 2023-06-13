@@ -4,7 +4,7 @@ var filesToCache = [
     '/assets/css/nucleo-icons.css',
     '/assets/img/logos/edflix-favicon.png',
     '/assets/css/material-dashboard.css?v=3.0.0',
-    '/assets/img/logos/edflix-logo.png',
+    '/assets/img/logos/EDPLAN.png',
 
     'https://kit.fontawesome.com/42d5adcbca.js',
     'http://code.jquery.com/jquery-3.3.1.min.js',
@@ -39,9 +39,9 @@ var filesToCache = [
     'https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js',
 
     '/offline',
-    // '/dashboard',
-    // '/lesson-plans',
-    // '/create-lesson-plan',
+    '/dashboard',
+    '/lesson-plans',
+    '/create-lesson-plan',
 
 
     '/images/icons/icon-72.png',

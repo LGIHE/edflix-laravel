@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Lessonplan;
 
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
