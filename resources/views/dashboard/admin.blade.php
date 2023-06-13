@@ -77,7 +77,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="usability-stats" class="chart-canvas" height="170"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="lp-upload-stats" class="chart-canvas" height="170"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
                                 <div class="chart">
-                                    <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
+                                    <canvas id="lp-complete-stats" class="chart-canvas" height="170"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
     <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
+        var ctx = document.getElementById("usability-stats").getContext("2d");
 
         new Chart(ctx, {
             type: "bar",
@@ -220,7 +220,7 @@
         });
 
 
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
+        var ctx2 = document.getElementById("lp-upload-stats").getContext("2d");
 
         new Chart(ctx2, {
             type: "line",
@@ -238,7 +238,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [100, 20, 50, 50, 40, 300, 320, 500, 350, 200, 230, 500],
+                    data: [10, 20, 50, 10, 15, 300, 0, 0, 0, 0, 0, 0],
                     maxBarThickness: 6
 
                 }],
@@ -303,7 +303,7 @@
             },
         });
 
-        var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+        var ctx3 = document.getElementById("lp-complete-stats").getContext("2d");
 
         new Chart(ctx3, {
             type: "line",
@@ -320,7 +320,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [100, 20, 50, 50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: [5, 0, 15, 10, 3, 75, 0, 0, 0, 0, 0, 0],
                     maxBarThickness: 6
 
                 }],
