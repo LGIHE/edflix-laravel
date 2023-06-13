@@ -7,12 +7,12 @@ var filesToCache = [
     '/assets/img/logos/EDPLAN.png',
 
     'https://kit.fontawesome.com/42d5adcbca.js',
-    'http://code.jquery.com/jquery-3.3.1.min.js',
+    'https://code.jquery.com/jquery-3.3.1.min.js',
     'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
     'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700',
 
-    'http://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css',
+    'https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css',
     'https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css',
     'https://cdn.datatables.net/colreorder/1.6.1/css/colReorder.bootstrap4.min.css',
     'https://cdn.datatables.net/fixedcolumns/4.2.1/css/fixedColumns.dataTables.min.css',
@@ -25,7 +25,7 @@ var filesToCache = [
     '/assets/js/material-dashboard.min.js?v=3.0.0',
 
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js',
-    'http://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js',
+    'https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js',
     'https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js',
     'https://cdn.datatables.net/buttons/2.3.5/js/buttons.bootstrap4.min.js',
     'https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js',
