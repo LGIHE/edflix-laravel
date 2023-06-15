@@ -3,25 +3,25 @@
     <body class="{{ $bodyClass }}" style="background-color:#f8f9fa!important">
         <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="install_pwa">
             <div class="modal-dialog" id="install_pwa_dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Install EDFLIX</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Install EDPLAN</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        <p>Install EDPLAN for Easy access and Offline use.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" id="install_button">Install</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
-                <div class="modal-body text-dark">
-                  <p>Install EDFLIX for Easy access and Offline use.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" id="install_button">Install</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
 
-{{ $slot }}
+        {{ $slot }}
 
-@include('components.footer')
+        @include('components.footer')
 
         <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
@@ -126,8 +126,8 @@
                         installButton.hidden = true;
                     } else {
                         console.log("PWA setup rejected");
+                        installButton.hidden = false;
                     }
-                    // installButton.disabled = false;
                     deferredPrompt = null;
                 });
             }

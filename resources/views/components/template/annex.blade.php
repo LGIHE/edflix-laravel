@@ -1,12 +1,6 @@
 <div class="">
     <h2><strong>Annexes</strong></h2>
     @foreach ($annexes as $annex)
-        {{-- <div class="row align-items-start">
-            <div class="col col-md-4">
-                <img class="logo" src="{{ asset('assets') }}/img/logos/edflix-logo.png" width="250" height="75"
-                    alt="EDFLIX">
-            </div>
-        </div> --}}
 
         <table class="mt-5 page-break" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
 

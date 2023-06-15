@@ -27,7 +27,7 @@
 </head>
 
 <body onload="window.print()">
-    <img class="logo" src="{{ asset('assets/img/logos/edflix-logo.png') }}" width="250" height="75"
+    <img class="logo" src="{{ asset('assets/img/logos/EDPLAN.png') }}" width="250" height="75"
         alt="EDFLIX">
 
     <h1 class="lp-heading">Lesson Plan Details</h1>

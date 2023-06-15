@@ -1,7 +1,7 @@
 @foreach ($steps as $step)
     <div class="row align-items-start">
         <div class="col col-md-4">
-            <img class="logo" src="{{ asset('assets') }}/img/logos/edflix-logo.png" width="250" height="75"
+            <img class="logo" src="{{ asset('assets') }}/img/logos/EDPLAN.png" width="250" height="75"
                 alt="EDFLIX">
         </div>
         <div class="col col-md-4">
