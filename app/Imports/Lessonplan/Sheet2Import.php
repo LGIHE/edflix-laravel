@@ -24,7 +24,9 @@ class Sheet2Import implements ToCollection, WithHeadingRow
             '*.duration' => new requiredInLPUpload('duration'),
         ])->validate();
 
-        $lp = LessonPlan::where('owner', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        $user = request()->teacher != null ? request()->teacher : auth()->user()->id;
+
+        $lp = LessonPlan::where('owner', $user)->orderBy('created_at', 'desc')->first();
 
         foreach ($rows as $row) {
             LessonStep::create([
@@ -39,7 +41,7 @@ class Sheet2Import implements ToCollection, WithHeadingRow
                 'output' => $row['output'],
                 'assessment_criteria' => $row['assessment_criteria'],
                 'facilitator_note' => $row['facilitator_note'],
-                'created_by' => auth()->user()->id
+                'created_by' => $user
             ]);
         }
     }

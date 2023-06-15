@@ -171,32 +171,13 @@ class LessonPlanController extends Controller
     public function getUploadLessonPlan()
     {
         $subjects = Subject::all();
+        $teachers = User::where('role', 'Teacher')->get();
 
-        return view('lesson-plan.upload', compact('subjects'));
+        return view('lesson-plan.upload', compact('subjects', 'teachers'));
     }
-
-    // public function uploadLessonPlan(){
-
-    //     request()->validate([
-    //         'subject' => 'required',
-    //         'lesson_plan_file' => 'required|mimes:doc,docx|max:1024'
-    //     ]);
-
-    //     // $phpWordReader = \PhpOffice\PhpWord\IOFactory::createReader('MsDoc');
-
-    //     if($phpWordReader->canRead(request()->lesson_plan_file)) {
-    //         $phpWord = \PhpOffice\PhpWord\IOFactory::load(request()->lesson_plan_file);
-    //         print_r($phpWord);
-    //     }
-
-    //     // return redirect()
-    //     //     ->route('lesson.plans')
-    //     //     ->with('status', 'The Lesson Plan has been uploaded successfully.');
-    // }
 
     public function uploadLessonPlan()
     {
-
         request()->validate([
             'subject' => 'required',
             'lesson_plan_file' => 'required|mimes:xlsx,xls|max:1024'

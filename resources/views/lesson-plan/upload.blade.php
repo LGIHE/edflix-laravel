@@ -62,6 +62,18 @@
                                             <div class="card-header"><h5>Upload Section</h5></div>
                                                 <form action="{{ route('upload.lesson.plan') }}" method="post" enctype="multipart/form-data">
                                                     @csrf
+                                                    <p class="card-text mb-2 font-weight-bold">Select Teacher for the Lesson Plan</p>
+                                                    @if(auth()->user()->isAdmin())
+                                                    <div class="mb-3 col-md-6">
+                                                        <select class="form-select border-2 p-2" name="teacher" aria-label="">
+                                                            <option value="" selected>Select Teacher</option>
+                                                            @foreach($teachers as $teacher)
+                                                            <option value="{!! $teacher->id !!}">{!! $teacher->name !!}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    @endif
+
                                                     <p class="card-text mb-2 font-weight-bold">Select Subject for the Lesson Plan</p>
                                                     <div class="mb-3 col-md-6">
                                                         <select class="form-select border-2 p-2" name="subject" aria-label="">
