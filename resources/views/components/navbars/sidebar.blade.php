@@ -36,7 +36,7 @@
                     <span class="nav-link-text text-m text-bold ms-1" style="font-size:1rem;">Lesson Plans</span>
                 </a>
             </li>
-            @if(auth()->user()->isRoleSuperAdmin())
+            @if(auth()->user()->isAdmin())
             <li class="nav-item mt-3">
                 <a class="nav-link text-dark {{ $activePage == 'users' ? ' active bg-gradient-info' : '' }} "
                     href="{{ route('users') }}">

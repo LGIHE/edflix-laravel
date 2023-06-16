@@ -14,34 +14,38 @@ class UserController extends Controller
 {
     public function createUser()
     {
-        $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'phone' => 'required|numeric|min:10',
-            'location' => 'max:255',
-            'role' => 'required',
-            'password' => 'required|min:5|max:255',
-            'school' => 'required|numeric',
-            'subject_1' => 'required_if:role,==,Teacher',
-            'subject_2' => 'nullable',
-            'subject_3' => 'nullable',
-        ]);
+        if (!auth()->user()->isAdmin()){
+            return back()->with('error', 'Action not Authorized. Please contact asministrator.');
+        }
+            $attributes = request()->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|email|max:255|unique:users,email',
+                'phone' => 'required|numeric|min:10',
+                'location' => 'max:255',
+                'role' => 'required',
+                'password' => 'required|min:5|max:255',
+                'school' => 'required|numeric',
+                'subject_1' => 'required_if:role,==,Teacher',
+                'subject_2' => 'nullable',
+                'subject_3' => 'nullable',
+            ]);
 
-        $attributes['type'] = $attributes['role'] == 'Teacher' ? 'teacher' : 'admin';
-        $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
+            $attributes['type'] = $attributes['role'] == 'Teacher' ? 'teacher' : 'admin';
+            $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
-        $user = User::create($attributes);
+            $user = User::create($attributes);
 
-        $log['message'] = 'User with id '. $user->id .' Created';
-        $log['user_id'] = Auth()->user()->id;
-        $log['action'] = 'Create User';
-        $log['ip_address'] = request()->ip();
-        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
-        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+            $log['message'] = 'User with id '. $user->id .' Created';
+            $log['user_id'] = Auth()->user()->id;
+            $log['action'] = 'Create User';
+            $log['ip_address'] = request()->ip();
+            $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+            $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
 
-        Logs::create($log);
+            Logs::create($log);
 
-        return redirect()->route('users')->with('status', 'The user has been added successfully.');
+            return redirect()->route('users')->with('status', 'The user has been added successfully.');
+
     }
 
     public function createUserSuccess(){
