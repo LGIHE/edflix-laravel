@@ -121,8 +121,53 @@
                                     <p class="text-dark">{{ $owner->name }} ({{ $school->name }})</p>
                                 </div>
                                 <div class="col-md-4 d-flex">
-                                    <p class="text-dark font-weight-bold">Last Edited:</p>&nbsp;
-                                    <p class="text-dark">{{ $lesson->updated_at }}</p>
+                                    <p class="text-dark font-weight-bold">School Term:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->term }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Competency:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->competency }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Learning Outcomes:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->learning_outcomes }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Generic Skills:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->generic_skills }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Cross-cutting Issues:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->cross_cutting_issues }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Key Learning Outcomes:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->key_learning_outcomes }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Pre-requisite Knowledge:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->pre_requisite_knowledge }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Learning Materials:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->learning_materials }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">Learning Methods:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->learning_methods }}</p>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <p class="text-dark font-weight-bold">References:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->references }}</p>
                                 </div>
                             </div>
                         </div>
