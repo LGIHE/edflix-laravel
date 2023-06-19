@@ -34,7 +34,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('sign-in', [AuthController::class, 'signInPost']);
     Route::get('sign-up', [AuthController::class, 'signUpGet'])->name('signup');
     Route::post('sign-up', [AuthController::class, 'signUpPost']);
-    Route::get('sign-up-success', [AuthController::class, 'signUpSuccess'])->name('signup.success');
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
     Route::get('verify', function () {return view('auth.verify');})->name('verify');
     Route::get('/reset-password/{token}', function ($token) {return view('auth.reset', ['token' => $token]);})->name('password.reset');

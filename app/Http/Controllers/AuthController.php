@@ -140,16 +140,8 @@ class AuthController extends Controller
 
         Logs::create($log);
 
-        return redirect()->route('users')->with('status', 'The user has been added successfully.');
+        return view('auth.success');
 
-    }
-
-    public function signUpSuccess()
-    {
-        $schools = School::all()->sortBy('name');
-        $subjects = Subject::all()->sortBy('code');
-
-        return view('auth.signup', compact('schools', 'subjects'));
     }
 
 }
