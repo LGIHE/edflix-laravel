@@ -76,7 +76,7 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <span class="text-dark text-m font-weight-bold">Luigi Giussani High School</span>
+                                                    <span class="text-dark text-m font-weight-bold">{{ App\Http\Controllers\SchoolController::getTeacherSchool($user->school) }}</span>
                                                 </div>
                                             </td>
                                             <td>

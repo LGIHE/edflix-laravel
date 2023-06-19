@@ -21,6 +21,12 @@ class SchoolController extends Controller
         return view('school.update', compact('school'));
     }
 
+    public static function getTeacherSchool($id){
+        $school = School::find($id);
+
+        return $school->name;
+    }
+
     public function createSchool()
     {
         $attributes = request()->validate([
