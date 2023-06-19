@@ -38,7 +38,7 @@ class LessonPlanController extends Controller
 
     public function getCreate()
     {
-        $teachers = User::all()->where('role', 'Teacher');
+        $teachers = User::all()->where('role', 'Teacher')->sortBy('name');
         $schools = School::all();
         $subjects = Subject::all();
 
@@ -173,7 +173,7 @@ class LessonPlanController extends Controller
     public function getUploadLessonPlan()
     {
         $subjects = Subject::all();
-        $teachers = User::where('role', 'Teacher')->get();
+        $teachers = User::all()->where('role', 'Teacher')->sortBy('name');
 
         return view('lesson-plan.upload', compact('subjects', 'teachers'));
     }
