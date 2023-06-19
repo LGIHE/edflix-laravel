@@ -170,6 +170,15 @@
                                     <p class="text-dark">{{ $lesson->references }}</p>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-1 d-flex">
+                                    <p class="text-dark font-weight-bold">Activity Aim:</p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+                                    <p class="text-dark">{{ $lesson->activity_aim }}</p>
+                                </div>
+                            </div>
                         </div>
 
                         <ul class="nav nav-tabs mt-5">
