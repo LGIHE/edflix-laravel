@@ -65,6 +65,7 @@ class LessonPlanController extends Controller
             'learning_materials' => 'required',
             'learning_methods' => 'required',
             'references' => 'required',
+            'activity_aim' => 'required',
         ]);
 
         $school = User::find($attributes['owner']);
@@ -146,6 +147,7 @@ class LessonPlanController extends Controller
             'learning_materials' => 'required',
             'learning_methods' => 'required',
             'references' => 'required',
+            'activity_aim' => 'required',
         ]);
 
         $school = User::find($attributes['owner']);

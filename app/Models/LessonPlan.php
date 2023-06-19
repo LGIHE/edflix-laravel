@@ -25,6 +25,7 @@ class LessonPlan extends Model
         'learners_no',
         'term',
         'theme',
+        'activity_aim',
         'competency',
         'learning_outcomes',
         'generic_skills',

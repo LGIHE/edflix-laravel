@@ -35,6 +35,7 @@ class Sheet1Import implements ToCollection, WithHeadingRow
             '*.learning_materials' => new requiredInLPUpload('learning_materials'),
             '*.learning_methods' => new requiredInLPUpload('learning_methods'),
             '*.references' => new requiredInLPUpload('references'),
+            '*.activity_aim' => new requiredInLPUpload('activity_aim'),
         ])->validate();
 
         $user = request()->teacher != null ? request()->teacher : auth()->user()->id;
@@ -63,6 +64,7 @@ class Sheet1Import implements ToCollection, WithHeadingRow
                 'learning_materials' => $row['learning_materials'],
                 'learning_methods' => $row['learning_methods'],
                 'references' => $row['references'],
+                'activity_aim' => $row['activity_aim'],
                 'created_by' => $user,
             ]);
         }
