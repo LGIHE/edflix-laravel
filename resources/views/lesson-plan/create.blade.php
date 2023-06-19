@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Choose Owner</label>
-                                            <select class="form-select border border-2 p-2" name="owner">
+                                            <select id="teacher-records" class="form-select border border-2 p-2" name="owner">
                                                 <option>Select</option>
                                                 @foreach($teachers as $teacher)
                                                     @if (auth()->user()->isTeacher())
@@ -199,6 +199,9 @@
 </x-layout>
 
 <script>
+$(document).ready(function() {
+    $('#teacher-records').select2();
+});
 
 $(function () {
 

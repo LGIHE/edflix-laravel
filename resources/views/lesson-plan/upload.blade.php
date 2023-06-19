@@ -65,7 +65,7 @@
                                                     <p class="card-text mb-2 font-weight-bold">Select Teacher for the Lesson Plan</p>
                                                     @if(auth()->user()->isAdmin())
                                                     <div class="mb-3 col-md-6">
-                                                        <select class="form-select border-2 p-2" name="teacher" aria-label="">
+                                                        <select id="teacher-records" class="form-select border-2 p-2" name="teacher" aria-label="">
                                                             <option value="" selected>Select Teacher</option>
                                                             @foreach($teachers as $teacher)
                                                             <option value="{!! $teacher->id !!}">{!! $teacher->name !!}</option>
@@ -99,3 +99,9 @@
         </div>
     </div>
 </x-layout>
+
+<script>
+    $(document).ready(function() {
+        $('#teacher-records').select2();
+    });
+</script>
