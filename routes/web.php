@@ -32,6 +32,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
     Route::get('sign-in', [AuthController::class, 'signInGet'])->name('login');
     Route::post('sign-in', [AuthController::class, 'signInPost']);
+    Route::get('sign-up', [AuthController::class, 'signUpGet'])->name('signup');
+    Route::post('sign-up', [AuthController::class, 'signUpPost']);
+    Route::get('sign-up-success', [AuthController::class, 'signUpSuccess'])->name('signup.success');
     Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
     Route::get('verify', function () {return view('auth.verify');})->name('verify');
     Route::get('/reset-password/{token}', function ($token) {return view('auth.reset', ['token' => $token]);})->name('password.reset');
@@ -53,8 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', [ProfileController::class, 'get'])->name('profile');
     Route::post('profile', [ProfileController::class, 'updateBio']);
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('update.password');
-
-    // Route::get('teachers', [UserController::class, 'getTeachers'])->name('teacher');
 
     Route::get('upload-teachers', [UserController::class, 'getUploadTeachers'])->name('get.upload.teachers');
 	Route::post('upload-teachers', [UserController::class, 'uploadTeachers'])->name('upload.teachers');

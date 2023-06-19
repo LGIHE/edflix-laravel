@@ -1,6 +1,6 @@
 @guest
 
-<footer class="footer position-absolute bottom-footer py-2 w-100 z-index-1 fixed-bottom">
+{{-- <footer class="footer position-absolute bottom-footer py-2 w-100 z-index-1 fixed-bottom">
     <div class="container">
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-12 col-md-12 my-auto">
@@ -16,6 +16,6 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> --}}
 
 @endguest

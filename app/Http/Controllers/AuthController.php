@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
+use App\Models\User;
+use Carbon\Carbon;
 Use Str;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
+use App\Models\School;
 
 class AuthController extends Controller
 {
@@ -98,6 +102,54 @@ class AuthController extends Controller
         auth()->logout();
 
         return redirect('/sign-in');
+    }
+
+    public function signUpGet()
+    {
+        $schools = School::all()->sortBy('name');
+        $subjects = Subject::all()->sortBy('code');
+
+        return view('auth.signup', compact('schools', 'subjects'));
+    }
+
+    public function signUpPost()
+    {
+        $attributes = request()->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'phone' => 'required|numeric|min:10',
+            'location' => 'max:255',
+            'role' => 'required',
+            'password' => 'required|min:5|max:255',
+            'school' => 'required|numeric',
+            'subject_1' => 'required',
+        ]);
+
+        $attributes['role'] == 'Teacher';
+        $attributes['type'] = 'teacher';
+        $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
+
+        $user = User::create($attributes);
+
+        $log['message'] = 'User with id '. $user->id .' Created';
+        $log['user_id'] = $user->id;
+        $log['action'] = 'Create User';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
+        return redirect()->route('users')->with('status', 'The user has been added successfully.');
+
+    }
+
+    public function signUpSuccess()
+    {
+        $schools = School::all()->sortBy('name');
+        $subjects = Subject::all()->sortBy('code');
+
+        return view('auth.signup', compact('schools', 'subjects'));
     }
 
 }

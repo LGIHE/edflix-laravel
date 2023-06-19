@@ -91,7 +91,7 @@
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Class</label>
                                             <select class="form-select border-2 p-2" name="class" aria-label="">
-                                                <option value="" selected>Select Subject</option>
+                                                <option value="" selected>Select Class</option>
                                                 <option value="S1">Senior One</option>
                                                 <option value="S2">Senior Two</option>
                                                 <option value="S3">Senior Three</option>
@@ -184,6 +184,12 @@
                                             <label class="form-label">References</label>
                                             <textarea name="references" class="form-control border border-2 p-2"></textarea>
                                             <p class='text-danger font-weight-bold inputerror' id="referencesError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Activity Aim</label>
+                                            <textarea name="activity_aim" class="form-control border border-2 p-2"></textarea>
+                                            <p class='text-danger font-weight-bold inputerror' id="activity_aimError"></p>
                                         </div>
 
                                     </div>

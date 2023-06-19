@@ -48,6 +48,12 @@
                                             <a href="{{ route('verify') }}"
                                                 class="text-info text-gradient font-weight-bold">Reset Password</a>
                                         </p>
+                                        <div class="text-center">
+                                            <p class="text-sm text-center">
+                                                - OR -
+                                            </p>
+                                            <a href="{{ route('signup') }}" class="btn bg-gradient-success w-100" >Sign Up</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
