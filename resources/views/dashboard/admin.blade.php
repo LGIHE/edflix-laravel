@@ -227,7 +227,7 @@
             data: {
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Uploaded",
                     tension: 0,
                     borderWidth: 0,
                     pointRadius: 5,
@@ -310,7 +310,7 @@
             data: {
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Completed",
                     tension: 0,
                     borderWidth: 0,
                     pointRadius: 5,
