@@ -216,6 +216,14 @@
                                             @enderror
                                         </div>
 
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Activity Aim</label>
+                                            <textarea name="activity_aim" class="form-control border border-2 p-2">{{ $lesson->activity_aim }}</textarea>
+                                            @error('activity_aim')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+
                                     </div>
                                     <button type="submit" class="btn bg-gradient-dark btn-submit">Update Lesson Plan <span id="loader"></span></button>
                                 </form>
