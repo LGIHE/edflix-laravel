@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SignupConfirmation;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
@@ -34,6 +36,9 @@ class UserController extends Controller
             $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
             $user = User::create($attributes);
+
+            $user['pass'] = request()->password;
+            Mail::to($user->email)->send(new SignupConfirmation($user));
 
             $log['message'] = 'User with id '. $user->id .' Created';
             $log['user_id'] = Auth()->user()->id;
