@@ -10,6 +10,8 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Jenssegers\Agent\Facades\Agent;
+use App\Mail\SignupConfirmation;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Logs;
 use App\Models\School;
 
@@ -130,6 +132,8 @@ class AuthController extends Controller
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
         $user = User::create($attributes);
+
+        Mail::to($user->email)->send(new SignupConfirmation($user));
 
         $log['message'] = 'User with id '. $user->id .' Created';
         $log['user_id'] = $user->id;
