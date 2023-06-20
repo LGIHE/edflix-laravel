@@ -144,4 +144,5 @@
     'school' => $school,
     'owner' => $owner,
     'duration' => $duration,
+    'activity' => $lesson->activity_aim
 ])

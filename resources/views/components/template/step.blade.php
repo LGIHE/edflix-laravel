@@ -1,4 +1,4 @@
-@foreach ($steps as $step)
+
     <div class="row align-items-start">
         <div class="col col-md-4">
             <img class="logo" src="{{ asset('assets') }}/img/logos/EDPLAN.png" width="250" height="75"
@@ -50,9 +50,16 @@
             </div>
         </div>
     </div>
-    @if ($step->step == 1)
+    <div class="container">
+        <div class="row align-items-start mt-4">
+            <div class="col">
+                <strong>Activity Aim:</strong> {{ $activity }}
+            </div>
+        </div>
+    </div>
+    {{-- @if ($step->step == 1) --}}
         <h2 class="lp-heading mt-3">Steps</h2>
-    @endif
+    {{-- @endif --}}
 
     <table class="mt-4 page-break" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
         <tr style="height: 33pt">
@@ -75,7 +82,7 @@
                 <p class="s2 column-head">Assessment criteria</p>
             </td>
         </tr>
-
+        @foreach ($steps as $step)
         <tr style="height: 33pt">
             <td class="column" style="width:75pt;">
                 <p class="s2 column-head">Step
@@ -102,6 +109,7 @@
                 <p class="s2 column-head">{{ $step->assessment_criteria }}</p>
             </td>
         </tr>
+        @endforeach
     </table>
-    <br>
-@endforeach
+<br>
+
