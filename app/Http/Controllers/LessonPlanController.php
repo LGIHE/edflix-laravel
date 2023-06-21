@@ -242,10 +242,8 @@ class LessonPlanController extends Controller
 
     public function AddStep()
     {
-
         request()->validate([
             'step' => 'required',
-            'duration' => 'required',
         ]);
 
         LessonStep::create(request()->all());
@@ -290,10 +288,8 @@ class LessonPlanController extends Controller
 
     public function updateStep()
     {
-
         request()->validate([
             'step' => 'required',
-            'duration' => 'required',
         ]);
 
         #Update the Lesson Plan Step
@@ -324,7 +320,7 @@ class LessonPlanController extends Controller
 
         $attributes = request()->validate([
             'title' => 'required',
-            'annex_file' => 'required|mimes:png,jpeg,jpg|max:5120'
+            'annex_file' => 'required|mimes:png,jpeg,jpg,doc,docx,pdf|max:5120'
         ]);
 
         $image = request()->file('annex_file');

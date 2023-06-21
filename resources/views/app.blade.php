@@ -101,8 +101,6 @@
                 }
             });
 
-
-
             let deferredPrompt; // Allows to show the install prompt
             const installButton = document.getElementById("install_button");
 

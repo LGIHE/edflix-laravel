@@ -219,7 +219,13 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex flex-column justify-content-center">
-                                                                <p class="text-m text-center text-dark font-weight-bold mb-0">{{ $step->duration }}</p>
+                                                                <p class="text-m text-center text-dark font-weight-bold mb-0">
+                                                                    @if ($step->duration > 0)
+                                                                        {{ $step->duration }}
+                                                                    @else
+                                                                        -
+                                                                    @endif
+                                                                </p>
                                                             </div>
                                                         </td>
                                                         <td>
