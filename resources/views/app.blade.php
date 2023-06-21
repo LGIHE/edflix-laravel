@@ -92,16 +92,16 @@
         </script>
         <script>
             $(window).on('load', function() {
-
-                    if(navigator.userAgent.match(/Android/i) ||
-                        navigator.userAgent.match(/iPhone|iPad|iPod/i)
-                        // && window.matchMedia('(display-mode: standalone)').matches === false
-                        ){
-
-                            $('#install_pwa').modal('show');
-
-                        }
+                if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)){
+                    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                        $('#install_pwa').modal('hide');
+                    } else {
+                        $('#install_pwa').modal('show');
+                    }
+                }
             });
+
+
 
             let deferredPrompt; // Allows to show the install prompt
             const installButton = document.getElementById("install_button");
@@ -112,7 +112,8 @@
                 e.preventDefault();
                 // Stash the event so it can be triggered later.
                 deferredPrompt = e;
-                // Show the install button
+
+
                 installButton.hidden = false;
                 installButton.addEventListener("click", installApp);
             });

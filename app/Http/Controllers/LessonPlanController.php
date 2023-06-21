@@ -11,7 +11,7 @@ use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
-use View;
+use PDF;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
 
@@ -440,13 +440,13 @@ class LessonPlanController extends Controller
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        // $data['lesson'] = $lesson;
-        // $data['subject'] = $subject;
-        // $data['owner'] = $owner;
-        // $data['school'] = $school;
-        // $data['steps'] = $steps;
-        // $data['duration'] = $duration;
-        // $data['annexes'] = $annexes;
+        $data['lesson'] = $lesson;
+        $data['subject'] = $subject;
+        $data['owner'] = $owner;
+        $data['school'] = $school;
+        $data['steps'] = $steps;
+        $data['duration'] = $duration;
+        $data['annexes'] = $annexes;
 
         // $pdf = new Pdf('/usr/local/bin/wkhtmltopdf');
         // $pdf->setTimeout(120); // set timeout to 120 seconds (2 minutes)
@@ -461,6 +461,8 @@ class LessonPlanController extends Controller
 
         // return $pdf->generateFromHtml($html, public_path('output.pdf'));
 
+
+
         $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
         $log['user_id'] = Auth()->user()->id;
         $log['action'] = 'Download Annex';
@@ -470,7 +472,7 @@ class LessonPlanController extends Controller
 
         Logs::create($log);
 
-        return View::make('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+        return view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 
     }
 

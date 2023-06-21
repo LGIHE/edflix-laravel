@@ -21,6 +21,8 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
+        "mpdf/mpdf": "^8.0",
+        "niklasravnsborg/laravel-pdf": "^4.1",
         "phpoffice/phpword": "^1.0",
         "silviolleite/laravelpwa": "^2.0",
         "thiagoalessio/tesseract_ocr": "^2.12"
