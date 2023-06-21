@@ -55,6 +55,8 @@ class Sheet1Import implements ToCollection, WithHeadingRow
                 'term' => $row['term'],
                 'competency' => $row['competency'],
                 'learners_no' => $row['learners_no'],
+                'female_learners' => $row['female_learners'],
+                'male_learners' => $row['male_learners'],
                 'learning_outcomes' => $row['learning_outcomes'],
                 'generic_skills' => $row['generic_skills'],
                 'values' => $row['values'],
