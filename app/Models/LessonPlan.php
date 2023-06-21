@@ -23,6 +23,8 @@ class LessonPlan extends Model
         'school',
         'class',
         'learners_no',
+        'female_learners',
+        'male_learners',
         'term',
         'theme',
         'activity_aim',

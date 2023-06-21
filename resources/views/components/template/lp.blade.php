@@ -59,7 +59,9 @@
         </div>
         <div class="row align-items-start mt-3">
             <div class="col col-md-4">
-                <strong>Number of learners: </strong>{{ $lesson->learners_no }}
+                <strong>Number of learners: </strong>
+                {{ $lesson->learners_no }}
+                (<strong>Female: </strong>{{ $lesson->female_learners }} <strong>Male: </strong>{{ $lesson->male_learners }})
             </div>
             <div class="col col-md-4">
                 <strong>Duration:

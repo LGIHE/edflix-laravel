@@ -92,7 +92,12 @@
                                 </div>
                                 <div class="col-md-4 d-flex">
                                     <p class="text-dark font-weight-bold">No. of Learners:</p>&nbsp;
-                                    <p class="text-dark">{{ $lesson->learners_no }}</p>
+                                    <p class="text-dark">{{ $lesson->learners_no }}&nbsp;</p>(
+                                    <p class="text-dark font-weight-bold">Female:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->female_learners }}&nbsp;</p>
+                                    <p class="text-dark font-weight-bold">Male:</p>&nbsp;
+                                    <p class="text-dark">{{ $lesson->male_learners }}&nbsp;</p>
+                                    )
                                 </div>
                             </div>
 
