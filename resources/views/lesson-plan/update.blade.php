@@ -46,6 +46,8 @@
                                                 <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Status</label>
                                             <select class="form-select border-2 p-2" name="status" aria-label="">
@@ -108,6 +110,22 @@
                                             <label class="form-label">No. of Learners</label>
                                             <input type="number" name="learners_no" class="form-control border border-2 p-2" value="{{ $lesson->learners_no }}">
                                             @error('learners_no')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">No. of Female Learners</label>
+                                            <input type="number" name="female_learners" class="form-control border border-2 p-2" value="{{ $lesson->female_learners }}">
+                                            @error('female_learners')
+                                                <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">No. of Male Learners</label>
+                                            <input type="number" name="male_learners" class="form-control border border-2 p-2" value="{{ $lesson->male_learners }}">
+                                            @error('male_learners')
                                                 <p class='text-danger inputerror font-weight-bold'>{{ $message }} </p>
                                             @enderror
                                         </div>

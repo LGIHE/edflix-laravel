@@ -34,8 +34,8 @@
                                     @csrf
                                     <input type="text" name="created_by" value="{{ auth()->user()->id }}" hidden>
                                     <div class="row">
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Choose Owner</label>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Choose Owners</label>
                                             <select id="teacher-records" class="form-select border border-2 p-2" name="owner">
                                                 <option>Select</option>
                                                 @foreach($teachers as $teacher)
@@ -50,6 +50,8 @@
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="ownerError"></p>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="mb-3 col-md-3">
                                             @if(@auth()->user()->isAdmin())
                                             <label class="form-label">Status</label>
@@ -104,6 +106,18 @@
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Learners</label>
+                                            <input type="number" name="learners_no" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">No. of Female Learners</label>
+                                            <input type="number" name="learners_no" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                        </div>
+
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label">No. of Male Learners</label>
                                             <input type="number" name="learners_no" class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
                                         </div>

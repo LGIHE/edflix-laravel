@@ -71,6 +71,8 @@ class LessonPlanController extends Controller
         $school = User::find($attributes['owner']);
 
         $attributes['school'] = $school->school;
+        $attributes['female_learners'] = request()->female_learners;
+        $attributes['male_learners'] = request()->male_learners;
         $attributes['created_by'] = request()->created_by;
         $lesson = LessonPlan::create($attributes);
 
@@ -153,6 +155,8 @@ class LessonPlanController extends Controller
         $school = User::find($attributes['owner']);
 
         $attributes['school'] = $school->school;
+        $attributes['female_learners'] = request()->female_learners;
+        $attributes['male_learners'] = request()->male_learners;
         $attributes['updated_by'] = request()->updated_by;
 
         #Update the lesson plan preliminary info
@@ -389,7 +393,6 @@ class LessonPlanController extends Controller
 
             $attributes['annex_file'] = $file_name;
         }
-
 
         $attributes['updated_by'] = auth()->user()->id;
 
