@@ -320,13 +320,19 @@ class LessonPlanController extends Controller
 
         $attributes = request()->validate([
             'title' => 'required',
-            'annex_file' => 'required|mimes:png,jpeg,jpg,doc,docx,pdf|max:5120'
+            'annex_file' => 'required|file|mimes:png,jpeg,jpg,doc,docx,pdf|max:5120'
         ]);
 
-        $image = request()->file('annex_file');
-        $file_name = time() . '.' . $image->getClientOriginalExtension();
-        $img = Image::make($image->getRealPath())->resize(800, 600);
-        $img->save(public_path('annex/' . $file_name));
+        $file = request()->file('annex_file');
+        $mimeType = $file->getMimeType();
+        $file_name = time() . '.' . $file->getClientOriginalExtension();
+
+        if (strpos($mimeType, 'image/') === 0) {
+            $img = Image::make($file->getRealPath())->resize(800, 600);
+            $img->save(public_path('annex/' . $file_name));
+        } else {
+            $file->storeAs(public_path('annex/'), $file_name);
+        }
 
         $attributes['annex_file'] = $file_name;
         $attributes['lesson_plan'] = request()->lesson_plan;
@@ -370,10 +376,16 @@ class LessonPlanController extends Controller
 
             unlink(public_path('annex/' . $annex->annex_file));
 
-            $image = request()->file('annex_file');
-            $file_name = time() . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->resize(800, 600);
-            $img->save(public_path('annex/' . $file_name));
+            $file = request()->file('annex_file');
+            $mimeType = $file->getMimeType();
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+
+            if (strpos($mimeType, 'image/') === 0) {
+                $img = Image::make($file->getRealPath())->resize(800, 600);
+                $img->save(public_path('annex/' . $file_name));
+            } else {
+                $file->storeAs(public_path('annex/'), $file_name);
+            }
 
             $attributes['annex_file'] = $file_name;
         }
