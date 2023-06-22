@@ -9,7 +9,6 @@ use App\Models\School;
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
-use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;

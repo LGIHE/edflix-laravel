@@ -238,7 +238,7 @@
                                                                 @if ($step->teacher_activity == null)
                                                                     <i class="material-icons text-center" role="button" style="font-size:40px;opacity:0.4;">person</i>
                                                                 @else
-                                                                    <i class="material-icons text-center" role="button" title="Header" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Content" style="font-size:40px;color:#1e4e9c;">person</i>
+                                                                    <i class="btn material-icons text-center" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Teacher Activity" data-bs-placement="top" data-bs-content="{{ $step->teacher_activity }}" style="font-size:40px;color:#1e4e9c;">person</i>
                                                                     <div class="ripple-container"></div>
                                                                 @endif
                                                             </div>
@@ -583,7 +583,6 @@
         </div>
     </div>
 </div>
-
 <script>
 
     $(document).on('click','#edit-lesson-plan',function(){
