@@ -9,11 +9,14 @@ use App\Models\School;
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
+
+use Barryvdh\DomPDF\Facade\Pdf as Pdfmod;
 
 class LessonPlanController extends Controller
 {
@@ -459,20 +462,10 @@ class LessonPlanController extends Controller
         $data['duration'] = $duration;
         $data['annexes'] = $annexes;
 
-        // $pdf = new Pdf('/usr/local/bin/wkhtmltopdf');
-        // $pdf->setTimeout(120); // set timeout to 120 seconds (2 minutes)
-        // $pdf->setOption('page-size', 'A4');
-        // $pdf->setOption('orientation', 'landscape');
-        // $pdf->setOption('margin-top', 0);
-        // $pdf->setOption('margin-right', 0);
-        // $pdf->setOption('margin-bottom', 0);
-        // $pdf->setOption('margin-left', 0);
+        // $pdf = Pdfmod::loadView('components.template.lp', $data);
+        // $pdf->setPaper('a4', 'landscape')->setWarnings(false);
 
-        // $html = view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
-
-        // return $pdf->generateFromHtml($html, public_path('output.pdf'));
-
-
+        // return $pdf->download('invoice.pdf');
 
         $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
         $log['user_id'] = Auth()->user()->id;
