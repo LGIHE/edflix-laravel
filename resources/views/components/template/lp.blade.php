@@ -198,9 +198,9 @@
             </div>
         </div>
 
-        <h2 class="lp-heading mt-3" style="font-family: Arial, Helvetica, sans-serif;">Steps</h2>
+        <h2 class="lp-heading m-4" style="font-family: Arial, Helvetica, sans-serif;">Steps</h2>
 
-        <table class="mt-4" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
+        <table class="" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
             <tr style="height: 33pt">
                 <td class="column" style="width:75pt;">
                     <p class="s2 column-head">Duration of activity</p>
@@ -222,7 +222,7 @@
                 </td>
             </tr>
             @foreach ($steps as $step)
-            <tr style="height: 33pt">
+            <tr style="height: 33pt page-break">
                 <td class="column" style="width:75pt;">
                     <p class="s2 column-head">Step
                         {{ $step->step }}<br>{{ Carbon\CarbonInterval::minutes($step->duration)->cascade()->forHumans() ?? '' }}
@@ -253,11 +253,11 @@
     </div>
 
     {{-- START ANNEX --}}
-    <div class="m-4">
+    <div class="m-4 page-break">
         <h2><strong>Annexes</strong></h2>
         @foreach ($annexes as $annex)
             @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
-                <table class="mt-5 page-break" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
+                <table class="mt-4" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
 
                     <tr style="height: 33pt">
                         <td class="column" style="width: 150pt;">
