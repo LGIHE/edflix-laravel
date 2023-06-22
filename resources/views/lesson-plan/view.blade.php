@@ -118,7 +118,13 @@
                             <div class="row">
                                 <div class="col-md-4 d-flex">
                                     <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
-                                    <p class="text-dark">{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans()  ?? '' }}</p>
+                                    <p class="text-dark">
+                                        @if ($duration > 0)
+                                            {{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans()  ?? '' }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="col-md-4 d-flex">
                                     <p class="text-dark font-weight-bold">Owner:</p>&nbsp;

@@ -198,7 +198,7 @@
             </div>
         </div>
 
-        <h2 class="lp-heading m-4" style="font-family: Arial, Helvetica, sans-serif;">Steps</h2>
+        <h2 style="margin-left:20pt"><strong>Steps</strong></h2>
 
         <table class="" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
             <tr style="height: 33pt">
@@ -254,7 +254,7 @@
 
     {{-- START ANNEX --}}
     <div class="m-4">
-        <h2><strong>Annexes</strong></h2>
+        <h2 style="margin-left:20pt"><strong>Annexes</strong></h2>
         @foreach ($annexes as $annex)
             @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
                 <table class="mt-4" style="border-collapse: collapse; margin-left:20pt" cellspacing="0">
