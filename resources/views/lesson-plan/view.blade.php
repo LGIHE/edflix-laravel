@@ -72,8 +72,7 @@
                                         <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
                                     </a>
                                     <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
-                                        {{-- <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download --}}
-                                        <i class="material-icons text-sm">print</i>&nbsp;&nbsp;Print
+                                        <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
                                     </a>
                                 </div>
                                 <div class="col-md-8 d-flex align-items-center">
