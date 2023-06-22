@@ -253,7 +253,7 @@
     </div>
 
     {{-- START ANNEX --}}
-    <div class="m-4 page-break">
+    <div class="m-4">
         <h2><strong>Annexes</strong></h2>
         @foreach ($annexes as $annex)
             @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
