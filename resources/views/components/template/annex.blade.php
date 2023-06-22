@@ -1,4 +1,4 @@
-<div class="">
+<div>
     <h2><strong>Annexes</strong></h2>
     @foreach ($annexes as $annex)
         @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
