@@ -198,6 +198,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#annexes-tab">Annexes</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#comments-tab">Review Comments</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content mt-2">
@@ -547,6 +550,14 @@
                                             </a>
                                         </div>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="comments-tab" role="tabpanel" aria-labelledby="annexes-tab">
+                                <div class="card-body px-0 pb-2">
+                                    <div class="container text-center m-2 p-4">
+                                        <p class="font-weight-bold">No Review Comments Added Yet.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

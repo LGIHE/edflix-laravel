@@ -20,6 +20,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LessonPlanController;
+use App\Http\Controllers\CommentController;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 
 
@@ -101,6 +102,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('delete-lesson-plan/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
 
     Route::get('download-lp/{id}', [LessonPlanController::class, 'downloadLessonPlan'])->name('download.lp');
+
+    //COMMENTS
+	Route::post('add-comment', [CommentController::class, 'addComment'])->name('add.comment');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
