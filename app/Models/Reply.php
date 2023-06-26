@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Reply extends Model
 {
     use HasFactory;
 
@@ -17,10 +17,8 @@ class Comment extends Model
     protected $fillable = [
         'user',
         'lesson_plan',
-        'commentable_type',
-        'commentable',
         'comment',
-        'is_done',
+        'reply',
     ];
 
     /**

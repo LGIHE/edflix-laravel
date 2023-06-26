@@ -105,6 +105,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //COMMENTS
 	Route::post('add-comment', [CommentController::class, 'addComment'])->name('add.comment');
+	Route::get('add-comment-success/{id}', [CommentController::class, 'successAddComment'])->name('add.comment.success');
+	Route::post('add-reply', [CommentController::class, 'addReply'])->name('add.reply');
+	Route::get('add-reply-success/{id}', [CommentController::class, 'successAddReply'])->name('add.reply.success');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');

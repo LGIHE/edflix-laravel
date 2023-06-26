@@ -73,6 +73,11 @@ class UserController extends Controller
         return view('user.update', compact('user', 'schools', 'subjects'));
     }
 
+    public static function findUser($id)
+    {
+        return User::where('id', $id)->first();
+    }
+
     public function updateUser(){
 
         $attributes = request()->validate([

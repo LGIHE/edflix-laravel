@@ -555,9 +555,19 @@
 
                             <div class="tab-pane fade" id="comments-tab" role="tabpanel" aria-labelledby="annexes-tab">
                                 <div class="card-body px-0 pb-2">
-                                    <div class="container text-center m-2 p-4">
-                                        <p class="font-weight-bold">No Review Comments Added Yet.</p>
-                                    </div>
+                                    @if (count($comments) > 0)
+                                        @include('lesson-plan.comments.capsule')
+                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    @else
+                                        <div class="container text-center m-2 p-4">
+                                            <p class="font-weight-bold">No Review Comments Added Yet.</p>
+                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Review Comment
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -771,3 +781,4 @@
 </script>
 
 @include('lesson-plan.step.create')
+@include('lesson-plan.comments.add')

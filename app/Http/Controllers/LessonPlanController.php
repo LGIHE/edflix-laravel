@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App;
+use App\Models\Comment;
+use App\Models\Reply;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\School;
@@ -11,11 +13,8 @@ use App\Models\LessonStep;
 use App\Models\LessonAnnex;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
-use PDF;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
-
-use Barryvdh\DomPDF\Facade\Pdf as Pdfmod;
 
 class LessonPlanController extends Controller
 {
@@ -40,7 +39,9 @@ class LessonPlanController extends Controller
 
     public function getCreate()
     {
-        $teachers = User::all()->where('role', 'Teacher')->sortBy('name');
+        $teachers = User::all()->where('role', 'Teacher')->where('role', 'Facilitator')->sortBy('name');
+        // $teachers = User::whereIn('role', ['Teacher, Facilitator'])->orderByDesc('name')
+        // ->get();
         $schools = School::all();
         $subjects = Subject::all();
 
@@ -106,8 +107,10 @@ class LessonPlanController extends Controller
         $steps = LessonStep::all()->where('lesson_plan', request()->id);
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
+        $comments = Comment::all()->where('lesson_plan', request()->id);
+        $replies = Reply::all()->where('lesson_plan', request()->id);
 
-        return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'));
+        return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes', 'comments', 'replies'));
 
     }
 
@@ -244,7 +247,6 @@ class LessonPlanController extends Controller
             return back()->with('error', 'Action not Authorized. Please contact asministrator.');
         }
     }
-
 
     public function AddStep()
     {

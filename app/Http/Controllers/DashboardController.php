@@ -27,8 +27,11 @@ class DashboardController extends Controller
 
             //Last week days
             $currentDate = Carbon::now();
-            $firstDayOfLastWeek = $currentDate->subWeek()->startOfWeek();
-            $lastDayOfLastWeek = $currentDate->endOfWeek();
+            $currentDate->startOfWeek(Carbon::MONDAY);
+            $previousWeek = $currentDate->subWeek();
+
+            $lastDayOfLastWeek = $previousWeek->endOfWeek();
+            $firstDayOfLastWeek = $lastDayOfLastWeek->copy()->subDays(6);
 
             //Usage Stats
             $logs = Logs::all()->filter(function ($item) use ($firstDayOfWeek, $lastDayOfWeek) {
@@ -66,9 +69,11 @@ class DashboardController extends Controller
             })->count();
 
             if($totalUsageLastWeek != 0){
-                $percentageChangeInUsage = (($totalUsageThisWeek - $totalUsageLastWeek) / $totalUsageLastWeek) * 100;
+                $changeInUsage = (($totalUsageThisWeek - $totalUsageLastWeek) / $totalUsageLastWeek) * 100;
+                $percentageChangeInUsage =  round($changeInUsage, 1);
             }else{
-                $percentageChangeInUsage = $totalUsageThisWeek * 100;
+                $changeInUsage = ($totalUsageLastWeek / $totalUsageThisWeek) * 100;
+                $percentageChangeInUsage =  round($changeInUsage, 1);
             }
 
             // an admin
