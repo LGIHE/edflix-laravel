@@ -47,22 +47,33 @@
                 <p><strong><em>Replies:</em></strong></p>
 
                 @foreach ($replies as $reply)
+                    @php
+                        $replier = App\Http\Controllers\UserController::findUser($reply->user);
+                    @endphp
                     <div class="reply-content">
-                        <p><strong><em>Abigaba Abel (Teacher)</em></strong></p>
-                        <p>Overall, an excellent lesson plan that promotes student engagement and achievement.</p>
+                        <p><strong><em>{{ $replier->name }} ({{ $replier->role }})</em></strong></p>
+                        <p>{{ $reply->reply }}</p>
                     </div>
                 @endforeach
             </div>
         @endif
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-outline-info btn-sm me-md-2" id="reply-show" type="button">Reply</button>
-            <button class="btn btn-outline-success btn-sm me-md-2" type="button">Mark as Done</button>
+            @if($comment->is_done == 0)
+                <button class="btn btn-outline-success btn-sm me-md-2" type="button" id="done-btn" data-value="{{ route('mark.done', $comment->id) }}">Mark as Done</button>
+            @endif
         </div>
     </div>
 </div>
 @endforeach
 
 <script>
+    $(document).on('click', '#done-btn', function(event) {
+        event.preventDefault();
+        let href = $(this).data('value');
+        window.location.assign(href);
+    });
+
     $(document).ready(function() {
         $('#reply-show').click(function() {
             $('#reply-form').show();

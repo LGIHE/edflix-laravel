@@ -73,4 +73,14 @@ class CommentController extends Controller
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan comment has been added successfully');
     }
+
+    public function markDone()
+    {
+        Comment::find(request()->id)->update(['is_done' => 1]);
+        $done = Comment::find(request()->id)->first();
+
+        return redirect()
+            ->route('get.lesson.plan', $done->lesson_plan)
+            ->with('status', 'Comment marked as done');
+    }
 }
