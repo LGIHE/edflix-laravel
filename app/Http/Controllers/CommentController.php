@@ -74,7 +74,7 @@ class CommentController extends Controller
     {
         return redirect()
             ->route('get.lesson.plan', request()->id)
-            ->with('status', 'The lesson plan comment has been added successfully');
+            ->with('status', 'The reply has been added successfully');
     }
 
     public function markDone()
