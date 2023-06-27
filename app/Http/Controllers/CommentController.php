@@ -49,11 +49,14 @@ class CommentController extends Controller
 
     public function addReply()
     {
-        request()->validate([
+        $attributes = request()->validate([
             'reply' => 'required',
         ]);
 
-        $reply = Reply::create(request()->all);
+        $attributes['user'] = request()->user;
+        $attributes['lesson_plan'] = request()->lesson_plan;
+        $attributes['comment'] = request()->comment;
+        $reply = Reply::create($attributes);
 
         $log['message'] = 'Added Comment for Lessonplan with id '. $reply->lesson_plan;
         $log['user_id'] = Auth()->user()->id;

@@ -26,7 +26,7 @@
         <p>{{ $comment->comment }}</p>
 
         <div class="justify-content-md-end" id="reply-form" style="display:none;">
-            <form action="#" id="addCommentForm">
+            <form action="#" id="addReplyForm">
                 @csrf
                 <input type="hidden" name="user" value="{{ auth()->user()->id }}">
                 <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
@@ -51,8 +51,8 @@
                         $replier = App\Http\Controllers\UserController::findUser($reply->user);
                     @endphp
                     <div class="reply-content">
-                        <p><strong><em>{{ $replier->name }} ({{ $replier->role }})</em></strong></p>
-                        <p>{{ $reply->reply }}</p>
+                        <p style="margin-bottom: 0;font-size:15px;"><strong><em>{{ $replier->name }} ({{ $replier->role }})</em></strong></p>
+                        <p style="font-size:14px;">{{ $reply->reply }}</p>
                     </div>
                 @endforeach
             </div>
@@ -82,6 +82,8 @@
         $('#reply-close').click(function() {
             $('#reply-form').hide();
             $('#reply').val('');
+            $(".inputerror").text("");
+            $("#reply").removeClass("is-invalid");
         });
     });
 
