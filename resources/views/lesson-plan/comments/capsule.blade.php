@@ -72,10 +72,9 @@
                 <button type="button" class="btn btn-danger" id="reply-close">Cancel</button>
             </div>
             @if (count($replies) > 0)
+            <a id="show-replies"><p>View Replies</p></a>
+            <a id="hide-replies" style="display:none;"><p>Hide Replies</p></a>
             <hr>
-                <a id="show-replies"><p>View Replies</p></a>
-                <a id="hide-replies" style="display:none;"><p>Hide Replies</p></a>
-
                 <div id="replies" style="display: none;">
                     <p><strong><em>Replies:</em></strong></p>
 
