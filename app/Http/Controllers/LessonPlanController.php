@@ -109,8 +109,9 @@ class LessonPlanController extends Controller
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
         $comments = Comment::all()->where('lesson_plan', request()->id);
         $replies = Reply::all()->where('lesson_plan', request()->id);
+        $logs = Logs::all()->where('message', 'Lessonplan with id '.request()->id.' was updated.');
 
-        return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes', 'comments', 'replies'));
+        return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes', 'comments', 'replies', 'logs'));
 
     }
 

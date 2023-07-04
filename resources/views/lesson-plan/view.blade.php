@@ -201,6 +201,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#comments-tab">Review Comments</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#timeline-tab">Review Timeline</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content mt-2">
@@ -568,6 +571,14 @@
                                             </a>
                                         </div>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="timeline-tab" role="tabpanel" aria-labelledby="annexes-tab">
+                                <div class="card-body px-0 pb-2">
+                                    <div class="container text-center m-2">
+                                        @include('lesson-plan.timeline.view')
+                                    </div>
                                 </div>
                             </div>
                         </div>
