@@ -47,6 +47,22 @@
                             <p class='text-danger font-weight-bold inputerror' id="stepError"></p>
                         </div>
 
+                        <div class="mb-3 col-md-6" style="display:none;" id="step-field">
+                            <label class="form-label">Choose Step Field</label>
+                            <select class="form-select border-2 p-2" name="step_field">
+                                <option value="" selected>Select Field</option>
+                                <option value="Duration">Duration</option>
+                                <option value="Teacher Activity">Teacher Activity</option>
+                                <option value="Student Activity">Student Activity</option>
+                                <option value="Knowledge">Knowledge</option>
+                                <option value="Skills">Skills</option>
+                                <option value="Values">Values</option>
+                                <option value="Output">Output</option>
+                                <option value="Assessment Criteria">Assessment Criteria</option>
+                            </select>
+                            <p class='text-danger font-weight-bold inputerror' id="step_fieldError"></p>
+                        </div>
+
                         <div class="mb-3 col-md-6" style="display:none;" id="annexes">
                             <label class="form-label">Choose Annex</label>
                             <select class="form-select border-2 p-2" name="annex">
@@ -59,7 +75,7 @@
                         </div>
 
                         <div class="mb-3 col-md-6" style="display:none;" id="ple-info">
-                            <label class="form-label">Choose Field</label>
+                            <label class="form-label">Choose Pleriminary Field</label>
                             <select class="form-select border-2 p-2" name="pleriminary">
                                 <option value="" selected>Select Field</option>
                                 <option value="Theme">Theme</option>
@@ -122,6 +138,10 @@
                 $('#annexes').hide();
             }
 
+        });
+
+        $('#steps').change(function() {
+            $('#step-field').show();
         });
     });
 

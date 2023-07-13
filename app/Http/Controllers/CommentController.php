@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\LessonStep;
 use App\Models\Logs;
 use App\Models\Reply;
 use Jenssegers\Agent\Facades\Agent;
@@ -15,15 +16,20 @@ class CommentController extends Controller
             'target' => 'required',
             'pleriminary' => 'required_if:target,pleriminary',
             'step' => 'required_if:target,step',
+            'step_field' => 'required_if:target,step',
             'annex' => 'required_if:target,annex',
             'comment' => 'required'
         ]);
+
+        $step = LessonStep::find(request()->step);
 
         $attributes['user'] = request()->user;
         $attributes['lesson_plan'] = request()->lesson_plan;
         $attributes['commentable_type'] = request()->target;
         $attributes['commentable'] = request()->target == "pleriminary" ? request()->pleriminary
-                                    : (request()->target == "step" ? request()->step : request()->annex);
+                                    : (request()->target == "step" ? $step->step : request()->annex);
+
+        $attributes['step_field'] = request()->step_field;
 
         $attributes['comment'] = request()->comment;
         $comment = Comment::create($attributes);

@@ -46,7 +46,14 @@
                 {{ ucfirst($comment->commentable_type) }} Information
             @else
                 {{ ucfirst($comment->commentable_type) }}
-            @endif - {{ $comment->commentable }}</h6>
+            @endif
+            -
+            @if ($comment->commentable_type == "step")
+                {{ $comment->commentable }} ({{ $comment->step_field }})
+            @else
+                {{ $comment->commentable }}
+            @endif
+        </h6>
         <div class="card-body" style="padding: 0 1.5rem;">
             @php
                 $user = App\Http\Controllers\UserController::findUser($comment->user);
