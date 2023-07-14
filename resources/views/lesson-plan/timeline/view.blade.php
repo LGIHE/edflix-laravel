@@ -131,16 +131,30 @@
             left: -60px;
         }
     }
-    @media(max-width: 440px){
-        .wrapper .center-line,
-        .row section::before,
-        .row section .icon{
-            display: none;
-        }
-        .wrapper .row{
-            margin: 10px 0;
+
+    /* CSS for tablets */
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        .row-2 {
+            margin-left: 1%;
         }
     }
+
+
+    @media screen and (max-width: 790px) {
+        .wrapper .row {
+            margin: 30px 0 3px 50px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .wrapper .center-line {
+            left: 0;
+        }
+        .wrapper .row {
+            margin: 30px 0 3px 30px;
+        }
+    }
+
 </style>
     <div class="wrapper">
         <div class="center-line">
