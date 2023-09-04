@@ -243,12 +243,17 @@
                                                 <div class="col-md-6 d-flex popover-container">
                                                     <p class="text-dark font-weight-bold">Number of learners:</p>&nbsp;
                                                     <p class="text-dark">
-                                                        {{ $lesson->learners_no }}
-                                                        (<strong>Female: </strong>{{ $lesson->female_learners }} <strong>Male: </strong>{{ $lesson->male_learners }})
+                                                        {{ $lesson->female_learners + $lesson->male_learners }}
+                                                        (<strong>F: </strong>{{ $lesson->female_learners }}
+                                                        <a href="#" class="info-popover" data-toggle="popover" data-title="Female Learners" data-comment-lp="{{ $lesson->id }}" data-content="{{ $lesson->female_learners }}" data-comment-type="pleriminary" data-comment-field="Female Learners" data-field-type="number">
+                                                            <i class="fa fa-info-circle" id="female_learners-info"></i>
+                                                        </a>
+                                                        <strong>M: </strong>{{ $lesson->male_learners }}
+                                                        <a href="#" class="info-popover" data-toggle="popover" data-title="Male Learners" data-comment-lp="{{ $lesson->id }}" data-content="{{ $lesson->male_learners }}" data-comment-type="pleriminary" data-comment-field="Male Learners" data-field-type="number">
+                                                            <i class="fa fa-info-circle" id="male_learners-info"></i>
+                                                        </a>
+                                                        )
                                                     </p>&nbsp;
-                                                    {{-- <a href="#" class="info-popover" data-toggle="popover" data-title="Number of Learners" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Number of Learners">
-                                                        <i class="fa fa-info-circle" id="theme-info"></i>
-                                                    </a> --}}
                                                 </div>
                                                 <div class="col-md-6 d-flex popover-container">
                                                     <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
@@ -480,9 +485,11 @@
                                                             <h2 style="margin-left: 20px;"><strong>Annex</strong></h2>
                                                         @endif
                                                     </div>
+                                                    @if(count($annexes) > 1)
                                                     <a class="btn bg-gradient-dark ms-auto" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
                                                         <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
                                                     </a>
+                                                    @endif
                                                 </div>
 
                                                 @foreach ($annexes as $annex)
@@ -657,6 +664,8 @@
             { target: 'pleriminary', commentable: 'Competency', iconSelector: '#competency-info' },
             { target: 'pleriminary', commentable: 'Topic', iconSelector: '#topic-info' },
             { target: 'pleriminary', commentable: 'Theme', iconSelector: '#theme-info' },
+            { target: 'pleriminary', commentable: 'Female Learners', iconSelector: '#female_learners-info' },
+            { target: 'pleriminary', commentable: 'Male Learners', iconSelector: '#male_learners-info' },
             { target: 'pleriminary', commentable: 'Term', iconSelector: '#term-info' },
             { target: 'pleriminary', commentable: 'Learning Outcomes', iconSelector: '#learning_outcomes-info' },
             { target: 'pleriminary', commentable: 'Generic Skills', iconSelector: '#generic_skills-info' },
