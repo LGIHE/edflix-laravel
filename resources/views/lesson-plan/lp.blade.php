@@ -574,6 +574,7 @@
                     <input type="hidden" name="target" value="" class="comment-target">
                     <input type="hidden" name="pleriminary" value="" class="comment-content">
                     <input type="hidden" name="step_field" value="" class="step-field">
+                    <input type="hidden" name="step_no" value="" class="step-no">
                     <input type="hidden" name="annex_field" value="" class="annex-field">
                     <div class="">
                         <label class="form-label comment-label"></label>
@@ -591,7 +592,6 @@
                     <input type="hidden" name="target" value="" class="comment-target">
                     <input type="hidden" name="field" value="" class="comment-field">
                     <input type="hidden" name="step" value="" class="step-field-edit">
-                    <input type="hidden" name="step_no" value="" class="step-no">
                     <input type="hidden" name="annex" value="" class="annex-field-edit">
                     <input type="hidden" class="annex-title">
                     <div class="">

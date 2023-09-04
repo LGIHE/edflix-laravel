@@ -62,7 +62,7 @@
             @endif
             -
             @if ($comment->commentable_type == "step")
-                {{ $comment->commentable }} ({{ $comment->step_field }})
+                {{ $comment->commentable }} ({{ $comment->target_field }})
             @else
                 {{ $comment->commentable }}
             @endif
@@ -82,9 +82,9 @@
                     <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
                     <input type="hidden" name="comment" value="{{ $comment->id }}">
 
-                    <div class="mb-3 col-md-9">
+                    <div class="mb-3">
                         <label class="form-label">Reply</label>
-                        <textarea name="reply" id="reply" cols="10" rows="3" class="form-control border border-2 p-2 w-50"></textarea>
+                        <textarea name="reply" id="reply" cols="10" rows="3" class="form-control border border-2 p-2 w-100"></textarea>
                         <p class='text-danger font-weight-bold inputerror' id="replyError"></p>
                     </div>
                 </form>

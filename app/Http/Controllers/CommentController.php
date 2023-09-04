@@ -28,7 +28,7 @@ class CommentController extends Controller
         $attributes['lesson_plan'] = request()->lesson_plan;
         $attributes['commentable_type'] = request()->target;
         $attributes['commentable'] = request()->target == "pleriminary" ? request()->pleriminary
-                                    : (request()->target == "step" ? request()->step : request()->annex);
+                                    : (request()->target == "step" ? request()->step_no : request()->annex);
 
         $attributes['target_field'] = request()->target == "step" ? request()->step_field : request()->annex_field;
 
