@@ -42,7 +42,7 @@
         border: 1px solid #ccc;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
-        padding: 10px 0;
+        padding: 0 0 10px 0;
     }
 
     .custom-popover::before {
@@ -69,8 +69,8 @@
     }
 
     .info-popover {
-        display: none!important;
-        padding-top: 5px!important;
+        display: none;
+        padding-top: 3px!important;
         color: #1a73e8d1!important;
     }
 
@@ -78,6 +78,57 @@
     .info-popover.show {
         display: inline-block!important;
     }
+
+    .popover {
+        display: none!important;
+    }
+
+    .comments-title {
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .field-comment {
+        font-size: 14px;
+    }
+
+    @keyframes blink {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    .blink {
+        animation: blink 2s infinite;
+    }
+
+    /* @media (min-width: 1024px) {
+        #lesson-plan-tab-1 {
+            max-width: 70%;
+        }
+    } */
+
+    #lesson-plan-tab {
+        /* display: flex; */
+        justify-content: space-between; /* Create space between columns */
+    }
+
+    #lesson-plan-tab > div:nth-child(1) {
+        flex: 3; /* Set the width for the first div */
+    }
+
+    #lesson-plan-tab > div:nth-child(2) {
+        flex: 1; /* Set the width for the second div */
+    }
+
+    #lesson-plan-tab-2 {
+        background: #80808012;
+    }
+
+    #lesson-plan-tab-2 h5 {
+        margin-top: 10px;
+    }
+
 
 </style>
 
@@ -115,275 +166,381 @@
                         </div>
                         @endif
                         <div class="card-header pb-0 p-2 pt-0">
-                            <div class="col-auto text-end">
-                                <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
-                                    <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
-                                </a>
+                            <div class="row">
+                                <div class="me-3 my-3 text-end">
+                                    @if ($lesson->status != 'submitted')
+                                        <a class="btn bg-gradient-success mb-0 end" id="submit-for-review" data-value="{{ $lesson->id }}">
+                                            <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submit for Review
+                                        </a>
+                                    @else
+                                        <a class="btn bg-gradient-secondary mb-0 end disabled">
+                                            <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submitted for Review
+                                        </a>
+                                    @endif
+                                    <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
+                                        <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
                         <div>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#pre-tab">Lesson Plan</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#comments-tab">Review Comments</a>
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#lesson-plan-tab">Lesson Plan</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#timeline-tab">Review Timeline</a>
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="tab-content mt-2">
-                            <div class="tab-pane fade show active" id="pre-tab" role="tabpanel" aria-labelledby="steps-tab">
-                                <div class="card-body px-0 pb-2">
-                                    <div class="m-4">
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex popover-container">
-                                                <p class="text-dark font-weight-bold">School:</p>&nbsp;
-                                                <p class="text-dark">{{ $school->name }}</p>&nbsp;
-                                                <a href="#" data-toggle="popover" data-title="School Name" data-content="No review Comments">
-                                                    <i class="fa fa-info-circle info-popover" id="school-info"></i>
-                                                </a>
+                        <div id="lesson" data-id='{{$lesson->id}}'></div>
+                        <div class="tab-content">
+                            <div class="d-md-flex" id="lesson-plan-tab">
+                                <div class="tab-pane fade show active" id="lesson-plan-tab-1" role="tabpanel" aria-labelledby="steps-tab">
+                                    <div class="card-body px-0 pb-2">
+                                        <div class="m-4 mb-2">
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">School:</p>&nbsp;
+                                                    <p class="text-dark">{{ $school->name }}</p>
+                                                </div>
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Teacher:</p>&nbsp;
+                                                    <p class="text-dark">{{ $owner->name }}</p>&nbsp;
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 d-flex popover-container">
-                                                <p class="text-dark font-weight-bold">Teacher:</p>&nbsp;
-                                                <p class="text-dark">{{ $owner->name }}</p>&nbsp;
-                                                <a href="#" data-toggle="popover" data-title="Teacher" data-content="No review comments.">
-                                                    <i class="fa fa-info-circle info-popover" id="owner-info"></i>
-                                                </a>
+
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Class:</p>&nbsp;
+                                                    <p class="text-dark">{{ $lesson->class }}</p>
+                                                </div>
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Subject:</p>&nbsp;
+                                                    <p class="text-dark">{{ $subject->name }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Topic:</p>&nbsp;
+                                                    <p class="text-dark">{{ $lesson->topic }}</p>&nbsp;
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Topic" data-content="{{ $lesson->topic }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary"  data-comment-field="Topic" data-field-type="text">
+                                                        <i class="fa fa-info-circle" id="topic-info"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Theme:</p>&nbsp;
+                                                    <p class="text-dark">{{ $lesson->theme }}</p>&nbsp;
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Theme" data-content="{{ $lesson->theme }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Theme" data-field-type="text">
+                                                        <i class="fa fa-info-circle" id="theme-info"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Number of learners:</p>&nbsp;
+                                                    <p class="text-dark">
+                                                        {{ $lesson->learners_no }}
+                                                        (<strong>Female: </strong>{{ $lesson->female_learners }} <strong>Male: </strong>{{ $lesson->male_learners }})
+                                                    </p>&nbsp;
+                                                    {{-- <a href="#" class="info-popover" data-toggle="popover" data-title="Number of Learners" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Number of Learners">
+                                                        <i class="fa fa-info-circle" id="theme-info"></i>
+                                                    </a> --}}
+                                                </div>
+                                                <div class="col-md-6 d-flex popover-container">
+                                                    <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
+                                                    <p class="text-dark">{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans() ?? '' }}</p>&nbsp;
+                                                    {{-- <a href="#" class="info-popover" data-toggle="popover" data-title="Duration" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Duration">
+                                                        <i class="fa fa-info-circle" id="duration-info"></i>
+                                                    </a> --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 d-flex popover-container ">
+                                                    <p class="text-dark font-weight-bold">Term:</p>&nbsp;
+                                                    <p class="text-dark">{{ $lesson->term }}</p>&nbsp;
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Term" data-content="{{ $lesson->term }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Term" data-field-type="number">
+                                                        <i class="fa fa-info-circle" id="term-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Class:</p>&nbsp;
-                                                <p class="text-dark">{{ $lesson->class }}</p>
+                                        <div class="m-4 mt-2 text-dark">
+                                            <div class="row align-items-start mt-5 popover-container">
+                                                <div class="col">
+                                                    <strong>Competency: </strong>{{ $lesson->competency }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Competency" data-content="{{ $lesson->competency }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Competency" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="competency-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Subject:</p>&nbsp;
-                                                <p class="text-dark">{{ $subject->name }}</p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Learning Outcomes: </strong>{{ $lesson->learning_outcomes }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Learning Outcomes" data-content="{{ $lesson->learning_outcomes }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Learning Outcomes" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="learning_outcomes-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Topic:</p>&nbsp;
-                                                <p class="text-dark">{{ $lesson->topic }}</p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Generic Skills: </strong>{{ $lesson->generic_skills }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Generic Skills" data-content="{{ $lesson->generic_skills }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Generic Skills" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="generic_skills-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Theme:</p>&nbsp;
-                                                <p class="text-dark">{{ $lesson->theme }}</p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Values: </strong>{{ $lesson->values }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Values" data-content="{{ $lesson->values }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Values">
+                                                        <i class="fa fa-info-circle" id="values-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Number of learners:</p>&nbsp;
-                                                <p class="text-dark">
-                                                    {{ $lesson->learners_no }}
-                                                    (<strong>Female: </strong>{{ $lesson->female_learners }} <strong>Male: </strong>{{ $lesson->male_learners }})
-                                                </p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Cross-cutting Issues: </strong>{{ $lesson->cross_cutting_issues }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Cross-cutting Issues" data-content="{{ $lesson->cross_cutting_issues }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Cross-cutting Issues" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="cross_cutting_issues-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Duration:</p>&nbsp;
-                                                <p class="text-dark">{{ Carbon\CarbonInterval::minutes($duration)->cascade()->forHumans() ?? '' }}</p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Key learning outcomes: </strong>{{ $lesson->key_learning_outcomes }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Key Learning Outcomes" data-content="{{ $lesson->key_learning_outcomes }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Key Learning Outcomes" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="key_learning_outcomes"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex">
-                                                <p class="text-dark font-weight-bold">Term:</p>&nbsp;
-                                                <p class="text-dark">{{ $lesson->term }}</p>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Pre-Requisiste Knowledge: </strong>{{ $lesson->pre_requisite_knowledge }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Pre-Requisite Knowledge" data-content="{{ $lesson->pre_requisite_knowledge }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Pre-Requisite Knowledge" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="pre_requisite_knowledge"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Learning Materials: </strong>{{ $lesson->learning_materials }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Learning Materials" data-content="{{ $lesson->learning_materials }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Learning Materials" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="learning_materials-info"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Learning Methods: </strong>{{ $lesson->learning_methods }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Learning Methods" data-content="{{ $lesson->learning_methods }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Learning Methods" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="learning_methods-info"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>References: </strong>{{ $lesson->references }}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="References" data-content="{{ $lesson->references }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="References" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="references-info"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-start mt-3 popover-container">
+                                                <div class="col">
+                                                    <strong>Activity Aim: </strong>{{ $lesson->activity_aim}}
+                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Activity Aim" data-content="{{ $lesson->activity_aim }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="pleriminary" data-comment-field="Activity Aim" data-field-type="textarea">
+                                                        <i class="fa fa-info-circle" id="activity_aim-info"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="m-4 text-dark">
-                                        <div class="row align-items-start mt-5">
-                                            <div class="col">
-                                                <strong>Competency: </strong>{{ $lesson->competency }}
+                                    <div class="card-body px-0 pb-2">
+                                        @if(count($steps) > 0)
+                                            <div class="d-flex">
+                                                <div>
+                                                    @if(count($steps) > 1)
+                                                        <h2 style="margin-left: 20px;"><strong>Steps</strong></h2>
+                                                    @else
+                                                        <h2 style="margin-left: 20px;"><strong>Step</strong></h2>
+                                                    @endif
+                                                </div>
+                                                <a class="btn bg-gradient-dark ms-auto" data-bs-toggle="modal" data-bs-target="#addStepModal">
+                                                    <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Step
+                                                </a>
                                             </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Learning Outcome: </strong>{{ $lesson->learning_outcomes }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Generic Skills: </strong>{{ $lesson->generic_skills }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Values: </strong>{{ $lesson->values }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Cross-cutting Issues: </strong>{{ $lesson->cross_cutting_issues }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Key learning outcomes: </strong>{{ $lesson->key_learning_outcomes }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Pre-Requisiste Knowledge: </strong>{{ $lesson->pre_requisite_knowledge }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Learning Materials: </strong>{{ $lesson->learning_materials }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3">
-                                            <div class="col">
-                                                <strong>Learning Methods: </strong>{{ $lesson->learning_methods }}
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-start mt-3 ">
-                                            <div class="col">
-                                                <strong>References: </strong>{{ $lesson->references }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card-body px-0 pb-2">
-                                    @if(count($steps) > 0)
-                                        @if(count($steps) > 1)
-                                            <h2 style="margin-left: 20px;"><strong>Steps</strong></h2>
+                                            <div class="table-responsive p-0 mt-3">
+                                                <table class="text-dark" style="border-collapse: collapse; margin-left:15pt; border: 2px solid black;" cellspacing="0">
+                                                    <tr style="height: 33pt">
+                                                        <td class="column" style="width:110pt; border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Duration of activity</strong></p>
+                                                        </td>
+                                                        <td class="column" style="width: 180pt; border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Teacher’s activity</strong></p>
+                                                        </td>
+                                                        <td class="column" style="width: 113pt; border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Students’ activity</strong></p>
+                                                        </td>
+                                                        <td class="column" style="width: 180pt;border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Knowledge, value and skills</strong></p>
+                                                        </td>
+                                                        <td class="column" style="width: 149pt; border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Output</strong></p>
+                                                        </td>
+                                                        <td class="column" style="width: 149pt; border: 1px solid black;">
+                                                            <p class="s2 column-head"><strong>Assessment criteria</strong></p>
+                                                        </td>
+                                                    </tr>
+                                                    @foreach ($steps as $step)
+                                                    <tr class="steps" style="height: 33pt">
+                                                        <td class="column popover-container" style="width:75pt; border: 1px solid black;">
+                                                            <p class="s2 column-head" style="margin-left: 10px;">Step
+                                                                {{ $step->step }}<br>@if($step->duration < 2) - @else{{ Carbon\CarbonInterval::minutes($step->duration)->cascade()->forHumans() ?? '' }}@endif
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Duration" data-content="{{ $step->duration }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Duration" data-field-type="number">
+                                                                    <i class="fa fa-info-circle" id="duration-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                        <td class="column popover-container" style="width: 150pt; border: 1px solid black;">
+                                                            <p class="s2 column-head" style="margin-left: 10px;">{{ $step->teacher_activity }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Teacher Activity" data-content="{{ $step->teacher_activity }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Teacher Activity" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="teacher_activity-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                        <td class="column popover-container" style="width: 113pt; border: 1px solid black;">
+                                                            <p class="s2 column-head" style="margin-left: 10px;">{{ $step->student_activity }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Student Activity" data-content="{{ $step->student_activity }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Student Activity" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="student_activity-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                        <td class="column" style="width: 111pt; border: 1px solid black;">
+                                                            <p class="s2 column-head popover-container" style="margin-left: 10px;">
+                                                                <strong>Knowledge: </strong>{{ $step->knowledge }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Knowledge" data-content="{{ $step->knowledge }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Knowledge" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="knowledge-info-{{$step->id}}"></i>
+                                                                </a><br>
+                                                                <strong>Values: </strong>{{ $step->values }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Values" data-content="{{ $step->values }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Values" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="values-info-{{$step->id}}"></i>
+                                                                </a><br>
+                                                                <strong>Skills: </strong>{{ $step->skills }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Skills" data-content="{{ $step->skills }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Skills" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="skills-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                        <td class="column popover-container" style="width: 149pt; border: 1px solid black;">
+                                                            <p class="s2 column-head" style="margin-left: 10px;">{{ $step->output }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Output" data-content="{{ $step->output }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Output" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="output-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                        <td class="column popover-container" style="width: 149pt; border: 1px solid black;margin-left: 10px;">
+                                                            <p class="s2 column-head">{{ $step->assessment_criteria }}
+                                                                <a href="#" class="info-popover" data-toggle="popover" data-title="Assessment Criteria" data-content="{{ $step->assessment_criteria }}" data-comment-lp="{{ $lesson->id }}" data-comment-type="step" data-step="{{ $step->id }}" data-step-no="{{ $step->step }}" data-comment-field="Assessment Criteria" data-field-type="textarea">
+                                                                    <i class="fa fa-info-circle" id="assessment_criteria-info-{{$step->id}}"></i>
+                                                                </a>
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+
                                         @else
-                                            <h2 style="margin-left: 20px;"><strong>Step</strong></h2>
+                                            <div class="container text-center m-2 p-4">
+                                                <p class="font-weight-bold">No Steps Added Yet.</p>
+
+                                                <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addStepModal">
+                                                    <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Step
+                                                </a>
+                                            </div>
                                         @endif
+                                    </div>
 
-                                        <div class="table-responsive p-0 mt-3">
-                                            <table class="text-dark" style="border-collapse: collapse; margin-left:15pt; border: 2px solid black;" cellspacing="0">
-                                                <tr style="height: 33pt">
-                                                    <td class="column" style="width:110pt; border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Duration of activity</strong></p>
-                                                    </td>
-                                                    <td class="column" style="width: 180pt; border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Teacher’s activity</strong></p>
-                                                    </td>
-                                                    <td class="column" style="width: 113pt; border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Students’ activity</strong></p>
-                                                    </td>
-                                                    <td class="column" style="width: 180pt;border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Knowledge, value and skills</strong></p>
-                                                    </td>
-                                                    <td class="column" style="width: 149pt; border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Output</strong></p>
-                                                    </td>
-                                                    <td class="column" style="width: 149pt; border: 1px solid black;">
-                                                        <p class="s2 column-head"><strong>Assessment criteria</strong></p>
-                                                    </td>
-                                                </tr>
-                                                @foreach ($steps as $step)
-                                                <tr style="height: 33pt">
-                                                    <td class="column" style="width:75pt; border: 1px solid black;">
-                                                        <p class="s2 column-head" style="margin-left: 10px;">Step
-                                                            {{ $step->step }}<br>@if($step->duration < 2) - @else{{ Carbon\CarbonInterval::minutes($step->duration)->cascade()->forHumans() ?? '' }}@endif
-                                                        </p>
-                                                    </td>
-                                                    <td class="column" style="width: 150pt; border: 1px solid black;">
-                                                        <p class="s2 column-head" style="margin-left: 10px;">{{ $step->teacher_activity }}</p>
-                                                    </td>
-                                                    <td class="column" style="width: 113pt; border: 1px solid black;">
-                                                        <p class="s2 column-head" style="margin-left: 10px;">{{ $step->student_activity }}</p>
-                                                    </td>
-                                                    <td class="column" style="width: 111pt; border: 1px solid black;">
-                                                        <p class="s2 column-head" style="margin-left: 10px;">
-                                                            <strong>Knowledge: </strong>{{ $step->knowledge }}<br>
-                                                            <strong>Values: </strong>{{ $step->values }}<br>
-                                                            <strong>Skills: </strong>{{ $step->skills }}
-                                                        </p>
-                                                    </td>
-                                                    <td class="column" style="width: 149pt; border: 1px solid black;">
-                                                        <p class="s2 column-head" style="margin-left: 10px;">{{ $step->output }}</p>
-                                                    </td>
-                                                    <td class="column" style="width: 149pt; border: 1px solid black;margin-left: 10px;">
-                                                        <p class="s2 column-head">{{ $step->assessment_criteria }}</p>
-                                                    </td>
-                                                </tr>
+                                    <div class="card-body px-0 pb-2">
+                                        @if(count($annexes) > 0)
+                                            {{-- <div> --}}
+                                                <div class="d-flex">
+                                                    <div>
+                                                        @if(count($annexes) > 1)
+                                                            <h2 style="margin-left: 20px;"><strong>Annexes</strong></h2>
+                                                        @else
+                                                            <h2 style="margin-left: 20px;"><strong>Annex</strong></h2>
+                                                        @endif
+                                                    </div>
+                                                    <a class="btn bg-gradient-dark ms-auto" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
+                                                        <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
+                                                    </a>
+                                                </div>
+
+                                                @foreach ($annexes as $annex)
+                                                    @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
+                                                        <table class="mt-4 annex" style="border-collapse: collapse; margin-left:20pt; border: 2px black solid" cellspacing="0">
+
+                                                            <tr style="height: 33pt; border: 1px black solid">
+                                                                <td class="column text-dark d-flex popover-container" style="width: 150pt;">
+                                                                    <p class="s2 column-head" style="font-size:20px;">{{ $annex->title }}
+                                                                        <a href="#" class="info-popover" data-toggle="popover" data-title="Annex Title" data-content="{{ $annex->title }}" data-comment-lp="{{ $lesson->id }}" data-annex="{{ $annex->id }}" data-comment-type="annex"  data-comment-field="Title" data-field-type="text" style="font-size:17px;">
+                                                                            <i class="fa fa-info-circle" id="annex_title-info-{{$annex->id}}"></i>
+                                                                        </a>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="height: 33pt">
+                                                                <td class="column popover-container">
+                                                                    <a href="#" class="info-popover" data-toggle="popover" data-title="Annex File" data-content="{{ $annex->annex_file }}" data-comment-lp="{{ $lesson->id }}" data-annex="{{ $annex->id }}" data-annex-title="{{ $annex->title }}" data-comment-type="annex"  data-comment-field="Annex File" data-field-type="file">
+                                                                        <i class="fa fa-info-circle" id="annex_file-info-{{$annex->id}}"></i>
+                                                                    </a>
+                                                                    <img src="{{ url('/annex/' . $annex->annex_file) }}" alt="{{ $annex->title }}" width="600" height="400">
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+                                                        <br>
+                                                    @endif
                                                 @endforeach
-                                            </table>
-                                        </div>
+                                            {{-- </div> --}}
+                                        @else
+                                            <div class="container text-center m-2 p-4">
+                                                <p class="font-weight-bold">No Annexes Added Yet.</p>
 
-                                    @else
-                                        <div class="container text-center m-2 p-4">
-                                            <p class="font-weight-bold">No Steps Added Yet.</p>
+                                                <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
+                                                    <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
 
-                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addStepModal">
-                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Step
-                                            </a>
-                                        </div>
-                                    @endif
                                 </div>
-
-                                <div class="card-body px-0 pb-2">
-                                    @if(count($annexes) > 0)
-                                        {{-- <div> --}}
-                                            @if(count($annexes) > 1)
-                                                <h2 style="margin-left: 20px;"><strong>Annexes</strong></h2>
-                                            @else
-                                                <h2 style="margin-left: 20px;"><strong>Annex</strong></h2>
-                                            @endif
-                                            @foreach ($annexes as $annex)
-                                                @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
-                                                    <table class="mt-4" style="border-collapse: collapse; margin-left:20pt; border: 2px black solid" cellspacing="0">
-
-                                                        <tr style="height: 33pt; border: 1px black solid">
-                                                            <td class="column text-dark" style="width: 150pt;">
-                                                                <p class="s2 column-head" style="font-size:20px;">{{ $annex->title }}</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr style="height: 33pt">
-                                                            <td class="column" style="width: 150pt;">
-                                                                <img src="{{ url('/annex/' . $annex->annex_file) }}" alt="{{ $annex->title }}" width="1000"
-                                                                    height="600">
-                                                            </td>
-                                                        </tr>
-
-                                                    </table>
-                                                    <br>
-                                                @endif
-                                            @endforeach
-                                        {{-- </div> --}}
-                                    @else
-                                        <div class="container text-center m-2 p-4">
-                                            <p class="font-weight-bold">No Annexes Added Yet.</p>
-
-                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
-                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
+                                <div class="d-none d-md-inline-block" id="lesson-plan-tab-2">
+                                    <center><h5>Comments</h5></center>
+                                    <div class="card-body px-0 pb-2">
+                                        @if (count($comments) > 0)
+                                            @include('lesson-plan.comments.comment')
+                                            <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                                <i class="fas fa-plus"></i>
                                             </a>
-                                        </div>
-                                    @endif
-                                </div>
-
-                            </div>
-
-                            <div class="tab-pane fade" id="comments-tab" role="tabpanel" aria-labelledby="annexes-tab">
-                                <div class="card-body px-0 pb-2">
-                                    @if (count($comments) > 0)
-                                        @include('lesson-plan.comments.capsule')
-                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addCommentModal">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                    @else
-                                        <div class="container text-center m-2 p-4">
-                                            <p class="font-weight-bold">No Review Comments Added Yet.</p>
-                                            <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addCommentModal">
-                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Review Comment
-                                            </a>
-                                        </div>
-                                    @endif
+                                        @else
+                                            <div class="container text-center m-2 p-4">
+                                                <p class="font-weight-bold">No Review Comments Added Yet.</p>
+                                                {{-- <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                                    <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Review Comment
+                                                </a> --}}
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
@@ -403,113 +560,540 @@
     </div>
 
     <div class="custom-popover" id="custom-popover">
-        <h5 class="custom-popover-header">Popover Header</h5>
-        <div class="custom-popover-body">Some content inside the popover</div>
-        <div class="popover-btn">
-            <button class="btn btn-info mb-0 comment-button" style="margin-left: 15px;">Comment</button>
-            <button class=" btn btn-success mb-0 edit-button">Edit</button>
+        <div class="custom-popover-header d-flex justify-content-between align-items-center">
+            <h5 class="popover-header"></h5>
+            <a href="#" class="close-popover">X</a>
         </div>
+        <div class="custom-popover-body">
+            <div class="popover-content"></div>
+            <div class="comment-form" style="display:none;">
+                <form method='POST' id="addCommentForm">
+                    @csrf
+                    <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
+                    <input type="hidden" name="user" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="target" value="" class="comment-target">
+                    <input type="hidden" name="pleriminary" value="" class="comment-content">
+                    <input type="hidden" name="step_field" value="" class="step-field">
+                    <input type="hidden" name="annex_field" value="" class="annex-field">
+                    <div class="">
+                        <label class="form-label comment-label"></label>
+                        <textarea name="comment" class="form-control border border-2 p-2 comment-input" cols="30" rows="3"></textarea>
+                        <p class='text-danger font-weight-bold inputerror' id="commentError"></p>
+                    </div>
+                    <button class="btn btn-success submit-comment">Comment <span id="loader"></span></button>
+                    <button class="btn btn-danger cancel-btn">Cancel</button>
+                </form>
+            </div>
+            <div class="edit-form" style="display:none;">
+                <form method='POST' id="editForm">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $lesson->id }}">
+                    <input type="hidden" name="target" value="" class="comment-target">
+                    <input type="hidden" name="field" value="" class="comment-field">
+                    <input type="hidden" name="step" value="" class="step-field-edit">
+                    <input type="hidden" name="step_no" value="" class="step-no">
+                    <input type="hidden" name="annex" value="" class="annex-field-edit">
+                    <input type="hidden" class="annex-title">
+                    <div class="">
+                        <label class="form-label edit-label"></label>
+                        <div class="input-field"></div>
+                        <p class='text-danger font-weight-bold inputerror' id="school_nameError"></p>
+                    </div>
+                    <button class="btn btn-success submit-edit">Edit <span id="loader"></span></button>
+                    <button class="btn btn-danger cancel-btn">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="custom-popover-btn">
+            <button class="btn btn-info mb-0 comment-btn" style="margin-left: 15px;">Comment</button>
+            <button class=" btn btn-success mb-0 edit-btn">Edit</button>
+        </div>
+
     </div>
 
 </x-layout>
 
-<script>
-    document.querySelectorAll('.info-popover').forEach(function (element) {
-        element.addEventListener('click', function (e) {
-            e.preventDefault();
-            var popover = document.querySelector('.custom-popover');
-
-            // Hide any open popover
-            var popover = document.querySelector('.custom-popover');
-            popover.style.display = 'none';
-
-            // Get the title and content from data attributes
-            var title = e.target.parentElement.getAttribute('data-title');
-            var content = e.target.parentElement.getAttribute('data-content');
-
-            // Update the popover content
-            popover.querySelector('.custom-popover-header').innerText = title;
-            // popover.querySelector('.custom-popover-body').innerText = content;
-            popover.querySelector('.custom-popover-body').innerHTML = `
-                <h4>Hello</h4>
-            `;
-
-            // Get the position of the icon
-            var rect = e.target.getBoundingClientRect();
-
-            // Position the popover
-            popover.style.left = rect.right + 'px';
-            popover.style.top = rect.top + 'px';
-
-            // Toggle the display
-            popover.style.display = (popover.style.display === 'block') ? 'none' : 'block';
-
-            // Keep the icon visible
-            e.target.classList.add('show');
-        });
-    });
-
-    // Optional: Hide the popover when clicking outside
-    window.addEventListener('click', function (e) {
-        var popover = document.querySelector('.custom-popover');
-        if (e.target.closest('.info-popover') === null && e.target.closest('.custom-popover') === null) {
-            popover.style.display = 'none';
-        }
-    });
-
-    document.querySelectorAll('.popover-container').forEach(function (element) {
-        element.addEventListener('mouseenter', function (e) {
-            e.preventDefault();
-            var iconLink = e.target.querySelector('.info-popover');
-            iconLink.classList.add('show');
-        })
-
-        element.addEventListener('mouseleave', function (e) {
-            e.preventDefault();
-            var iconLink = e.target.querySelector('.info-popover');
-            var popover = document.querySelector('.custom-popover');
-
-            if (popover.classList.contains('show')) { // Check if the popover has the 'show' class
-                iconLink.classList.add('show');
-            } else {
-                iconLink.classList.remove('show');
-            }
-        })
-
-    })
-
-    document.querySelectorAll('.comment-button').forEach(function(element) {
-        element.addEventListener('click', function(e){
-            e.preventDefault();
-            var popoverContainer = e.target.closest('.custom-popover');
-            var header = popoverContainer.querySelector('.custom-popover-header');
-            popoverContainer.querySelector('.popover-btn').style.display = 'none';
-            popoverContainer.querySelector('.custom-popover-body').innerHTML = `
-                <form>
-                    <div class="">
-                        <label class="form-label">Comment on `+header.innerText+`</label>
-                        <input type="text" name="comment" class="form-control border border-2 p-2">
+<!-- Add Annex Modal -->
+<div class="modal fade" id="addAnnexModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addAnnexModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAnnexModalLabel">Add an Annex</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" id="addAnnexForm" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="lesson_plan" value="{{ $lesson->id }}">
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control border border-2 p-2">
                         <p class='text-danger font-weight-bold inputerror' id="titleError"></p>
                     </div>
-                    <button type="submit" class="btn btn-success btn-update-annex" data-value="{{ $step->id }}">Comment <span id="loader"></span></button>
-                    <button type="button" class="btn btn-danger popover-cancel-comment-btn">Cancel</button>
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Annex File</label>
+                        <input type="file" name="annex_file" class="form-control border border-2 p-2">
+                        <p class='text-danger font-weight-bold inputerror' id="annex_fileError"></p>
+                    </div>
                 </form>
-            `;
-        })
-    });
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success btn-submit" data-value="{{ $lesson->id }}">Add Annex <span id="loader"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    document.querySelectorAll('.edit-button').forEach(function(element) {
-        element.addEventListener('click', function(e){
+<script>
+    $(document).ready(function() {
+        var lesson_id = $('#lesson').attr('data-id');
+        var steps = $('.steps');
+        var annexes = $('.annex');
+
+        // Define an array of fields and their corresponding icon selectors
+        var fields = [
+            { target: 'pleriminary', commentable: 'Competency', iconSelector: '#competency-info' },
+            { target: 'pleriminary', commentable: 'Topic', iconSelector: '#topic-info' },
+            { target: 'pleriminary', commentable: 'Theme', iconSelector: '#theme-info' },
+            { target: 'pleriminary', commentable: 'Term', iconSelector: '#term-info' },
+            { target: 'pleriminary', commentable: 'Learning Outcomes', iconSelector: '#learning_outcomes-info' },
+            { target: 'pleriminary', commentable: 'Generic Skills', iconSelector: '#generic_skills-info' },
+            { target: 'pleriminary', commentable: 'Values', iconSelector: '#values-info' },
+            { target: 'pleriminary', commentable: 'Cross-cutting Issues', iconSelector: '#cross_cutting_issues-info' },
+            { target: 'pleriminary', commentable: 'Key Learning Outcomes', iconSelector: '#key_learning_outcomes' },
+            { target: 'pleriminary', commentable: 'Pre-Requisite Knowledge', iconSelector: '#pre_requisite_knowledge' },
+            { target: 'pleriminary', commentable: 'Learning Materials', iconSelector: '#learning_materials-info' },
+            { target: 'pleriminary', commentable: 'Learning Methods', iconSelector: '#learning_methods-info' },
+            { target: 'pleriminary', commentable: 'References', iconSelector: '#references-info' },
+            { target: 'pleriminary', commentable: 'Activity Aim', iconSelector: '#activity_aim-info' }
+
+        ];
+
+        steps.each(function(){
+            var tds = $(this).find('td');
+            tds.each(function(){
+                var $icon = $(this).find('i.fa-info-circle');
+                var iconId = $icon.attr('id');
+
+                var $step = $(this).find('a.info-popover');
+                var theStep = $step.data('step');
+                var stepCommentField = $step.data('comment-field');
+
+                var stepField = {
+                    target: 'step',
+                    commentable: theStep,
+                    comment_field: stepCommentField,
+                    iconSelector: '#'+iconId
+                }
+
+                // Append the new field object to the existing array
+                fields.push(stepField);
+            })
+        })
+
+        annexes.each(function(){
+            var trs = $(this).find('tr');
+            trs.each(function(){
+                var $icon = $(this).find('i.fa-info-circle');
+                var iconId = $icon.attr('id');
+
+                var $annex = $(this).find('a.info-popover');
+                var theAnnex= $annex.data('annex');
+                var annexCommentField = $annex.data('comment-field');
+
+                var annexField = {
+                    target: 'annex',
+                    commentable: theAnnex,
+                    comment_field: annexCommentField,
+                    iconSelector: '#'+iconId
+                }
+
+                // Append the new field object to the existing array
+                fields.push(annexField);
+            })
+        })
+
+        // Loop through the fields and check for comments for each field
+        fields.forEach(function (field) {
+            // Your existing AJAX code to check for comments
+            $.ajax({
+                url: "{{route('get.field.comments')}}",
+                // url: '/get-field-comments',
+                type: 'GET',
+                data: { lesson: lesson_id, target: field.target, commentable: field.commentable, field: field.comment_field },
+                success: function (comments) {
+                    // Check if comments exist for the current field
+                    var commentsExist = comments.length > 0;
+                    toggleIconBlink(commentsExist, field.iconSelector);
+                },
+                error: function () {
+                    // Call the toggleIconBlink function with false in case of an error
+                    toggleIconBlink(false);
+                }
+            });
+        })
+
+        // Function to toggle the icon-blink class based on comments
+        function toggleIconBlink(commentsExist, iconSelector) {
+            // Check if commentsExist is true, then add the 'blink' class, otherwise, remove it
+            if (commentsExist) {
+                $(iconSelector).addClass('blink');
+                $(iconSelector).parent().css('display', 'inline-block');
+            } else {
+                $(iconSelector).removeClass('blink');
+                $(iconSelector).parent().css('display', 'none');
+            }
+        }
+
+        // Show popover
+        $('.fa-info-circle').click(function(e) {
             e.preventDefault();
-            var popoverContainer = e.target.closest('.custom-popover');
-            var text = popoverContainer.querySelector('.custom-popover-header');
-            console.log('Edit Button for ' + text.innerText + ' clicked');
+            var position = $(this).offset();
+            var title = $(this).parent().attr('data-title');
+            var content = $(this).parent().attr('data-content');
+            var target = $(this).parent().attr('data-comment-type');
+            var lesson = $(this).parent().attr('data-comment-lp');
+            var comment_field = $(this).parent().attr('data-comment-field');
+            var input_name = comment_field.replace(/[\s-]/g, '_').toLowerCase();
+            var input_type = $(this).parent().attr('data-field-type');
+            var theStep = $(this).parent().attr('data-step');
+            var theStepNo = $(this).parent().attr('data-step-no');
+            var theAnnex = $(this).parent().attr('data-annex');
+            var theAnnexTitle = $(this).parent().attr('data-annex-title');
+
+            if($('.custom-popover').css('display') !== 'none'){
+                $('.custom-popover').hide();
+                $('.comment-form').hide();
+                $('.edit-form').hide();
+                $('.popover-content').show();
+                $('.comment-btn, .edit-btn').show();
+                $('.comment-input').val('');
+                $(".inputerror").text("");
+                $("#addCommentForm input").removeClass("is-invalid");
+                $('.input-field').html('');
+            }
+
+            // Set popover header
+            $('.custom-popover .popover-header').text(title);
+
+            $('.edit-btn').attr('data-field-type', input_type);
+
+            // Update the Input Field Type
+            editInputChange(input_type);
+
+            // Set edit content
+            if (target != 'annex'){
+                $('.custom-popover .edit-input').val(content);
+            }
+
+            $('.custom-popover .comment-field').val(input_name);
+
+            // Set the comment and edit labels
+            $('.custom-popover .comment-label').text('Comment on ' + title);
+            $('.custom-popover .edit-label').text('Edit ' + title);
+
+            // Set the comment target and content
+            $('.custom-popover .comment-target').val(target);
+            $('.custom-popover .comment-content').val(comment_field);
+
+            if(target == 'step'){
+                $('.custom-popover .comment-content').attr('name', target);
+                $('.custom-popover .comment-content').val(theStep);
+                $('.custom-popover .step-field').val(comment_field);
+
+                $('.custom-popover .edit-input').attr('name', input_name);
+                $('.custom-popover .step-field-edit').val(theStep);
+                $('.custom-popover .step-no').val(theStepNo);
+            }
+
+            if(target == 'annex'){
+                $('.custom-popover .comment-content').attr('name', target);
+                $('.custom-popover .comment-content').val(theAnnex);
+                $('.custom-popover .annex-field').val(comment_field);
+
+                if(input_name == 'title'){
+                    $('.custom-popover .edit-input').val(content);
+                }
+                    $('.custom-popover .annex-title').attr('name', 'title');
+                    $('.custom-popover .annex-title').val(theAnnexTitle);
+                    $('.custom-popover .edit-input').attr('name', input_name);
+                    $('.custom-popover .annex-field-edit').val(theAnnex);
+
+            }
+
+            $('.custom-popover').css({ top: position.top, left: position.left + 20 }).show();
+
+            // Call the function whenever the window is resized
+            $(window).resize(adjustPopoverPosition);
+
+            // Call the function whenever the popover is shown
+            $('.custom-popover').show(adjustPopoverPosition);
+
+            // Add loading effect
+            $('.popover-content').html('<div class="loading">Loading...</div>');
+
+            // Fetch the comments via AJAX
+            $.ajax({
+                url: "{{route('get.comments')}}",
+                // url: '/get-comments',
+                type: 'GET',
+                data: { lesson: lesson, target: target, content: theStep ? theStep : theAnnex ? theAnnex : comment_field, target_field: comment_field},
+                success: function(comments) {
+                    if (comments.length === 0) {
+                        $('.popover-content').html('<div class="no-comment">No Review Comments</div>');
+                    } else {
+                        var commentHtml = '<span class="comments-title">Comments</span><ul class="field-comments">';
+                        comments.forEach(function(comment) {
+                            commentHtml += '<li class="field-comment">' + comment.comment + ' (<em style="font-size: 12px;font-weight:bold;">'+ comment.username +'</em>)</li>';
+                        });
+                        commentHtml += '</ul>';
+                        $('.popover-content').html(commentHtml);
+                    }
+                },
+                error: function() {
+                    $('.popover-content').html('<div class="error">Error loading comments</div>');
+                }
+            });
+        });
+
+        // Close popover on comment and open comment form
+        $('.comment-btn').click(function() {
+            $('.popover-content').hide();
+            $('.comment-form').show();
+            $('.comment-btn, .edit-btn').hide();
+        });
+
+        // Close popover on edit and open edit form
+        $('.edit-btn').click(function() {
+            $('.popover-content').hide();
+            $('.edit-form').show();
+            $('.comment-btn, .edit-btn').hide();
+
+            if($('.edit-form .edit-input').css('display') == 'none'){
+                editInputChange($(this).attr('data-field-type'));
+            }
+
+        });
+
+        // Cancel and show popover content
+        $('.cancel-btn').click(function(e) {
+            e.preventDefault();
+            $('.comment-form').hide();
+            $('.edit-form').hide();
+            $('.popover-content').show();
+            $('.comment-btn, .edit-btn').show();
+            $(".inputerror").text("");
+            $("#addCommentForm input").removeClass("is-invalid");
+            $('.input-field').html('');
+        });
+
+        // Close popover when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.custom-popover').length && !$(e.target).closest('.fa-info-circle').length) {
+                $('.custom-popover').hide();
+                $('.comment-form').hide();
+                $('.edit-form').hide();
+                $('.popover-content').show();
+                $('.comment-btn, .edit-btn').show();
+                $('.comment-input').val('');
+                $(".inputerror").text("");
+                $("#addCommentForm input").removeClass("is-invalid");
+                $('.input-field').html('');
+            }
+        });
+
+        // Close popover using close button
+        $('.close-popover').click(function(e) {
+            e.preventDefault()
+            $('.custom-popover').hide();
+            $('.comment-form').hide();
+            $('.edit-form').hide();
+            $('.popover-content').show();
+            $('.comment-btn, .edit-btn').show();
+            $('.comment-input').val('');
+            $(".inputerror").text("");
+            $("#addCommentForm input").removeClass("is-invalid");
+            $('.input-field').html('');
+        });
+
+        $('.submit-comment').on('click', function (e) {
+            e.preventDefault();
+
+            let formData = $('#addCommentForm').serializeArray();
+            $(".inputerror").text("");
+            $("#addCommentForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".submit-comment").attr("disabled", 'disabled');
+
+            $.ajax({
+                method: "POST",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: "{{ route('add.comment') }}",
+                data: formData,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".submit-comment").prop("disabled", false);
+                    let goTo = '{{route("add.comment.success",":id")}}';
+                    goTo = goTo.replace(':id', response.id);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".submit-comment").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+        $('.submit-edit').on('click', function (e) {
+            e.preventDefault();
+
+            let formData = $('#editForm').serializeArray();
+            $(".inputerror").text("");
+            $("#editForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".submit-edit").attr("disabled", 'disabled');
+
+            $.ajax({
+                method: "POST",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: "{{ route('update.lesson.plan.field') }}",
+                data: formData,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".submit-comment").prop("disabled", false);
+                    let goTo = '{{ route("update.lesson.plan.field.success", ["id" => ":id", "target" => ":target"]) }}';
+                    goTo = goTo.replace(':id', response.id);
+                    goTo = goTo.replace(':target', response.target);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".submit-comment").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+
+        });
+
+        function adjustPopoverPosition() {
+            var $popover = $('.custom-popover');
+            var popoverWidth = $popover.outerWidth();
+            var popoverHeight = $popover.outerHeight(); // Get popover height
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height(); // Get window height
+            var leftPos = $popover.offset().left;
+            var topPos = $popover.offset().top; // Get popover top position
+
+            // Check if the popover is going out of the right boundary of the viewport
+            if (leftPos + popoverWidth > windowWidth) {
+                $popover.css('left', windowWidth - popoverWidth - 10); // Adjust the left position
+            }
+
+            // Check if the popover is going out of the left boundary of the viewport
+            if (leftPos < 0) {
+                $popover.css('left', 10); // Adjust the left position
+            }
+
+        }
+
+        // Change the input according to field type
+        function editInputChange(input_type){
+            if (input_type == 'textarea')
+            {
+                $('.input-field').append(`<textarea name="value" class="form-control border border-2 p-2 edit-input" cols="30" rows="3"></textarea>`)
+            }
+            else if (input_type == 'text'){
+                $('.input-field').append(`<input type="text" name="value" class="form-control border border-2 p-2 edit-input">`)
+            }
+            else if (input_type == 'file'){
+                $('.input-field').append(`<input type="file" name="value" class="form-control border border-2 p-2 edit-input">`)
+            }
+            else if (input_type == 'number'){
+                $('.input-field').append(`<input type="number" name="value" class="form-control border border-2 p-2 edit-input">`)
+            }
+        }
+
+        $('#submit-for-review').on('click', function(){
+            var lesson_id = $(this).data("value");
+            var url = '{{route("update.status",":id")}}';
+            url = url.replace(':id', lesson_id);
+            window.location.assign(url);
         })
-    });
 
-    document.querySelector('.popover-cancel-comment-btn').addEventListener('click', function(){
-        var popoverContainer = e.target.closest('.custom-popover');
-        popoverContainer.querySelector('.popover-btn').style.display = 'block';
-    });
+        //Add Annex
+        $('.btn-submit').on('click', function (e) {
+            e.preventDefault();
 
+            let formData = new FormData(document.getElementById('addAnnexForm'));
+
+            let lesson_plan_id = $(this).data("value");
+            let url = '{{route("add.annex",":id")}}';
+            url = url.replace(':id', lesson_plan_id);
+
+            $(".inputerror").text("");
+            $("#addAnnexForm input").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".btn-submit").attr("disabled", 'disabled');
+
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+                    let goTo = '{{route("add.annex.success",":id")}}';
+                    goTo = goTo.replace(':id', response.id);
+                    window.location.assign(goTo);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+    });
 </script>
+
+@include('lesson-plan.step.create')

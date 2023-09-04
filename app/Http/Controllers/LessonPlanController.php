@@ -110,6 +110,7 @@ class LessonPlanController extends Controller
         $comments = Comment::all()->where('lesson_plan', request()->id);
         $replies = Reply::all()->where('lesson_plan', request()->id);
         $logs = Logs::all()->where('message', 'Lessonplan with id '.request()->id.' was updated.');
+        // $logs = Logs::all()->where('message', 'LIKE', '%Lessonplan with id '.request()->id.' was updated.');
 
         // return view('lesson-plan.view', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes', 'comments', 'replies', 'logs'));
         return view('lesson-plan.lp', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes', 'comments', 'replies', 'logs'));
@@ -481,6 +482,107 @@ class LessonPlanController extends Controller
 
         return view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 
+    }
+
+    public function updateLessonPlanField()
+    {
+
+        $field = [];
+        if(request()->target == 'pleriminary')
+        {
+            $field[request()->field] = request()->value;
+
+            #Update the lesson plan preliminary info
+            LessonPlan::find(request()->id)->update($field);
+        }
+
+        if(request()->target == 'step')
+        {
+            request()->validate([
+                'step' => 'required',
+            ]);
+
+            #Update the Lesson Plan Step
+            LessonStep::find(request()->step)->fill(request()->except('step'))->save();
+        }
+
+        if(request()->target == 'annex')
+        {
+            $annex = LessonAnnex::find(request()->annex);
+
+            $attributes = request()->validate([
+                'title' => 'required'
+            ]);
+
+            if (request()->hasFile('annex_file')) {
+                request()->validate([
+                    'annex_file' => 'required|mimes:jpg,png,jpeg|max:5120'
+                ]);
+
+                unlink(public_path('annex/' . $annex->annex_file));
+
+                $file = request()->file('annex_file');
+                $mimeType = $file->getMimeType();
+                $file_name = time() . '.' . $file->getClientOriginalExtension();
+
+                if (strpos($mimeType, 'image/') === 0) {
+                    $img = Image::make($file->getRealPath())->resize(800, 600);
+                    $img->save(public_path('annex/' . $file_name));
+                } else {
+                    $file->storeAs(public_path('annex/'), $file_name);
+                }
+
+                $attributes['annex_file'] = $file_name;
+            }
+
+            $attributes['updated_by'] = auth()->user()->id;
+
+            #Update the Lesson Plan Annex
+            $annex->update($attributes);
+        }
+
+        $log_target = request()->target == 'step' ? 'Step ' . request()->step_no . ' for ' :
+            (request()->target == 'annex' ? 'Annex- ' . request()->title . ' for ': ucfirst(request()->field).' for ');
+
+        $target = request()->target == 'step' ? 'Step ' . request()->step_no :
+                    (request()->target == 'annex' ? 'Annex- ' . request()->title : ucfirst(request()->field));
+
+        $log['lesson_plan'] = request()->id;
+        $log['message'] = $log_target . 'Lessonplan with id '. request()->id .' was updated.';
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Updated Lessonplan '.$target;
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
+        return response()->json(['id' => request()->id, 'target' => $log_target]);
+    }
+
+    public function successUpdateLessonPlanFields()
+    {
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The ' . request()->target . ' the lesson plan has been updated successfully');
+    }
+
+    public function updateLessonPlanStatus(){
+        $lp = LessonPlan::find(request()->id);
+
+        // Check if the record exists
+        if (!$lp) {
+            return redirect()
+                ->route('get.lesson.plan', request()->id)
+                ->with('error', 'The lesson plan was not found.');
+        }
+
+        // Update the 'status' field to 'submitted'
+        $lp->update(['status' => 'submitted']);
+
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan has been submitted for review.');
     }
 
 }

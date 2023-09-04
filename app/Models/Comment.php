@@ -19,7 +19,7 @@ class Comment extends Model
         'lesson_plan',
         'commentable_type',
         'commentable',
-        'step_field',
+        'target_field',
         'comment',
         'is_done',
     ];

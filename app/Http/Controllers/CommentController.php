@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\LessonStep;
 use App\Models\Logs;
 use App\Models\Reply;
+use Illuminate\Http\Request;
 use Jenssegers\Agent\Facades\Agent;
 
 class CommentController extends Controller
@@ -27,9 +28,9 @@ class CommentController extends Controller
         $attributes['lesson_plan'] = request()->lesson_plan;
         $attributes['commentable_type'] = request()->target;
         $attributes['commentable'] = request()->target == "pleriminary" ? request()->pleriminary
-                                    : (request()->target == "step" ? $step->step : request()->annex);
+                                    : (request()->target == "step" ? request()->step : request()->annex);
 
-        $attributes['step_field'] = request()->step_field;
+        $attributes['target_field'] = request()->target == "step" ? request()->step_field : request()->annex_field;
 
         $attributes['comment'] = request()->comment;
         $comment = Comment::create($attributes);
@@ -92,4 +93,51 @@ class CommentController extends Controller
             ->route('get.lesson.plan', $done->lesson_plan)
             ->with('status', 'Comment marked as done');
     }
+
+    public function getComments(Request $request)
+    {
+        if($request->target == 'pleriminary')
+        {
+            $comments = Comment::join('users', 'comments.user', '=', 'users.id')
+                            ->where('comments.lesson_plan', $request->lesson)
+                            ->where('comments.commentable_type', $request->target)
+                            ->where('comments.commentable', $request->content)
+                            ->orderBy('comments.created_at', 'desc')
+                            ->select('comments.*', 'users.name as username')
+                            ->get();
+        }
+        else {
+            $comments = Comment::join('users', 'comments.user', '=', 'users.id')
+                            ->where('comments.lesson_plan', $request->lesson)
+                            ->where('comments.commentable_type', $request->target)
+                            ->where('comments.commentable', $request->content)
+                            ->where('comments.target_field', $request->target_field)
+                            ->orderBy('comments.created_at', 'desc')
+                            ->select('comments.*', 'users.name as username')
+                            ->get();
+        }
+
+        return response()->json($comments);
+    }
+
+    public function getFieldComments(Request $request)
+    {
+        if($request->target === 'pleriminary')
+        {
+            $comments = Comment::where('lesson_plan', $request->lesson)
+                                ->where('commentable_type', $request->target)
+                                ->where('commentable', $request->commentable)
+                                ->get();
+        }
+        else {
+            $comments = Comment::where('lesson_plan', $request->lesson)
+                                ->where('commentable_type', $request->target)
+                                ->where('commentable', $request->commentable)
+                                ->where('target_field', $request->field)
+                                ->get();
+        }
+
+        return response()->json($comments);
+    }
+
 }

@@ -99,9 +99,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('lesson-plan/update/{id}', [LessonPlanController::class, 'getLessonPlanUpdate'])->name('get.lesson.plan.update');
 	Route::post('lesson-plan/update/{id}', [LessonPlanController::class, 'updateLessonPlan'])->name('update.lesson.plan');
+	Route::post('lesson-plan/update-field', [LessonPlanController::class, 'updateLessonPlanField'])->name('update.lesson.plan.field');
+	Route::get('lesson-plan/update-field-success/{id}/{target}', [LessonPlanController::class, 'successUpdateLessonPlanFields'])->name('update.lesson.plan.field.success');
 	Route::get('delete-lesson-plan/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
-
     Route::get('download-lp/{id}', [LessonPlanController::class, 'downloadLessonPlan'])->name('download.lp');
+    Route::get('update-lesson-plan-status/{id}', [LessonPlanController::class, 'updateLessonPlanStatus'])->name('update.status');
 
     //COMMENTS
 	Route::post('add-comment', [CommentController::class, 'addComment'])->name('add.comment');
@@ -109,6 +111,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('add-reply', [CommentController::class, 'addReply'])->name('add.reply');
 	Route::get('add-reply-success/{id}', [CommentController::class, 'successAddReply'])->name('add.reply.success');
     Route::get('mark-done/{id}', [CommentController::class, 'markDone'])->name('mark.done');
+    Route::get('get-comments', [CommentController::class, 'getComments'])->name('get.comments');
+    Route::get('get-field-comments', [CommentController::class, 'getFieldComments'])->name('get.field.comments');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
