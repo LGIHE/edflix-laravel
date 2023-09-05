@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EDFLIX-LP</title>
+    <title>ACT NOW-LP</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
@@ -31,8 +31,8 @@
 </head>
 
 <body onload="window.print()">
-    <img class="logo" src="{{ asset('assets/img/logos/EDPLAN.png') }}" width="250" height="75"
-        alt="EDFLIX">
+    <img class="logo" src="{{ asset('assets/img/logos/actnow-logo.png') }}" width="250" height="75"
+        alt="ACT NOW">
 
     <h1 class="lp-heading">Lesson Plan Details</h1>
 
@@ -142,8 +142,8 @@
         <table class="mt-4" style="border-collapse: collapse; border: none;margin-left:20pt" cellspacing="0" cellpadding="0">
             <tr style="border: none;height: 33pt">
                 <td class="column" style="border: none;width:300pt;">
-                    <img class="logo" src="{{ asset('assets') }}/img/logos/EDPLAN.png" width="250" height="75"
-                    alt="EDFLIX">
+                    <img class="logo" src="{{ asset('assets') }}/img/logos/actnow-logo.png" width="250" height="75"
+                    alt="ACT NOW">
                 </td>
                 <td class="column" style="border: none;width: 300pt;">
                     <div class="row align-items-start">
