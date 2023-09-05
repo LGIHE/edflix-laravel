@@ -797,6 +797,13 @@
                 $('.custom-popover .edit-input').val(content);
             }
 
+            if (target == 'annex' && input_type == 'file'){
+                $('.custom-popover .submit-edit').attr('data-file', 'true');
+            }else{
+
+                $('.custom-popover .submit-edit').attr('data-file', 'false');
+            }
+
             $('.custom-popover .comment-field').val(input_name);
 
             // Set the comment and edit labels
@@ -971,7 +978,20 @@
         $('.submit-edit').on('click', function (e) {
             e.preventDefault();
 
-            let formData = $('#editForm').serializeArray();
+            let formData;
+            let content_type;
+            let process_data;
+
+            if($(this).attr('data-file') == 'true'){
+                formData = new FormData(document.getElementById('editForm'));
+                content_type = false;
+                process_data = false;
+            }else{
+                formData = $('#editForm').serializeArray();
+                process_data = true;
+            }
+            console.log(formData)
+
             $(".inputerror").text("");
             $("#editForm input").removeClass("is-invalid");
 
@@ -980,11 +1000,10 @@
 
             $.ajax({
                 method: "POST",
-                headers: {
-                    Accept: "application/json"
-                },
                 url: "{{ route('update.lesson.plan.field') }}",
                 data: formData,
+                contentType: content_type,
+                processData: process_data,
                 success: (response) => {
                     $(".fa-spinner").remove();
                     $(".submit-comment").prop("disabled", false);
