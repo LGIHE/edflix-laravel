@@ -13,7 +13,7 @@
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-transparent" id="sidenav-main">
     <div class="sidenav-header">
-        <img src="{{ asset('assets') }}/img/logos/EDPLAN.png" class="cursor-pointer h-80 w-80" id="iconSidenav" alt="">
+        <img src="{{ asset('assets') }}/img/logos/actnow-logo.png" class="cursor-pointer h-80 w-80" id="iconSidenav" alt="">
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse w-auto max-height-vh-100" id="sidenav-collapse-main">

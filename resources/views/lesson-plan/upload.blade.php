@@ -10,7 +10,7 @@
                 <div class="card card-plain h-100">
                     <div class="card-body p-3">
                         <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-info mb-0" href="{{ asset('assets') }}/download/edflix_lesson_plan.xlsx">
+                            <a class="btn bg-gradient-info mb-0" href="{{ asset('assets') }}/download/act_now_lesson_plan.xlsx">
                                 <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download Example LP
                             </a>
                         </div>

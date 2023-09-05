@@ -39,9 +39,10 @@ class LessonPlanController extends Controller
 
     public function getCreate()
     {
-        $teachers = User::all()->where('role', 'Teacher')->where('role', 'Facilitator')->sortBy('name');
-        // $teachers = User::whereIn('role', ['Teacher, Facilitator'])->orderByDesc('name')
-        // ->get();
+        $teacher = User::where('role', 'Teacher')->orderBy('name');
+        $facilitator = User::where('role', 'Facilitator')->orderBy('name');
+        $teachers = $teacher->union($facilitator)->orderBy('name')->get();
+
         $schools = School::all();
         $subjects = Subject::all();
 
