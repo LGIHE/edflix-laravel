@@ -24,7 +24,9 @@
         "mpdf/mpdf": "^8.0",
         "niklasravnsborg/laravel-pdf": "^4.1",
         "phpoffice/phpword": "^1.0",
+        "setasign/fpdi": "^2.4",
         "silviolleite/laravelpwa": "^2.0",
+        "tecnickcom/tcpdf": "^6.6",
         "thiagoalessio/tesseract_ocr": "^2.12"
     },
     "require-dev": {

@@ -467,21 +467,21 @@ class LessonPlanController extends Controller
         $data['duration'] = $duration;
         $data['annexes'] = $annexes;
 
-        // $pdf = Pdfmod::loadView('components.template.lp', $data);
-        // $pdf->setPaper('a4', 'landscape')->setWarnings(false);
+        $pdf = Pdfmod::loadView('components.template.lp', $data);
+        $pdf->setPaper('a4', 'landscape')->setWarnings(false);
 
-        // return $pdf->download('invoice.pdf');
+        return $pdf->download('lesson_plan.pdf');
 
-        $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
-        $log['user_id'] = Auth()->user()->id;
-        $log['action'] = 'Download Annex';
-        $log['ip_address'] = request()->ip();
-        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
-        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+        // $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
+        // $log['user_id'] = Auth()->user()->id;
+        // $log['action'] = 'Download Annex';
+        // $log['ip_address'] = request()->ip();
+        // $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        // $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
 
-        Logs::create($log);
+        // Logs::create($log);
 
-        return view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+        // return view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
 
     }
 
