@@ -15,6 +15,8 @@ use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
+use Illuminate\Support\Facades\View;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class LessonPlanController extends Controller
 {
@@ -459,29 +461,11 @@ class LessonPlanController extends Controller
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
-        $data['lesson'] = $lesson;
-        $data['subject'] = $subject;
-        $data['owner'] = $owner;
-        $data['school'] = $school;
-        $data['steps'] = $steps;
-        $data['duration'] = $duration;
-        $data['annexes'] = $annexes;
-
-        $pdf = Pdfmod::loadView('components.template.lp', $data);
-        $pdf->setPaper('a4', 'landscape')->setWarnings(false);
-
-        return $pdf->download('lesson_plan.pdf');
-
-        // $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
-        // $log['user_id'] = Auth()->user()->id;
-        // $log['action'] = 'Download Annex';
-        // $log['ip_address'] = request()->ip();
-        // $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
-        // $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
-
-        // Logs::create($log);
-
-        // return view('components.template.lp',compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+        $html = View::make('components.template.lp', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
+        $html2pdf = new Html2Pdf('L', 'A4','en', true, null, array(10, 5, 5, 0));
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->writeHTML($html);
+        $html2pdf->output('lesson_plan.pdf');
 
     }
 
