@@ -62,6 +62,7 @@ class LessonPlanController extends Controller
             'learners_no' => 'required',
             'term' => 'required',
             'theme' => 'required',
+            'competency' => 'required',
             'learning_outcomes' => 'required',
             'generic_skills' => 'required',
             'values' => 'required',
@@ -465,7 +466,7 @@ class LessonPlanController extends Controller
         $html2pdf = new Html2Pdf('L', 'A4','en', true, null, array(10, 5, 5, 0));
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($html);
-        $html2pdf->output('lesson_plan.pdf');
+        $html2pdf->output('lesson_plan.pdf', 'D');
 
         $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
         $log['user_id'] = Auth()->user()->id;

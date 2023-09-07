@@ -112,14 +112,14 @@
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Female Learners</label>
-                                            <input type="number" name="learners_no" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                            <input type="number" name="female_learners" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="female_learnersError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Male Learners</label>
-                                            <input type="number" name="learners_no" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                            <input type="number" name="male_learners" class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="male_learnersError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-3">
