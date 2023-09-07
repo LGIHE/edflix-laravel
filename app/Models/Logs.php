@@ -17,6 +17,7 @@ class Logs extends Model
     protected $fillable = [
         'message',
         'user_id',
+        'lesson_plan',
         'action',
         'ip_address',
         'platform',

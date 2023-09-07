@@ -107,7 +107,7 @@ class LessonPlanController extends Controller
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
         $school = School::find($owner->school);
-        $steps = LessonStep::all()->where('lesson_plan', request()->id);
+        $steps = LessonStep::all()->where('lesson_plan', request()->id)->sortBy('step');
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
         $comments = Comment::all()->where('lesson_plan', request()->id);
@@ -457,7 +457,7 @@ class LessonPlanController extends Controller
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
         $school = School::find($owner->school);
-        $steps = LessonStep::all()->where('lesson_plan', request()->id);
+        $steps = LessonStep::all()->where('lesson_plan', request()->id)->sortBy('step');
         $duration = LessonStep::all()->where('lesson_plan', request()->id)->sum('duration');
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
@@ -466,6 +466,16 @@ class LessonPlanController extends Controller
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($html);
         $html2pdf->output('lesson_plan.pdf');
+
+        $log['message'] = 'Lessonplan with id '. request()->id . ' downloaded';
+        $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->id;
+        $log['action'] = 'Downloaded Lesson Plan';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
 
     }
 
