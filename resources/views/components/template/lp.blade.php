@@ -313,7 +313,8 @@
 </head>
 
 <body>
-    <img class="logo" src="{{asset('assets/img/logos/actnow-logo.png')}}" width="150" height="30" alt="ACT NOW">
+    {{-- <img class="logo" src="{{asset('assets/img/logos/actnow-logo.png')}}" width="150" height="30" alt="ACT NOW"> --}}
+    <img class="logo" src="assets/img/logos/actnow-logo.png" width="150" height="30" alt="ACT NOW">
 
     <h1 class="lp-heading">Lesson Plan Details</h1>
 
@@ -424,8 +425,8 @@
         <table class="mt-4" style="border-collapse: collapse; border: none;margin-left:20pt" cellspacing="0" cellpadding="0">
             <tr style="border: none;height: 33pt">
                 <td class="column" style="border: none;width:200pt;">
-                    <img class="logo" src="{{asset('assets/img/logos/actnow-logo.png')}}" width="150" height="30"
-                    alt="ACT NOW">
+                    {{-- <img class="logo" src="{{asset('assets/img/logos/actnow-logo.png')}}" width="150" height="30" alt="ACT NOW"> --}}
+                    <img class="logo" src="assets/img/logos/actnow-logo.png" width="150" height="30" alt="ACT NOW">
                 </td>
                 <td class="column" style="border: none;width: 300pt;">
                     <div class="row align-items-start">
