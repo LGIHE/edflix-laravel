@@ -458,7 +458,33 @@
                                                                 </a>
                                                             </p>
                                                         </td>
+                                                        <td style="text-align: right;border: 1px solid black;">
+                                                            <a class="" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$step->id}}" title="Delete Step" style="cursor:pointer;">
+                                                                <i class="fa fa-times" style="font-size: 24px; color: red;"></i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
+
+                                                    {{-- Confirm Step Deletion --}}
+                                                    <div class="modal fade" id="deleteModal-{{ $step->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Confirm</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" id="smallBody">
+                                                                    <div class="text-center">
+                                                                        <span class="">Are you sure you want to Delete this Step?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer align-items-center">
+                                                                    <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.step', $step->id) }}">Confirm</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     @endforeach
                                                 </table>
                                             </div>
@@ -496,13 +522,17 @@
                                                     @if (Str::endsWith($annex->annex_file, ['.jpg', '.jpeg', '.png']))
                                                         <table class="mt-4 annex" style="border-collapse: collapse; margin-left:20pt; border: 2px black solid" cellspacing="0">
 
-                                                            <tr style="height: 33pt; border: 1px black solid">
-                                                                <td class="column text-dark d-flex popover-container" style="width: 150pt;">
-                                                                    <p class="s2 column-head" style="font-size:20px;">{{ $annex->title }}
+                                                            <tr style="height: 20pt; border: 1px black solid">
+                                                                <td class="column text-dark d-flex popover-container">
+                                                                    <p class="s2 column-head mt-2" style="font-size:20px;">{{ $annex->title }}
                                                                         <a href="#" class="info-popover" data-toggle="popover" data-title="Annex Title" data-content="{{ $annex->title }}" data-comment-lp="{{ $lesson->id }}" data-annex="{{ $annex->id }}" data-comment-type="annex"  data-comment-field="Title" data-field-type="text" style="font-size:17px;">
                                                                             <i class="fa fa-info-circle" id="annex_title-info-{{$annex->id}}"></i>
                                                                         </a>
                                                                     </p>
+                                                                    <a class="ms-auto mt-2" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$annex->id}}" title="Delete Annex" style="cursor:pointer;">
+                                                                        <i class="material-icons" style="font-size:25px;margin-right:20px;color:red">close</i>
+                                                                        <div class="ripple-container"></div>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                             <tr style="height: 33pt">
@@ -517,6 +547,26 @@
                                                         </table>
                                                         <br>
                                                     @endif
+                                                    <!-- Confirm Annex Delete modal -->
+                                                    <div class="modal fade" id="deleteModal-{{ $annex->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Confirm</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" id="smallBody">
+                                                                    <div class="text-center">
+                                                                        <span class="">Are you sure you want to Delete this Annex?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer align-items-center">
+                                                                    <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.annex', $annex->id) }}">Confirm</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endforeach
                                             {{-- </div> --}}
                                         @else
@@ -654,6 +704,13 @@
 </div>
 
 <script>
+    $(document).on('click', '#del-btn', function(event) {
+        event.preventDefault();
+        $(this).prop("disabled", true);
+        let href = $(this).data('value');
+        window.location.assign(href);
+    });
+
     $(document).ready(function() {
         var lesson_id = $('#lesson').attr('data-id');
         var steps = $('.steps');
