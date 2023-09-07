@@ -223,6 +223,13 @@ class LessonPlanController extends Controller
     {
         $lesson = LessonPlan::find(request()->id);
 
+        if ($lesson->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+                ->route('get.lesson.plan', request()->lesson_plan)
+                ->with('error', 'Unauthorized. Only the owner can delete.');
+        }
+
         if (auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner) {
 
             $lesson->delete();
@@ -257,6 +264,15 @@ class LessonPlanController extends Controller
 
     public function AddStep()
     {
+        $user = LessonPlan::find(request()->lesson_plan);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+                ->route('get.lesson.plan', request()->lesson_plan)
+                ->with('error', 'Unauthorized. Only the owner can add a step.');
+        }
+
         request()->validate([
             'step' => 'required',
         ]);
@@ -285,6 +301,16 @@ class LessonPlanController extends Controller
     public function deleteStep()
     {
         $step = LessonStep::find(request()->id);
+
+        $user = LessonPlan::find($step->lesson_plan);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+                ->route('get.lesson.plan', $step->lesson_plan)
+                ->with('error', 'Unauthorized. Only the owner can delete.');
+        }
+
         $step->delete();
 
         $log['message'] = 'Step deleted for Lessonplan with id '. $step->lesson_plan;
@@ -332,6 +358,14 @@ class LessonPlanController extends Controller
 
     public function addAnnex()
     {
+        $user = LessonPlan::find(request()->lesson_plan);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+                ->route('get.lesson.plan', request()->lesson_plan)
+                ->with('error', 'Unauthorized. Only the owner can add an annex.');
+        }
 
         $attributes = request()->validate([
             'title' => 'required',
@@ -434,6 +468,15 @@ class LessonPlanController extends Controller
     {
         $annex = LessonAnnex::find(request()->id);
 
+        $user = LessonPlan::find($annex->lesson_plan);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+                ->route('get.lesson.plan', $annex->lesson_plan)
+                ->with('error', 'Unauthorized. Only the owner can delete.');
+        }
+
         unlink(public_path('annex/' . $annex->annex_file));
 
         $annex->delete();
@@ -482,6 +525,12 @@ class LessonPlanController extends Controller
 
     public function updateLessonPlanField()
     {
+        $user = LessonPlan::find(request()->id);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return response()->json(['error' => 'Unauthorized. Only the owner can edit.'], 403);
+        }
 
         $field = [];
         if(request()->target == 'pleriminary')

@@ -654,7 +654,7 @@
                     <div class="">
                         <label class="form-label edit-label"></label>
                         <div class="input-field"></div>
-                        <p class='text-danger font-weight-bold inputerror' id="school_nameError"></p>
+                        <p class='text-danger font-weight-bold inputerror' id="editError"></p>
                     </div>
                     <button class="btn btn-success submit-edit">Edit <span id="loader"></span></button>
                     <button class="btn btn-danger cancel-btn">Cancel</button>
@@ -1063,7 +1063,7 @@
                 processData: process_data,
                 success: (response) => {
                     $(".fa-spinner").remove();
-                    $(".submit-comment").prop("disabled", false);
+                    $(".submit-edit").prop("disabled", false);
                     let goTo = '{{ route("update.lesson.plan.field.success", ["id" => ":id", "target" => ":target"]) }}';
                     goTo = goTo.replace(':id', response.id);
                     goTo = goTo.replace(':target', response.target);
@@ -1071,7 +1071,7 @@
                 },
                 error: (response) => {
                     $(".fa-spinner").remove();
-                    $(".submit-comment").prop("disabled", false);
+                    $(".submit-edit").prop("disabled", false);
 
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
@@ -1079,7 +1079,12 @@
                             $("[name='" + key + "']").addClass("is-invalid");
                             $("#" + key + "Error").text(errors[key][0]);
                         });
-                    } else {
+                    }
+                    else if (response.status === 403)
+                    {
+                        $('#editError').text(response.responseJSON.error)
+                    }
+                    else {
                         window.location.reload();
                     }
                 }
