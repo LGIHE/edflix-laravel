@@ -1,3 +1,12 @@
+<style>
+    .toggle-password {
+        cursor: pointer;
+        padding: 0px 10px;
+        border-left: none;
+        font-size: 18px;
+        z-index: 1000;
+    }
+</style>
 <x-layout bodyClass="bg-gray-200">
     <main class="main-content mt-0">
         <div class="page-header align-items-start min-vh-100">
@@ -80,7 +89,10 @@
 
                                     <div class="input-group input-group-outline mt-3">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control" name="password" id="password">
+                                        <span class="input-group-text">
+                                            <i class="toggle-password fa fa-eye"></i>
+                                        </span>
                                     </div>
                                     @error('password')
                                     <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
@@ -111,20 +123,31 @@
 <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#school-records').select2();
-    $('#subject-records').select2();
-});
+    $(document).ready(function() {
+        $('#school-records').select2();
+        $('#subject-records').select2();
+    });
 
-$(function() {
+    $(function() {
 
-    var text_val = $(".input-group input").val();
-    if (text_val === "") {
-    $(".input-group").removeClass('is-filled');
-    } else {
-    $(".input-group").addClass('is-filled');
-    }
-});
+        var text_val = $(".input-group input").val();
+        if (text_val === "") {
+        $(".input-group").removeClass('is-filled');
+        } else {
+        $(".input-group").addClass('is-filled');
+        }
+    });
+
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var passwordField = $("#password");
+        var passwordFieldType = passwordField.attr("type");
+        if (passwordFieldType === "password") {
+            passwordField.attr("type", "text");
+        } else {
+            passwordField.attr("type", "password");
+        }
+    });
 </script>
 @endpush
 </x-layout>

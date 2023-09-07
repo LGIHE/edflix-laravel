@@ -1,3 +1,12 @@
+<style>
+    .toggle-password {
+        cursor: pointer;
+        padding: 0px 10px;
+        border-left: none;
+        font-size: 18px;
+        z-index: 1000;
+    }
+</style>
 <x-layout bodyClass="bg-gray-200">
     <main class="main-content mt-0">
         <div class="page-header align-items-start min-vh-100">
@@ -21,14 +30,20 @@
                                     @enderror
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">New password</label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control password" name="password">
+                                        <span class="input-group-text">
+                                            <i class="toggle-password fa fa-eye"></i>
+                                        </span>
                                     </div>
                                     @error('password')
                                     <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
                                     @enderror
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Confirm New Password</label>
-                                        <input type="password" class="form-control" name="password_confirmation">
+                                        <input type="password" class="form-control password" name="password_confirmation">
+                                        <span class="input-group-text">
+                                            <i class="toggle-password fa fa-eye"></i>
+                                        </span>
                                     </div>
                                     @error('password_confirmation')
                                     <p class='text-danger font-weight-bold inputerror'>{{ $message }} </p>
@@ -48,3 +63,16 @@
     </main>
 
 </x-layout>
+<script>
+
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var passwordField = $(".password");
+        var passwordFieldType = passwordField.attr("type");
+        if (passwordFieldType === "password") {
+            passwordField.attr("type", "text");
+        } else {
+            passwordField.attr("type", "password");
+        }
+    });
+</script>
