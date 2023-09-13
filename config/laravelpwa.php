@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'EDPLAN',
+    'name' => 'ACTNOW',
     'manifest' => [
-        'name' => env('APP_NAME', 'EDPLAN'),
-        'short_name' => 'EDPLAN',
+        'name' => env('APP_NAME', 'ACTNOW'),
+        'short_name' => 'ACTNOW',
         'start_url' => './',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
@@ -59,8 +59,8 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'EDPLAN',
-                'description' => 'Shortcut to EDPLAN',
+                'name' => 'ACTNOW',
+                'description' => 'Shortcut to ACTNOW',
                 'url' => './',
                 'icons' => [
                     "src" => "./images/icons/icon-72.png",
