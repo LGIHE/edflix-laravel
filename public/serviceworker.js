@@ -4,7 +4,7 @@ var filesToCache = [
     '/assets/css/nucleo-icons.css',
     '/assets/img/logos/edflix-favicon.png',
     '/assets/css/material-dashboard.css?v=3.0.0',
-    '/assets/img/logos/EDPLAN.png',
+    '/assets/img/logos/actnow_logo.png',
 
     'https://kit.fontawesome.com/42d5adcbca.js',
     'https://code.jquery.com/jquery-3.3.1.min.js',
