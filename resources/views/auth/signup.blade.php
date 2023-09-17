@@ -12,7 +12,7 @@
         <div class="page-header align-items-start min-vh-100">
             <span class="mask bg-gradient-dark opacity-1"></span>
             <div class="container mt-5">
-                <center><img src="{{ asset('assets') }}/img/logos/actnow-logo.png" alt="ACT NOW" class="m-3 mb-5" width="200"></center>
+                <center><img src="{{ asset('assets') }}/img/logos/actnow-logo.png" alt="ACT Now" class="m-3 mb-5" width="200"></center>
                 <div class="row">
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
                         <div class="card z-index-0 fadeIn3 fadeInBottom">

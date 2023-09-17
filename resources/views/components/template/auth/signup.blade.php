@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>ACT NOW</title>
+<title>ACT Now</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="color-scheme" content="light">
@@ -33,7 +33,7 @@ width: 100% !important;
 <tr>
 <td class="header" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-align: center;">
 <a href="https://lgfug.org/actnow" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none; display: inline-block;">
-ACT NOW
+ACT Now
 </a>
 </td>
 </tr>
@@ -47,7 +47,7 @@ ACT NOW
     <tr>
     <td class="content-cell" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 35px;">
     <h1 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 24px; font-weight: bold; margin-top: 0; text-align: left;">Hello {{ $user->name }}!</h1>
-    <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Thank you for joining ACT NOW. We are excited to have you as part of our community. Get ready to enjoy a wide range of educational videos, resources and collaboration.</p>
+    <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Thank you for joining ACT Now. We are excited to have you as part of our community. Get ready to enjoy a wide range of educational videos, resources and collaboration.</p>
     <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Below are your credentials:</p>
     <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Username:&nbsp; {{ $user->email }}</p>
     {{-- <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Password:&nbsp; {{ $user->pass }}</p> --}}
@@ -70,7 +70,7 @@ ACT NOW
     </table>
     <!-- Footer -->
     <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">If you have any questions or need assistance, feel free to contact our support team. Happy learning!</p>
-    <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Best regards,<br><strong>ACT NOW Team</strong></p>
+    <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; color: #718096; font-size: 16px; line-height: 1.5em; margin-top: 0;">Best regards,<br><strong>ACT Now Team</strong></p>
     </td>
     </tr>
     </table>
