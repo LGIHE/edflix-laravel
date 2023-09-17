@@ -177,9 +177,17 @@
                                             <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submitted for Review
                                         </a>
                                     @endif
-                                    <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
-                                        <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
-                                    </a>
+                                    @if ($lesson->status == 'reviewed')
+                                        <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
+                                            <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
+                                        </a>
+                                    @else
+                                        @if ($lesson->owner == auth()->user()->id || auth()->user()->isAdmin())
+                                            <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
+                                                <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
+                                            </a>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                         </div>

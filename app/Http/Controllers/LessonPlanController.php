@@ -497,6 +497,15 @@ class LessonPlanController extends Controller
 
     public function downloadLessonPlan()
     {
+        $user = LessonPlan::find(request()->id);
+
+        if ($user->owner !== auth()->user()->id && auth()->user()->type == 'teacher')
+        {
+            return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('error', 'Unauthorized. Lesson Plan is still under review and can only be downloaded when approved');
+        }
+
         $lesson = LessonPlan::find(request()->id);
         $subject = Subject::find($lesson->subject);
         $owner = User::find($lesson->owner);
