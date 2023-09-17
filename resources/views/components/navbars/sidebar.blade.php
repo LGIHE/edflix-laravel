@@ -14,7 +14,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-transparent" id="sidenav-main">
     <div class="sidenav-header">
         <a href="{{ route('dashboard') }}">
-            <img src="{{ asset('assets') }}/img/logos/actnow-logo.png" class="cursor-pointer h-80 w-80" id="iconSidenav" alt="">
+            <img src="{{ asset('assets') }}/img/logos/actnow-logo.png" class="cursor-pointer h-90 w-100" id="iconSidenav" alt="">
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
