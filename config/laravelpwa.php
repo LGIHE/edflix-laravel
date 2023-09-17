@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'ACTNOW',
+    'name' => 'ACT Now',
     'manifest' => [
-        'name' => env('APP_NAME', 'ACTNOW'),
-        'short_name' => 'ACTNOW',
+        'name' => env('APP_NAME', 'ACT Now'),
+        'short_name' => 'ACT Now',
         'start_url' => './',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
@@ -59,8 +59,8 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'ACTNOW',
-                'description' => 'Shortcut to ACTNOW',
+                'name' => 'ACT Now',
+                'description' => 'Shortcut to ACT Now',
                 'url' => './',
                 'icons' => [
                     "src" => "./images/icons/icon-72.png",
