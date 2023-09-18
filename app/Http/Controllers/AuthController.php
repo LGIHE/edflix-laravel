@@ -116,17 +116,22 @@ class AuthController extends Controller
 
     public function signUpPost()
     {
+
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'phone' => 'required|numeric|min:10',
-            'location' => 'max:255',
+            'town' => 'required',
+            'district' => 'required',
             'role' => 'required',
             'password' => 'required|min:5|max:255',
             'school' => 'required|numeric',
             'subject_1' => 'required',
+            'subject_2' => 'nulled',
+            'subject_3' => 'nulled',
         ]);
 
+        $attributes['location'] = $attributes['town'].', '.$attributes['district'].', Uganda';
         $attributes['role'] == 'Teacher';
         $attributes['type'] = 'teacher';
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
