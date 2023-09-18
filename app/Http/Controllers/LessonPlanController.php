@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 use Spipu\Html2Pdf\Html2Pdf;
 
 class LessonPlanController extends Controller
@@ -30,13 +31,15 @@ class LessonPlanController extends Controller
             ->orderBy('lesson_plans.created_at', 'asc')
             ->get();
 
+        $subjects = Subject::all();
+
         if (auth()->user()->isAdmin()) {
             $yourLPs = 1;
         } else {
             $yourLPs = LessonPlan::all()->where('owner', auth()->user()->id)->count();
         }
 
-        return view('lesson-plan.index', compact('lessonPlans', 'yourLPs'));
+        return view('lesson-plan.index', compact('lessonPlans', 'yourLPs', 'subjects'));
     }
 
     public function getCreate()
@@ -637,6 +640,68 @@ class LessonPlanController extends Controller
         return redirect()
             ->route('get.lesson.plan', request()->id)
             ->with('status', 'The lesson plan has been submitted for review.');
+    }
+
+    public function filterLessonPlans(Request $request)
+    {
+        $class = $request->input('class');
+        $subject = $request->input('subject');
+        $theme = $request->input('theme');
+        $topic = $request->input('topic');
+        $learning_outcomes = $request->input('learning_outcomes');
+
+        // Build your query based on the selected filters
+        $query = LessonPlan::query();
+
+        if ($class) {
+            $query->where('class', $class);
+        }
+
+        if ($subject) {
+            $query->where('subject', $subject);
+        }
+
+        if ($theme) {
+            $query->where('theme', $theme);
+        }
+
+        if ($topic) {
+            $query->where('topic', $topic);
+        }
+
+        if ($learning_outcomes) {
+            $query->where('learning_outcomes', $learning_outcomes);
+        }
+
+        $lessonPlans = $query->get();
+
+        // Iterate through the results and retrieve the subject name
+        foreach ($lessonPlans as $lessonPlan) {
+            // Add the subject name to the lessonPlan object
+            $subjectId = $lessonPlan->subject;
+            $subject = Subject::find($subjectId);
+            $lessonPlan->subject = $subject->id ? $subject->name : 'N/A';
+
+            // Add the owner name to the lessonPlan object
+            $ownerId = $lessonPlan->owner;
+            $owner = User::find($ownerId);
+            $lessonPlan->owner = $owner->id ? $owner->name : 'N/A';
+
+            // Add the school name to the lessonPlan object
+            $schoolId = $lessonPlan->school;
+            $school = School::find($schoolId);
+            $lessonPlan->school = $school->id ? $school->name : 'N/A';
+
+            // Get the duration from the steps
+            $lessonPlan->duration = LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration');
+
+            $lessonPlan->visibility = $lessonPlan->visibility == 1 ? 'Yes' : 'No';
+
+            // Make the status first letter uppercase
+            $lessonPlan->status = ucfirst($lessonPlan->status);
+        }
+
+        return response()->json($lessonPlans);
     }
 
 }

@@ -1,3 +1,12 @@
+<style>
+    @media only screen and (max-width: 600px)
+    {
+        .filter-submit-btn {
+            width: 100%;
+        }
+    }
+</style>
+
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
     <x-navbars.sidebar activePage="lesson-plans"></x-navbars.sidebar>
@@ -42,11 +51,68 @@
                             </div>
                         </div>
                         @endif
-                        <div class="card-body px-0 pb-2">
+                        <div class="card-body pb-2">
+                            <div class="filters">
+                                <div class="ml-4 mb-3 text-dark text-bold">
+                                    <span >Filter the Lesson Plans</span>
+                                </div>
+                                <form method="GET" action="{{ route('filter.lesson.plans') }}" class="form-inline" id="filter-form">
+                                    @csrf
+                                    <div class="row ml-4 mb-3">
+                                        <div class="col-md-2">
+                                            <label for="class">Class</label>
+                                            <select name="class" id="class" class="form-select px-3">
+                                                <option value="">Select Class</option>
+                                                <option value="S1">Senior One</option>
+                                                <option value="S2">Senior Two</option>
+                                                <option value="S3">Senior Three</option>
+                                                <option value="S4">Senior Four</option>
+                                                <option value="S5">Senior Five</option>
+                                                <option value="S6">Senior Six</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="subject">Subject</label>
+                                            <select name="subject" id="subject" class="form-select px-3">
+                                                <option value="">Select Subject</option>
+                                                @foreach($subjects as $subject)
+                                                <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="theme">Theme</label>
+                                            <select name="theme" id="theme" class="form-select px-3">
+                                                <option value="">Select Theme</option>
+                                                <!-- Populate theme options dynamically if needed -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="topic">Topic</label>
+                                            <select name="topic" id="topic" class="form-select px-3">
+                                                <option value="">Select Topic</option>
+                                                <!-- Populate topic options dynamically if needed -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="learning_outcomes">Key Learning Outcomes</label>
+                                            <select name="learning_outcomes" id="learning_outcomes" class="form-select px-2">
+                                                <option value="">Select Learning Outcome</option>
+                                                <!-- Populate key learning outcomes options dynamically if needed -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="" style="color: transparent;">Search</label>
+                                            <button type="submit" class="btn btn-primary filter-submit-btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
                             @if (count($lessonPlans) > 0)
                                 @if ($yourLPs > 0)
                                 <div class="table-responsive p-0">
-                                    <table class="table align-items-center mb-0" id="table">
+                                    <table class="table align-items-center mb-0" id="lp-table">
                                         <thead>
                                             <tr>
                                                 <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
@@ -59,10 +125,10 @@
                                                 <th class="text-secondary text-xxl font-weight-bolder">Public</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">School</th>
-                                                <th class="text-secondary"></th>
+                                                <th class="text-secondary">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="lp-table-body">
                                         @foreach ($lessonPlans as $lessonPlan)
                                             <tr>
                                                 <td>
@@ -151,6 +217,9 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="spinner-border text-dark" role="status" id="loading-spinner" style="display: none;">
+                                    {{-- <span class="sr-only">Loading...</span> --}}
+                                </div>
                                 @else
                                 <div class="container text-center mt-2 pt-5">
                                     <h4 class="font-weight-bold">Add a lesson plan to view others.</h4>
@@ -180,6 +249,62 @@
         window.location.assign(url);
     });
 
+    $(document).ready(function() {
+        $('#lp-table').DataTable({
+            dom: 'Bflrtip',
+            pageLength: 10,
+            buttons: [],
+            columnDefs: [{
+                "defaultContent": "",
+                "targets": "_all"
+            }]
+        });
+        $('#lp-table td .d-flex').css('white-space','initial');
+    });
+
+    $(document).ready(function () {
+        $('#filter-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+            $('#loading-spinner').show(); // Show the loading spinner
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('filter.lesson.plans') }}",
+                data: formData,
+                dataType: 'json', // Assume the response is in JSON format
+                success: function (data) {
+                    // Refresh the DataTable instance
+                    var lpDataTable = $('#lp-table').DataTable();
+                    lpDataTable.clear().draw();
+                    lpDataTable.rows.add(data).draw();
+
+                    if(data.length > 0){
+                        // Get the Handlebars template
+                        var template = Handlebars.compile($('#lesson-plan-template').html());
+
+                        // Generate HTML for each row and append it to the table body
+                        var html = '';
+                        data.forEach(function (lessonPlan) {
+                            html += template(lessonPlan);
+                        });
+
+                        $('#lp-table-body').html(html); // Update the table body with new data
+                    }
+                    $('#loading-spinner').hide(); // Hide the loading spinner
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    // Handle errors if needed
+                }
+            });
+        });
+    });
 
 </script>
 
+<script id="lesson-plan-template" type="text/x-handlebars-template">
+    @include('lesson-plan/row')
+</script>

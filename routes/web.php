@@ -70,6 +70,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('upload-lesson-plan', [LessonPlanController::class, 'getUploadLessonPlan'])->name('get.upload.lesson.plan');
 	Route::post('upload-lesson-plan', [LessonPlanController::class, 'uploadLessonPlan'])->name('upload.lesson.plan');
 
+	Route::get('filter-lesson-plans', [LessonPlanController::class, 'filterLessonPlans'])->name('filter.lesson.plans');
+
     Route::get('lp-image', function ()
         {
             $tesseract = new TesseractOCR(public_path('annex/image.jpeg'));
