@@ -26,7 +26,7 @@
     </td>
     <td>
         <div class="d-flex flex-column justify-content-center">
-            <p class="text-m text-dark font-weight-bold mb-0">@{{ duration }}</p>
+            <p class="text-m text-dark font-weight-bold mb-0">@{{ duration }}'</p>
         </div>
     </td>
     <td>

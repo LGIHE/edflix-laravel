@@ -60,6 +60,15 @@
                                     @csrf
                                     <div class="row ml-4 mb-3">
                                         <div class="col-md-2">
+                                            <label for="subject">Subject</label>
+                                            <select name="subject" id="subject" class="form-select px-3">
+                                                <option value="">Select Subject</option>
+                                                @foreach($subjects as $subject)
+                                                <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
                                             <label for="class">Class</label>
                                             <select name="class" id="class" class="form-select px-3">
                                                 <option value="">Select Class</option>
@@ -69,15 +78,6 @@
                                                 <option value="S4">Senior Four</option>
                                                 <option value="S5">Senior Five</option>
                                                 <option value="S6">Senior Six</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="subject">Subject</label>
-                                            <select name="subject" id="subject" class="form-select px-3">
-                                                <option value="">Select Subject</option>
-                                                @foreach($subjects as $subject)
-                                                <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
-                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-2">
