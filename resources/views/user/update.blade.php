@@ -119,7 +119,7 @@
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label subject-3">Subject 3</label>
-                                            <select class="form-select" name="subject_3" aria-label="">
+                                            <select class="form-select border-2 p-2" name="subject_3" aria-label="">
                                                 <option value="" selected>Select Subject</option>
                                                 @foreach($subjects as $subject)
                                                 <option value="{!! $subject->id !!}" @if($subject->id == $user->subject_3) {{'selected'}} @endif>{!! $subject->name !!}</option>

@@ -327,8 +327,7 @@
                 success: (response) => {
                     $(".fa-spinner").remove();
                     $(".btn-submit").prop("disabled", false);
-                    let url = '{{route("signup")}}';
-                    url = url.replace(':id', response.id);
+                    let url = '{{route("signup.success")}}';
                     window.location.assign(url);
                 },
                 error: (response) => {
@@ -341,8 +340,6 @@
                             $("[name='" + key + "']").addClass("is-invalid");
                             $("#" + key + "Error").text(errors[key][0]);
                         });
-                    } else {
-                        window.location.reload();
                     }
                 }
             })
@@ -368,12 +365,13 @@
                             <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
                             @endforeach
                         </select>
+                        <p class='text-danger font-weight-bold inputerror' id="subject_`+subjectCount+`Error"></p>
                     </div>
-                    <p class='text-danger font-weight-bold inputerror' id="subject_`+subjectCount+`Error"></p>
                 `;
 
                 // Create a remove button for the new subject field
-                var removeButton = $("<button>").text("Remove").addClass("btn btn-danger mt-2");
+                var removeButton = $("<button>").text("Remove Subject").addClass("btn btn-danger mt-2");
+
                 removeButton.click(function() {
                     $(this).prev().remove(); // Remove the select element
                     $(this).remove(); // Remove the remove button

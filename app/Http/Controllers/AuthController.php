@@ -127,8 +127,8 @@ class AuthController extends Controller
             'password' => 'required|min:5|max:255',
             'school' => 'required|numeric',
             'subject_1' => 'required',
-            'subject_2' => 'nulled',
-            'subject_3' => 'nulled',
+            'subject_2' => 'nullable',
+            'subject_3' => 'nullable',
         ]);
 
         $attributes['location'] = $attributes['town'].', '.$attributes['district'].', Uganda';
@@ -150,8 +150,13 @@ class AuthController extends Controller
 
         Logs::create($log);
 
-        return view('auth.success');
+        return response()->json(['success' => True]);
 
+    }
+
+    public function signUpSuccess()
+    {
+        return view('auth.success');
     }
 
 }
