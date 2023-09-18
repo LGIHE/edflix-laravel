@@ -115,10 +115,10 @@
                                     <table class="table align-items-center mb-0" id="lp-table">
                                         <thead>
                                             <tr>
-                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Subject</th>
-                                                <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Class</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Status</th>
@@ -132,23 +132,23 @@
                                         @foreach ($lessonPlans as $lessonPlan)
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex flex-column justify-content-center px-2">
-                                                        <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
-                                                    </div>
-                                                </td>
-                                                <td>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column justify-content-center px-2">
+                                                        <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->class }}</span>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->topic }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
