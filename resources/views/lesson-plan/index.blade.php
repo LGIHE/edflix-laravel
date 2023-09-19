@@ -68,9 +68,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-1">
                                             <label for="class">Class</label>
-                                            <select name="class" id="class" class="form-select px-3">
+                                            <select name="class" id="class" class="form-select px-1">
                                                 <option value="">Select Class</option>
                                                 <option value="S1">Senior One</option>
                                                 <option value="S2">Senior Two</option>
@@ -78,6 +78,15 @@
                                                 <option value="S4">Senior Four</option>
                                                 <option value="S5">Senior Five</option>
                                                 <option value="S6">Senior Six</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="term">Term</label>
+                                            <select name="term" id="term" class="form-select px-1">
+                                                <option value="">Select Term</option>
+                                                <option value="1">Term One</option>
+                                                <option value="2">Term Two</option>
+                                                <option value="3">Term Three</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">

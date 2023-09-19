@@ -646,6 +646,7 @@ class LessonPlanController extends Controller
     {
         $class = $request->input('class');
         $subject = $request->input('subject');
+        $term = $request->input('term');
         $theme = $request->input('theme');
         $topic = $request->input('topic');
         $learning_outcomes = $request->input('learning_outcomes');
@@ -659,6 +660,10 @@ class LessonPlanController extends Controller
 
         if ($subject) {
             $query->where('subject', $subject);
+        }
+
+        if ($term) {
+            $query->where('term', $term);
         }
 
         if ($theme) {
