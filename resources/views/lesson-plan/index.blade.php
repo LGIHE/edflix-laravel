@@ -1,4 +1,42 @@
 <style>
+    .filter-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(221, 218, 218, 0.7); /* Background color with 0.7 opacity */
+        z-index: 1; /* Ensure it's above the table content */
+        display: none;
+    }
+
+    /* Style for the table container */
+    .table-container {
+        position: relative;
+        width: 100%;
+        /* Add any other styling for the container as needed */
+    }
+
+    /* Style for the loading spinner */
+    .loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #3498db; /* Change to your desired spinner color */
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite; /* Animation for spinning */
+    }
+
+    /* Keyframes animation for spinning */
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
     @media only screen and (max-width: 600px)
     {
         .filter-submit-btn {
@@ -112,7 +150,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <label for="" style="color: transparent;">Search</label>
-                                            <button type="submit" class="btn btn-primary filter-submit-btn">Search</button>
+                                            <button type="submit" class="btn btn-primary filter-submit-btn">Search <span id="loader"></span></button>
                                         </div>
                                     </div>
                                 </form>
@@ -120,7 +158,7 @@
 
                             @if (count($lessonPlans) > 0)
                                 @if ($yourLPs > 0)
-                                <div class="table-responsive p-0">
+                                <div class="table-responsive p-0 table-container">
                                     <table class="table align-items-center mb-0" id="lp-table">
                                         <thead>
                                             <tr>
@@ -174,7 +212,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ ucfirst(trans($lessonPlan->status)) }}</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->status == 'init' ? 'Edit' : ucfirst(trans($lessonPlan->status)) }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -225,9 +263,9 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="spinner-border text-dark" role="status" id="loading-spinner" style="display: none;">
-                                    {{-- <span class="sr-only">Loading...</span> --}}
+                                    <div class="filter-overlay">
+                                        <div class="loading-spinner"></div>
+                                    </div>
                                 </div>
                                 @else
                                 <div class="container text-center mt-2 pt-5">
@@ -274,7 +312,9 @@
     $(document).ready(function () {
         $('#filter-form').on('submit', function (e) {
             e.preventDefault(); // Prevent form submission
-            $('#loading-spinner').show(); // Show the loading spinner
+            $('.filter-overlay').show();
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>'); // Show the button loading spinner
+            $(".btn-submit").attr("disabled", 'disabled'); // Disable button
 
             // Serialize the form data
             var formData = $(this).serialize();
@@ -285,6 +325,9 @@
                 data: formData,
                 dataType: 'json', // Assume the response is in JSON format
                 success: function (data) {
+                    $('.filter-overlay').hide();
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
                     // Refresh the DataTable instance
                     var lpDataTable = $('#lp-table').DataTable();
                     lpDataTable.clear().draw();
@@ -302,10 +345,12 @@
 
                         $('#lp-table-body').html(html); // Update the table body with new data
                     }
-                    $('#loading-spinner').hide(); // Hide the loading spinner
                 },
                 error: function (xhr, status, error) {
-                    console.error(error);
+                    $('.filter-overlay').hide();
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+                    // console.error(error);
                     // Handle errors if needed
                 }
             });
