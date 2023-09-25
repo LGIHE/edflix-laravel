@@ -726,7 +726,6 @@
 
         // When the "Review Timeline" tab is clicked
         $("a[href='#timeline-tab']").on("click", function () {
-            // $("#lesson-plan-tab").addClass('hide-content');
             $("#lesson-plan-tab").attr("style", "display: none!important");
         });
     });
