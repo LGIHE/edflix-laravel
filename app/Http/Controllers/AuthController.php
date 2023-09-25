@@ -46,7 +46,8 @@ class AuthController extends Controller
 
         Logs::create($log);
 
-        return redirect('/dashboard');
+        // return redirect('/dashboard');
+        return redirect()->route('dashboard');
 
     }
 
@@ -85,8 +86,12 @@ class AuthController extends Controller
             }
         );
 
+        if (auth()->check()) {
+            // User is authenticated, so it's safe to access the id property.
+            $log['user_id'] = auth()->user()->id;
+        }
+
         $log['message'] = 'User Reset Password';
-        $log['user_id'] = Auth()->user()->id;
         $log['action'] = 'Reset Password';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
