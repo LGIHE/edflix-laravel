@@ -129,7 +129,6 @@
         margin-top: 10px;
     }
 
-
 </style>
 
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
@@ -204,8 +203,8 @@
                         </div>
                         <div id="lesson" data-id='{{$lesson->id}}'></div>
                         <div class="tab-content">
-                            <div class="d-md-flex" id="lesson-plan-tab">
-                                <div class="tab-pane fade show active" id="lesson-plan-tab-1" role="tabpanel" aria-labelledby="steps-tab">
+                            <div id="lesson-plan-tab" class="d-md-flex tab-pane fade show active" role="tabpanel" aria-labelledby="lesson-plan-tab">
+                                <div id="lesson-plan-tab-1">
                                     <div class="card-body px-0 pb-2">
                                         <div class="m-4 mb-2">
                                             <div class="row">
@@ -609,7 +608,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="timeline-tab" role="tabpanel" aria-labelledby="annexes-tab">
+                            <div class="tab-pane fade" id="timeline-tab" role="tabpanel" aria-labelledby="timeline-tab">
                                 <div class="card-body px-0 pb-2">
                                     <div class="container text-center m-2">
                                         @include('lesson-plan.timeline.view')
@@ -617,7 +616,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -717,6 +715,20 @@
         $(this).prop("disabled", true);
         let href = $(this).data('value');
         window.location.assign(href);
+    });
+
+    $(document).ready(function () {
+
+        // When the "Lesson Plan" tab is clicked
+        $("a[href='#lesson-plan-tab']").on("click", function () {
+            $("#lesson-plan-tab").removeAttr("style");
+        });
+
+        // When the "Review Timeline" tab is clicked
+        $("a[href='#timeline-tab']").on("click", function () {
+            // $("#lesson-plan-tab").addClass('hide-content');
+            $("#lesson-plan-tab").attr("style", "display: none!important");
+        });
     });
 
     $(document).ready(function() {
