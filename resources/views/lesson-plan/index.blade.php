@@ -94,7 +94,7 @@
                                 <div class="ml-4 mb-3 text-dark text-bold">
                                     <span >Filter the Lesson Plans</span>
                                 </div>
-                                <form method="GET" action="{{ route('filter.lesson.plans') }}" class="form-inline" id="filter-form">
+                                <form method="GET" class="form-inline" id="filter-form">
                                     @csrf
                                     <div class="row ml-4 mb-3">
                                         <div class="col-md-2">
@@ -106,7 +106,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <label for="class">Class</label>
                                             <select name="class" id="class" class="form-select px-1">
                                                 <option value="">Select Class</option>
@@ -118,7 +118,7 @@
                                                 <option value="S6">Senior Six</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <label for="term">Term</label>
                                             <select name="term" id="term" class="form-select px-1">
                                                 <option value="">Select Term</option>
@@ -148,6 +148,23 @@
                                                 <!-- Populate key learning outcomes options dynamically if needed -->
                                             </select>
                                         </div>
+
+                                    </div>
+
+                                    <div class="row ml-4 mb-3">
+                                        @if (auth()->user()->isAdmin())
+                                        <div class="col-md-2">
+                                            <label for="status">Status</label>
+                                            <select name="status" id="status" class="form-select px-3">
+                                                <option value="">Select Status</option>
+                                                <option value="edit">Edit</option>
+                                                <option value="submitted">Submitted</option>
+                                                <option value="reviewed">Reviewed</option>
+                                                <option value="approved">Approved</option>
+                                            </select>
+                                        </div>
+                                        @endif
+
                                         <div class="col-md-1">
                                             <label for="" style="color: transparent;">Search</label>
                                             <button type="submit" class="btn btn-primary filter-submit-btn">Search <span id="loader"></span></button>

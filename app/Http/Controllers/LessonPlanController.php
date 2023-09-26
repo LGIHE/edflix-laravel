@@ -851,6 +851,7 @@ class LessonPlanController extends Controller
         $theme = $request->input('theme');
         $topic = $request->input('topic');
         $learning_outcomes = $request->input('learning_outcomes');
+        $status = $request->input('status');
 
         // Build your query based on the selected filters
         $query = LessonPlan::query();
@@ -877,6 +878,10 @@ class LessonPlanController extends Controller
 
         if ($learning_outcomes) {
             $query->where('learning_outcomes', $learning_outcomes);
+        }
+
+        if ($status) {
+            $query->where('status', $status);
         }
 
         $lessonPlans = $query->get();
