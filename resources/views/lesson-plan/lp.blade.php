@@ -167,14 +167,16 @@
                         <div class="card-header pb-0 p-2 pt-0">
                             <div class="row">
                                 <div class="me-3 my-3 text-end">
-                                    @if ($lesson->status != 'submitted')
-                                        <a class="btn bg-gradient-success mb-0 end" id="submit-for-review" data-value="{{ $lesson->id }}">
-                                            <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submit for Review
-                                        </a>
-                                    @else
-                                        <a class="btn bg-gradient-secondary mb-0 end disabled">
-                                            <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submitted for Review
-                                        </a>
+                                    @if ($lesson->owner == auth()->user()->id || auth()->user()->isAdmin())
+                                        @if ($lesson->status != 'submitted')
+                                            <a class="btn bg-gradient-success mb-0 end" id="submit-for-review" data-value="{{ $lesson->id }}">
+                                                <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submit for Review
+                                            </a>
+                                        @else
+                                            <a class="btn bg-gradient-secondary mb-0 end disabled">
+                                                <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submitted for Review
+                                            </a>
+                                        @endif
                                     @endif
                                     @if ($lesson->status == 'reviewed')
                                         <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">

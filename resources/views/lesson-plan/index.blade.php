@@ -148,7 +148,6 @@
                                                 <!-- Populate key learning outcomes options dynamically if needed -->
                                             </select>
                                         </div>
-
                                     </div>
 
                                     <div class="row ml-4 mb-3">
@@ -256,7 +255,6 @@
                                             </tr>
 
                                             <!-- School Update Modal -->
-                                            <!--  -->
                                             <!-- Confirm School Delete modal -->
                                             <div class="modal fade" id="deleteModal-{{ $lessonPlan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm" role="document">
@@ -360,15 +358,13 @@
                             html += template(lessonPlan);
                         });
 
-                        $('#lp-table-body').html(html); // Update the table body with new data
+                        $('#lp-table-body').html(html);
                     }
                 },
                 error: function (xhr, status, error) {
                     $('.filter-overlay').hide();
                     $(".fa-spinner").remove();
                     $(".btn-submit").prop("disabled", false);
-                    // console.error(error);
-                    // Handle errors if needed
                 }
             });
         });

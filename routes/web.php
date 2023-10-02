@@ -29,6 +29,16 @@ Route::get('optimize', function () {
     return "<pre>$output</pre>";
 });
 
+Route::get('cache', function () {
+    $output = Artisan::call('cache:clear');
+    return "<pre>$output</pre>";
+});
+
+Route::get('clear', function () {
+    $output = Artisan::call('optimize:clear');
+    return "<pre>$output</pre>";
+});
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {return redirect('sign-in');});
     Route::get('sign-in', [AuthController::class, 'signInGet'])->name('login');
