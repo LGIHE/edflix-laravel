@@ -109,6 +109,34 @@ class UserController extends Controller
 
     }
 
+    public function updatePassword() {
+
+        $attributes = request()->validate([
+            'password' => 'required'
+        ]);
+
+        #Update the user password
+        User::find(request()->id)->update($attributes);
+
+        $log['message'] = 'Update Password for User with id '. request()->id ;
+        $log['user_id'] = Auth()->user()->id;
+        $log['action'] = 'Update User Password';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
+        return response()->json(['id' => request()->id]);
+    }
+
+    public function updateUserPasswordSuccess()
+    {
+        return redirect()
+            ->route('get.user', request()->id)
+            ->with('status', 'The user password has been updated successfully.');
+    }
+
     public function deleteUser(){
         User::find(request()->id)->delete();
 

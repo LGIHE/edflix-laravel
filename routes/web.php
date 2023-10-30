@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('user/{id}', [UserController::class, 'updateUser'])->middleware('super.admin')->name('update.user');
     Route::get('user/delete/{id}', [UserController::class, 'deleteUser'])->middleware('super.admin')->name('delete.user');
     Route::get('users', [UserController::class, 'getUsers'])->middleware('admin')->name('users');
+    Route::post('update-user-password', [UserController::class, 'updatePassword'])->middleware('super.admin')->name('update.user.password');
+    Route::get('update-user-password-success/{id}', [UserController::class, 'updateUserPasswordSuccess'])->middleware('super.admin')->name('update.user.password.success');
 
 	Route::get('profile', [ProfileController::class, 'get'])->name('profile');
     Route::post('profile', [ProfileController::class, 'updateBio']);

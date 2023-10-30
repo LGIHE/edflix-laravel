@@ -80,7 +80,10 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Password</label><br>
-                                            <button type="button" class="btn bg-gradient-info">Change Password</button>
+                                            {{-- <button type="button" class="btn bg-gradient-info">Change Password</button> --}}
+                                            <a class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#updatePassword">
+                                                <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Change Password
+                                            </a>
                                         </div>
 
                                         <div class="mb-3 col-md-6">
@@ -139,3 +142,4 @@
     </div>
 </x-layout>
 
+@include('user.updatePassword', ['user_id' => $user->id])
