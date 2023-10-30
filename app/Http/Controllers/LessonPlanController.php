@@ -11,9 +11,7 @@ use App\Models\School;
 use App\Models\LessonPlan;
 use App\Models\LessonStep;
 use App\Models\LessonAnnex;
-use Faker\Core\Number;
 use Intervention\Image\Facades\Image;
-use Maatwebsite\Excel\Facades\Excel;
 use Jenssegers\Agent\Facades\Agent;
 use App\Models\Logs;
 use Illuminate\Support\Facades\View;
@@ -91,6 +89,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Lessonplan with id '. $lesson->id .' was created.';
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = $lesson->id;
         $log['action'] = 'Create Lessonplan';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -182,6 +181,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Lessonplan with id '. request()->id .' was updated.';
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->id;
         $log['action'] = 'Updated Lessonplan';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -250,8 +250,6 @@ class LessonPlanController extends Controller
                         foreach ($rows as $row) {
                             $cells = $row->getCells();
                             $rowData = [];
-
-                            // dd($cells[0]->getElements()[0]->getElements())['text'];
 
                             foreach ($cells as $cell) {
                                 $els = $cell->getElements();
@@ -410,6 +408,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Lessonplan was uploaded and created with id '.$lesson->id;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = $lesson->id;
         $log['action'] = 'Upload Lessonplan';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -451,6 +450,7 @@ class LessonPlanController extends Controller
 
             $log['message'] = 'Lessonplan with id '. request()->id .' was deleted.';
             $log['user_id'] = Auth()->user()->id;
+            $log['lesson_plan'] = request()->id;
             $log['action'] = 'Delete Lessonplan';
             $log['ip_address'] = request()->ip();
             $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -485,6 +485,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Step added for Lessonplan with id '. request()->id;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->id;
         $log['action'] = 'Add Step';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -499,7 +500,7 @@ class LessonPlanController extends Controller
     {
         return redirect()
             ->route('get.lesson.plan', request()->id)
-            ->with('status', 'The lesson plan step has been uploaded successfully');
+            ->with('status', 'The lesson plan step has been added successfully');
     }
 
     public function deleteStep()
@@ -519,6 +520,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Step deleted for Lessonplan with id '. $step->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = $step->lesson_plan;
         $log['action'] = 'Delete Step';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -542,6 +544,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Step updated for Lessonplan with id '. request()->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->lesson_plan;
         $log['action'] = 'Update Step';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -596,6 +599,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Annex added for Lessonplan with id '. request()->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->lesson_plan;
         $log['action'] = 'Add Annex';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -650,6 +654,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Annex updated for Lessonplan with id '. $annex->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = $annex->lesson_plan;
         $log['action'] = 'Update Annex';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -687,6 +692,7 @@ class LessonPlanController extends Controller
 
         $log['message'] = 'Annex deleted for Lessonplan with id '. $annex->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = $annex->lesson_plan;
         $log['action'] = 'Delete Annex';
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
@@ -808,6 +814,7 @@ class LessonPlanController extends Controller
         $log['lesson_plan'] = request()->id;
         $log['message'] = $log_target . 'Lessonplan with id '. request()->id .' was updated.';
         $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->id;
         $log['action'] = 'Updated Lessonplan '.$target;
         $log['ip_address'] = request()->ip();
         $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
