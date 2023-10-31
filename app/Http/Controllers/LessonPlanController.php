@@ -261,6 +261,14 @@ class LessonPlanController extends Controller
                                         foreach ($e->getElements() as $textElement) {
                                             if (get_class($textElement) == 'PhpOffice\PhpWord\Element\Text') {
                                                 $cellText .= $textElement->getText();
+                                                // if($textElement->getText() != 'INFO 1' || $textElement->getText() != 'INFO 2' || $textElement->getText() != 'STEPS')
+                                                // {
+                                                //     $cellText .= $textElement->getText().', ';
+                                                // }
+                                                // else{
+                                                //     $cellText .= $textElement->getText();
+                                                // }
+                                                // var_dump($cellText);
                                             }
                                         }
                                     }
@@ -303,6 +311,7 @@ class LessonPlanController extends Controller
             if ($contents[0][0] == 'INFO 2')
             {
                 $info_2_rows = array_slice($contents, 1);
+
 
                 $info_2['competency'] = $info_2_rows[0][1];
                 $info_2['learning_outcomes'] = $info_2_rows[1][1];

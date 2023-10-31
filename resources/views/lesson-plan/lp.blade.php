@@ -520,11 +520,9 @@
                                                             <h2 style="margin-left: 20px;"><strong>Annex</strong></h2>
                                                         @endif
                                                     </div>
-                                                    @if(count($annexes) > 1)
                                                     <a class="btn bg-gradient-dark ms-auto" data-bs-toggle="modal" data-bs-target="#addAnnexModal">
                                                         <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add an Annex
                                                     </a>
-                                                    @endif
                                                 </div>
 
                                                 @foreach ($annexes as $annex)
