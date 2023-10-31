@@ -316,8 +316,8 @@
     {{-- <img class="logo" src="{{asset('assets/img/logos/actnow-logo.png')}}" width="150" height="30" alt="ACT NOW"> --}}
     <img class="logo" src="assets/img/logos/actnow-logo.png" width="150" height="30" alt="ACT NOW">
 
+    <div style="width: 90%;">
     <h1 class="lp-heading">Lesson Plan Details</h1>
-
     <table style="border-collapse: collapse; border: none;" cellspacing="0" cellpadding="0">
         <tr style="border: none;height: 33pt">
             <td class="column" style="border: none;width:400pt;">
@@ -367,57 +367,58 @@
         </tr>
     </table>
 
-    <div style="margin: 40px 10px 5px 10px; width: 90%;">
-        <div class="row align-items-start">
+    {{-- <div style="margin: 40px 10px 5px 10px; width: 90%;"> --}}
+        <div class="row align-items-start" style="margin: 40px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Competency: </strong>{{ $lesson->competency }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Learning Outcome: </strong>{{ $lesson->learning_outcomes }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Generic Skills: </strong>{{ $lesson->generic_skills }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Values: </strong>{{ $lesson->values }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Cross-cutting Issues: </strong>{{ $lesson->cross_cutting_issues }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Key learning outcomes: </strong>{{ $lesson->key_learning_outcomes }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Pre-Requisiste Knowledge: </strong>{{ $lesson->pre_requisite_knowledge }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Learning Materials: </strong>{{ $lesson->learning_materials }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>Learning Methods: </strong>{{ $lesson->learning_methods }}
             </div>
         </div>
-        <div class="row align-items-start">
+        <div class="row align-items-start" style="margin: 0px 10px 5px 10px;">
             <div class="col" style="font-size: 16px; margin-bottom: 18px;line-height: 30px;">
                 <strong>References: </strong>{{ $lesson->references }}
             </div>
         </div>
+    {{-- </div> --}}
     </div>
 
     {{-- START OF STEPS --}}
