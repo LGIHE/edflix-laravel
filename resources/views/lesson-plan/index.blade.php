@@ -251,11 +251,16 @@
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
+                                                    @if(@auth()->user()->isSuperAdmin())
+                                                    <a data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $lessonPlan->id}}" title="Delete Lesson Plan" style="cursor:pointer;">
+                                                        <i class="material-icons" style="font-size:25px;margin-right:20px;">delete</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                    @endif
                                                 </td>
+
                                             </tr>
 
-                                            <!-- School Update Modal -->
-                                            <!-- Confirm School Delete modal -->
                                             <div class="modal fade" id="deleteModal-{{ $lessonPlan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm" role="document">
                                                     <div class="modal-content">
@@ -265,11 +270,11 @@
                                                         </div>
                                                         <div class="modal-body" id="smallBody">
                                                             <div class="text-center">
-                                                                <span class="">Are you sure you want to Delete this School?</span>
+                                                                <span class="">Are you sure you want to Delete this Lesson Plan?</span>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer align-items-center">
-                                                            <button type="button" class="btn btn-success" id="del-btn" data-value="{{ route('delete.lesson.plan', $lessonPlan->id) }}">Confirm</button>
+                                                            <button type="button" class="btn btn-success" id="delete-lp" data-value="{{ route('delete.lesson.plan', $lessonPlan->id) }}">Confirm</button>
                                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
@@ -309,6 +314,13 @@
         var url = '{{route("get.lesson.plan",":id")}}';
         url = url.replace(':id', lesson_plan_id);
         window.location.assign(url);
+    });
+
+    $(document).on('click', '#delete-lp', function(event) {
+        event.preventDefault();
+        $(this).prop("disabled", true);
+        let href = $(this).data('value');
+        window.location.assign(href);
     });
 
     $(document).ready(function() {
