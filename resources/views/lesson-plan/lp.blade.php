@@ -129,6 +129,18 @@
         margin-top: 10px;
     }
 
+    @media only screen and (max-width: 600px) {
+        .annex-file-show {
+            width: 320px;
+            aspect-ratio: auto 320 / 200;
+            height: 200px;
+        }
+
+        .annex {
+            margin-left: 0!important;
+        }
+    }
+
 </style>
 
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
@@ -547,7 +559,7 @@
                                                                     <a href="#" class="info-popover" data-toggle="popover" data-title="Annex File" data-content="{{ $annex->annex_file }}" data-comment-lp="{{ $lesson->id }}" data-annex="{{ $annex->id }}" data-annex-title="{{ $annex->title }}" data-comment-type="annex"  data-comment-field="Annex File" data-field-type="file">
                                                                         <i class="fa fa-info-circle" id="annex_file-info-{{$annex->id}}"></i>
                                                                     </a>
-                                                                    <img src="{{ url('/annex/' . $annex->annex_file) }}" alt="{{ $annex->title }}" width="600" height="400">
+                                                                    <img class="annex-file-show" src="{{ url('/annex/' . $annex->annex_file) }}" alt="{{ $annex->title }}" width="600" height="400">
                                                                 </td>
                                                             </tr>
 
