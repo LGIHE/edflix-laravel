@@ -157,7 +157,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subject }}</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -177,7 +177,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">0</p>
+                                                        <p class="text-m text-dark font-weight-bold mb-0">
+                                                            {{ \App\Models\LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration') }}`
+                                                        </p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -187,17 +189,17 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->visibility }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->owner }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->ownerName }}</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->school }}</span>
+                                                        <span class="text-dark text-m font-weight-bold">{{ $lessonPlan->schoolName }}</span>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">

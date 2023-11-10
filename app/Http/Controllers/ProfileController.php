@@ -11,7 +11,15 @@ use App\Models\Logs;
 class ProfileController extends Controller
 {
     public function get(){
-        $lessonPlans = LessonPlan::all()->where('owner', auth()->user()->id);
+
+        $lessonPlans = LessonPlan::join('subjects', 'lesson_plans.subject', '=', 'subjects.id')
+                    ->join('users', 'lesson_plans.owner', '=', 'users.id')
+                    ->join('schools', 'lesson_plans.school', '=', 'schools.id')
+                    ->select('lesson_plans.*', 'subjects.name as subjectName', 'users.name as ownerName', 'schools.name as schoolName')
+                    ->where('lesson_plans.owner', '=', auth()->user()->id)
+                    ->orderBy('lesson_plans.created_at', 'asc')
+                    ->get();
+
 
         return view('user.profile', compact('lessonPlans'));
     }
