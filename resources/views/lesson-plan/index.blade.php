@@ -183,7 +183,7 @@
                                                 <th class="text-secondary text-xxl font-weight-bolder px-4">Theme</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Topic</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Learners</th>
-                                                <th class="text-secondary text-xxl font-weight-bolder">Duration</th>
+                                                <th class="text-secondary text-xxl font-weight-bolder">Duration (min)</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Status</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Public</th>
                                                 <th class="text-secondary text-xxl font-weight-bolder">Owner</th>
@@ -222,18 +222,30 @@
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">
-                                                        {{ \App\Models\LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration') }}`
+                                                        {{ \App\Models\LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration') }}
                                                         </p>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->status == 'init' ? 'Edit' : ucfirst(trans($lessonPlan->status)) }}</p>
+                                                        @if($lessonPlan->status == 'init' || $lessonPlan->status == 'edit')
+                                                            <span id="editSpan" onmouseover="showPopover('editSpan')" onmouseout="hidePopover('editSpan')" data-toggle="popover" title="Edit" data-content="{{ 'Edit' }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: red; cursor: pointer;"></span>
+                                                        @elseif($lessonPlan->status == 'submitted')
+                                                            <span id="submittedSpan" onmouseover="showPopover('submittedSpan')" onmouseout="hidePopover('submittedSpan')" data-toggle="popover" title="Submitted" data-content="{{ 'Submitted' }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: #debd36; cursor: pointer;"></span>
+                                                        @elseif($lessonPlan->status == 'reviewed')
+                                                            <span id="reviewedSpan" onmouseover="showPopover('reviewedSpan')" onmouseout="hidePopover('reviewedSpan')" data-toggle="popover" title="Reviewed" data-content="{{ 'Reviewed' }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: #1564b8; cursor: pointer;"></span>
+                                                        @else
+                                                            <span id="statusSpan" onmouseover="showPopover('statusSpan')" onmouseout="hidePopover('statusSpan')" data-toggle="popover" title="{{ ucfirst(trans($lessonPlan->status)) }}" data-content="{{ ucfirst(trans($lessonPlan->status)) }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: #15b815; cursor: pointer;"></span>
+                                                        @endif
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="text-dark text-m font-weight-bold">@if($lessonPlan->visibility == 1) {{ 'Yes' }} @else {{ 'No' }} @endif</span>
+                                                        @if($lessonPlan->visibility == 1)
+                                                            <span id="yesSpan" onmouseover="showPopover('yesSpan')" onmouseout="hidePopover('yesSpan')" data-toggle="popover" title="Public" data-content="{{ 'Public' }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: #15b815; cursor: pointer;"></span>
+                                                        @else
+                                                            <span id="noSpan" onmouseover="showPopover('noSpan')" onmouseout="hidePopover('noSpan')" data-toggle="popover" title="Private" data-content="{{ 'Private' }}" style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: red; cursor: pointer;"></span>
+                                                        @endif
                                                     </div>
                                                 </td>
                                                 <td>
@@ -251,7 +263,7 @@
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
-                                                    @if(@auth()->user()->isSuperAdmin())
+                                                    @if(@auth()->user()->isAdmin())
                                                     <a data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $lessonPlan->id}}" title="Delete Lesson Plan" style="cursor:pointer;">
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">delete</i>
                                                         <div class="ripple-container"></div>
@@ -383,6 +395,32 @@
     });
 
 </script>
+
+<script>
+    // Function to initialize Bootstrap popovers
+    function initializePopovers() {
+        // Initialize popovers for each span
+        $('[data-toggle="popover"]').popover({
+            trigger: 'hover', // Show on hover
+            placement: 'bottom', // Adjust placement as needed
+        });
+    }
+
+    // Function to show popover content on hover
+    function showPopover(spanId) {
+        $(`#${spanId}`).popover('show');
+    }
+
+    // Function to hide popover content when mouse leaves
+    function hidePopover(spanId) {
+        $(`#${spanId}`).popover('hide');
+    }
+
+    // Call initializePopovers when the document is ready
+    $(document).ready(function () {
+        initializePopovers();
+    });
+  </script>
 
 <script id="lesson-plan-template" type="text/x-handlebars-template">
     @include('lesson-plan/row')

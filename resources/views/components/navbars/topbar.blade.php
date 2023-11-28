@@ -1,3 +1,22 @@
+<style>
+    .notification-indicator {
+        position: fixed;
+        top: 15px;
+        right: 110px;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    @media (max-width: 640px) {
+        .notification-indicator {
+            top: 20px;
+            right: 100px;
+        }
+    }
+</style>
+
 @props(['titlePage'])
 
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -9,8 +28,8 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
-                    <!-- <label class="form-label">Type here...</label>
-                    <input type="text" class="form-control"> -->
+                    {{-- <label class="form-label">Type here...</label>
+                    <input type="text" class="form-control"> --}}
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
@@ -26,6 +45,28 @@
                         </div>
                     </a>
                 </li>
+
+                {{-- <li class="nav-item dropdown pe-2 d-flex align-items-center" style="margin-left:30px;">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope cursor-pointer me-sm-1" style="font-size:1.8rem;"></i>
+                    </a>
+                    <span class="notification-indicator"></span>
+                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a class="dropdown-item border-radius-md" href="{{ route('profile') }}">
+                                <div class="text-dark">
+                                    <span class="font-weight-bold">Pleriminary - Pre-Requisite Knowledge</span>
+                                </div>
+                                <div>
+                                    <h6 class="text-sm font-weight-normal mb-1">
+                                        Caleb Nkunze Njiriwansanga has commented on your lesson plan.
+                                    </h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
+
                 <li class="nav-item dropdown pe-2 d-flex align-items-center" style="margin-left:30px;">
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-user cursor-pointer me-sm-1" style="font-size:1.5rem;"></i>

@@ -141,7 +141,7 @@
             </div>
 
             {{-- Leader Board --}}
-            <div class="row mt-4">
+            {{-- <div class="row mt-4">
                 <h3 class="mt-4 mb-5" style="font-family: sans-serif;">Leader Board</h3>
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
@@ -162,7 +162,45 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-info border-radius-lg py-1 pe-1">
+                                <img src="/assets/img/user/avatar.png" alt="user_avatar" width="200"
+                                    height="200">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-0 ">Jon Doe</h6>
+                            <p class="text-sm ">( Best Lesson Plan of the month )</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm"> This Month </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-info border-radius-lg py-1 pe-1">
+                                <img src="/assets/img/user/avatar.png" alt="user_avatar" width="200"
+                                    height="200">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-0 ">Jon Doe</h6>
+                            <p class="text-sm ">( Upcoming Teacher (Lesson Plan) )</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm"> This Month </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </main>
     </div>
