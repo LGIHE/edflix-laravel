@@ -179,10 +179,10 @@
                         <div class="card-header pb-0 p-2 pt-0">
                             <div class="row">
                                 <div class="me-3 my-3 text-end">
-                                    @if ($lesson->owner == auth()->user()->id || auth()->user()->isAdmin())
-                                        @if ($lesson->status != 'submitted')
+                                    @if ($lesson->owner == auth()->user()->id)
+                                        @if ( $lesson->status != 'submitted')
                                             <a class="btn bg-gradient-success mb-0 end" id="submit-for-review" data-value="{{ $lesson->id }}">
-                                                <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Submit for Review
+                                                <i class="material-icons text-sm">send</i>&nbsp;&nbsp;Submit for Review
                                             </a>
                                         @else
                                             <a class="btn bg-gradient-secondary mb-0 end disabled">
@@ -190,7 +190,23 @@
                                             </a>
                                         @endif
                                     @endif
-                                    @if ($lesson->status == 'reviewed')
+
+                                    @if (auth()->user()->isAdmin())
+                                        @if ( $lesson->status == 'submitted')
+                                            <a class="btn bg-gradient-secondary mb-0 end disabled">
+                                                <i class="material-icons text-sm">chat</i>&nbsp;&nbsp;Submitted for Review
+                                            </a>
+                                            <a class="btn bg-gradient-success mb-0 end" href="#">
+                                                <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Approve Lesson
+                                            </a>
+                                        @elseif ($lesson->status == 'approved')
+                                            <a class="btn bg-gradient-success mb-0 end disabled">
+                                                <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Lesson Plan Approved
+                                            </a>
+                                        @endif
+                                    @endif
+
+                                    @if ($lesson->status == 'approved')
                                         <a class="btn bg-gradient-info mb-0 end" href="{{ route('download.lp', $lesson->id) }}" target="_blank">
                                             <i class="material-icons text-sm">download</i>&nbsp;&nbsp;Download
                                         </a>
