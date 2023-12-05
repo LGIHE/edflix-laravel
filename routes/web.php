@@ -117,6 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('lesson-plan/update-field', [LessonPlanController::class, 'updateLessonPlanField'])->name('update.lesson.plan.field');
 	Route::get('lesson-plan/update-field-success/{id}/{target}', [LessonPlanController::class, 'successUpdateLessonPlanFields'])->name('update.lesson.plan.field.success');
 	Route::get('delete-lesson-plan/{id}', [LessonPlanController::class, 'deleteLessonPlan'])->name('delete.lesson.plan');
+    Route::get('approve-lp/{id}', [LessonPlanController::class, 'approveLessonPlan'])->name('approve.lp');
     Route::get('download-lp/{id}', [LessonPlanController::class, 'downloadLessonPlan'])->name('download.lp');
     Route::get('update-lesson-plan-status/{id}', [LessonPlanController::class, 'updateLessonPlanStatus'])->name('update.status');
 

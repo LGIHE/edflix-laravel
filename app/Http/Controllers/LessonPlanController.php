@@ -751,6 +751,36 @@ class LessonPlanController extends Controller
 
     }
 
+    public function approveLessonPlan()
+    {
+
+        if (Auth()->user()->type != 'admin')
+        {
+            return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('error', 'Unauthorized. Lesson Plan can only be approved by a Facilitator.' . !auth()->user()->isAdmin());
+        }
+
+        $lesson = LessonPlan::find(request()->id);
+        $lesson->update(['status'=> 'approved']);
+
+
+        $log['message'] = 'Lessonplan with id '. request()->id . ' approved';
+        $log['user_id'] = Auth()->user()->id;
+        $log['lesson_plan'] = request()->id;
+        $log['action'] = 'Approved Lesson Plan';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
+
+        Logs::create($log);
+
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The lesson plan has been approved');
+
+    }
+
     public function updateLessonPlanField()
     {
         $user = LessonPlan::find(request()->id);

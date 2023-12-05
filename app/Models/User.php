@@ -70,6 +70,10 @@ class User extends Authenticatable
         return $this->type === self::TEACHER;
     }
 
+    public function isFacilitator() {
+        return $this->role === self::FACILITATOR;
+    }
+
     public function isRoleSuperAdmin() {
         return $this->role === self::SYS_ADMIN;
     }
