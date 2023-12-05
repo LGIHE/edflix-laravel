@@ -12,12 +12,13 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"
-                    onclick="window.location.href='{{ route('schools') }}'">
+                    onclick="loadingEffect('schools', '{{ route('schools') }}')">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">school</i>
+                                <i class="material-icons opacity-10 loading-icon" id="loading-schools" style="top:10%;margin-top:10px;font-size:48px;color:gray;animation: rotate 2s linear infinite;display:none;">loop</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Schools</h5>
@@ -28,12 +29,13 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"
-                    onclick="window.location.href='{{ route('lesson.plans') }}'">
+                    onclick="loadingEffect('lps', '{{ route('lesson.plans') }}')">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">piano</i>
+                                <i class="material-icons opacity-10 loading-icon" id="loading-lps" style="top:10%;margin-top:10px;font-size:48px;color:gray;animation: rotate 2s linear infinite;display:none;">loop</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Lesson Plans</h5>
@@ -44,12 +46,13 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 dash-block"
-                    onclick="window.location.href='{{ route('users') }}'">
+                    onclick="loadingEffect('facilitators', '{{ route('users') }}')">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">people</i>
+                                <i class="material-icons opacity-10 loading-icon" id="loading-facilitators" style="top:10%;margin-top:10px;font-size:48px;color:gray;animation: rotate 2s linear infinite;display:none;">loop</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Facilitators</h5>
@@ -59,12 +62,13 @@
                         <div class="card-footer p-2"></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 dash-block" onclick="window.location.href='{{ route('users') }}'">
+                <div class="col-xl-3 col-sm-6 dash-block" onclick="loadingEffect('teachers', '{{ route('users') }}')">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-secondary text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10" style="top:10%;font-size:48px;">groups</i>
+                                <i class="material-icons opacity-10 loading-icon" id="loading-teachers" style="top:10%;margin-top:10px;font-size:48px;color:gray;animation: rotate 2s linear infinite;display:none;">loop</i>
                             </div>
                             <div class="text-end pt-1">
                                 <h5 class="mb-0">Teachers</h5>
