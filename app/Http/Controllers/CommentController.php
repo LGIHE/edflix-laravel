@@ -140,4 +140,47 @@ class CommentController extends Controller
         return response()->json($comments);
     }
 
+    public function updateComment()
+    {
+        if (request()->user != auth()->user()->id) {
+            return redirect()
+            ->route('get.lesson.plan', request()->lesson_plan)
+            ->with('error', 'Unauthorized action.');
+        }
+
+        request()->validate([
+            'comment' => 'required'
+        ]);
+
+        $comment = Comment::find(request()->id);
+        $comment->update(['comment' => request()->comment]);
+
+        return response()->json(['id' => request()->lesson_plan]);
+    }
+
+    public function successUpdateComment()
+    {
+        return redirect()
+            ->route('get.lesson.plan', request()->id)
+            ->with('status', 'The comment was updated successfully');
+    }
+
+    public function deleteComment()
+    {
+        $comment = Comment::find(request()->id);
+        $lp = $comment->lesson_plan;
+
+        if (!auth()->user()->isAdmin() && $comment->user != auth()->user()->id) {
+            return redirect()
+            ->route('get.lesson.plan', $lp)
+            ->with('error', 'Unauthorized action. You cannot delete this comment.');
+        }
+
+        $comment->delete();
+
+        return redirect()
+            ->route('get.lesson.plan', $lp)
+            ->with('status', 'Comment has been deleted.');
+    }
+
 }

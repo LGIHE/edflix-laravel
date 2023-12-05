@@ -82,7 +82,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('upload-lesson-plan', [LessonPlanController::class, 'getUploadLessonPlan'])->name('get.upload.lesson.plan');
 	Route::post('upload-lesson-plan', [LessonPlanController::class, 'uploadLessonPlan'])->name('upload.lesson.plan');
-
 	Route::get('filter-lesson-plans', [LessonPlanController::class, 'filterLessonPlans'])->name('filter.lesson.plans');
 
     Route::get('lp-image', function ()
@@ -129,6 +128,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('mark-done/{id}', [CommentController::class, 'markDone'])->name('mark.done');
     Route::get('get-comments', [CommentController::class, 'getComments'])->name('get.comments');
     Route::get('get-field-comments', [CommentController::class, 'getFieldComments'])->name('get.field.comments');
+    Route::post('update-comment', [CommentController::class, 'updateComment'])->name('update.comment');
+	Route::get('update-comment-success/{id}', [CommentController::class, 'successUpdateComment'])->name('update.comment.success');
+    Route::get('delete-comment/{id}', [CommentController::class, 'deleteComment'])->name('delete.comment');
 
     //SCHOOL ROUTES
 	Route::get('schools', [SchoolController::class, 'getAll'])->middleware('admin')->name('schools');
