@@ -196,8 +196,9 @@
                                             <a class="btn bg-gradient-secondary mb-0 end disabled">
                                                 <i class="material-icons text-sm">chat</i>&nbsp;&nbsp;Submitted for Review
                                             </a>
-                                            <a class="btn bg-gradient-success mb-0 end" href="{{ route('approve.lp', $lesson->id) }}">
+                                            <a class="btn bg-gradient-success mb-0 end" onclick="loadingEffect('approve-lp', '{{ route('approve.lp', $lesson->id) }}')">
                                                 <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Approve Lesson
+                                                <i class="material-icons opacity-10 loading-icon" id="loading-approve-lp" style="animation: rotate 2s linear infinite;display:none;">loop</i>
                                             </a>
                                         @elseif ($lesson->status == 'approved')
                                             <a class="btn bg-gradient-success mb-0 end disabled">
@@ -206,7 +207,7 @@
                                         @endif
                                     @endif
 
-                                    @if ($lesson->status == 'approved')
+                                    @if ($lesson->status == 'approved' && !auth()->user()->isAdmin())
                                         <a class="btn bg-gradient-success mb-0 end disabled">
                                             <i class="material-icons text-sm">check</i>&nbsp;&nbsp;Lesson Plan Approved
                                         </a>
