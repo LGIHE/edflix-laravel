@@ -734,7 +734,7 @@ class LessonPlanController extends Controller
         $annexes = LessonAnnex::all()->where('lesson_plan', request()->id);
 
         $html = View::make('components.template.lp', compact('lesson', 'subject', 'owner', 'school', 'steps', 'duration', 'annexes'))->render();
-        $html2pdf = new Html2Pdf('L', 'A4','en', true, null, array(10, 5, 5, 0));
+        $html2pdf = new Html2Pdf('L', 'A4','en', true, null, array(8, 5, 5, 0));
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($html);
         $html2pdf->output('lesson_plan.pdf', 'D');
