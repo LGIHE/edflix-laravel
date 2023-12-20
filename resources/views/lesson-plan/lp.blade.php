@@ -129,6 +129,10 @@
         margin-top: 10px;
     }
 
+    #comments-tab-btn {
+        display: none;
+    }
+
     @media only screen and (max-width: 600px) {
         .annex-file-show {
             width: 320px;
@@ -138,6 +142,10 @@
 
         .annex {
             margin-left: 0!important;
+        }
+
+        #comments-tab-btn {
+            display: inline-block;
         }
     }
 
@@ -231,7 +239,10 @@
                                     <a class="nav-link active" data-bs-toggle="tab" href="#lesson-plan-tab">Lesson Plan</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#timeline-tab">Review Timeline</a>
+                                    <a class="nav-link" data-bs-toggle="tab" href="#comments-tab" id="comments-tab-btn">Comments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#timeline-tab">Timeline</a>
                                 </li>
                             </ul>
                         </div>
@@ -640,6 +651,26 @@
                                 </div>
                             </div>
 
+                            {{-- Comments Tab --}}
+                            <div class="tab-pane fade" id="comments-tab" role="tabpanel" aria-labelledby="comments-tab">
+                                <div class="card-body px-0 pb-2">
+                                    @if (count($comments) > 0)
+                                        @include('lesson-plan.comments.comment')
+                                        <a class="btn bg-gradient-info btn-floating" id="addBtn" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    @else
+                                        <div class="container m-2 p-4">
+                                            <p class="font-weight-bold">No Review Comments Added Yet.</p>
+                                            {{-- <a class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add a Review Comment
+                                            </a> --}}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Review Timeline Tab --}}
                             <div class="tab-pane fade" id="timeline-tab" role="tabpanel" aria-labelledby="timeline-tab">
                                 <div class="card-body px-0 pb-2">
                                     <div class="container text-center m-2">
@@ -754,11 +785,22 @@
         // When the "Lesson Plan" tab is clicked
         $("a[href='#lesson-plan-tab']").on("click", function () {
             $("#lesson-plan-tab").removeAttr("style");
+            $("#timeline-tab").attr("style", "display: none!important");
+            $("#comments-tab").attr("style", "display: none!important");
+        });
+
+        // When the "Comments" tab is clicked
+        $("a[href='#comments-tab']").on("click", function () {
+            $("#comments-tab").removeAttr("style");
+            $("#lesson-plan-tab").attr("style", "display: none!important");
+            $("#timeline-tab").attr("style", "display: none!important");
         });
 
         // When the "Review Timeline" tab is clicked
         $("a[href='#timeline-tab']").on("click", function () {
+            $("#timeline-tab").removeAttr("style");
             $("#lesson-plan-tab").attr("style", "display: none!important");
+            $("#comments-tab").attr("style", "display: none!important");
         });
     });
 
