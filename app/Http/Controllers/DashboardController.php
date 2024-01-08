@@ -68,12 +68,18 @@ class DashboardController extends Controller
                        ($item['updated_at'] >= $firstDayOfLastWeek && $item['updated_at'] <= $lastDayOfLastWeek);
             })->count();
 
-            if($totalUsageLastWeek != 0){
+            if ($totalUsageLastWeek != 0) {
+                // Calculate the percentage change when last week's usage is not zero
                 $changeInUsage = (($totalUsageThisWeek - $totalUsageLastWeek) / $totalUsageLastWeek) * 100;
-                $percentageChangeInUsage =  round($changeInUsage, 1);
-            }else{
-                $changeInUsage = ($totalUsageLastWeek / $totalUsageThisWeek) * 100;
-                $percentageChangeInUsage =  round($changeInUsage, 1);
+                $percentageChangeInUsage = round($changeInUsage, 1);
+            } else {
+                // Handle the case when last week's usage is zero
+                if ($totalUsageThisWeek == 0) {
+                    // No change in usage
+                    $percentageChangeInUsage = 0;
+                } else {
+                    $percentageChangeInUsage = 100;
+                }
             }
 
             // an admin

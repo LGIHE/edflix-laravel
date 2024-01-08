@@ -65,6 +65,22 @@ class UserController extends Controller
         return view('user.index', compact('users', 'schools', 'subjects'));
     }
 
+    public function getFacilitators(){
+        $users = User::all()->where('role', 'Facilitator');
+        $schools = School::all();
+        $subjects = Subject::all();
+
+        return view('user.facilitators', compact('users', 'schools', 'subjects'));
+    }
+
+    public function getTeachers(){
+        $users = User::all()->where('role', 'Teacher');
+        $schools = School::all();
+        $subjects = Subject::all();
+
+        return view('user.teachers', compact('users', 'schools', 'subjects'));
+    }
+
     public function getUser(){
         $user = User::find(request()->id);
         $schools = School::all();
