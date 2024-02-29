@@ -124,7 +124,13 @@
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">School Term</label>
-                                            <input type="text" name="term" class="form-control border border-2 p-2">
+                                            <select class="form-select border-2 p-2" name="class" aria-label="">
+                                                <option value="" selected>Select Class</option>
+                                                <option value="1">Term One</option>
+                                                <option value="2">Term Two</option>
+                                                <option value="3">Term Three</option>
+                                            </select>
+                                            {{-- <input type="text" name="term" class="form-control border border-2 p-2"> --}}
                                             <p class='text-danger font-weight-bold inputerror' id="termError"></p>
                                         </div>
 
