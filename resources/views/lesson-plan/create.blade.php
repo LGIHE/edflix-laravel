@@ -130,7 +130,6 @@
                                                 <option value="2">Term Two</option>
                                                 <option value="3">Term Three</option>
                                             </select>
-                                            {{-- <input type="text" name="term" class="form-control border border-2 p-2"> --}}
                                             <p class='text-danger font-weight-bold inputerror' id="termError"></p>
                                         </div>
 

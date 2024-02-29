@@ -79,12 +79,6 @@
                             <p class='text-danger font-weight-bold inputerror' id="assessment_criteriaError"></p>
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Facilitator Note</label>
-                            <textarea name="facilitator_note" class="form-control border border-2 p-2"></textarea>
-                            <p class='text-danger font-weight-bold inputerror' id="facilitator_noteError"></p>
-                        </div>
-
                     </div>
                 </form>
             </div>

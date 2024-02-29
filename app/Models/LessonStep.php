@@ -25,7 +25,6 @@ class LessonStep extends Model
         'values',
         'output',
         'assessment_criteria',
-        'facilitator_note',
         'created_by'
     ];
 
