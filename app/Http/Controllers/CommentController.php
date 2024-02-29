@@ -8,6 +8,10 @@ use App\Models\Logs;
 use App\Models\Reply;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Facades\Agent;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Mail\CommentNotification;
+use App\Models\LessonPlan;
 
 class CommentController extends Controller
 {
@@ -22,7 +26,7 @@ class CommentController extends Controller
             'comment' => 'required'
         ]);
 
-        $step = LessonStep::find(request()->step);
+        LessonStep::find(request()->step);
 
         $attributes['user'] = request()->user;
         $attributes['lesson_plan'] = request()->lesson_plan;
@@ -34,6 +38,14 @@ class CommentController extends Controller
 
         $attributes['comment'] = request()->comment;
         $comment = Comment::create($attributes);
+
+        if($comment){
+            $lesson_plan = LessonPlan::find(request()->lesson_plan);
+            $user = User::find($lesson_plan->owner);
+            $user->lesson_plan = $lesson_plan;
+            $user->comment = $comment;
+            Mail::to($user->email)->send(new CommentNotification($user));
+        }
 
         $log['message'] = 'Added Comment for Lessonplan with id '. $comment->lesson_plan;
         $log['user_id'] = Auth()->user()->id;
