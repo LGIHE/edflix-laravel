@@ -193,7 +193,7 @@
                                         </thead>
                                         <tbody id="lp-table-body">
                                         @foreach ($lessonPlans as $lessonPlan)
-                                            <tr>
+                                            <tr onclick="redirectToLessonPlan('{{ route('get.lesson.plan', $lessonPlan->id) }}')" style="cursor: pointer;">
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-m text-dark font-weight-bold mb-0">{{ $lessonPlan->subjectName }}</p>
@@ -420,7 +420,12 @@
     $(document).ready(function () {
         initializePopovers();
     });
-  </script>
+
+    function redirectToLessonPlan(url) {
+        window.location.href = url;
+    }
+
+</script>
 
 <script id="lesson-plan-template" type="text/x-handlebars-template">
     @include('lesson-plan/row')
