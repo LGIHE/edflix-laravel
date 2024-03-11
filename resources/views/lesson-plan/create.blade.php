@@ -124,8 +124,8 @@
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">School Term</label>
-                                            <select class="form-select border-2 p-2" name="class" aria-label="">
-                                                <option value="" selected>Select Class</option>
+                                            <select class="form-select border-2 p-2" name="term" aria-label="">
+                                                <option value="" selected>Select Term</option>
                                                 <option value="1">Term One</option>
                                                 <option value="2">Term Two</option>
                                                 <option value="3">Term Three</option>

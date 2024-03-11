@@ -95,7 +95,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($lessonPlans as $lessonPlan)
-                                    <tr>
+                                    <tr onclick="redirectToLessonPlan('{{ route('get.lesson.plan', $lessonPlan->id) }}')" style="cursor: pointer;">
                                         <td>
                                             <div class="d-flex flex-column justify-content-center px-2">
                                                 <h6 class="mb-0 text-m">{{ $lessonPlan->theme }}</h6>
@@ -208,4 +208,8 @@
         url = url.replace(':id', lesson_plan_id);
         window.location.assign(url);
     });
+
+    function redirectToLessonPlan(url) {
+        window.location.href = url;
+    }
 </script>
