@@ -1,3 +1,37 @@
+<style>
+    .select2-container--default .select2-selection--single {
+        padding: 5px !important;
+        border: 2px solid #d2d6da !important;
+        border-radius: 0.375rem ! important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 44px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #7b809a !important;
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        margin-top: 5px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        background-image: url(https://cdn4.iconfinder.com/data/icons/user-interface-174/32/UIF-76-512.png);
+        background-color: transparent;
+        background-size: contain;
+        border: none !important;
+        height: 20px !important;
+        width: 20px !important;
+        margin: auto !important;
+        top: 40% !important;
+        left: auto !important;
+    }
+</style>
+
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
     <x-navbars.sidebar activePage="lesson-plans"></x-navbars.sidebar>
@@ -11,15 +45,15 @@
                 <div class="card card-plain h-100">
                     <div class="card-body p-3">
                         @if (session('status'))
-                        <div class="row">
-                            <div class="alert alert-success alert-dismissible text-white" role="alert">
-                                <span class="text-sm">{{ Session::get('status') }}</span>
-                                <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                    data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div class="row">
+                                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                                    <span class="text-sm">{{ Session::get('status') }}</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                        data-bs-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="bio-form">
@@ -36,15 +70,18 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Choose Owners</label>
-                                            <select id="teacher-records" class="form-select border border-2 p-2" name="owner">
+                                            <select id="teacher-records" class="form-select border border-2 p-2"
+                                                name="owner">
                                                 <option>Select</option>
-                                                @foreach($teachers as $teacher)
+                                                @foreach ($teachers as $teacher)
                                                     @if (auth()->user()->isTeacher())
                                                         @if (auth()->user()->id == $teacher->id)
-                                                            <option value="{{ $teacher->id }}">{!! $teacher->name !!}</option>
+                                                            <option value="{{ $teacher->id }}">{!! $teacher->name !!}
+                                                            </option>
                                                         @endif
                                                     @else
-                                                        <option value="{{ $teacher->id }}">{!! $teacher->name !!}</option>
+                                                        <option value="{{ $teacher->id }}">{!! $teacher->name !!}
+                                                        </option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -53,38 +90,42 @@
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-3">
-                                            @if(@auth()->user()->isAdmin())
-                                            <label class="form-label">Status</label>
-                                            <select class="form-select border-2 p-2" name="status" aria-label="">
-                                                <option value="" selected>Select Status</option>
-                                                <option value="edit">Edit</option>
-                                                <option value="submitted">Submitted</option>
-                                                <option value="reviewed">Reviewed</option>
-                                                <option value="approved">Approved</option>
-                                                <option value="saved">Saved</option>
-                                            </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="statusError"></p>
+                                            @if (@auth()->user()->isAdmin())
+                                                <label class="form-label">Status</label>
+                                                <select class="form-select border-2 p-2" name="status" aria-label="">
+                                                    <option value="" selected>Select Status</option>
+                                                    <option value="edit">Edit</option>
+                                                    <option value="submitted">Submitted</option>
+                                                    <option value="reviewed">Reviewed</option>
+                                                    <option value="approved">Approved</option>
+                                                    <option value="saved">Saved</option>
+                                                </select>
+                                                <p class='text-danger font-weight-bold inputerror' id="statusError"></p>
                                             @endif
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             @if (auth()->user()->isAdmin())
-                                            <label class="form-label">Public</label>
-                                            <select class="form-select border-2 p-2" name="visibility" aria-label="">
-                                                <option value="" selected>Select</option>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                            <p class='text-danger font-weight-bold inputerror' id="visibilityError"></p>
+                                                <label class="form-label">Public</label>
+                                                <select class="form-select border-2 p-2" name="visibility"
+                                                    aria-label="">
+                                                    <option value="" selected>Select</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                                <p class='text-danger font-weight-bold inputerror' id="visibilityError">
+                                                </p>
                                             @endif
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">Subject</label>
-                                            <select class="form-select border-2 p-2" name="subject" aria-label="">
+                                            <select id="subject-records" class="form-select border-2 p-2" name="subject"
+                                                aria-label="">
                                                 <option value="" selected>Select Subject</option>
-                                                @foreach($subjects as $subject)
-                                                <option value="{!! $subject->id !!}">{!! $subject->name !!}</option>
+                                                @foreach ($subjects as $subject)
+                                                    <option value="{!! $subject->id !!}">{!! $subject->name !!}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <p class='text-danger font-weight-bold inputerror' id="subjectError"></p>
@@ -106,20 +147,26 @@
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Learners</label>
-                                            <input type="number" name="learners_no" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError"></p>
+                                            <input type="number" name="learners_no"
+                                                class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="learners_noError">
+                                            </p>
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Female Learners</label>
-                                            <input type="number" name="female_learners" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="female_learnersError"></p>
+                                            <input type="number" name="female_learners"
+                                                class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="female_learnersError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-3">
                                             <label class="form-label">No. of Male Learners</label>
-                                            <input type="number" name="male_learners" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="male_learnersError"></p>
+                                            <input type="number" name="male_learners"
+                                                class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="male_learnersError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-3">
@@ -135,32 +182,38 @@
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Theme</label>
-                                            <input type="text" name="theme" class="form-control border border-2 p-2">
+                                            <input type="text" name="theme"
+                                                class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="themeError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Topic</label>
-                                            <input type="text" name="topic" class="form-control border border-2 p-2">
+                                            <input type="text" name="topic"
+                                                class="form-control border border-2 p-2">
                                             <p class='text-danger font-weight-bold inputerror' id="topicError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Competency</label>
-                                            <input type="text" name="competency" class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="competencyError"></p>
+                                            <input type="text" name="competency"
+                                                class="form-control border border-2 p-2">
+                                            <p class='text-danger font-weight-bold inputerror' id="competencyError">
+                                            </p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning outcomes</label>
                                             <textarea name="learning_outcomes" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_outcomesError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="learning_outcomesError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Generic Skills</label>
                                             <textarea name="generic_skills" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="generic_skillsError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="generic_skillsError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
@@ -172,47 +225,55 @@
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Cross-cutting Issues</label>
                                             <textarea name="cross_cutting_issues" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="cross_cutting_issuesError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="cross_cutting_issuesError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Key learning outcomes</label>
                                             <textarea name="key_learning_outcomes" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="key_learning_outcomesError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="key_learning_outcomesError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Pre-requisite Knowledge</label>
                                             <textarea name="pre_requisite_knowledge" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="pre_requisite_knowledgeError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="pre_requisite_knowledgeError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning materials</label>
                                             <textarea name="learning_materials" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_materialsError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="learning_materialsError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Learning methods</label>
                                             <textarea name="learning_methods" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="learning_methodsError"></p>
+                                            <p class='text-danger font-weight-bold inputerror'
+                                                id="learning_methodsError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">References</label>
                                             <textarea name="references" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="referencesError"></p>
+                                            <p class='text-danger font-weight-bold inputerror' id="referencesError">
+                                            </p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Activity Aim</label>
                                             <textarea name="activity_aim" class="form-control border border-2 p-2"></textarea>
-                                            <p class='text-danger font-weight-bold inputerror' id="activity_aimError"></p>
+                                            <p class='text-danger font-weight-bold inputerror' id="activity_aimError">
+                                            </p>
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn bg-gradient-dark btn-submit">Start Lesson Plan <span id="loader"></span></button>
+                                    <button type="submit" class="btn bg-gradient-dark btn-submit">Start Lesson Plan
+                                        <span id="loader"></span></button>
                                 </form>
                             </div>
                         </div>
@@ -224,53 +285,57 @@
 </x-layout>
 
 <script>
-$(document).ready(function() {
-    $('#teacher-records').select2();
-});
-
-$(function () {
-
-    $('.btn-submit').on('click', function (e) {
-        e.preventDefault();
-
-        let formData = $('#addLessonPlan').serializeArray();
-        $(".inputerror").text("");
-        $("#addLessonPlan input").removeClass("is-invalid");
-        $("#addLessonPlan select").removeClass("is-invalid");
-        $("#addLessonPlan textarea").removeClass("is-invalid");
-
-        $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
-        $(".btn-submit").attr("disabled", 'disabled');
-
-        $.ajax({
-            method: "POST",
-            headers: {
-                Accept: "application/json"
-            },
-            url: "{{ route('create.lesson.plan') }}",
-            data: formData,
-            success: (response) => {
-                $(".fa-spinner").remove();
-                $(".btn-submit").prop("disabled", false);
-                let url = '{{route("create.lesson.plan.success",":id")}}';
-                url = url.replace(':id', response.id);
-                window.location.assign(url);
-            },
-            error: (response) => {
-                $(".fa-spinner").remove();
-                $(".btn-submit").prop("disabled", false);
-
-                if(response.status === 422) {
-                    let errors = response.responseJSON.errors;
-                    Object.keys(errors).forEach(function (key) {
-                        $("[name='" + key + "']").addClass("is-invalid");
-                        $("#" + key + "Error").text(errors[key][0]);
-                    });
-                } else {
-                    window.location.reload();
-                }
-            }
-        })
+    $(document).ready(function() {
+        $('#teacher-records').select2();
     });
-})
+
+    $(document).ready(function() {
+        $('#subject-records').select2();
+    });
+
+    $(function() {
+
+        $('.btn-submit').on('click', function(e) {
+            e.preventDefault();
+
+            let formData = $('#addLessonPlan').serializeArray();
+            $(".inputerror").text("");
+            $("#addLessonPlan input").removeClass("is-invalid");
+            $("#addLessonPlan select").removeClass("is-invalid");
+            $("#addLessonPlan textarea").removeClass("is-invalid");
+
+            $("#loader").prepend('<i class="fa fa-spinner fa-spin"></i>');
+            $(".btn-submit").attr("disabled", 'disabled');
+
+            $.ajax({
+                method: "POST",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: "{{ route('create.lesson.plan') }}",
+                data: formData,
+                success: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+                    let url = '{{ route('create.lesson.plan.success', ':id') }}';
+                    url = url.replace(':id', response.id);
+                    window.location.assign(url);
+                },
+                error: (response) => {
+                    $(".fa-spinner").remove();
+                    $(".btn-submit").prop("disabled", false);
+
+                    if (response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function(key) {
+                            $("[name='" + key + "']").addClass("is-invalid");
+                            $("#" + key + "Error").text(errors[key][0]);
+                        });
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+    })
 </script>
