@@ -196,10 +196,8 @@
 
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label">Competency</label>
-                                            <input type="text" name="competency"
-                                                class="form-control border border-2 p-2">
-                                            <p class='text-danger font-weight-bold inputerror' id="competencyError">
-                                            </p>
+                                            <textarea name="competency" class="form-control border border-2 p-2"></textarea>
+                                            <p class='text-danger font-weight-bold inputerror' id="competencyError"></p>
                                         </div>
 
                                         <div class="mb-3 col-md-4">
