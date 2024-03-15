@@ -914,15 +914,8 @@ class LessonPlanController extends Controller
             $lessonPlan->subject = $subject->id ? $subject->name : 'N/A';
 
             // Add the owner name to the lessonPlan object
-            $ownerId = $lessonPlan->owner;
-            $owner = User::find($ownerId);
-            $lessonPlan->owner = $owner->id ? $owner->name : 'N/A';
-
-            if ($owner) {
-                $lessonPlan->owner = $owner->id ? $owner->name : 'N/A';
-            } else {
-                $lessonPlan->owner = 'N/A';
-            }
+            $owner = User::find($lessonPlan->owner);
+            $lessonPlan->owner = $owner ? $owner->name : 'N/A';
 
             // Get the duration from the steps
             $lessonPlan->duration = LessonStep::where(['lesson_plan' => $lessonPlan->id])->sum('duration');
