@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// use App;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\User;
@@ -202,28 +201,6 @@ class LessonPlanController extends Controller
 
     public function uploadLessonPlan()
     {
-        // request()->validate([
-        //     'subject' => 'required',
-        //     'lesson_plan_file' => 'required|mimes:xlsx,xls|max:1024'
-        // ]);
-
-        // $import = new \App\Imports\Lessonplan\getSheets();
-
-        // Excel::import($import, request()->lesson_plan_file);
-
-        // $log['message'] = 'Lessonplan was uploaded.';
-        // $log['user_id'] = Auth()->user()->id;
-        // $log['action'] = 'Upload Lessonplan';
-        // $log['ip_address'] = request()->ip();
-        // $log['platform'] = Agent::platform() . '-' .Agent::version(Agent::platform());
-        // $log['agent'] = Agent::browser() . '-' .Agent::version(Agent::browser());
-
-        // Logs::create($log);
-
-        // return redirect()
-        //     ->route('lesson.plans')
-        //     ->with('status', 'The Lesson Plan has been uploaded successfully.');
-
         request()->validate([
             'teacher' => 'required',
             'subject' => 'required',
@@ -288,8 +265,6 @@ class LessonPlanController extends Controller
                 }
             }
         }
-
-        $response = [];
 
         foreach ($data as $contents)
         {
@@ -428,7 +403,6 @@ class LessonPlanController extends Controller
         return redirect()
                 ->route('get.lesson.plan', $lesson->id)
                 ->with('status', 'Lesson plan created successfully.');
-        // return response()->json($steps);
     }
 
     public function deleteLessonPlan()
@@ -944,10 +918,6 @@ class LessonPlanController extends Controller
             $owner = User::find($ownerId);
             $lessonPlan->owner = $owner->id ? $owner->name : 'N/A';
 
-            // Add the school name to the lessonPlan object
-            $schoolId = $lessonPlan->school;
-            $school = School::find($schoolId);
-            // $lessonPlan->school = $school->id ? $school->name : 'N/A';
             if ($owner) {
                 $lessonPlan->owner = $owner->id ? $owner->name : 'N/A';
             } else {

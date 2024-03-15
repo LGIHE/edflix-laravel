@@ -1,22 +1,22 @@
 <tr>
     <td>
-        <div class="d-flex flex-column justify-content-center px-2">
-            <h6 class="mb-0 text-m">@{{ theme }}</h6>
-        </div>
-    </td>
-    <td>
         <div class="d-flex flex-column justify-content-center">
             <p class="text-m text-dark font-weight-bold mb-0">@{{ subject }}</p>
         </div>
     </td>
     <td>
         <div class="d-flex flex-column justify-content-center">
-            <p class="text-m text-dark font-weight-bold mb-0">@{{ topic }}</p>
+            <span class="text-dark text-m font-weight-bold">@{{ class }}</span>
+        </div>
+    </td>
+    <td>
+        <div class="d-flex flex-column justify-content-center px-2">
+            <h6 class="mb-0 text-m">@{{ theme }}</h6>
         </div>
     </td>
     <td>
         <div class="d-flex flex-column justify-content-center">
-            <span class="text-dark text-m font-weight-bold">@{{ class }}</span>
+            <p class="text-m text-dark font-weight-bold mb-0">@{{ topic }}</p>
         </div>
     </td>
     <td>
