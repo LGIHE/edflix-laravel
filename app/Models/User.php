@@ -78,9 +78,4 @@ class User extends Authenticatable
         return $this->role === self::SYS_ADMIN;
     }
 
-    public function isRoleFacilitator() {
-        return $this->role === self::FACILITATOR;
-    }
-
-
 }
