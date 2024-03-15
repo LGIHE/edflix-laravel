@@ -321,7 +321,7 @@
 
 <script>
 
-    $(document).on('click','#view-lp',function(){
+    $(document).on('click','.view-lp',function(){
         var lesson_plan_id = $(this).data("value");
         var url = '{{route("get.lesson.plan",":id")}}';
         url = url.replace(':id', lesson_plan_id);

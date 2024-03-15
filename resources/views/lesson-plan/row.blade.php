@@ -1,4 +1,4 @@
-<tr>
+<tr class="view-lp" data-value="@{{ id }}" style="cursor: pointer;">
     <td>
         <div class="d-flex flex-column justify-content-center">
             <p class="text-m text-dark font-weight-bold mb-0">@{{ subject }}</p>
@@ -50,7 +50,7 @@
         </div>
     </td>
     <td class="align-middle not-export-col">
-        <a rel="tooltip" class="" id="view-lp" data-value="@{{ id }}" style="cursor:pointer;">
+        <a rel="tooltip" class="view-lp" data-value="@{{ id }}" style="cursor:pointer;">
             <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
             <div class="ripple-container"></div>
         </a>
