@@ -195,6 +195,8 @@ class AuthController extends Controller
                 'email' => $googleUser->getEmail(),
                 'password' => Hash::make(uniqid()), // Generate a random password
                 'email_verified_at' => now(),
+                'type' => 'teacher',
+                'role' => 'Teacher'
             ]);
 
             $log['message'] = 'User Created via Google Login';
