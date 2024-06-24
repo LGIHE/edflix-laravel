@@ -150,10 +150,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('subject/update/{id}', [SubjectController::class, 'updateSubject'])->middleware('admin')->name('update.subject');
 	Route::get('subject-delete/{id}', [SubjectController::class, 'deleteSuccess'])->middleware('admin')->name('delete.subject');
 
-    Route::post('sign-out', [AuthController::class, 'singOut'])->name('logout');
-
-    // Route::get('admin-optimize', function () {
-    //     $output = Artisan::call('optimize');
-    //     return "<pre>$output</pre>";
-    // });
+    Route::get('sign-out', [AuthController::class, 'singOut'])->name('logout');
 });
