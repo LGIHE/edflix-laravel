@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Models\User;
 use Carbon\Carbon;
-Use Str;
+use Str;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Jenssegers\Agent\Facades\Agent;
 use App\Mail\SignupConfirmation;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\Logs;
 use App\Models\School;
 
@@ -46,7 +49,6 @@ class AuthController extends Controller
 
         Logs::create($log);
 
-        // return redirect('/dashboard');
         return redirect()->route('dashboard');
 
     }
@@ -137,7 +139,7 @@ class AuthController extends Controller
         ]);
 
         $attributes['location'] = $attributes['town'].', '.$attributes['district'].', Uganda';
-        $attributes['role'] == 'Teacher';
+        $attributes['role'] = 'Teacher';
         $attributes['type'] = 'teacher';
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
@@ -155,13 +157,71 @@ class AuthController extends Controller
 
         Logs::create($log);
 
-        return response()->json(['success' => True]);
+        return response()->json(['success' => true]);
 
     }
 
     public function signUpSuccess()
     {
         return view('auth.success');
+    }
+
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectToGoogle(): \Illuminate\Http\RedirectResponse
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Google.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+
+        // Check if the user already exists in your database
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if (!$user) {
+            // Create a new user if not exists
+            $user = User::create([
+                'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
+                'password' => Hash::make(uniqid()), // Generate a random password
+                'email_verified_at' => now(),
+            ]);
+
+            $log['message'] = 'User Created via Google Login';
+            $log['user_id'] = $user->id;
+            $log['action'] = 'Create User';
+            $log['ip_address'] = request()->ip();
+            $log['platform'] = Agent::platform() . '-' . Agent::version(Agent::platform());
+            $log['agent'] = Agent::browser() . '-' . Agent::version(Agent::browser());
+
+            Logs::create($log);
+        }
+
+        // Log the user in
+        Auth::login($user, true);
+
+        // Log the sign in action
+        $log['message'] = 'User SignedIn via Google Login';
+        $log['user_id'] = Auth::user()->id;
+        $log['action'] = 'Sign In';
+        $log['ip_address'] = request()->ip();
+        $log['platform'] = Agent::platform() . '-' . Agent::version(Agent::platform());
+        $log['agent'] = Agent::browser() . '-' . Agent::version(Agent::browser());
+
+        Logs::create($log);
+
+        // Redirect to the dashboard
+        return redirect()->route('dashboard');
     }
 
 }

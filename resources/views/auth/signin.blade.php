@@ -61,6 +61,11 @@
                                                 class="text-info text-gradient font-weight-bold">Reset Password</a>
                                         </p>
                                         <div class="text-center">
+                                            <a href="{{ route('google.login') }}" class="btn bg-gradient-info w-100 my-4 mb-2">
+                                                Sign in with Google
+                                            </a>
+                                        </div>
+                                        <div class="text-center">
                                             <p class="text-sm text-center">
                                                 - OR -
                                             </p>
