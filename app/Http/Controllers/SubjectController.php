@@ -22,7 +22,13 @@ class SubjectController extends Controller
     }
 
     public function createSubject()
-    {
+    {if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('subjects')
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'code' => 'max:255',
@@ -50,6 +56,12 @@ class SubjectController extends Controller
     }
 
     public function updateSubject(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('update.subject')
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
 
         $attributes = request()->validate([
             'name' => 'required|max:255',
@@ -75,6 +87,13 @@ class SubjectController extends Controller
     }
 
     public function deleteSuccess(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('schools')
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         Subject::find(request()->id)->delete();
 
         $log['message'] = 'Subject with id '. request()->id .' was deleted';

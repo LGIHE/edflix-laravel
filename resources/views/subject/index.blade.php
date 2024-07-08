@@ -15,17 +15,29 @@
                             </a>
                         </div>
                         @if (session('status'))
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="alert alert-success alert-dismissible text-white fade show" role="alert"style="margin-left:20px;width:90%;">
-                                    <span class="text-sm">{{ Session::get('status') }}</span>
-                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                        data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="alert alert-success alert-dismissible text-white fade show" role="alert"style="margin-left:20px;width:90%;">
+                                        <span class="text-sm">{{ Session::get('status') }}</span>
+                                        <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                            data-bs-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @elseif (session('error'))
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="alert alert-danger alert-dismissible text-white fade show" role="alert"style="margin-left:20px;width:90%;">
+                                        <span class="text-sm">{{ Session::get('error') }}</span>
+                                        <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                            data-bs-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                         <div class="card-body px-0 pb-2">
                             @if (count($subjects) > 0)
