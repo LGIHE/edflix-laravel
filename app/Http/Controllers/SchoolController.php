@@ -29,6 +29,13 @@ class SchoolController extends Controller
 
     public function createSchool()
     {
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('schools')
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'email' => 'email|nullable|max:255',
@@ -56,6 +63,12 @@ class SchoolController extends Controller
     }
 
     public function updateSchool(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('get.school', request()->id)
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
 
         $attributes = request()->validate([
             'name' => 'required|max:255',
@@ -81,6 +94,13 @@ class SchoolController extends Controller
     }
 
     public function deleteSuccess(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return redirect()
+                ->route('schools')
+                ->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         School::find(request()->id)->delete();
 
         $log['message'] = 'School with id '. request()->id .' was deleted';
