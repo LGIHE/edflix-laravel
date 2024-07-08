@@ -70,15 +70,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $subject->id }}">
-                                                        <i class="material-icons">edit</i>
-                                                        <div class="ripple-container"></div>
-                                                    </a>
+                                                    @if (@auth()->user()->isRoleSuperAdmin())
+                                                        <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $subject->id }}">
+                                                            <i class="material-icons">edit</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
 
-                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$subject->id}}" title="Delete Subject">
-                                                        <i class="material-icons ">delete</i>
-                                                        <div class="ripple-container"></div>
-                                                    </a>
+                                                        <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$subject->id}}" title="Delete Subject">
+                                                            <i class="material-icons ">delete</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
 

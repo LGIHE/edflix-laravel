@@ -71,15 +71,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle not-export-col">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $school->id }}">
-                                                        <i class="material-icons">edit</i>
-                                                        <div class="ripple-container"></div>
-                                                    </a>
+                                                    @if (@auth()->user()->isRoleSuperAdmin())
+                                                        <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $school->id }}">
+                                                            <i class="material-icons">edit</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
 
-                                                    <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$school->id}}" title="Delete Project">
-                                                        <i class="material-icons ">delete</i>
-                                                        <div class="ripple-container"></div>
-                                                    </a>
+                                                        <a class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$school->id}}" title="Delete Project">
+                                                            <i class="material-icons ">delete</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
 

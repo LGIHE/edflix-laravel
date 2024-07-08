@@ -85,15 +85,17 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle not-export-col">
-                                                <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $user->id }}">
-                                                    <i class="material-icons">edit</i>
-                                                    <div class="ripple-container"></div>
-                                                </a>
+                                                @if (@auth()->user()->isRoleSuperAdmin())
+                                                    <a rel="tooltip" class="btn btn-success btn-link" id="open-update" data-value="{{ $user->id }}">
+                                                        <i class="material-icons">edit</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
 
-                                                <button type="button" class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$user->id}}" title="Delete User">
-                                                    <i class="material-icons">delete</i>
-                                                    <div class="ripple-container"></div>
-                                                </button>
+                                                    <button type="button" class="btn btn-danger btn-link" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$user->id}}" title="Delete User">
+                                                        <i class="material-icons">delete</i>
+                                                        <div class="ripple-container"></div>
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
 
