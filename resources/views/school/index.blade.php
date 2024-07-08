@@ -43,6 +43,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach ($schools as $school)
+                                            @if ($school->id != 1)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex flex-column justify-content-center px-2">
@@ -104,6 +105,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
                                         @endforeach
                                         </tbody>
                                     </table>
