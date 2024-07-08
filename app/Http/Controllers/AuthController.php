@@ -144,7 +144,7 @@ class AuthController extends Controller
         $attributes['email_verified_at'] = Carbon::now()->toDateTimeString();
 
         $user = User::create($attributes);
-        $user['pass'] = '';
+        $user['pass'] = 'Please use the password you provided.';
 
         Mail::to($user->email)->send(new SignupConfirmation($user));
 

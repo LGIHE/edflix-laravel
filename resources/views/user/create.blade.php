@@ -49,7 +49,7 @@
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Role</label>
-                            <select class="form-select" name="role" aria-label="">
+                            <select class="form-select border border-2 p-2" name="role" aria-label="">
                                 <option selected>Select User Role</option>
                                 <option value="Administrator">System Admin</option>
                                 <option value="Facilitator">Facilitator</option>
