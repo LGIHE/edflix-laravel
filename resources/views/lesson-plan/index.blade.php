@@ -263,7 +263,7 @@
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">visibility</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
-                                                    @if(@auth()->user()->isAdmin())
+                                                    @if(@auth()->user()->isRoleSuperAdmin())
                                                     <a data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $lessonPlan->id}}" title="Delete Lesson Plan" style="cursor:pointer;">
                                                         <i class="material-icons" style="font-size:25px;margin-right:20px;">delete</i>
                                                         <div class="ripple-container"></div>

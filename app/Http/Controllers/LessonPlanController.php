@@ -416,7 +416,7 @@ class LessonPlanController extends Controller
                 ->with('error', 'Unauthorized. Only the owner can delete.');
         }
 
-        if (auth()->user()->isAdmin() || auth()->user()->id == $lesson->owner) {
+        if (auth()->user()->isRoleSuperAdmin() || auth()->user()->id == $lesson->owner) {
 
             $lesson->delete();
             $steps = LessonStep::where('lesson_plan', request()->id);
