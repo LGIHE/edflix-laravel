@@ -16,8 +16,9 @@ class UserController extends Controller
 {
     public function createUser()
     {
-        if (!auth()->user()->isAdmin()){
-            return back()->with('error', 'Action not Authorized. Please contact asministrator.');
+
+        if (!auth()->user()->isRoleSuperAdmin()){
+            return back()->with('error', 'Unauthorized action. Please contact support.');
         }
             $attributes = request()->validate([
                 'name' => 'required|max:255',
@@ -96,6 +97,11 @@ class UserController extends Controller
 
     public function updateUser(){
 
+        $user = User::find(request()->id);
+        if (!auth()->user()->isRoleSuperAdmin() || $user->id != request()->id){
+            return back()->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
@@ -126,6 +132,10 @@ class UserController extends Controller
     }
 
     public function updatePassword() {
+        $user = User::find(request()->id);
+        if (!auth()->user()->isRoleSuperAdmin() || $user->id != request()->id){
+            return back()->with('error', 'Unauthorized action. Please contact support.');
+        }
 
         $attributes = request()->validate([
             'password' => 'required'
@@ -154,6 +164,11 @@ class UserController extends Controller
     }
 
     public function deleteUser(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return back()->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         User::find(request()->id)->delete();
 
         $log['message'] = 'User with id '. request()->id .' Deleted';
@@ -174,6 +189,11 @@ class UserController extends Controller
     }
 
     public function uploadTeachers(){
+        if (!auth()->user()->isRoleSuperAdmin())
+        {
+            return back()->with('error', 'Unauthorized action. Please contact support.');
+        }
+
         request()->validate([
             'teacher_upload' => 'required|mimes:xlsx,xls|max:1024'
         ]);
